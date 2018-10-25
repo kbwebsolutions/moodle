@@ -253,9 +253,7 @@ $string['pld'] = 'PLD';
 $string['pluginname'] = 'ccot';
 $string['poster'] = 'Cover image';
 $string['posterdesc'] = 'A large header image for the front page of your site. Landscape images (1200 x 600 pixels) or larger work best.';
-$string['poweredbyrunby'] = 'Built with <a href="http://www.blackboard.com/" target="_blank">Blackboard Open LMS</a>,
-     <a href="http://www.moodle.com/" target="_blank">Moodle</a>-based product.<br>
-    Copyright &#169; 2017 Blackboard Inc, All Rights Reserved.';
+$string['poweredbyrunby'] = 'CCOT theme developed by Kieran Briggs for the Chartered College of Teachers<br />based off of Snap from Moodlerooms.';
 $string['previoussection'] = 'Previous section';
 $string['privacy:metadata:theme_ccot_course_favorites:courseid'] = 'The course ID of the course that the user favorited';
 $string['privacy:metadata:theme_ccot_course_favorites:userid'] = 'The user ID of the user that favorited the course';
