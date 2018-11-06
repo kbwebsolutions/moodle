@@ -90,11 +90,11 @@ if (!empty($custommenu)) {
     <div id="mrooms-footer" class="helplink col-sm-6">
         <small>
             <?php
-            if ($OUTPUT->page_doc_link()) {
+           /* if ($OUTPUT->page_doc_link()) {
                 echo $OUTPUT->page_doc_link();
-                echo "<br>";
-            }
-            if (core_component::get_component_directory('local_mrooms') !== null) {
+                echo "<br>";  
+            } Hide Moodle Docs Link */
+           /* if (core_component::get_component_directory('local_mrooms') !== null) {
                 $langkey   = \local_mrooms\kb_link::resolve_language_key();
                 $builtwith = html_writer::link("https://$langkey.help.blackboard.com/Moodlerooms",
                         get_string('pluginname', 'theme_ccot'),
@@ -102,8 +102,8 @@ if (!empty($custommenu)) {
                 );
             } else {
                 $builtwith = get_string('pluginname', 'theme_ccot');
-            }
-            echo get_string('poweredbyrunby', 'theme_ccot', $builtwith);
+            } */
+            echo get_string('poweredbyrunby', 'theme_ccot'); 
             ?>
         </small>
     </div>

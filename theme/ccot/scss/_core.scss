@@ -1184,7 +1184,7 @@ header#page-header
         min-height: 405px;
         position: relative;
         padding: 0;
-        margin: 0;
+        margin: 1.4em 0 0 0;  //Change made by Kieran Briggs 5 November 2018 to add 1.4em padding
     }
 
     #ccot-coverimagecontrol {
@@ -2926,8 +2926,8 @@ body:not(.pagelayout-course) #moodle-footer {
     padding-top: 3em;
     padding-bottom: 1em;
     clear: both;
-    color: $gray-lighter;
-    background-color: $body-color;
+    //color: $gray-lighter;
+    background-color: $footer-color-bg ; /* changed by Kieran Briggs from $body-color; to make a unified footer bottom */
 }
 
 #ccot-footer-content,
@@ -2942,7 +2942,7 @@ body:not(.pagelayout-course) #moodle-footer {
     h4,
     h5,
     h6 {
-        color: $gray-lighter;
+        color: #565656; /* Change made by Kieran Briggs to bring in line with main website $gray-lighter; */
     }
 
     .helplink img.poweredbylogo {
@@ -2955,12 +2955,17 @@ body:not(.pagelayout-course) #moodle-footer {
 
     a:not(.btn),
     a:not(.btn):hover {
-        color: #fff;
+        color: $brand-primary; //#fff;
     }
 
     .langmenu {
         color: #666;
     }
+}
+
+ul {
+	list-style: none;
+	padding-left:0;
 }
 
 // Custom menu lists.
