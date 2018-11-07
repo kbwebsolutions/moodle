@@ -201,15 +201,15 @@ $lighter-grey-btn: #e6e6e6;
     .button-group > button.default,
     .btn.btn-primary {
         color: #fff;
-        background-color: $brand-primary;
-        border-color: $brand-primary;
+        background-color: $button-primary; //$brand-primary;
+        border-color: $button-primary; //$brand-primary;
         &:hover,
         &:focus,
         &:active,
         &.active {
-            background-color: darken($brand-primary, 10%);
-            border-color: darken($brand-primary, 10%);
-            outline: 3px auto $brand-primary;
+            background-color: darken($button-primary, 10%);
+            border-color: darken($button-primary, 10%);
+            outline: 3px auto $button-primary;
         }
     }
 
@@ -233,24 +233,24 @@ $lighter-grey-btn: #e6e6e6;
         // Imitate btn.btn-secondary CSS for buttons without proper
         // Bootstrap classes applied to them, and override colors for
         // btn-secondary, btn-default.
-        color: $brand-primary;
-        border-color: $brand-primary;
+        color: $button-primary; //$brand-primary;
+        border-color: $button-primary; //$brand-primary;
 
         &:hover:not(:disabled),
         &:focus:not(:disabled),
         &:active:not(:disabled),
         &.active:not(:disabled) {
-            background-color: $brand-primary;
-            border-color: $brand-primary;
+            background-color: $button-primary; //$brand-primary;
+            border-color: $button-primary; //$brand-primary;
             color: #fff;
-            outline: 3px auto $brand-primary;
+            outline: 3px auto $button-primary; //$brand-primary;
         }
 
     }
 
     .btn.btn-secondary {
         .icon {
-            color: $brand-primary;
+            color: $button-primary; //$brand-primary;
         }
 
         &:hover:not(:disabled),
@@ -265,7 +265,7 @@ $lighter-grey-btn: #e6e6e6;
     }
 
     #id_cancel {
-        color: $brand-primary;
+        color: $button-primary; //$brand-primary;
 
         &:hover,
         &:focus,
