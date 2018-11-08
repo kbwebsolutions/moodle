@@ -3327,7 +3327,14 @@ table th img.iconhelp {
     background-color: white;
     position: absolute;
     bottom: 0;
-    padding: 0.5em 4%;
+    padding: 0px 4px 0px 0px;
+    text-align: left;
+}
+/* Featured course summary. */
+.ccot-featured-course-summary {
+    padding: 6px 4px 0px 0px;
+    color: #000000;
+    font-size: 0.9em;
 }
 
 // Scrolling gradebook fixes

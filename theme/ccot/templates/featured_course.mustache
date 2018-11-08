@@ -24,12 +24,13 @@
         "number" : "1",
         "url" : "http://someurl.local",
         "coverimageurl" : "http://someurl.local",
-        "title" : "Super cool course!"
+        "title" : "Super cool course!",
+        	"summary" : "This is a cool course"
     }
 }}
 <div class="{{colclass}}" id="ccot-featured-course-{{number}}">
     <a href="{{url}}" class="ccot-featured-course" style="background-image: url({{coverimageurl}});">
         <!--Card content-->
-        <span class="ccot-featured-course-title">{{title}}</span>
+        <span class="ccot-featured-course-title">{{title}}<br /><span class="ccot-featured-course-summary">{{summary}}</span></span>
     </a>
 </div>

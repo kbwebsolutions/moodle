@@ -63,12 +63,13 @@ class featured_course implements \renderable, \templatable{
      * @param string $title
      * @param int $number
      */
-    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $title, $number, $colclass) {
+    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $title, $summary, $number, $colclass) {
         $this->url = $url;
         $this->coverimageurl = $coverimageurl;
         $this->title = $title;
         $this->number = $number;
         $this->colclass = $colclass;
+        	$this->summary = $summary;
     }
 
 }
