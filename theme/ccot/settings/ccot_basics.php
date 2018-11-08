@@ -38,16 +38,6 @@ $setting = new admin_setting_configcolourpicker($name, $title, $description, $de
 $setting->set_updatedcallback('theme_reset_all_caches');
 $ccotsettings->add($setting);
 
-// Main button colour setting.
-$name = 'theme_ccot/buttoncolor';
-$title = new lang_string('buttoncolor', 'theme_ccot');
-$description = '';
-$default = '#ff7f41'; // Blackboard Open LMS orange.
-$previewconfig = null;
-$setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$ccotsettings->add($setting);
-
 // Site description setting.
 $name = 'theme_ccot/subtitle';
 $title = new lang_string('sitedescription', 'theme_ccot');
