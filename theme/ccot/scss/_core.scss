@@ -612,6 +612,9 @@ a.yui3-button,
 // -------------------------
 // Icons inserted as pseudo elements.
 // -------------------------
+#page-footer{
+	min-height: 10px;
+}
 
 .ccot-icon-close:before {
     content: '';

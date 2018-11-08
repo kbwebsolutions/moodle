@@ -90,20 +90,7 @@ if (!empty($custommenu)) {
     <div id="mrooms-footer" class="helplink col-sm-6">
         <small>
             <?php
-           /* if ($OUTPUT->page_doc_link()) {
-                echo $OUTPUT->page_doc_link();
-                echo "<br>";  
-            } Hide Moodle Docs Link */
-           /* if (core_component::get_component_directory('local_mrooms') !== null) {
-                $langkey   = \local_mrooms\kb_link::resolve_language_key();
-                $builtwith = html_writer::link("https://$langkey.help.blackboard.com/Moodlerooms",
-                        get_string('pluginname', 'theme_ccot'),
-                        ['target' => '_blank', 'title' => get_string('help', 'theme_ccot')]
-                );
-            } else {
-                $builtwith = get_string('pluginname', 'theme_ccot');
-            } */
-            echo get_string('poweredbyrunby', 'theme_ccot'); 
+                       	echo get_string('copywrite', 'theme_ccot');
             ?>
         </small>
     </div>
@@ -114,7 +101,7 @@ if (!empty($custommenu)) {
 
 <div id="page-footer">
 <br/>
-<?php echo $OUTPUT->standard_footer_html(); ?>
+
 </div>
 </footer>
 <?php echo $OUTPUT->standard_end_of_body_html() ?>
