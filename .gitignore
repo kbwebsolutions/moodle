@@ -37,3 +37,6 @@ composer.phar
 atlassian-ide-plugin.xml
 /node_modules/
 .travis.yml
+/theme/snap/.eslintignore
+/theme/snap/.eslintrc
+/theme/snap/.moodle-plugin-ci.yml
