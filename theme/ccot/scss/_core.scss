@@ -1201,6 +1201,13 @@ header#page-header
         display: inline-block;
         padding: 1em 2%;
         margin: 10em 4% 1em;
+        	color: $brand-primary;
+        	font-family: "Roboto Slab", "Open Sans",Georgia,"Times New Roman",Times,serif;
+        	
+        	h1 {
+	        	color:$brand-primary;
+	        	font-family: "Roboto Slab", "Open Sans",Georgia,"Times New Roman",Times,serif;
+        	}
     }
 
     #moodle-page {
