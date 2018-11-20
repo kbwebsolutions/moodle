@@ -122,7 +122,7 @@
     }}
 <!-- Begin HTML generated from question_rate template. -->
 {{#qelements}}
-<table style="width:{{qelements.twidth}}">
+<table style="width:95%">
   <tbody>
     {{#qelements.headerrow}}
     <tr>
@@ -140,8 +140,11 @@
         {{#coltext}}{{{.}}}{{/coltext}}
         {{#colhiddentext}}<span class="accesshide">{{{.}}}</span>{{/colhiddentext}}
         {{#colinput}}<input type="radio" name="{{name}}" id="{{id}}" value="{{value}}"{{#checked}} checked="checked"{{/checked}}{{#disabled}} disabled="disabled"{{/disabled}}{{#onclick}} onclick="{{.}}"{{/onclick}}>
-        {{#label}}<label for="{{id}}" class="accesshide">{{{.}}}</label>{{/label}}{{/colinput}}
+        {{#label}}<label for="{{id}}" class=""></label>{{/label}}
+        	<div class="check"></div>
+        {{/colinput}}
       </td>
+      
       {{/cols}}
     </tr>
     {{/qelements.rows}}
