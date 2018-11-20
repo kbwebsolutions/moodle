@@ -129,7 +129,7 @@ echo $OUTPUT->course_content_footer();
 
 if (stripos($PAGE->bodyclasses, 'format-singleactivity') !== false ) {
     // Shared renderer is only loaded if required at this point.
-    $output = \theme_ccot\output\shared::course_tools();
+    //$output = \theme_ccot\output\shared::course_tools();
     if (!empty($output)) {
         echo $output;
     }
