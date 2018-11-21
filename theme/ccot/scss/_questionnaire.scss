@@ -78,7 +78,8 @@
 			left: 20px;
 			z-index: 5;
 			transition: border .25s linear;
-			margin-left:40%;
+			margin-left:auto;
+			margin-right:auto;
 		}
 		
 		.check::before {
@@ -90,7 +91,9 @@
 			left: 5px;
 			margin: auto;
 			transition: background 0.25s linear;
-			margin-left:40%;
+			margin-left:auto;
+			margin-right:auto;
+
 		}
 		
 		input[type=radio]:checked ~ .check {
