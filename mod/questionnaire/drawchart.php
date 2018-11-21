@@ -39,7 +39,7 @@ function draw_chart($feedbacktype, $charttype=null, $labels,
     $charttitlesize = 10;
     $charttitlesize2 = 10;
     if ($PAGE->pagetype == 'mod-questionnaire-myreport') {
-        $charttitle = get_string('yourresponse', 'questionnaire');
+        $charttitle = get_string('yourresponseresults', 'questionnaire'); //KRB was yourresponse
     } else {
         $charttitle = get_string('thisresponse', 'questionnaire');
     }
