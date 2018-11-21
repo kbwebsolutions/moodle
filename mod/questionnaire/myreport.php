@@ -162,11 +162,11 @@ switch ($action) {
         $resps = $questionnaire->get_responses($userid);
 
         // All participants.
-        $respsallparticipants = $questionnaire->get_responses();
+        //$respsallparticipants = $questionnaire->get_responses();
 
         $respsuser = $questionnaire->get_responses($userid);
 
-        $SESSION->questionnaire->numrespsallparticipants = count($respsallparticipants);
+       // $SESSION->questionnaire->numrespsallparticipants = count($respsallparticipants);
         $SESSION->questionnaire->numselectedresps = $SESSION->questionnaire->numrespsallparticipants;
         $iscurrentgroupmember = false;
 
