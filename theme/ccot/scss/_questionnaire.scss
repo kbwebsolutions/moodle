@@ -131,19 +131,66 @@
 	}
 }
 
-#page-mod-questionnaire-report {
+#page-mod-questionnaire-myreport {
+
+	.respondentinfo {
+		font-variant: all-small-caps;
+		margin:10px 0px;
+	}
 	h3 {
-		background-color: #E4F1FA;
+		font-family: $font-family-feature;
+		margin: 1rem 0;
+		color: $brand-primary;
+		
+	}
+
+	.respondentsnavbar {
+		border-radius:10px;
+	}
+		
+// Survey response recap
+
+	.qn-content{
+		margin-left:0px;
+	}
+
+
+	.qn-legend {
+		display: none;
+	}
+
+	.qn-question {
 		padding-left: 15px;
 		border-radius: 25px;
 		margin-top: 2em;
 	}
-	.reportQuestionTitle {
-		border-bottom: 3px solid $brand-primary;
-		padding-bottom: -1rem;
+		.reportQuestionTitle {
+		border-top: 3px solid $brand-primary;
+	
 	}
+	.feedbacktext {
+		a {
+			font-size: $font-size-sm;
+			padding: .75em;
+			border-left:3px solid $brand-danger;
+			background-color:#eee;
+			margin-right: 1em;
+		}
+		a:hover {
+			text-decoration: none;
+			background-color:#ccc;
+		}
+	}
+	// All Responses
+	.individualresp {
+		border-radius: 10px;
+		.qn-content {
+			.qn-question{ 
+				//display: none;
+			}
+		}
+	}	
 }
 
-	.reportQuestionTitle {
-		border-bottom: 3px solid $brand-primary;
-	}
+
+	
