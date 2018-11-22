@@ -59,7 +59,7 @@
 			visibility: hidden;
 		}
 		label {
-			display: block;
+			display: none;
 			position: relative;
 			font-weight: 300;
 			font-size: 1.35em;
@@ -116,6 +116,10 @@
 	.c1 {
 		background-color: transparent;
 		border: none;
+	}
+	
+	td, td.raterow {
+		border-bottom: 1px solid #eee;
 	}
 	
 	td.raterow:hover {
