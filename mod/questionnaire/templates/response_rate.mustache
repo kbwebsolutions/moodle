@@ -58,11 +58,11 @@
 }}
 <!-- Begin HTML generated from response_rate template. -->
 <div class="questionnaire_response questionnaire_radio">
-<table class="individual" style="border: 0; borderspacing: 1px; padding: 0; width:95%">
+<table class="individual" style="border: 0; borderspacing: 1px; padding: 0; width:{{twidth}}">
   <tbody>
     <tr>
         {{#osgood}}<td style="width: {{sidecolwidth}}; text-align: right;"></td>{{/osgood}}
-       <!-- {{^osgood}}<td style="width: {{sidecolwidth}}"></td>{{/osgood}}-->
+        {{^osgood}}<td style="width: {{sidecolwidth}}"></td>{{/osgood}}
         {{#headers}}
         <td style="width:{{colwidth}}; text-align:center" class="{{bg}} smalltext">{{str}}</td>
         {{/headers}}
@@ -70,7 +70,7 @@
     </tr>
     {{#rows}}
     <tr>
-       <!-- <td style="text-align:{{textalign}}">{{{content}}}</td>-->
+       <td style="text-align:{{textalign}}">{{{content}}}</td>
         {{#cols}}
         {{#checked}}
         <td style="text-align:center;" class="selected">
