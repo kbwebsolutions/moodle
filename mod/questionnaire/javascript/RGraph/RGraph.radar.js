@@ -65,7 +65,7 @@
             'chart.gutter.top':            25,
             'chart.gutter.bottom':         25,
             'chart.linewidth':             1,
-            'chart.colors':                ['rgba(255,255,0,0.25)','rgba(0,255,255,0.25)','rgba(255,0,0,0.5)', 'red', 'green', 'blue', 'pink', 'aqua','brown','orange','grey'],
+            'chart.colors':                 ['rgba(136,210,219,0.2)', 'rgba(39,70,76,0.2)', 'rgba(255,209,91,0.2)', 'rgb(252,216,214,0.2)', 'rgb(209,211,212,0.2)', 'rgb(131,48,69,0.2)', 'rgb(255,128,255)'],
             'chart.colors.alpha':          null,
             'chart.circle':                0,
             'chart.circle.fill':           'red',
