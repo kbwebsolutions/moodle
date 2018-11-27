@@ -47,7 +47,7 @@ function draw_chart($feedbacktype, $charttype=null, $labels,
 
     // Gradient colors if needed.
     // TODO make gradient colors customizable in the settings.
-    $chartcolorsgradient = "['Gradient(white:blue)', 'Gradient(white:red)', 'Gradient(white:green)', 'Gradient(white:pink)',
+    $chartcolorsgradient = "['Gradient(white:black)', 'Gradient(white:red)', 'Gradient(white:green)', 'Gradient(white:pink)',
             'Gradient(white:yellow)', 'Gradient(white:cyan)', 'Gradient(white:navy)',
             'Gradient(white:gray)', 'Gradient(white:black)']";
 
@@ -438,8 +438,8 @@ function draw_chart($feedbacktype, $charttype=null, $labels,
                             chart.Set("chart.ymax", 100);
                             chart.Set("chart.background.axes", false);
                             chart.Set("chart.colors.sequential", true);
-                            chart.Set("chart.colors", ["Gradient(white:red)","Gradient(white:green)","Gradient(white:blue)",
-                            "Gradient(white:gray)","Gradient(white:purple)","Gradient(white:pink)",
+                            chart.Set("chart.colors", ["Gradient(white:#88d2db)","Gradient(white:#fed8d6)","Gradient(white:#ffd15b)",
+                            "Gradient(white:#d1d3d4)","Gradient(white:#833045)","Gradient(white:#ef464e)",
                                             "Gradient(white:orange)","Gradient(white:black)"]);
                             chart.Draw();
                             ';
@@ -459,9 +459,10 @@ function draw_chart($feedbacktype, $charttype=null, $labels,
                             chart.Set("chart.ymax", 100);
                             chart.Set("chart.background.axes", false);
                             chart.Set("chart.colors.sequential", true);
-                            chart.Set("chart.colors", ["Gradient(white:red)","Gradient(white:green)","Gradient(white:blue)",
-                            "Gradient(white:gray)","Gradient(white:purple)","Gradient(white:pink)",
+                            chart.Set("chart.colors", ["Gradient(white:#88d2db)","Gradient(white:#fed8d6)","Gradient(white:#ffd15b)",
+                            "Gradient(white:#d1d3d4)","Gradient(white:#833045)","Gradient(white:#ef464e)",
                                             "Gradient(white:orange)","Gradient(white:black)"]);
+
                             chart.Draw();
                             ';
             }
