@@ -17,9 +17,8 @@
 /**
  * Version of the benchmark report
  *
- * @package    report
- * @subpackage benchmark
- * @copyright  Mickaël Pannequin, mickael.pannequin@smartcanal.com
+ * @package    report_benchmark
+ * @copyright  2016 onwards Mickaël Pannequin {@link m.pannequin@xperteam.fr}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,9 +29,9 @@ if (!isset($plugin)) {
     $plugin = new stdClass();
 }
 
-// Plugin informations
-$plugin->requires   = 2011120500; // Requires this Moodle version  2.0
-$plugin->version    = 2016070800; // The current module version (Date: YYYYMMDDXX)
+// Plugin informations.
+$plugin->requires   = 2011120500; // Requires this Moodle version 2.0 or later
+$plugin->version    = 2018102803; // The current module version (Date: YYYYMMDDXX)
 $plugin->component  = 'report_benchmark'; // Full name of the plugin (used for diagnostics)
 $plugin->maturity   = MATURITY_STABLE;
-$plugin->release    = 'v1.0.1';
+$plugin->release    = 'v1.1.0';

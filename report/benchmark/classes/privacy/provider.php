@@ -15,24 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Benchmark report capabilities are defined here.
+ * Privacy Subsystem implementation for report_benchmark.
  *
  * @package    report_benchmark
- * @copyright  2016 onwards Mickaël Pannequin {@link mickael.pannequin@gmail.com}
+ * @copyright  2018 Olivier Secret {@link olivier.secret@catalyst-au.net}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @link       https://github.com/mikasmart/benchmark Source on GitHub
  */
+
+namespace report_benchmark\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'report/benchmark:view' => array(
-        'riskbitmask' => RISK_DATALOSS,
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        ),
-        'clonepermissionsfrom' => 'report/performance:view'
-    )
-);
+/**
+ * Privacy Subsystem for report_benchmark implementing null_provider.
+ *
+ * This plugin does not store any personal user data.
+ * @copyright  2018 Olivier Secret {@link olivier.secret@catalyst-au.net}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  String
+     */
+    public static function get_reason() : string {
+        return 'privacy:no_data_reason';
+    }
+
+}
