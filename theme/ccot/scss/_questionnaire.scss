@@ -52,7 +52,7 @@
 	.qn-answer {
 		padding-left:1em;
 	}		
-		/*TODO  All this is for the Styling of the radio buttons 
+		TODO  All this is for the Styling of the radio buttons 
 			
 			input[type=radio] {
 			//display:none;
@@ -64,8 +64,8 @@
 		
 }
 	
-	.qn-answer {
-	
+		.qn-answer {
+	.raterow{
 		input[type=radio] {
 			position: absolute;
 			visibility: hidden;
@@ -118,8 +118,9 @@
 
 		input[type=radio]:checked ~ label{
 			color: $brand-primary;
-		}*/
+		}
 	} 
+	}
 	
 	.c0 {
 		background-color: transparent;
@@ -131,7 +132,7 @@
 	}
 	
 	td, td.raterow {
-		border-bottom: 2px solid #ddd;
+	//	border-bottom: 2px solid #ddd;
 	}
 	
 	td.raterow:hover {
