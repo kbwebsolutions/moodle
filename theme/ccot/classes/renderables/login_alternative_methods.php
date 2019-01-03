@@ -53,9 +53,11 @@ class login_alternative_methods implements \renderable {
                 $icon = $OUTPUT->image_url('i/permissions');
 
                 if (!empty($idp['iconurl'])) {
-                    $icon = $idp['iconurl'];
+                   $icon = $idp['iconurl'];
                 } else if (!empty($idp['icon'])) {
-                    $icon = $OUTPUT->image_url($idp['icon']->pix, $idp['icon']->component);
+                    //$icon = $OUTPUT->image_url($idp['icon']->pix, $idp['icon']->component);
+                    $icon = $OUTPUT->image_url('cctfavicon', 'theme');
+                   	
                 }
 
                 $this->potentialidps[] = (object) [
