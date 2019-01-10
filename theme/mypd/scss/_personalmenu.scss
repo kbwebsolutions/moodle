@@ -276,7 +276,8 @@ body.mypd-pm-open {
     height: 150px;
     margin: .5em 3% .5em 0;
     border-radius: 0em;
-    box-shadow: 0 1px 2px 0 #eceeef;
+   // box-shadow: 0 1px 2px 0 #eceeef;
+   border-bottom: $standard-border;
     cursor: pointer;
     position: relative;
     overflow: hidden;
