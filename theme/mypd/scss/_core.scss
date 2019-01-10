@@ -26,11 +26,11 @@
 
 html {
     -webkit-font-smoothing: auto !important;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 #moodle-page {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 // myPD Layout yo...
@@ -701,6 +701,7 @@ a.yui3-button,
 #page-header {
     overflow: hidden;
     min-height: 250px;
+    border-bottom: $standard-border;
 }
 
 .mypd-media-object {
@@ -828,6 +829,7 @@ footer #moodle-footer
     z-index: 23;
     padding: .5em 4%;
     background-color: $nav-bg;
+    border-bottom: $standard-border;
 
     //headroom js http://wicky.nillia.ms/headroom.js/
     &.headroom--unpinned {
@@ -1280,14 +1282,14 @@ header#page-header
     #page-site-index {
         #page-header,
         .carousel-slide {
-            min-height: 600px;
+            min-height: 300px;
         }
     }
 }
 @include media-breakpoint-up(md) {
     #page-site-index #page-mast {
         width: 50%;
-        margin: 20vh 4%;
+        margin: 19vh 25%;
     }
 }
 

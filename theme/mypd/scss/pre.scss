@@ -24,10 +24,10 @@
 // myPD specific overrides to Boost settings from
 // theme/boost/scss/bootstrap/variables.scss
 
-$font-size-root: 18px;
+$font-size-root: 16px;
 $font-size-lg:   1.25rem;
-$font-size-sm:   .75rem;
-$font-size-xs:   .6rem;
+$font-size-sm:   .8rem;
+$font-size-xs:   .7rem;
 
 // This needs some investigation of issues around IE11 and Moodle's autoprefixer implementaion.
 //$enable-flex:               true;
@@ -39,14 +39,14 @@ $brand-danger:          #e91e63;
 $brand-info:            #03a9f4;
 
 $body-bg:               #fff;
-$body-color:            #565656;
+$body-color:            #555555;
 
 $font-family-system:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
-$font-family-sans-serif:  "Roboto", $font-family-system;
-$font-family-feature:     "Roboto", $font-family-system;
+$font-family-sans-serif: "work Sans", "Roboto", $font-family-system;
+$font-family-feature:   "Work Sans",  "Roboto", $font-family-system;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
 
-$headings-font-weight:    400;
+$headings-font-weight:    300;
 $headings-color:          $body-color;
 
 $modal-backdrop-bg:           #fff;
@@ -135,3 +135,9 @@ $mypd-carousel-buttons: #e3e3e3;
 
 /* https://github.com/twbs/bootstrap/issues/22222#issuecomment-292819959 */
 $cursor-disabled: not-allowed;
+
+// -------------------------
+// Default Section Borders.
+// -------------------------
+
+$standard-border: 1px solid #dedede;
