@@ -5,7 +5,7 @@
 /* stylelint-disable declaration-no-important*/
 
 #mypd-pm {
-    background-color: #eee;
+    background-color: #fff;
     overflow-x: hidden; // Prevent scrollbars.
     display: none;
 
@@ -65,7 +65,7 @@ body.mypd-pm-open {
 
     h1,
     a {
-        color: white !important;
+        color: #555 !important;
         padding-top: 0; // No top padding on close icon and links.
     }
 
@@ -275,7 +275,7 @@ body.mypd-pm-open {
 
     height: 150px;
     margin: .5em 3% .5em 0;
-    border-radius: .3em;
+    border-radius: 0em;
     box-shadow: 0 1px 2px 0 #eceeef;
     cursor: pointer;
     position: relative;
@@ -397,7 +397,7 @@ body.mypd-pm-open {
 
     section {
         position: relative;
-        border-bottom: 1px solid $gray-light;
+        border-bottom: $standard-border;
         padding-bottom: .5em;
         width: 100%;
     }

@@ -177,9 +177,11 @@ $lighter-grey-btn: #e6e6e6;
     // -------------------------
 
     #mypd-pm-header {
-        background-color: $brand-primary;
+        background-color: trasnparent; // $brand-primary;
+        	border-bottom: $standard-border;
+        	background-image: url([[pix:theme | menu_bg]]);
         .userpicture {
-            box-shadow: 0 0 5em lighten($brand-primary, 8%);
+           // box-shadow: 0 0 5em lighten($brand-primary, 8%);
         }
     }
 
