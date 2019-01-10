@@ -6552,7 +6552,7 @@ header#page-header
 #page-site-index #page-header {
     padding-top: 12.7%;
     padding-bottom: 1.75em;
-    min-height: 405px;
+    min-height: 400px;
     border-bottom: 0;
     margin: 0;
     position: relative;
@@ -6565,7 +6565,8 @@ header#page-header
 }
 
 #page-site-index #page-mast {
-    background-color: rgba(255, 255, 255, 0.9);
+    /*background-color: rgba(255, 255, 255, 0.9);*/
+    background-color: rgba(255, 255, 255, 1)
     display: inline-block;
     padding: 1em 2%;
     margin-top: 2em;
@@ -6578,7 +6579,8 @@ http://blog.rodneyrehm.de/archives/34-iOS7-Mobile-Safari-And-Viewport-Units.html
 */
 @media screen and (min-width: 1200px) {
     #page-site-index #page-header {
-        min-height: 87vh;
+        /*min-height: 87vh;*/
+	    min-height: 400px;
     }
 }
 

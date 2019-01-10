@@ -3,3 +3,19 @@
 /**setting:logo**/
 
 /**setting:customcss**/
+
+#page-site-index {
+	#page-mast{
+		text-align: center;
+		background-color: transparent;
+		h1 {
+			display:none;
+		}
+		p {
+			font-size: 2.2rem;
+			line-height: 2.2rem;
+			font-weight: 300;
+			color: #1b2342;
+		}
+	}
+}
