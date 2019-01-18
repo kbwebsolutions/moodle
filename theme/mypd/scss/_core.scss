@@ -223,7 +223,7 @@ body:not(.mypd-js-loaded) .js-only {
 // Baseline boilerplate for mypd
 // -------------------------
 body {
-    font-weight: 400;
+    font-weight: 300;
 }
 
 a {
@@ -3398,7 +3398,7 @@ table th img.iconhelp {
 }
 
 #mypd-featured-courses {
-    background-color: $mypd-featured-courses;
+    background-color: transparent; //$mypd-featured-courses;
 }
 #mypd-featured-courses a.mypd-featured-course {
     border-radius: 4px;
@@ -3433,12 +3433,27 @@ table th img.iconhelp {
 /* Featured course title. */
 .mypd-featured-course-title {
     display: block;
+	text-align: left;
     min-height: 25%;
     width: 100%;
     background-color: white;
     position: absolute;
     bottom: 0;
-    padding: 0.5em 4%;
+    padding: 0px 4px 0px 0px;
+    font-size: 1.3em;
+}
+
+/* Featured course Summary. */
+.mypd-featured-course-summary {
+    display: block;
+    font-size: 1rem;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    padding: 0px 4px 0px 0px;
 }
 
 // Scrolling gradebook fixes

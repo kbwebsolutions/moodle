@@ -45,6 +45,11 @@ class featured_course implements \renderable, \templatable{
      * @var string
      */
     public $title;
+    
+        /**
+     * @var string
+     */
+    public $summary;
 
     /**
      * @var int card number in list
@@ -63,12 +68,14 @@ class featured_course implements \renderable, \templatable{
      * @param string $title
      * @param int $number
      */
-    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $title, $number, $colclass) {
+    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $title, $summary, $number, $colclass) {
         $this->url = $url;
         $this->coverimageurl = $coverimageurl;
         $this->title = $title;
+        	$this->summary = $summary;
         $this->number = $number;
         $this->colclass = $colclass;
+        
     }
 
 }
