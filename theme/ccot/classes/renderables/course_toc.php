@@ -159,6 +159,7 @@ class course_toc implements \renderable, \templatable{
     }
 
     protected function set_chapters() {
+	    global $CFG;
 
         $this->chapters = (object) [];
 
@@ -227,7 +228,7 @@ class course_toc implements \renderable, \templatable{
             if ($chapter->outputlink) {
                 $singlepage = $this->course->format !== 'folderview';
                 if ($singlepage) {
-                    $chapter->url = '#section-'.$section;
+                    $chapter->url = $CFG->wwwroot.'/course/view.php?id='.$this->course->id. '#section-'.$section;
                 } else if ($section > 0) {
                     $chapter->url = course_get_url($this->course, $section, ['navigation' => true, 'sr' => $section]);
                 } else {
