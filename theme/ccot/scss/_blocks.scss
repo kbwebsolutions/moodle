@@ -72,7 +72,6 @@
 #page-site-index #moodle-blocks,
 #page-user-profile #moodle-blocks,
 #page-my-index #moodle-blocks,
-#page-calendar-view #moodle-blocks,
 #moodle-blocks.state-visible,
 .format-folderview.path-course-view:not(.folderview-single-section) #moodle-blocks,
 .format-weeks.path-course-view.editing #moodle-blocks,
@@ -80,6 +79,11 @@
     visibility: visible;
     height: auto;
     overflow: visible;
+}
+
+
+#page-calendar-view #moodle-blocks {
+	display:none;
 }
 
 /* Some mods have faux blocks - but we want to hide all the other blocks */
