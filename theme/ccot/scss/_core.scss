@@ -1161,9 +1161,14 @@ header#page-header
 
 .forumpost {
     background-color: transparent;
-    border: 0;
+    border: $standard-border;
     box-shadow: none;
-    padding: 0;
+    padding: 1rem;
+    font-size: $font-size-med;
+    
+    .row .commands>a {
+	    font-size: $font-size-xs;
+    }
 }
 
 /* hide show description option */
