@@ -88,6 +88,11 @@ body.ccot-pm-open {
     #ccot-pm-content {
         width: 23em;
         margin: 2em auto;
+        	background-color: #fff;
+		box-shadow: 10px 10px 5px 0px rgba(222,222,222,1);
+		padding-top: 115px;
+		background-image:url([[pix:theme|logo]]);
+		background-repeat: no-repeat;
     }
     label {
         font-weight: 300;
