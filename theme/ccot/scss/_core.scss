@@ -28,6 +28,9 @@ html {
     -webkit-font-smoothing: auto !important;
 }
 
+.custom-select { 
+	border-radius: 8px;
+}
 // ccot Layout yo...
 // -------------------------
 // SHAME -  all that fun moodle reset css
@@ -1165,6 +1168,7 @@ header#page-header
     box-shadow: none;
     padding: 1rem;
     font-size: $font-size-med;
+    border-radius: 4px;
     
     .row .commands>a {
 	    font-size: $font-size-xs;
@@ -1907,8 +1911,7 @@ ul.events-new + ul.events-underway {
     .formulation {
         select {
             .custom-select {
-                padding-right: 5em;
-            }
+                padding-right: 5em;            }
             &:disabled {
                 color: #818a91 !important;
                 cursor: not-allowed;
