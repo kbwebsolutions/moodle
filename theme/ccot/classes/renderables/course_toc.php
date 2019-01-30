@@ -159,7 +159,8 @@ class course_toc implements \renderable, \templatable{
     }
 
     protected function set_chapters() {
-
+		global $CFG;
+	
         $this->chapters = (object) [];
 
         $this->chapters->listlarge = $this->numsections > 9 ? 'list-large' : '';
@@ -227,9 +228,10 @@ class course_toc implements \renderable, \templatable{
             if ($chapter->outputlink) {
                 $singlepage = $this->course->format !== 'folderview';
                 if ($singlepage) {
-                    $chapter->url = '#section-'.$section;
+                    //$chapter->url = '#section-'.$section;
+                   $chapter->url = $CFG->wwwroot.'/course/view.php?id=' . $this->course->id . '#section-'.$section;
                 } else if ($section > 0) {
-                    $chapter->url = course_get_url($this->course, $section, ['navigation' => true, 'sr' => $section]);
+                  $chapter->url = course_get_url($this->course, $section, ['navigation' => true, 'sr' => $section]);
                 } else {
                     // We need to create the url for section 0, or a hash will get returned.
                     $chapter->url = new moodle_url('/course/view.php', ['id' => $this->course->id, 'section' => $section]);
