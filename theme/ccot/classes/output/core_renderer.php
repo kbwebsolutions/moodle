@@ -612,14 +612,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'link' => s($CFG->wwwroot). '/user/profile.php',
             'title' => get_string('profile')
         ];
-        $dashboardlink = [
+     /*   $dashboardlink = [
             'link' => s($CFG->wwwroot). '/my',
             'title' => get_string('myhome')
         ];
         $gradelink = [
             'link' => s($CFG->wwwroot). '/grade/report/overview/index.php',
             'title' => get_string('grades')
-        ];
+        ]; */
         $preferenceslink = [
             'link' => s($CFG->wwwroot). '/user/preferences.php',
             'title' => get_string('preferences')
@@ -629,7 +629,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'link' => s($CFG->wwwroot).'/login/logout.php?sesskey='.sesskey(),
             'title' => get_string('logout')
         ];
-        $quicklinks = [$profilelink, $dashboardlink, $preferenceslink, $logoutlink];
+        $quicklinks = [$profilelink, $preferenceslink, $logoutlink];
 
         // Build up courses.
         $courseservice = course::service();
