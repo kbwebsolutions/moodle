@@ -3394,14 +3394,17 @@ table th img.iconhelp {
     padding: 1em 4%;
 }
 .mypd-featured-courses-heading {
-    padding: 1em 0;
+    //padding: 1em 0;
+    border-bottom: $standard-border;
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
 #mypd-featured-courses {
     background-color: transparent; //$mypd-featured-courses;
 }
 #mypd-featured-courses a.mypd-featured-course {
-    border-radius: 4px;
+    border-radius: 0px;
 }
 #mypd-featured-courses .mypd-featured-course-title {
     border-radius: 0 0 4px 4px;
@@ -3414,6 +3417,7 @@ table th img.iconhelp {
     position: relative;
     background-color: #ccc;
     margin-bottom: 1em;
+    border-bottom: $standard-border;
     @include bg-cover;
     @include alakazam;
 
@@ -3453,7 +3457,8 @@ table th img.iconhelp {
     background-color: white;
     position: absolute;
     bottom: 0;
-    padding: 0px 4px 0px 0px;
+    padding: 0px 4px 20px 0px;
+    overflow: auto;
 }
 
 // Scrolling gradebook fixes
