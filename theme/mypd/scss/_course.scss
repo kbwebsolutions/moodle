@@ -567,9 +567,9 @@ li.section:focus {
     margin: 0 auto;
     height: auto;
     font-family: $font-family-system;
-    background-color: #fff;
+  //  background-color: #fff;
     border: 1px solid $gray-lighter;
-    border-top-width: 0.3em;
+    border-top-width: 5px;
 
     // For editors add space for editong tools.
     &.mypd-can-edit {
@@ -592,7 +592,7 @@ li.section:focus {
     .activityinstance {
         padding: 0;
         height: auto;
-        background-color: rgba(255, 255, 255, 0.9);
+       // background-color: rgba(255, 255, 255, 0.9);
         @include clearfix;
 
         .activityicon {
@@ -816,15 +816,19 @@ li.section:focus {
 // myPD resources as cards.
 // -------------------------
 body.mypd-resource-card li.mypd-resource {
-    height: 200px;
+    height: 120px;
     width: 31%;
     margin: 1%;
     float: left;
     clear: none;
-    background-image: url([[pix:theme|file]]);
+   // background-image: url([[pix:theme|file]]);
     background-repeat: no-repeat;
     background-position: 50% 70%;
     background-size: 38px auto;
+    border-left-width:5px;
+    border-top:0px;
+    border-right:0px;
+    border-bottom:0px;
 
     &:hover {
         background-size: 50px auto;
@@ -848,42 +852,47 @@ body.mypd-resource-card li.mypd-resource {
     &.mypd-mime-writer,
     &.mypd-mime-oth,
     &.mypd-mime-text {
-        border-top-color: $color-word;
-        background-image: url([[pix:core|/f/document]]);
+        border-left-color: $color-word;
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/document]]);
     }
 
     &.mypd-mime-powerpoint,
     &.mypd-mime-impress {
-        border-top-color: $color-powerpoint;
-        background-image: url([[pix:core|/f/powerpoint]]);
+        border-left-color: $color-powerpoint;
+        	background-color: $resource-bg;
+        //background-image: url([[pix:core|/f/powerpoint]]);
     }
 
     &.mypd-mime-spreadsheet,
     &.mypd-mime-chart,
     &.mypd-mime-database,
     &.mypd-mime-calc {
-        border-top-color: $color-excel;
-        background-image: url([[pix:core|/f/spreadsheet]]);
+        border-left-color: $color-excel;
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/spreadsheet]]);
     }
 
     // ADOBE //
     &.mypd-mime-pdf,
     &.mypd-mime-eps,
     &.mypd-mime-flash {
-        border-top-color: $color-pdf;
-        background-image: url([[pix:core|/f/pdf]]);
+        border-left-color: $color-pdf;
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/pdf]]);
     }
 
     &.mypd-mime-flash {
-        background-image: url([[pix:core|/f/flash]]);
+        //background-image: url([[pix:core|/f/flash]]);
     }
 
     // MULTIMEDIA //
     &.mypd-mime-mp3,
     &.mypd-mime-wav,
     &.mypd-mime-audio {
-        border-top-color: $color-audio;
-        background-image: url([[pix:core|/f/audio]]);
+        border-left-color: $color-audio;
+        	background-color: $resource-bg;
+        //background-image: url([[pix:core|/f/audio]]);
     }
 
     &.mypd-mime-mov,
@@ -892,40 +901,46 @@ body.mypd-resource-card li.mypd-resource {
     &.mypd-mime-quicktime,
     &.mypd-mime-mpeg,
     &.mypd-mime-avi {
-        border-top-color: $color-video;
-        background-image: url([[pix:core|/f/video]]);
+        border-left-color: $color-video;
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/video]]);
     }
 
     &.modtype_lightboxgallery,
     &.mypd-mime-bmp {
-        border-top-color: #4abc96;
-        background-image: url([[pix:core|/f/image]]);
+        border-left-color: #4abc96;
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/image]]);
     }
 
     // MOODLE MODS //
     &.modtype_url {
-        border-top-color: #999;
-        background-image: url([[pix:core|/f/url]]);
+        border-left-color: #999;
+        	background-color: $resource-bg;
+        //background-image: url([[pix:core|/f/url]]);
     }
 
     &.modtype_imscp,
     &.modtype_scorm {
         border-top-color: #f7981d;
-        background-image: url([[pix:core|/f/book]]);
+        	background-color: $resource-bg;
+       // background-image: url([[pix:core|/f/book]]);
     }
 
     &.modtype_scorm {
-        background-image: url([[pix:core|/f/scorm]]);
+       // background-image: url([[pix:core|/f/scorm]]);
     }
 
     &.modtype_folder {
-        border-top-color: #fed859;
-        background-image: url([[pix:core|/f/folder]]);
+        border-left-color: #fed859;
+        	background-color: $resource-bg;
+        //background-image: url([[pix:core|/f/folder]]);
     }
 
     // CODE & SYSTEM //
     &.mypd-mime-archive {
         border-top-color: #fed859;
+        	background-color: $resource-bg;
         background-image: url([[pix:core|/f/archive]]);
     }
 
@@ -1426,7 +1441,7 @@ form.togglecompletion {
         border: 1px solid white;
         width: 1.75em;
         height: 1.75em;
-        background-color: white;
+        //background-color: white;
         @include alakazam;
     }
 

@@ -370,6 +370,11 @@ $lighter-grey-btn: #e6e6e6;
 
     // Catch all for mods we do not have colours for.
     li.mypd-resource,
+    {
+        border-left-color: $brand-primary;
+    }
+    
+
     li.mypd-activity {
         border-top-color: $brand-primary;
     }
