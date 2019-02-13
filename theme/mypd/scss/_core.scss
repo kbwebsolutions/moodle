@@ -33,6 +33,10 @@ html {
     font-size: 1rem;
 }
 
+.custom-select { 
+	border-radius: 8px;
+}
+
 // myPD Layout yo...
 // -------------------------
 // SHAME -  all that fun moodle reset css
@@ -1231,6 +1235,7 @@ header#page-header
     border: 0;
     box-shadow: none;
     padding: 0;
+    border-radius: 4px;
 }
 
 /* hide show description option */
