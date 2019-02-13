@@ -1653,9 +1653,20 @@ li.calendar_event_user:before {
 }
 
 .path-calendar {
+	
+	block-region-side-pre {
+		display:none;
+	}
+	
+	.maincalendar .calendarmonth {
+		width: 98%; 
+		min-height:500px;
+		margin: 10px auto;
+	}
+
     .maincalendar .calendarmonth td,
     .maincalendar .calendarmonth th {
-        border-color: #fff;
+        border-color: #dedede;
         height: 1em;
     }
 }
