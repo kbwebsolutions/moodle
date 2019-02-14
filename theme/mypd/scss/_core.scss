@@ -3413,7 +3413,7 @@ table th img.iconhelp {
 /* Featured course link. */
 .mypd-featured-course {
     display: block;
-    height: 300px;
+    height: 400px;
     position: relative;
     background-color: #ccc;
     margin-bottom: 1em;
@@ -3423,15 +3423,39 @@ table th img.iconhelp {
 
     &:hover {
         transform: scale(1.03);
-        box-shadow:
+        /*box-shadow:
             0 2px 2px 0 rgba(0, 0, 0, 0.14),
             0 3px 1px -2px rgba(0, 0, 0, 0.2),
-            0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            0 1px 5px 0 rgba(0, 0, 0, 0.12); */
 
         .mypd-featured-course-title {
-            text-decoration: underline;
+            text-decoration: none;
         }
     }
+}
+
+/* Featured course category */
+.mypd-featured-course-category {
+	display: block;
+	text-align: left;
+    min-height: 35%;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    padding: 10px 4px 0px 0px;
+    font-size: $font-size-sm;
+    font-variant: small-caps;
+	
+	cat-1 {
+		color: #A176b0;
+	}
+	cat-2 {
+		color: #FC6868;
+	}
+	cat-3 {
+		color: #98D4DF;
+	}
 }
 
 /* Featured course title. */
@@ -3457,7 +3481,7 @@ table th img.iconhelp {
     background-color: white;
     position: absolute;
     bottom: 0;
-    padding: 0px 4px 20px 0px;
+    padding: 0px 4px 40px 0px;
     overflow: auto;
 }
 

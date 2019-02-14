@@ -49,6 +49,16 @@ class featured_course implements \renderable, \templatable{
         /**
      * @var string
      */
+    public $category;
+    
+        /**
+     * @var string
+     */
+    public $categoryid;
+    
+        /**
+     * @var string
+     */
     public $summary;
 
     /**
@@ -68,13 +78,15 @@ class featured_course implements \renderable, \templatable{
      * @param string $title
      * @param int $number
      */
-    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $title, $summary, $number, $colclass) {
+    public function __construct(\moodle_url $url, \moodle_url $coverimageurl = null, $category, $categoryid, $title, $summary,  $number, $colclass) {
         $this->url = $url;
         $this->coverimageurl = $coverimageurl;
         $this->title = $title;
         	$this->summary = $summary;
         $this->number = $number;
         $this->colclass = $colclass;
+        	$this->category = $category;
+        	$this->categoryid = $categoryid;
         
     }
 
