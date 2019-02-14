@@ -3463,16 +3463,18 @@ table th img.iconhelp {
     font-size: $font-size-sm;
     font-variant: all-small-caps;
 	
-	.cat-1 {
+}
+
+/*Course Category Colours */
+	.course-cat-1 {
 		color: #A176b0;
 	}
-	.cat-2 {
+	.course-cat-2 {
 		color: #FC6868;
 	}
-	.cat-3 {
+	.course-cat-3 {
 		color: #98D4DF;
 	}
-}
 
 /* Featured course title. */
 .mypd-featured-course-title {
