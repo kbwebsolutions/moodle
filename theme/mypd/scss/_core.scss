@@ -3461,15 +3461,15 @@ table th img.iconhelp {
     bottom: 0;
     padding: 10px 4px 0px 0px;
     font-size: $font-size-sm;
-    font-variant: small-caps;
+    font-variant: all-small-caps;
 	
-	cat-1 {
+	.cat-1 {
 		color: #A176b0;
 	}
-	cat-2 {
+	.cat-2 {
 		color: #FC6868;
 	}
-	cat-3 {
+	.cat-3 {
 		color: #98D4DF;
 	}
 }
