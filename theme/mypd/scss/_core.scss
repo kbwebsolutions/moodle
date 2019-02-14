@@ -33,6 +33,10 @@ html {
     font-size: 1rem;
 }
 
+.custom-select { 
+	border-radius: 8px;
+}
+
 // myPD Layout yo...
 // -------------------------
 // SHAME -  all that fun moodle reset css
@@ -1231,6 +1235,7 @@ header#page-header
     border: 0;
     box-shadow: none;
     padding: 0;
+    border-radius: 4px;
 }
 
 /* hide show description option */
@@ -1653,9 +1658,20 @@ li.calendar_event_user:before {
 }
 
 .path-calendar {
+	
+	block-region-side-pre {
+		display:none;
+	}
+	
+	.maincalendar .calendarmonth {
+		width: 98%; 
+		min-height:500px;
+		margin: 10px auto;
+	}
+
     .maincalendar .calendarmonth td,
     .maincalendar .calendarmonth th {
-        border-color: #fff;
+        border-color: #dedede;
         height: 1em;
     }
 }
