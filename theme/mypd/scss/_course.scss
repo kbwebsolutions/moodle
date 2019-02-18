@@ -908,21 +908,21 @@ body.mypd-resource-card li.mypd-resource {
 
     &.modtype_lightboxgallery,
     &.mypd-mime-bmp {
-        border-left-color: #4abc96;
+        border-left-color: $color-assignment; //#4abc96;
         	background-color: $resource-bg;
        // background-image: url([[pix:core|/f/image]]);
     }
 
     // MOODLE MODS //
     &.modtype_url {
-        border-left-color: #999;
+        border-left-color: $color-url;
         	background-color: $resource-bg;
         //background-image: url([[pix:core|/f/url]]);
     }
 
     &.modtype_imscp,
     &.modtype_scorm {
-        border-top-color: #f7981d;
+        border-top-color: $color-scorm;
         	background-color: $resource-bg;
        // background-image: url([[pix:core|/f/book]]);
     }
@@ -932,14 +932,14 @@ body.mypd-resource-card li.mypd-resource {
     }
 
     &.modtype_folder {
-        border-left-color: #fed859;
+        border-left-color: $color-folder;
         	background-color: $resource-bg;
         //background-image: url([[pix:core|/f/folder]]);
     }
 
     // CODE & SYSTEM //
     &.mypd-mime-archive {
-        border-top-color: #fed859;
+        border-top-color: $color-folder; //#fed859;
         	background-color: $resource-bg;
         background-image: url([[pix:core|/f/archive]]);
     }
@@ -947,7 +947,7 @@ body.mypd-resource-card li.mypd-resource {
     &.mypd-mime-markup,
     &.mypd-mime-html,
     &.mypd-mime-sourcecode {
-        border-top-color: #f0652a;
+        border-top-color: $color-pdf;
         background-image: url([[pix:core|/f/sourcecode]]);
     }
 
