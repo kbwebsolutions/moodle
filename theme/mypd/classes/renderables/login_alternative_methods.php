@@ -55,7 +55,7 @@ class login_alternative_methods implements \renderable {
                 if (!empty($idp['iconurl'])) {
                     $icon = $idp['iconurl'];
                 } else if (!empty($idp['icon'])) {
-                    $icon = $OUTPUT->image_url($idp['icon']->pix, $idp['icon']->component);
+                    $icon = $OUTPUT->image_url('mypdfavicon', 'theme');
                 }
 
                 $this->potentialidps[] = (object) [
