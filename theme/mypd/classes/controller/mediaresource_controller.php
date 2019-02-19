@@ -109,9 +109,9 @@ class mediaresource_controller extends controller_abstract {
             'context' => $context
         ));
         $resource = $DB->get_record('resource', array('id' => $cm->instance));
-        $event->add_record_mypdshot('course_modules', $cm);
-        $event->add_record_mypdshot('course', $COURSE);
-        $event->add_record_mypdshot('resource', $resource);
+        $event->add_record_snapshot('course_modules', $cm);
+        $event->add_record_snapshot('course', $COURSE);
+        $event->add_record_snapshot('resource', $resource);
         $event->trigger();
 
         $resource->content = $this->get_media_html($resource, $context, $cm);
