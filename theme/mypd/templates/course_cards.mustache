@@ -51,6 +51,7 @@
     <button class="mypd-icon-toggle favoritetoggle" title="{{toggletitle}}" aria-pressed="{{#favorited}}true{{/favorited}}{{^favorited}}false{{/favorited}}"></button>
     {{/archived}}
     <div class="coursecard-body">
+    	<span class="coursecard-category course-cat-{{categoryid}}">{{categoryname}}</span>
         <h3><a class="coursecard-coursename" href="{{{url}}}">{{{fullname}}}</a></h3>
         <div class="coursecard-dynamicinfo">
             {{#feedback.coursegrade.value}}

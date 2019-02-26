@@ -122,6 +122,11 @@ class course_card implements \renderable {
      * @var int
      */
     public $category = null;
+    
+    /** 
+	  * @var string
+	  */
+	public $categoryname = null;
 
     /**
      * @var string
@@ -145,6 +150,7 @@ class course_card implements \renderable {
     private function apply_properties() {
         global $DB;
         $this->course = $DB->get_record('course', ['id' => $this->courseid]);
+        	$this->categoryname = $DB->get_field('course_categories', 'name', ['id'=> $this->course->category]);
         $this->category = $this->course->category;
         $this->url = new \moodle_url('/course/view.php', ['id' => $this->course->id]) . '';
         $this->feedbackurl = new \moodle_url('/grade/report/user/index.php', ['id' => $this->course->id]) . '';
