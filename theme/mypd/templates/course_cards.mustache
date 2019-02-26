@@ -25,6 +25,7 @@
     * published - visible to students
     * courseid - id of the course
     * categoryid - id of the category that contains the course 
+    * categoryname = name of the category that contains the course
     * model - 
     * archived - course close date has passed
     * toggletitle - hover text on favorite toggle
@@ -51,7 +52,7 @@
     <button class="mypd-icon-toggle favoritetoggle" title="{{toggletitle}}" aria-pressed="{{#favorited}}true{{/favorited}}{{^favorited}}false{{/favorited}}"></button>
     {{/archived}}
     <div class="coursecard-body">
-    	<span class="coursecard-category course-cat-{{categoryid}}">{{categoryname}}</span>
+    	<span class="coursecard-category course-cat-{{category}}">{{categoryname}}</span>
         <h3><a class="coursecard-coursename" href="{{{url}}}">{{{fullname}}}</a></h3>
         <div class="coursecard-dynamicinfo">
             {{#feedback.coursegrade.value}}
