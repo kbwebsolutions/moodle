@@ -1,0 +1,237 @@
+/**
+ * Questionnaire specific theming
+ *
+ */
+
+#page-mod-questionnaire-complete {
+	
+	.message {
+		border:none;
+	}
+	
+	.qn-content{
+		margin-left:0px;
+	}
+	
+	//bottom nav bar
+	.surveyPage {
+    background-color: #e4f1fa;
+    border-bottom-color: #e4f1fa;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    clear: right;
+    padding:  3px 3px 3px 10px;
+    margin-bottom: 5px;
+    margin-top: 4em;
+    border-radius: 10px;
+}
+	
+
+.qn-legend {
+	display: none;
+}
+
+//Whole Question container
+.qn-container {
+	
+	color:#565656;
+	margin-bottom:2em;
+	
+	//Question Number
+	.qn-legend {
+		display: none;
+	}
+
+	//Question Text
+	.qn-question {
+		padding-left: 15px;
+		border-radius: 25px;
+	}
+	
+	//Answer Block
+	.qn-answer {
+		padding-left:1em;
+	}		
+		TODO  All this is for the Styling of the radio buttons 
+			
+			input[type=radio] {
+			//display:none;
+		}
+		
+		table {
+			width: 95%;	
+		}
+		
+}
+	
+		.qn-answer {
+	.raterow{
+		input[type=radio] {
+			position: absolute;
+			visibility: hidden;
+		}
+		label {
+			display: none;
+			position: relative;
+			font-weight: 300;
+			font-size: 1.35em;
+			margin: 10px auto;
+			z-index: 9;
+			cursor: pointer;
+			-webkit-transition: all 0.25s linear;
+		}
+		
+		.check {
+			border: 5px solid #AAAAAA;
+			border-radius: 100%;
+			height: 25px;
+			width: 25px;
+			top: 30px;
+			left: 20px;
+			z-index: 5;
+			transition: border .25s linear;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		
+		.check::before {
+			content: '';
+			border-radius: 100%;
+			height: 15px;
+			width: 15px;
+			top: 5px;
+			left: 5px;
+			margin: auto;
+			transition: background 0.25s linear;
+			margin-left:auto;
+			margin-right:auto;
+
+		}
+		
+		input[type=radio]:checked ~ .check {
+			border: 5px solid $brand-primary;
+		}
+
+		input[type=radio]:checked ~ .check::before{
+			background: $brand-primary;
+		}
+
+		input[type=radio]:checked ~ label{
+			color: $brand-primary;
+		}
+	} 
+	}
+	
+	.c0 {
+		background-color: transparent;
+		border: none;
+	}
+	.c1 {
+		background-color: transparent;
+		border: none;
+	}
+	
+	td, td.raterow {
+	//	border-bottom: 2px solid #ddd;
+	}
+	
+	td.raterow:hover {
+		border:none; 
+		cursor: hand;
+		border-bottom: 2px solid #ddd;
+	}
+	.raterow:hover{
+		background-color: transparent;
+		cursor: hand;
+		border-bottom: 2px solid #ddd;
+		font-weight: 400;
+		font-style: italic;	 
+		
+		
+	}
+}
+
+#page-mod-questionnaire-myreport {
+
+	.respondentinfo {
+		font-variant: all-small-caps;
+		margin:10px 0px;
+	}
+	h3 {
+		font-family: $font-family-feature;
+		margin: 1rem 0;
+		color: $brand-primary;
+		
+	}
+	h5 {
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.respondentsnavbar {
+		border-radius:10px;
+	}
+		
+// Survey response recap
+
+	.qn-content{
+		margin-left:0px;
+	}
+
+//Whole Question container
+.qn-container {
+	
+	color:#565656;
+	margin-bottom:2em;
+
+	//headers
+	.smalltext {
+		font-weight: 500;
+	}
+	
+	//Question Number
+	.qn-legend {
+		display: none;
+	}
+
+	//Question Text
+	.qn-question {
+		padding-left: 15px;
+		border-radius: 25px;
+	}
+	
+	//Answer Block
+	.qn-answer {
+		padding-left:1em;
+	}	
+}
+
+		.reportQuestionTitle {
+		border-top: 3px solid $brand-primary;
+	
+	}
+	.feedbacktext {
+		a {
+			font-size: $font-size-sm;
+			padding: .75em;
+			border-left:3px solid $brand-danger;
+			background-color:#eee;
+			margin-right: 1em;
+		}
+		a:hover {
+			text-decoration: none;
+			background-color:#ccc;
+		}
+	}
+	// All Responses
+	.individualresp {
+		border-radius: 10px;
+		.qn-content {
+			.qn-question{ 
+				//display: none;
+			}
+		}
+	}	
+}
+
+	
