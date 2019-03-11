@@ -88,6 +88,8 @@ body.mypd-pm-open {
     #mypd-pm-content {
         width: 23em;
         margin: 2em auto;
+        	border: 2px solid $border-color;
+        	box-shadow: 1px 2px 6px 2px $border-color;
     }
     label {
         font-weight: 300;
