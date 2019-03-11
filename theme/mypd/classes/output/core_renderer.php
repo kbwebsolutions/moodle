@@ -638,7 +638,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'link' => s($CFG->wwwroot).'/login/logout.php?sesskey='.sesskey(),
             'title' => get_string('logout')
         ];
-        $quicklinks = [$profilelink, $dashboardlink, $preferenceslink, $gradelink, $logoutlink];
+        $quicklinks = [$profilelink, $preferenceslink, $gradelink, $logoutlink];
 
         // Build up courses.
         $courseservice = course::service();
