@@ -1,0 +1,62 @@
+{{!
+    This file is part the Local Analytics plugin for Moodle
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_analytics/guniversal
+
+    Template for adding the Google Universal Tracking script.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * siteid The Google tracking code
+    * addition Page tracking info added by this plugin
+
+    Example context (json):
+    { "siteid": UA-90210-15, "addition": 2, }
+}}
+
+<!-- Start Piwik Code -->
+{{#imagetrack}}
+<noscript>
+<p>
+  <img src="//{{{siteurl}}}/piwik.php?idsite={{{siteid}}}" style="border:0;" alt="" />
+</p>
+</noscript>
+{{/imagetrack}}
+<!-- End Piwik Code -->
+
+{{#js}}
+var _paq = _paq || [];
+{{{doctitle}}}
+{{#userid}}
+_paq.push(['setUserId', {{{userid}}}]);
+{{/userid}}
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+_paq.push(['enableHeartBeatTimer', 30]);
+(function() {
+  var u='//{{{siteurl}}}/';
+  _paq.push(['setTrackerUrl', u+'piwik.php']);
+  _paq.push(['setSiteId', {{{siteid}}}]);
+  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+})();
+{{/js}}
