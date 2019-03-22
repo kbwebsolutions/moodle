@@ -762,5 +762,16 @@ function xmldb_bookingform_upgrade($oldversion=0) {
         upgrade_mod_savepoint(true, 2019021300, 'bookingform');
     }
 
+    if ($oldversion < 2019032200) {
+        // Update all records in 'course_modules' for labels to have showdescription = 1.
+        if ($modid = $DB->get_field('modules', 'id', ['name' => 'bookingform'])) {
+            $DB->execute("UPDATE {course_modules} SET showdescription = ? WHERE module = ?",
+                [1, $modid]);
+        }
+
+        // Label savepoint reached.
+        upgrade_mod_savepoint(true, 2019032200, 'bookingform');
+    }
+
     return $result;
 }

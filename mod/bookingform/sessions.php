@@ -147,6 +147,7 @@ if ($mform->is_cancelled()) {
 }
 
 if ($fromform = $mform->get_data()) { // Form submitted.
+
     if (empty($fromform->submitbutton) && empty($fromform->submitbutton_add_new)) {
         print_error('error:unknownbuttonclicked', 'bookingform', $returnurl);
     }

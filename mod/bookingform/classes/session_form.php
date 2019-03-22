@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/mod/bookingform/lib.php');
 class mod_bookingform_session_form extends moodleform {
 
     public function definition() {
-        global $CFG, $DB;
+        global $CFG, $DB, $USER;
 
         $mform =& $this->_form;
         $context = context_course::instance($this->_customdata['course']->id);
@@ -195,6 +195,14 @@ class mod_bookingform_session_form extends moodleform {
                     $headershown = true;
                 }
 
+                /**
+                 * Move the coach/teacher who is creating the session
+                 * to the top.
+                 *
+                 * @author  Andres Ramos <andres.ramos@lmsdoctor.com>
+                 */
+                bookingform_move_to_top($choices, $USER->id);
+
                 // If only a few, use checkboxes.
                 if (count($choices) < 4) {
                     $roleshown = false;
@@ -240,8 +248,6 @@ class mod_bookingform_session_form extends moodleform {
         $buttonarray[] = $mform->createElement('submit', 'submitbutton_add_new', get_string('save_add_new', 'mod_bookingform'));
         $buttonarray[] = $mform->createElement('cancel');
         $mform->addGroup($buttonarray, 'page_actions', '', array(' '), false);
-
-        //$this->add_action_buttons();
     }
 
     public function validation($data, $files) {
