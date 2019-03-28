@@ -30,7 +30,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019030500;
+$plugin->version   = 2019032201;
 $plugin->requires  = 2017111300;  // Requires 3.4.
 $plugin->release   = '3.4.2';
 $plugin->component = 'mod_bookingform';

@@ -1999,6 +1999,12 @@ function bookingform_update_signup_status($signupid, $statuscode, $createdby, $n
     }
 }
 
+function bookingform_move_to_top(&$array, $key) {
+    $temp = array($key => $array[$key]);
+    unset($array[$key]);
+    $array = $temp + $array;
+}
+
 /**
  * Sends email to a user with upcoming sessions upon now show.
  *
@@ -2634,9 +2640,21 @@ function bookingform_format_session_times($start, $end, $tz) {
 function bookingform_cm_info_view(cm_info $coursemodule) {
     global $USER, $DB, $COURSE;
     $output = '';
+    $content = '';
 
     if (!($bookingform = $DB->get_record('bookingform', array('id' => $coursemodule->instance)))) {
         return null;
+    }
+
+    /**
+     * Display description if the option was checked. This validation should be
+     * a couple of more times, before the function ends.
+     *
+     * @author  Andres Ramos <andres.ramos@lmsdoctor.com>
+     */
+    if ($coursemodule->showdescription) {
+        // Convert intro to html. Do not filter cached version, filters run at display time.
+        $output .= format_module_intro('bookingform', $bookingform, $coursemodule->id, false);
     }
 
     $coursemodule->set_name($bookingform->name);
@@ -2862,12 +2880,20 @@ function bookingform_cm_info_view(cm_info $coursemodule) {
 
         } else {
             // Show only name if session display is set to zero.
-            $content = html_writer::tag('span', $htmlviewallsessions, array('class' => 'f2fsessionnotice f2factivityname'));
+            if ($coursemodule->showdescription) {
+                // Convert intro to html. Do not filter cached version, filters run at display time.
+                $content = format_module_intro('bookingform', $bookingform, $coursemodule->id, false);
+            }
+            $content .= html_writer::tag('span', $htmlviewallsessions, array('class' => 'f2fsessionnotice f2factivityname'));
             $coursemodule->set_content($content);
             return;
         }
     } else if (has_capability('mod/bookingform:viewemptyactivities', $contextmodule)) {
-        $content = html_writer::tag('span', $htmlviewallsessions, array('class' => 'f2fsessionnotice f2factivityname'));
+        if ($coursemodule->showdescription) {
+            // Convert intro to html. Do not filter cached version, filters run at display time.
+            $content = format_module_intro('bookingform', $bookingform, $coursemodule->id, false);
+        }
+        $content .= html_writer::tag('span', $htmlviewallsessions, array('class' => 'f2fsessionnotice f2factivityname'));
         $coursemodule->set_content($content);
         return;
     } else {

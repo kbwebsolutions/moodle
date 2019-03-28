@@ -53,6 +53,10 @@ class mod_bookingform_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements();
 
+        $mform->addElement('advcheckbox', 'showdescription', get_string('showdescription'));
+        $mform->addHelpButton('showdescription', 'showdescription');
+        $mform->setType('showdescription', PARAM_INT);
+
         $mform->addElement('text', 'thirdparty', get_string('thirdpartyemailaddress', 'bookingform'), array('size' => '64'));
         $mform->setType('thirdparty', PARAM_NOTAGS);
         $mform->addHelpButton('thirdparty', 'thirdpartyemailaddress', 'bookingform');
