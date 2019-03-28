@@ -15,21 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
- * @package     mod_comments
- * @category    upgrade
- * @copyright   2019 Kieran Briggs <kbriggs@chartered.college>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod
+ * @subpackage comments
+ * @copyright  2019 onwards Kieran Briggs <kbriggs@chartered.college>
+ * @author     Kieran Briggs <kbriggs@chartered.college>
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Custom code to be run on installing the plugin.
- */
+$capabilities = array(
 
-function xmldb_mod_comments_install() {
-
-    return true;
-}
+    // Ability to add a new comments activity to a course.
+    'mod/comments:addinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+    ),
+);

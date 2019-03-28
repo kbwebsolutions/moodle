@@ -66,11 +66,6 @@ class mod_comments_mod_form extends moodleform_mod {
             $this->add_intro_editor();
         }
 
-        // Adding the rest of mod_comments settings, spreading all them into this fieldset
-        // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'commentssettings', get_string('commentssettings', 'mod_comments'));
-        $mform->addElement('header', 'commentsfieldset', get_string('commentsfieldset', 'mod_comments'));
-
         // Add standard elements.
         $this->standard_coursemodule_elements();
 

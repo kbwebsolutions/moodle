@@ -1,0 +1,65 @@
+/**
+* style sheet for Comments
+*/
+
+.path-mod-comments ul.feed {
+    margin:0;
+    padding:0;
+    list-style:none;
+    max-width: 100%;
+}
+.path-mod-comments li.item {
+    display:flex;
+    flex-flow: row wrap;
+    margin-bottom: 1.5em;
+}
+
+.path-mod-comments .user{
+    order: 1;
+    margin-right: 1em;
+}
+.path-mod-comments .user .avatar{
+
+}
+
+.path-mod-comments .msg-body {
+    flex: 3 0px;
+    order: 2;
+}
+
+.path-mod-comments .msg-body .options {
+    font-size: 0.9em;
+    padding: 0.5em 0em;
+}
+
+.path-mod-comments .msg-body .options .option {
+    margin-right: 3em;
+}
+
+.path-mod-comments .msg-body .options a {
+    color: #EE7EA0;
+}
+
+.path-mod-comments .msg-body .options a:hover {
+    text-decoration: none;
+    color: #EE7EA0;
+}
+
+
+.path-mod-comments .msg-body .name {
+display: inline-block;
+float: left;
+font-weight: bold;
+color: #000;
+
+}
+
+.path-mod-comments .msg-body .date {
+display: inline-block;
+float: right;
+color: #666;
+}
+
+.path-mod-comments .msg-body .message {
+clear: both;
+}

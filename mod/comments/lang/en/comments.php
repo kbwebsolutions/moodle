@@ -25,4 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['commentsname'] = 'Name';
+$string['commentsname_help'] = 'Add the name of the activity here';
+$string['commentsfieldset'] = 'Options';
+$string['details'] = "Comment";
 $string['pluginname'] = 'Section Comments';
+$string['missingidandcmid'] = 'No Module or course ID';
+$string['modulename'] = 'Comments';
+$string['modulenameplural'] = 'Section Comments';
+$string['post'] = 'Post';
+$string['pluginadministration'] = 'Administration';

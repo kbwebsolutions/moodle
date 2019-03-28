@@ -24,6 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->libdir . '/formslib.php');
+
 /**
  * Return if the plugin supports $feature.
  *
@@ -33,6 +35,8 @@ defined('MOODLE_INTERNAL') || die();
 function mod_comments_supports($feature) {
     switch ($feature) {
         case FEATURE_MOD_INTRO:
+            return true;
+        case FEATURE_SHOW_DESCRIPTION:
             return true;
         default:
             return null;
@@ -50,12 +54,13 @@ function mod_comments_supports($feature) {
  * @param mod_comments_mod_form $mform The form.
  * @return int The id of the newly inserted record.
  */
-function mod_comments_add_instance($moduleinstance, $mform = null) {
+function comments_add_instance($moduleinstance, $mform = null) {
     global $DB;
 
     $moduleinstance->timecreated = time();
+    $moduleinstance->timemodified = time();
 
-    $id = $DB->insert_record('mod_comments', $moduleinstance);
+    $id = $DB->insert_record('comments', $moduleinstance);
 
     return $id;
 }
@@ -70,13 +75,13 @@ function mod_comments_add_instance($moduleinstance, $mform = null) {
  * @param mod_comments_mod_form $mform The form.
  * @return bool True if successful, false otherwise.
  */
-function mod_comments_update_instance($moduleinstance, $mform = null) {
+function comments_update_instance($moduleinstance, $mform = null) {
     global $DB;
 
     $moduleinstance->timemodified = time();
     $moduleinstance->id = $moduleinstance->instance;
 
-    return $DB->update_record('mod_comments', $moduleinstance);
+    return $DB->update_record('comments', $moduleinstance);
 }
 
 /**
@@ -85,15 +90,26 @@ function mod_comments_update_instance($moduleinstance, $mform = null) {
  * @param int $id Id of the module instance.
  * @return bool True if successful, false on failure.
  */
-function mod_comments_delete_instance($id) {
+function comments_delete_instance($id) {
     global $DB;
 
-    $exists = $DB->get_record('mod_comments', array('id' => $id));
+    $exists = $DB->get_record('comments', array('id' => $id));
     if (!$exists) {
         return false;
     }
 
-    $DB->delete_records('mod_comments', array('id' => $id));
+    $DB->delete_records('comments', array('id' => $id));
+
+    return true;
+}
+
+/**
+ * Checks to see if the current user has liked the post
+ * 
+ * @param 
+ */
+function checked_liked($postid, $user) {
+    global $DB;
 
     return true;
 }
