@@ -1,0 +1,20 @@
+.local_catagories_frontpage .course {
+    display: block;
+    height: 200px;
+    position: relative;
+    background-color: #ccc;
+    border: 1px solid #ddd;
+    background-position: center top;
+    
+}
+.local_catagories_frontpage .course .ctitle {
+    display: block;
+    text-align: left;
+    min-height: 15%;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+    font-size: 0.9em;
+}
