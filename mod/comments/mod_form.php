@@ -34,7 +34,9 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_comments_mod_form extends moodleform_mod {
-
+    
+    
+    
     /**
      * Defines forms elements
      */
@@ -42,6 +44,9 @@ class mod_comments_mod_form extends moodleform_mod {
         global $CFG;
 
         $mform = $this->_form;
+
+        //$id = _customdata->id;
+        $id = '18';
 
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
@@ -59,12 +64,9 @@ class mod_comments_mod_form extends moodleform_mod {
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
         $mform->addHelpButton('name', 'commentsname', 'mod_comments');
 
-        // Adding the standard "intro" and "introformat" fields.
-        if ($CFG->branch >= 29) {
-            $this->standard_intro_elements();
-        } else {
-            $this->add_intro_editor();
-        }
+        $mform->addElement('hidden', 'id');
+        $mform->setDefault('id', $id);
+
 
         // Add standard elements.
         $this->standard_coursemodule_elements();

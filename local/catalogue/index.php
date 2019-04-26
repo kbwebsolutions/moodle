@@ -24,7 +24,6 @@ foreach ($courses as $c) {
     //$courseimage = get_course_image($c);
     echo $c->id;
     $context = \context_course::instance($c->id);
-    print_r($context);
     echo "<div class='cat-course'><a href='".$CFG->wwwroot."/course/view.php?id=".$c->id."'>";
     //echo local::course_coverimage_url($c->id)."<br />";
     echo $c->fullname.'<br />';

@@ -29,27 +29,14 @@ global $DB, $OUTPUT, $USER;
 
 
 // Course_module ID
-$id = optional_param('id', 0, PARAM_INT);
-$id = 18;
+$id = required_param('id', PARAM_INT);
+//$id = 18;
 
-// comments activity instance ID.
-$c  = optional_param('c', 0, PARAM_INT);
+list ($course, $cm) = get_course_and_cm_from_cmid($id, 'comments');
 
-if ($id) {
-    $cm             = get_coursemodule_from_id('comments', $id, 0, false, MUST_EXIST);
-    $course         = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $moduleinstance = $DB->get_record('comments', array('id' => $cm->instance), '*', MUST_EXIST);
-} else if ($c) {
-    $moduleinstance = $DB->get_record('comments', array('id' => $c), '*', MUST_EXIST);
-    $course         = $DB->get_record('course', array('id' => $moduleinstance->course), '*', MUST_EXIST);
-    $cm             = get_coursemodule_from_instance('comments', $moduleinstance->id, $course->id, false, MUST_EXIST);
-} else {
-    print_error(get_string('missingidandcmid', 'comments'));
-}
 
 require_login($course, true, $cm);
-
-$modulecontext = context_module::instance($cm->id);
+$context = context_module::instance($cm->id);
 
 /*$event = \comments\event\course_module_viewed::create(array(
     'objectid' => $moduleinstance->id,
@@ -60,22 +47,25 @@ $event->add_record_snapshot('comments', $moduleinstance);
 $event->trigger();*/
 
 $PAGE->set_url('/mod/comments/view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($moduleinstance->name));
+$PAGE->set_title(format_string($cm->name));
 $PAGE->set_heading(format_string($course->fullname));
-$PAGE->set_context($modulecontext);
+$PAGE->set_context($context);
 $output = $PAGE->get_renderer('mod_comments');
 $page = new \mod_comments\output\comment_posts();
 $pageurl = $PAGE->url;
 
-echo $OUTPUT->header();
-echo format_module_intro('comments', $moduleinstance, $id);
+echo $output->header();
  
-$mform = new mod_comments_message_form();
+$mformdata =  ['id' => $cm->id];
+
+
+$mform = new mod_comments_message_form($pageurl, $mformdata);
+
 
 $mform->display();
 
 if ($mform->is_cancelled()) {
-    redirect(new moodle_url('/mod/comments/view.php', array('id' => $cm->id)));
+    //redirect(new moodle_url('/mod/comments/view.php', array('id' => $mformdata->id)));
 } else if($fromform = $mform->get_data()) {
     $todb = new stdClass();
     $todb->commentsid = $cm->id;
@@ -85,7 +75,7 @@ if ($mform->is_cancelled()) {
     $todb->deleted = 0;
     //print_r($todb); 
     $DB->insert_record('comments_posts', $todb);
-    redirect(new moodle_url('/mod/comments/view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('/mod/comments/view.php', array('id' => $fromform->id)));
 };
 
 echo "<hr />";
@@ -125,4 +115,4 @@ foreach ($posts as $post) {
 $posts->close();
 echo '</div>';
 
-echo $OUTPUT->footer();
+echo $output->footer();

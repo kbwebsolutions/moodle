@@ -40,9 +40,11 @@ defined('MOODLE_INTERNAL')||die();
 use plugin_renderer_base;
 
 
-class renderer extends plugin_renderer_base {
+class renderer extends plugin_renderer_base
+{
 
-    public function render_comment_posts($post) {
+    public function render_comment_posts($post)
+    {
         $data = $post->export_for_template($this);
         return $this->render_from_template('mod_comments/comment_posts', $data);
     }
