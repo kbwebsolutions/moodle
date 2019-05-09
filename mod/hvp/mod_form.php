@@ -250,6 +250,15 @@ class mod_hvp_mod_form extends moodleform_mod {
 
                     $messages = array_merge(\mod_hvp\framework::messages('info'), $errors);
                     $errors['h5pfile'] = implode('<br/>', $messages);
+                } else {
+                    foreach ($h5pvalidator->h5pC->mainJsonData['preloadedDependencies'] as $dep) {
+                        if ($dep['machineName'] === $h5pvalidator->h5pC->mainJsonData['mainLibrary']) {
+                            if ($h5pvalidator->h5pF->libraryHasUpgrade($dep)) {
+                                // We do not allow storing old content due to security concerns.
+                                $errors['h5pfile'] = get_string('olduploadoldcontent', 'hvp');
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -279,15 +288,20 @@ class mod_hvp_mod_form extends moodleform_mod {
             } else {
                 $data['h5plibrary'] = $library;
 
-                // Verify that parameters are valid.
-                if (empty($data['h5pparams'])) {
-                    $errors['h5peditor'] = get_string('noparameters', 'hvp');
+                if ($core->h5pF->libraryHasUpgrade($library)) {
+                    // We do not allow storing old content due to security concerns.
+                    $errors['h5peditor'] = get_string('anunexpectedsave', 'hvp');
                 } else {
-                    $params = json_decode($data['h5pparams']);
-                    if ($params === null) {
-                        $errors['h5peditor'] = get_string('invalidparameters', 'hvp');
+                    // Verify that parameters are valid.
+                    if (empty($data['h5pparams'])) {
+                        $errors['h5peditor'] = get_string('noparameters', 'hvp');
                     } else {
-                        $data['h5pparams'] = $params;
+                        $params = json_decode($data['h5pparams']);
+                        if ($params === null) {
+                            $errors['h5peditor'] = get_string('invalidparameters', 'hvp');
+                        } else {
+                            $data['h5pparams'] = $params;
+                        }
                     }
                 }
             }
@@ -339,7 +353,7 @@ class mod_hvp_mod_form extends moodleform_mod {
         $core = \mod_hvp\framework::instance();
         $data->disable = $core->getStorableDisplayOptions($options, 0);
 
-        // Remove metadata wrapper from form data
+        // Remove metadata wrapper from form data.
         $params = json_decode($data->h5pparams);
         if ($params !== null) {
             $data->params = json_encode($params->params);
@@ -348,23 +362,24 @@ class mod_hvp_mod_form extends moodleform_mod {
             }
         }
 
-        // Cleanup
+        // Cleanup.
         unset($data->h5pparams);
 
         if ($data->h5paction === 'upload') {
             if (empty($data->metadata) || empty($data->metadata->title)) {
                 // Fix for legacy content upload to work.
-                // Fetch title from h5p.json or use a default string if not available
+                // Fetch title from h5p.json or use a default string if not available.
                 $h5pvalidator = \mod_hvp\framework::instance('validator');
                 $data->metadata->title = empty($h5pvalidator->h5pC->mainJsonData['title']) ? 'Uploaded Content' : $h5pvalidator->h5pC->mainJsonData['title'];
             }
-            $data->name = $data->metadata->title; // Sort of a hack, but there is no JavaScript that sets the value when there is no editor...
+            $data->name = $data->metadata->title; // Sort of a hack,
+            // but there is no JavaScript that sets the value when there is no editor...
         }
     }
 
     /**
      * This should not be overridden, but we have to in order to support Moodle <3.2
-     * (Do not override this method, override data_postprocessing() instead.)
+     * and older Totara sites.
      *
      * Moodle 3.1 LTS is supported until May 2019, after that this can be dropped.
      * (could cause issues for new features if they add more to this in Core)
@@ -372,11 +387,17 @@ class mod_hvp_mod_form extends moodleform_mod {
      * @return object submitted data; NULL if not valid or not submitted or cancelled
      */
     public function get_data() {
-        global $CFG;
         $data = parent::get_data();
-        // Check if Moodle version is < 3.2
-        if ($CFG->version < 2016120500) {
-            if ($data) {
+
+        if ($data) {
+            // Check if moodleform_mod class has already taken care of the data for us.
+            // If not this is an older Moodle or Totara site that we need to treat differently.
+
+            $class = new ReflectionClass('moodleform_mod');
+            $method = $class->getMethod('get_data');
+            if ($method->class !== 'moodleform_mod') {
+                // Moodleform_mod class doesn't override get_data so we need to convert it ourselves.
+
                 // Convert the grade pass value - we may be using a language which uses commas,
                 // rather than decimal points, in numbers. These need to be converted so that
                 // they can be added to the DB.

@@ -402,12 +402,7 @@ class file_storage implements \H5PFileStorage {
             'filename' => $file->getName()
         );
         $fs = get_file_storage();
-        $filedata = $file->getData();
-        if ($filedata) {
-            $storedfile = $fs->create_file_from_string($record, $filedata);
-        } else {
-            $storedfile = $fs->create_file_from_pathname($record, $_FILES['file']['tmp_name']);
-        }
+        $storedfile = $fs->create_file_from_pathname($record, $_FILES['file']['tmp_name']);
 
         return $storedfile->get_id();
     }
@@ -844,5 +839,27 @@ class file_storage implements \H5PFileStorage {
     public function hasPresave($libraryname, $developmentpath = null) {
         // TODO: Implement.
         return false;
+    }
+
+    /**
+     * Check if upgrades script exist for library.
+     *
+     * @param string $machineName
+     * @param int $majorVersion
+     * @param int $minorVersion
+     * @return string Relative path
+     */
+    // @codingStandardsIgnoreLine
+    public function getUpgradeScript($machinename, $majorversion, $minorversion) {
+        $context = \context_system::instance();
+        $fs = get_file_storage();
+        $area = 'libraries';
+        $path = "/{$machinename}-{$majorversion}.{$minorversion}/";
+        $file = 'upgrades.js';
+        if ($fs->get_file($context->id, 'mod_hvp', $area, 0, $path, $file)) {
+            return "/{$area}{$path}{$file}";
+        } else {
+            return null;
+        }
     }
 }
