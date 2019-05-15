@@ -36,10 +36,19 @@ $PAGE->set_url('/report/streamstats/index.php');
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('pluginname', 'report_streamstats'));
 $PAGE->set_heading(get_string('header', 'report_streamstats'));
-$PAGE->set_pagelayout('admin');
+$PAGE->set_pagelayout('report');
 
-$OUTPUT->header();
+echo $OUTPUT->header();
 
-$OUTPUT->heading(get_string('mystats', 'report_streamstats'));;
+echo $OUTPUT->heading(get_string('mystats', 'report_streamstats'));;
 
-$OUTPUT->footer();
+$content = get_workstream_categories();
+
+foreach ($content as $c) {
+    echo '<p>'.$c->name.'</p>';
+}
+
+$stats = forum_statistics($category);
+
+
+echo $OUTPUT->footer();
