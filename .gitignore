@@ -36,3 +36,13 @@ composer.phar
 /lib/yuilib/*/*/*-coverage.js
 atlassian-ide-plugin.xml
 /node_modules/
+/local/hackfest/version.php
+/local/hackfest/amd/build/refresh.min.js
+/local/hackfest/amd/src/refresh.js
+/local/hackfest/classes/external.php
+/local/hackfest/classes/output/index_page.php
+/local/hackfest/classes/output/renderer.php
+/local/hackfest/db/services.php
+/local/hackfest/index.php
+/local/hackfest/lang/en/local_hackfest.php
+/local/hackfest/templates/index_page.mustache
