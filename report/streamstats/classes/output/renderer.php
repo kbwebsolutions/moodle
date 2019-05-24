@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,9 +23,17 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace report_streamstats\output;
+
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('reports', new admin_externalpage('reportstreamstats', get_string('pluginname', 'report_streamstats'), "$CFG->wwwroot/report/streamstats/index.php"));
+use plugin_renderer_base;
 
-// no report settings
-$settings = null;
+
+class renderer extends plugin_renderer_base{
+
+    public function render_forum_stats($page) {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('report_streamstats', $data);
+    }
+}

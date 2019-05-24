@@ -1,4 +1,5 @@
-<?php
+<?php>
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,9 +23,20 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+namespace report_streamstats\output;
 
-$ADMIN->add('reports', new admin_externalpage('reportstreamstats', get_string('pluginname', 'report_streamstats'), "$CFG->wwwroot/report/streamstats/index.php"));
+use renderable;
+use templatable;
+use renderer_base;
+use stdClass;
 
-// no report settings
-$settings = null;
+
+class forumstats implements renderable, templatable {
+
+    public function export_for_template(renderer_base $output)
+    {
+        $data = new stdClass();
+
+        return $data;   // TODO: Implement export_for_template() method.
+    }
+}

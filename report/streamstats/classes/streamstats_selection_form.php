@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,9 +23,29 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('reports', new admin_externalpage('reportstreamstats', get_string('pluginname', 'report_streamstats'), "$CFG->wwwroot/report/streamstats/index.php"));
 
-// no report settings
-$settings = null;
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->libdir.'/formslib.php');
+
+class report_streamstats_selection_form extends moodleform
+{
+    /**
+     * Form definition method.
+     */
+    public function definition() {
+
+        $mform = $this->_form;
+        $componentarray = $this->_customdata['components'];
+
+        $mform->addElement('header', 'displayinfo', get_string('mystats', 'report_streamstats'));
+
+
+        $mform->addElement('select', 'eventcomponent', get_string('choosestream', 'report_streamstats'), $componentarray);
+
+        $buttonarray = array();
+        $buttonarray[] = $mform->createElement('button', 'filterbutton', get_string('run', 'report_streamstats'));
+        $mform->addGroup($buttonarray, 'filterbuttons', '', array(' '), false);
+    }
+}
