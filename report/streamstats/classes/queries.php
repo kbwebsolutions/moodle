@@ -53,7 +53,7 @@ class queries {
 
         $sql = "SELECT DISTINCT c.id, c.fullname,
                     (SELECT COUNT(distinct(ra.userid)) AS Users FROM {role_assignments} AS ra JOIN {context} AS ctx ON ra.contextid = ctx.id WHERE ra.roleid = :student AND ctx.instanceid = c.id ) AS Participants,
-                    (SELECT count(cc.userid) FROM {course_completions} AS cc WHERE cc.course = c.id) as completions,
+                    (SELECT count(cc.userid) FROM {course_completions} AS cc WHERE cc.course = c.id AND cc.timecompleted IS NOT NULL) as completions,
                     (SELECT count(distinct(log.userid)) as Active FROM {logstore_standard_log}  AS log JOIN {role_assignments} as ra ON ra.userid = log.userid AND ra.contextid = log.contextid WHERE log.action = 'viewed' AND log.target  = 'course' AND log.timecreated > :fromdate AND log.courseid = c.id AND ra.roleid = :roleid2) AS activeusers,
                     (SELECT count(cmc.id) FROM {course_modules_completion} AS cmc JOIN {course_modules} AS cm ON cm.id = cmc.coursemoduleid WHERE cm.course = c.id AND cm.deletioninprogress = 0 AND cm.visible = 1) as completedactivities               
                 FROM {course} as c
