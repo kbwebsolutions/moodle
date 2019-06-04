@@ -46,3 +46,4 @@ atlassian-ide-plugin.xml
 /local/hackfest/index.php
 /local/hackfest/lang/en/local_hackfest.php
 /local/hackfest/templates/index_page.mustache
+local/hackfest/*
