@@ -37,7 +37,7 @@ $PAGE->set_context($context);
 $PAGE->set_title(get_string('pluginname', 'report_streamstats'));
 $PAGE->set_heading(get_string('header', 'report_streamstats'));
 $PAGE->set_pagelayout('report');
-//$output = $PAGE->get_renderer('report_streamstats');
+$output = $PAGE->get_renderer('report_streamstats');
 
 echo $OUTPUT->header();
 

@@ -23,17 +23,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace report_streamstats\output;
 
 defined('MOODLE_INTERNAL') || die;
 
-use plugin_renderer_base;
 
 
-class renderer extends plugin_renderer_base{
+class report_streamstats_renderer extends plugin_renderer_base {
 
     public function render_forum_stats($page) {
         $data = $page->export_for_template($this);
         return parent::render_from_template('report_streamstats', $data);
+    }
+
+    public function get_report_selector() {
+        echo html_writer::start_tag('form', array('class' => 'programmeselection', 'action' => $report->url, 'method' => 'get'));
+        echo html_writer::start_div();
+        echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'chooselog', 'value' => '1'));
+        echo html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'showusers', 'value' => $report->showcats));
     }
 }
