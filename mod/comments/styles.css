@@ -14,11 +14,11 @@
     margin-bottom: 1.5em;
 }
 
-.path-mod-comments .user{
+.path-mod-comments .userpix{
     order: 1;
     margin-right: 1em;
 }
-.path-mod-comments .user .avatar{
+.path-mod-comments .userpix .avatar{
 
 }
 
@@ -46,7 +46,7 @@
 }
 
 
-.path-mod-comments .msg-body .name {
+.path-mod-comments .msg-body .username {
 display: inline-block;
 float: left;
 font-weight: bold;

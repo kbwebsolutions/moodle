@@ -15,26 +15,23 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template mod_comments/comment_post
+    @template mod_comments/comment_posts
 
     Example context (json):
     {
-        "messageid": 12,
-        "userpix": "Picture Here",
-        "username": "Kieran Briggs",
-        "date": "22 April",
-        "message": "content of the message"
+        "section": "Topic 5",
+        "messages": [
+            {"messageid": "12", "userpix": "Picture Here", "username": "Kieran Briggs", "date": "22 April", "message": "content of the message"},
+            {"messageid": "14", "userpix": "Picture Here", "username": "Tony Stark", "date": "2 April", "message": "I am Iron Man"}
+        ]
     }
 
 }}
-<li id="{{messageid}}" class="item">
-    <div class="userpix">{{userpix}}</div>
-        <div class="msg-body">
-            <div class="header">
-                <div class="username">{{username}}</div>
-                <div class="date">{{date}}</div>
-            </div>
-            <div class="message">{{message}}</div>
-        </div>
-    <div class="social"><a href=#">{{# str}}like, mod_comments{{/str}}</a> | <a href=#">{{# str}}delete, mod_comments{{/str}}</a></div>
-</li>
+<h4>{{section}}</h4>
+<div id = "comment-posts">
+<ul class ="comments feed">
+    {{#messages}}
+    {{>mod_comments/comment_post}}
+    {{/messages}}
+</ul>
+</div>

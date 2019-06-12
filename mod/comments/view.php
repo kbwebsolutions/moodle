@@ -30,7 +30,7 @@ global $DB, $OUTPUT, $USER;
 
 // Course_module ID
 $id = required_param('id', PARAM_INT);
-//$id = 18;
+
 
 list ($course, $cm) = get_course_and_cm_from_cmid($id, 'comments');
 
@@ -55,8 +55,8 @@ $page = new \mod_comments\output\comment_posts();
 $pageurl = $PAGE->url;
 
 echo $output->header();
- 
-$mformdata =  ['id' => $cm->id];
+
+$mformdata = array('modid' => $cm->id);
 
 
 $mform = new mod_comments_message_form($pageurl, $mformdata);
@@ -65,7 +65,7 @@ $mform = new mod_comments_message_form($pageurl, $mformdata);
 $mform->display();
 
 if ($mform->is_cancelled()) {
-    //redirect(new moodle_url('/mod/comments/view.php', array('id' => $mformdata->id)));
+    redirect(new moodle_url('/mod/comments/view.php', array('id' => $mformdata->id)));
 } else if($fromform = $mform->get_data()) {
     $todb = new stdClass();
     $todb->commentsid = $cm->id;
@@ -73,12 +73,15 @@ if ($mform->is_cancelled()) {
     $todb->created = time();
     $todb->message = $fromform->posting;
     $todb->deleted = 0;
-    //print_r($todb); 
     $DB->insert_record('comments_posts', $todb);
     redirect(new moodle_url('/mod/comments/view.php', array('id' => $fromform->id)));
 };
 
 echo "<hr />";
+
+//echo $output->render($page);
+
+
 
 $sql = "SELECT cp.id, cp.created, cp.userid, cp.message, u.firstname, u.lastname
           FROM {comments_posts} cp, {user} u
@@ -88,8 +91,18 @@ $sql = "SELECT cp.id, cp.created, cp.userid, cp.message, u.firstname, u.lastname
       ORDER BY cp.created DESC";
 
 $posts = $DB->get_recordset_sql($sql, array('del'=>'0', 'id'=>$cm->id));
+
+
+
 echo '<div id="comment-posts"><ul class="feed">';
 foreach ($posts as $post) {
+$messages[] = array (
+"id" => $post->id,
+"username" => $post->firstname. ' '. $post->lastname,
+"date" => date("d F", $post->created),
+"message" => $post->message
+);
+
 
     //render_from_template($message_list, $post);
     //echo $output->render($page);
@@ -99,7 +112,7 @@ foreach ($posts as $post) {
     $liked = checked_liked($post->id, $USER->id);
     $user = $DB->get_record('user', array('id' => $post->userid));
     $userpix = $OUTPUT->user_picture($user);
-    $code = '<li id='.$post->id.' class="item"><div class="user">'.$userpix.'</div>';
+    $code = '<li id='.$post->id.' class="item"><div class="userpix">'.$userpix.'</div>';
     $code .= '<div class="msg-body"><div class="header">';
     $code .= '<div class="name">'.$post->firstname.' '.$post->lastname.'</div>';
     $code .= '<div class="date">'.date("d F", $post->created).'</div></div>';
@@ -114,5 +127,8 @@ foreach ($posts as $post) {
 }
 $posts->close();
 echo '</div>';
+
+print_object($messages);
+
 
 echo $output->footer();

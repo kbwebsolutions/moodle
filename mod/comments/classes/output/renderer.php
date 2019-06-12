@@ -23,29 +23,18 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * A custom renderer class that extends the plugin_renderer_base and
- * is used by the forum module.
- *
- * @package   mod_comments
- * @copyright 2019 Kieran Briggs
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
- **/
 
 namespace mod_comments\output;
 
 defined('MOODLE_INTERNAL')||die();
 
-use plugin_renderer_base;
 
-
-class renderer extends plugin_renderer_base
+class renderer extends \plugin_renderer_base
 {
 
     public function render_comment_posts($post)
     {
         $data = $post->export_for_template($this);
-        return $this->render_from_template('mod_comments/comment_posts', $data);
+        return parent::render_from_template('mod_comments/comment_posts', $data);
     }
 }

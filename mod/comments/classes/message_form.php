@@ -38,6 +38,8 @@ class mod_comments_message_form extends moodleform {
     public function definition() {
         global $CFG, $DB;
 
+        $cid = $this->_customdata['modid'];
+
         $mform =& $this->_form;
        
         // Message area
@@ -45,6 +47,7 @@ class mod_comments_message_form extends moodleform {
         $mform->setType('details_editor', PARAM_RAW);
         $mform->addHelpButton('posting', 'details', 'bookingform');
 
+        $mform->addElement('hidden', 'id', $cid);
 
         // Submit button
         $buttonarray = array();

@@ -42,7 +42,27 @@ class comment_posts implements renderable, templatable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output) {
+        global $DB;
+
+        $sql = "SELECT cp.id, cp.created, cp.userid, cp.message, u.firstname, u.lastname
+          FROM {comments_posts} cp, {user} u
+         WHERE u.id = cp.userid 
+               AND cp.deleted = :del
+               AND cp.commentsid = :id
+      ORDER BY cp.created DESC";
+
+        $posts = $DB->get_recordset_sql($sql, array('del'=>'0', 'id'=>$cm->id));
+
         $data = new stdClass();
+
+        foreach ($posts as $p) {
+            $messages[] = array (
+                "id" => $p->id,
+                "username" => $p->firstname. ' '. $p->lastname,
+                "date" => date("d F", $p->created),
+                "message" => $p->message
+            );
+        }
 
         // TODO export some stuff.
 
