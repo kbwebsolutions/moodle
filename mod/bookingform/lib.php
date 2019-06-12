@@ -2638,7 +2638,7 @@ function bookingform_format_session_times($start, $end, $tz) {
  * @global class $CFG used to get the path to the module
  */
 function bookingform_cm_info_view(cm_info $coursemodule) {
-    global $USER, $DB, $COURSE;
+    global $CFG, $USER, $DB, $COURSE;
     $output = '';
     $content = '';
 
@@ -2775,9 +2775,13 @@ function bookingform_cm_info_view(cm_info $coursemodule) {
                  * @since   02.13.2019
                  */
                 if (!empty($mygroupid)) {
-
+                    if(!empty($cfg->bookingform_session_roles)) {
+                        $roleid = $cfg->bookingform_session_roles;
+                    } else {
+                        $roleid = 4;
+                    }
                     // Get the trainers for this session.
-                    $trainers = bookingform_get_trainers($session->id, 3);
+                    $trainers = bookingform_get_trainers($session->id, $roleid);
                     if (is_array($trainers) || is_object($trainers)) {
 
                         // See if the teachers for this sessions are part of my group.
