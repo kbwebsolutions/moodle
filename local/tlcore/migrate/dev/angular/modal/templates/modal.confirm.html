@@ -1,0 +1,30 @@
+<!-- background overlay -->
+<div 
+  class="modal-backdrop fade"
+  aria-hidden="true"
+  ng-class="{'in': show}"
+  ng-click="close(false)"
+></div>
+
+<!-- modal dialog -->
+<div 
+  class="modal fade modal-confirm {{class}}"
+  ng-class="{'show': show, 'in': show}"
+>
+  <div class="modal-dialog" id="modal-dialog" role="dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        {{message}}
+        <div class="text-sm-right">
+          <button
+            type="button"
+            ng-repeat="button in buttons.slice().reverse()" 
+            ng-click="onClick(button)"
+            ng-class="['btn', {'btn-primary': $index == buttons.length-1}]"
+            ng-bind="button.label"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
