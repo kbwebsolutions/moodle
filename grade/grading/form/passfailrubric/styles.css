@@ -1,0 +1,364 @@
+.gradingform_passfailrubric_editform .status {
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 60%;
+    padding: 0.25em;
+    border: 1px solid #EEE;
+}
+.gradingform_passfailrubric_editform .status.ready {
+    background-color: #e7f1c3;
+    border-color: #AAEEAA;
+}
+.gradingform_passfailrubric_editform .status.draft {
+    background-color: #f3f2aa;
+    border-color: #EEEE22;
+}
+.gradingform_passfailrubric {
+    overflow: auto;
+    padding-bottom: 1.5em;
+    position: relative;
+}
+.gradingform_passfailrubric.editor .criterion .controls,
+.gradingform_passfailrubric .criterion .description,
+.gradingform_passfailrubric .criterion .levels,
+.gradingform_passfailrubric.editor .criterion .addlevel,
+.gradingform_passfailrubric .criterion .levels .level {
+    vertical-align: top;
+}
+.gradingform_passfailrubric.editor .criterion .controls,
+.gradingform_passfailrubric .criterion .description,
+.gradingform_passfailrubric.editor .criterion .addlevel,
+.gradingform_passfailrubric .criterion .levels .level {
+    padding: 3px;
+}
+.gradingform_passfailrubric .criteria {
+    height: 100%;
+    width: 100%;
+}
+.gradingform_passfailrubric .grade_history {
+    font-size: .9em;
+}
+
+.gradingform_passfailrubric .add_comment {
+    box-shadow: 1px 1px 1px #000;
+}
+
+.gradingform_passfailrubric .add_comment:hover {
+    box-shadow: 2px 2px 1px #000;
+}
+
+.gradingform_passfailrubric .history{
+    border-style: solid;
+    border-width: 1px;
+}
+
+.gradingform_passfailrubric .criterion {
+    border: 1px solid #DDD;
+    overflow: hidden;
+}
+.gradingform_passfailrubric .criterion.even {
+    background: #F0F0F0;
+}
+.gradingform_passfailrubric .descriptionfrozen {
+    font-weight: bold;
+    float: left;
+}
+
+.gradingform_passfailrubric .criterion .description {
+    font-weight: bold;
+    float: left;
+    width:100%;
+}
+.gradingform_passfailrubric .criterion .levels table {
+    width: 100%;
+    height: 100%;
+}
+.gradingform_passfailrubric .criterion .levels,
+.gradingform_passfailrubric .criterion .levels table,
+.gradingform_passfailrubric .criterion .levels table tbody {
+    padding: 0;
+    margin: 0;
+}
+.gradingform_passfailrubric .criterion .levels .level {
+    border-left: 1px solid #DDD;
+    max-width: 150px;
+}
+#passfailrubric-advancedgrading {
+    width:100%;
+}
+.gradingform_passfailrubric .remark {
+    width: 100%;
+    padding-right: 1%;
+}
+.gradingform_passfailrubric td.remarkinput {
+    width: 35%;
+}
+    
+
+.modal-body .reusable_remark{
+    border: solid black thin;
+    margin:1px;
+}
+.gradingform_passfailrubric .criterion .levels .level .level-wrapper {
+    position: relative;
+}
+.gradingform_passfailrubric .criterion .levels .level.last {
+    border-right: 1px solid #DDD;
+}
+.gradingform_passfailrubric .plainvalue.empty {
+    font-style: italic;
+    color: #AAA;
+}
+.gradingform_passfailrubric.editor .criterion .levels .level .delete {
+    position: absolute;
+    right: 0;
+}
+.gradingform_passfailrubric .criterion .levels .level .pfrubrc-spacer {
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+.gradingform_passfailrubric.editor .controls {
+    width:5%;
+}
+/* description of criteria */
+.gradingform_passfailrubric.editor .descriptionedit {
+    height:50px !important;
+}
+
+
+.gradingform_passfailrubric.editor .criterion.first .controls .moveup input,
+.gradingform_passfailrubric.editor .criterion.last .controls .movedown input {
+    display: none;
+}
+.gradingform_passfailrubric .criterion .levels .level.currentchecked {
+    background: #fff0f0;
+}
+.gradingform_passfailrubric .criterion .levels .level.checked {
+    background: #d0ffd0;
+    border: 1px solid #555;
+}
+.gradingform_passfailrubric.evaluate .criterion .levels .level:hover {
+    background: #30ff30;
+}
+.gradingform_passfailrubric.editor .delete input,
+.gradingform_passfailrubric.editor .duplicate input,
+.gradingform_passfailrubric.editor .moveup input,
+.gradingform_passfailrubric.editor .movedown input {
+    text-indent: -1000em;
+    cursor: pointer;
+    border: none;
+}
+.gradingform_passfailrubric.editor .criterion .controls .delete input {
+    width: 12px;
+    height: 12px;
+    background: transparent url([[pix:t/delete]]) no-repeat center top;
+    margin: .3em .3em 0 .3em;
+}
+.gradingform_passfailrubric.editor .criterion .controls .duplicate input {
+    width: 12px;
+    height: 12px;
+    background: transparent url([[pix:t/copy]]) no-repeat center top;
+    margin: .3em .3em 0 .3em;
+}
+.gradingform_passfailrubric.editor .levels .level .delete input {
+    width: 12px;
+    height: 16px;
+    background: transparent url([[pix:t/delete]]) no-repeat center center;
+}
+.dir-rtl .gradingform_passfailrubric.editor .levels .level .delete input {
+    margin-right: .45em;
+    margin-left: 0;
+}
+.gradingform_passfailrubric.editor .moveup input {
+    width: 12px;
+    height: 12px;
+    background: transparent url([[pix:t/up]]) no-repeat center top;
+    margin: .3em .3em 0 .3em;
+}
+.gradingform_passfailrubric.editor .movedown input {
+    width: 12px;
+    height: 12px;
+    background: transparent url([[pix:t/down]]) no-repeat center top;
+    margin: .3em .3em 0 .3em;
+}
+.gradingform_passfailrubric.editor .addcriterion input,
+.gradingform_passfailrubric.editor .addlevel input {
+    background: transparent url([[pix:t/add]]) no-repeat top left;
+    display: block;
+    color: #555555;
+    font-weight: bold;
+    text-decoration: none;
+}
+.gradingform_passfailrubric.editor .addcriterion input {
+    background-position: 5px 8px;
+    height: 30px;
+    line-height: 29px;
+    margin-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.gradingform_passfailrubric.editor .addlevel input {
+    background-position: 5px 5px;
+    height: 25px;
+    line-height: 24px;
+    margin-bottom: 45px;
+    padding-left: 18px;
+    padding-right: 8px;
+}
+.gradingform_passfailrubric .options .optionsheading {
+    font-weight: bold;
+    font-size: 1.1em;
+    padding-bottom: 5px;
+}
+.gradingform_passfailrubric .options .option {
+    padding-bottom: 2px;
+}
+.gradingform_passfailrubric .options .option label {
+    margin-left: 5px;
+}
+.gradingform_passfailrubric .options .option .value {
+    margin-left: 5px;
+    font-weight: bold;
+}
+.gradingform_passfailrubric .criterion .levels.error {
+    border: 1px solid red;
+}
+.gradingform_passfailrubric .criterion .description.error,
+.gradingform_passfailrubric .criterion .levels .level .definition.error,
+.gradingform_passfailrubric .criterion .levels .level .score.error {
+    background: #FFDDDD;
+}
+.gradingform_passfailrubric .description_edit{
+    width:520px;
+}
+.gradingform_passfailrubric-regrade {
+    padding: 10px;
+    background: #FFDDDD;
+    border: 1px solid #F00;
+    margin-bottom: 10px;
+}
+.gradingform_passfailrubric-restored {
+    padding: 10px;
+    background: #FFFFDD;
+    border: 1px solid #FF0;
+    margin-bottom: 10px;
+}
+.gradingform_passfailrubric-error {
+    color: red;
+    font-weight: bold;
+}
+.gradingform_passfailrubric.editor .hiddenelement {
+    display: none;
+}
+.gradingform_passfailrubric.editor .pseudotablink {
+    background-color: transparent;
+    border: 0 solid;
+    height: 1px;
+    width: 1px;
+    color: transparent;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    float: right;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric .addcriterion input {
+    background: transparent url([[pix:t/add]]) no-repeat scroll 7px 8px;
+    border: 0 none;
+    color: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding-left: 26px;
+    text-shadow: inherit;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric .addcriterion {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: #ccc #ccc #b3b3b3;
+    border-image: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 1em;
+    margin-left: 5px;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria {
+    margin-bottom: 1em;
+}
+
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria .criterion .addlevel {
+    vertical-align: middle;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria .criterion .addlevel input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    border-color: #ccc #ccc #b3b3b3;
+    border-image: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-right: 5px;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria .criterion .level .delete {
+    clear: both;
+    float: right;
+    height: 32px;
+    margin-top: -32px;
+    position: relative;
+    width: 32px;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria .criterion .level .delete input {
+    bottom: 0;
+    display: block;
+    height: 24px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: 24px;
+}
+
+#passfailrubric-passfailrubric.gradingform_passfailrubric #passfailrubric-criteria .criterion .pfrubrc-spacer {
+    float: left;
+    margin-right: 28px;
+    position: relative;
+}
