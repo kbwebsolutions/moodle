@@ -207,6 +207,7 @@ $string['bookingform:signup'] = 'Sign-up for a session';
 $string['bookingform:takeattendance'] = 'Take attendance';
 $string['bookingform:view'] = 'View Booking-Form activities and sessions';
 $string['bookingform:viewattendees'] = 'View attendance list and attendees';
+$string['bookingform:exportattendance'] = 'Download Attendance Lists';
 $string['bookingform:viewcancellations'] = 'View cancellations';
 $string['bookingform:viewemptyactivities'] = 'View empty Booking-Form activities';
 $string['bookingformbooking'] = 'Booking-Form booking';

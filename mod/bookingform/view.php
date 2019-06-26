@@ -127,7 +127,7 @@ if (count($locations) > 2) {
 
 print_session_list($course->id, $bookingform->id, $location);
 
-if (has_capability('mod/bookingform:viewattendees', $context)) {
+if (has_capability('mod/bookingform:exportattendance', $context)) {
     echo $OUTPUT->heading(get_string('exportattendance', 'bookingform'));
     echo html_writer::start_tag('form', array('action' => 'view.php', 'method' => 'get'));
     echo html_writer::start_tag('div');
