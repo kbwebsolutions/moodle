@@ -125,7 +125,7 @@ if ($PAGE->pagelayout === 'frontpage' && $PAGE->pagetype === 'site-index') {
 }
 
 //echo $OUTPUT->activity_navigation();
-echo "<hr /><p> <a class='btn btn-secondary'  href='".$CFG->wwwroot."/course/view.php?id=".$COURSE->id."'>Back to module homepage</a></p>";
+echo $OUTPUT->backToSection($mastimage);
 echo $OUTPUT->course_content_footer();
 
 if (stripos($PAGE->bodyclasses, 'format-singleactivity') !== false ) {

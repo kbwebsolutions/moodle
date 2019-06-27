@@ -1819,4 +1819,22 @@ HTML;
             return '<ol class="breadcrumb">' .$breadcrumbs .'</ol>';
         }
     }
+
+    /**
+     * This renders the Back to section button at the bottom of all activities.
+     * Uses bootstrap compatible html.
+     * @param string $coverimage
+     */
+    public function backToSection($coverimage = '') {
+        global $COURSE, $CFG;
+
+        require_once($CFG->dirroot.'/course/lib.php');
+
+        $chosenElem = end($this->page->navbar->get_items());
+        $chosenElemSectionNumber = $this->get_section_for_id($chosenElem->parent->key);
+
+        if (!empty($chosenElemSectionNumber)) {
+            return '<a class="btn btn-secondary" style="margin:1em 0" href="'.$CFG->wwwroot.'/course/view.php?id='.$COURSE->id.'#section-'.$chosenElemSectionNumber.'">Back To '.$chosenElem->parent->text.'</a>';
+        }
+    }
 }
