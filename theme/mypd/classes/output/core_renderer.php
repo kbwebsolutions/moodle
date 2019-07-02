@@ -1834,11 +1834,94 @@ HTML;
     }
 
     /**
+     * This renders the navbar in the wrong place.
+     * Uses bootstrap compatible html.
+     * @param string $coverimage
+     */
+    public function backToSectionTesting($coverimage = '') {
+        global $COURSE, $CFG;
+
+        require_once($CFG->dirroot.'/course/lib.php');
+
+        $breadcrumbs = '';
+        $courseitem = null;
+        $attr['class'] = 'js-mypd-pm-trigger';
+
+        if (!empty($coverimage)) {
+            $attr['class'] .= ' mast-breadcrumb';
+        }
+        $mypdmycourses = html_writer::link('#', get_string('menu', 'theme_mypd'), $attr);
+
+        $lastelem = end($this->page->navbar->get_items());
+        echo "<script>console.log('" . json_encode($lastelem) . "');</script>";
+        if ($lastelem->action == $this->page->url) {
+            echo "This is the actual page";
+        }
+        foreach ($this->page->navbar->get_items() as $item) {
+            $item->hideicon = true;
+
+            // Remove link to current page - n.b. needs improving.
+            if ($item->action == $this->page->url) {
+                continue;
+            }
+
+            // Remove link to home/dashboard as site name/logo provides the same link.
+            if ($item->key === 'home' || $item->key === 'myhome' || $item->key === 'dashboard') {
+                continue;
+            }
+
+            // Replace my courses none-link with link to mypd personal menu.
+            if ($item->key === 'mycourses') {
+                $breadcrumbs .= '<li class="breadcrumb-item">' .$mypdmycourses. '</li>';
+                continue;
+            }
+
+            if ($item->type == \navigation_node::TYPE_COURSE) {
+                $courseitem = $item;
+            }
+
+            if ($item->type == \navigation_node::TYPE_SECTION) {
+                if ($courseitem != null) {
+                    $url = $courseitem->action->out(false);
+                    $item->action = $courseitem->action;
+                    $sectionnumber = $this->get_section_for_id($item->key);
+
+                    // Append section focus hash only for topics and weeks formats because we can
+                    // trust the behaviour of these formats.
+                    if ($COURSE->format == 'topics' || $COURSE->format == 'weeks') {
+                        $url .= '#section-'.$sectionnumber;
+                        if ($item->text == get_string('general')) {
+                            $item->text = get_string('introduction', 'theme_mypd');
+                        }
+                    } else {
+                        $url = course_get_url($COURSE, $sectionnumber);
+                    }
+                    $item->action = new moodle_url($url);
+                }
+            }
+
+            // Only output breadcrumb items which have links.
+            if ($item->action !== null) {
+                $attr = [];
+                if (!empty($coverimage)) {
+                    $attr = ['class' => 'mast-breadcrumb'];
+                }
+                $link = html_writer::link($item->action, $item->text, $attr);
+                $breadcrumbs .= '<li class="breadcrumb-item">' .$link. '</li>';
+            }
+        }
+
+        if (!empty($breadcrumbs)) {
+            return '<ol class="breadcrumb">' .$breadcrumbs .'</ol>';
+        }
+    }
+
+    /**
      * This renders the Back to section button at the bottom of all activities.
      * Uses bootstrap compatible html.
      * @param string $coverimage
      */
-    public function backToSection($coverimage = '') {
+    public function backToSection() {
         global $COURSE, $CFG;
 
         require_once($CFG->dirroot.'/course/lib.php');
@@ -1847,7 +1930,10 @@ HTML;
         $chosenElemSectionNumber = $this->get_section_for_id($chosenElem->parent->key);
 
         if (!empty($chosenElemSectionNumber)) {
-            return '<a class="btn btn-secondary" style="margin:1em 0" href="'.$CFG->wwwroot.'/course/view.php?id='.$COURSE->id.'#section-'.$chosenElemSectionNumber.'">Back To '.$chosenElem->parent->text.'</a>';
+            //return '<a class="btn btn-secondary" style="margin:1em 0" href="'.$chosenElem->parent->action.'">Back To '.$chosenElem->parent->text.'</a>';
+           return '<hr style="clear:both"/><a class="btn btn-secondary" style="margin:1em 0" href="'.$CFG->wwwroot.'/course/view.php?id='.$COURSE->id.'#section-'.$chosenElemSectionNumber.'">Back To '.$chosenElem->parent->text.'</a>';
+        } else {
+            return '<hr style="clear:both"/><a class="btn btn-secondary" style="margin:1em 0" href="'.$CFG->wwwroot.'/course/view.php?id='.$COURSE->id.'">Back to module homepage</a>';
         }
     }
 }
