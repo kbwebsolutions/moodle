@@ -1,0 +1,1 @@
+This is described in filter/embedquestion/internaldoc/functionality.txt.
