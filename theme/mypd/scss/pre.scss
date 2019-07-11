@@ -115,7 +115,7 @@ $color-scorm:  					#ee7ea0; //#f7981d // Scorm, imsp
 // Colour variables for the customisable mr_nav.
 // -------------------------
 
-$nav-bg:                            rgba(255, 255, 255, .95) !default;
+$nav-bg:                            rgba(255, 255, 255, 1) !default; // rgba(255, 255, 255, .95)
 $nav-color:                         $brand-primary !default;
 $nav-color-hover:                   darken($nav-color, 8%);
 
