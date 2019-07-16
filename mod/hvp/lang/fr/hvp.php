@@ -60,8 +60,12 @@ $string['noh5ps'] = 'Il n\'y a aucune ressource interactive disponible pour ce c
 $string['lookforupdates'] = 'Rechercher des mises à jour H5P';
 $string['removetmpfiles'] = 'Supprimer les anciens fichiers temporaires H5P';
 $string['removeoldlogentries'] = 'Supprimer les anciennes entrées de logs H5P';
+$string['removeoldmobileauthentries'] = 'Remove old H5P mobile auth entries';
 
 // Admin settings.
+$string['displayoptiondownloadnever'] = 'Never';
+$string['displayoptiondownloadalways'] = 'Always';
+$string['displayoptiondownloadpermission'] = 'Only if user has permissions to export H5P';
 $string['displayoptionnevershow'] = 'Never show';
 $string['displayoptionalwaysshow'] = 'Always show';
 $string['displayoptionpermissions'] = 'Show only if user has permissions to export H5P';
@@ -70,7 +74,7 @@ $string['displayoptionauthoron'] = 'Controlled by author, default is on';
 $string['displayoptionauthoroff'] = 'Controlled by author, default is off';
 $string['displayoptions'] = 'Afficher les options';
 $string['enableframe'] = 'Afficher la barre de menu des actions';
-$string['enabledownload'] = 'Bouton de téléchargement';
+$string['enabledownload'] = 'Allow download';
 $string['enableembed'] = 'Bouton d\'intégration';
 $string['enablecopyright'] = 'Bouton de copyright';
 $string['enableabout'] = 'Bouton à propos de H5P';
@@ -137,6 +141,9 @@ $string['upgradenothingtodo'] = "Il n\'y a aucune instance à mettre à jour.";
 $string['upgradebuttonlabel'] = 'Mettre à jour';
 $string['upgradeinvalidtoken'] = 'Erreur : Token de sécruité invalide!';
 $string['upgradelibrarymissing'] = 'Erreur : Votre bibliothèque est manquante!';
+$string['upgradeerrormissinglibrary'] = 'Missing required library %lib.';
+$string['upgradeerrortoohighversion'] = 'Parameters contain %used while only %supported or earlier are supported.';
+$string['upgradeerrornotsupported'] = 'Parameters contain %used which is not supported.';
 
 // Results / report page.
 $string['user'] = 'Utilisateur';
@@ -197,6 +204,7 @@ $string['hvp:getcachedassets'] = 'Récupérer les assets mis en cache';
 $string['hvp:installrecommendedh5plibraries'] = 'Install new safe H5P content types recommended by H5P.org';
 
 // Capabilities error messages.
+$string['nopermissiontogettranslations'] = 'You do not have permissions to retrieve translations';
 $string['nopermissiontoupgrade'] = 'Vous n\'avez pas les droits pour mettre à jour les bibliothèques.';
 $string['nopermissiontorestrict'] = 'Vous n\'avez pas les droits pour restreindre les biliothèques.';
 $string['nopermissiontosavecontentuserdata'] = 'Vous n\'avez pas les droits pour sauvegarder les données utilisateur.';
@@ -302,3 +310,9 @@ $string['licenseversion'] = 'License Version';
 
 // Embed.
 $string['embedloginfailed'] = 'You do not have access to this content. Try logging in.';
+
+// Reuse.
+$string['reuse'] = 'Reuse';
+$string['reuseContent'] = 'Reuse Content';
+$string['reuseDescription'] = 'Reuse this content.';
+$string['contentCopied'] = 'Content is copied to the clipboard';
