@@ -1,15 +1,16 @@
 // This file is for setting the Style Settings
 // for the Atto Plugin.
 
-{
-  "title": "Video time",
-  "type": "block",
-  "classes": "videotime"
-},
+
 {
   "title": "EEF Header",
   "type": "inline",
   "classes": "eefheader"
+},
+{
+"title": "Video time",
+"type": "block",
+"classes": "videotime"
 },
 {
   "title": "Reading Time",
