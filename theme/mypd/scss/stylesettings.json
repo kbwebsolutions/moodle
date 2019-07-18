@@ -20,4 +20,14 @@
   "title": "Activity Time",
   "type": "block",
   "classes": "activitytime"
+},
+{
+"title": "Forum Time",
+"type": "block",
+"classes": "forumtime"
+},
+{
+"title": "Active From",
+"type": "block",
+"classes": "availablefrom"
 }

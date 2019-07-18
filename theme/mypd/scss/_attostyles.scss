@@ -25,7 +25,7 @@
   background-image: url("[[pix:theme|styles/timetoread]]");
   background-repeat: no-repeat;
   padding-left: 4em;
-  line-height: 4em;
+  line-height: 3em;
   margin: 1em 0;
   font-style: italic;
 }
@@ -33,7 +33,7 @@
   background-image: url("[[pix:theme|styles/timeactivity]]");
   background-repeat: no-repeat;
   padding-left: 4em;
-  line-height: 4em;
+  line-height: 3em;
   margin: 1em 0;
   font-style: italic;
 }
@@ -41,7 +41,23 @@
   background-image: url("[[pix:theme|styles/videotime]]");
   background-repeat: no-repeat;
   padding-left: 4em;
-  line-height: 4em;
+  line-height: 3em;
   margin: 1em 0;
   font-style: italic;
  }
+.forumtime {
+  background-image: url("[[pix:theme|styles/forumtime]]");
+  background-repeat: no-repeat;
+  padding-left: 4em;
+  line-height: 3em;
+  margin: 1em 0;
+  font-style: italic;
+}
+.availablefrom {
+  background-image: url("[[pix:theme|styles/calendar]]");
+  background-repeat: no-repeat;
+  padding-left: 4em;
+  line-height: 3em;
+  margin: 1em 0;
+  font-style: italic;
+}
