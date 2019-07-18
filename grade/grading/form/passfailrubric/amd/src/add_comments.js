@@ -14,7 +14,7 @@ define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
      */
     var registerEventListeners = function(root) {
         root.on('click', function(e) {
-            if ($(e.target).is(".reusable_remark")){
+            if ($(e.target).is(".reusable_remark")) {
                 e.preventDefault();
                 /* should copytext be trimmed? */
                 var copytext = (e.target.innerHTML);
@@ -23,6 +23,8 @@ define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
                 /* There does not appear to be a js equivalent of PHP EOL */
                 var pastetext = $(pastetarget).val() + copytext + "\r\n";
                 $(pastetarget).val(pastetext);
+                $(e.target).addClass('reusable_remark_selected');
+                $(e.target).attr("aria-selected", "true");
             }
         });
     };
@@ -32,9 +34,9 @@ define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
             var trigger = $('#create-modal');
             $(".add_comment").on('click', function(e) {
                 ModalFactory.create({
-                    title: 'Click text to add to feedback',
-                    body: $("#comment_popup")[0].innerHTML,
-                    type: ModalFactory.types.DEFAULT
+                        title: 'Click text to add to feedback',
+                        body: $("#comment_popup")[0].innerHTML,
+                        type: ModalFactory.types.DEFAULT
                     }, trigger)
                     .done(function(modal) {
                         remarkfield = e.target.id;

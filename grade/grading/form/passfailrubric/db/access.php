@@ -8,6 +8,13 @@ $capabilities = [
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ]
+    ],
+    'gradingform/passfailrubric:view_grade_overrides' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ]
     ]
 ];
 

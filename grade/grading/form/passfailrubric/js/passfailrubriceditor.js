@@ -1,4 +1,4 @@
-M.gradingform_passfailrubriceditor = {'templates' : {}, 'eventhandler' : null, 'name' : null, 'Y' : null};
+M.gradingform_passfailrubriceditor = { 'templates': {}, 'eventhandler': null, 'name': null, 'Y': null };
 /**
  * This function is called for each passfailrubriceditor on page.
  */
@@ -6,12 +6,12 @@ M.gradingform_passfailrubriceditor.init = function(Y, options) {
     M.gradingform_passfailrubriceditor.name = options.name;
     M.gradingform_passfailrubriceditor.Y = Y;
     M.gradingform_passfailrubriceditor.templates[options.name] = {
-        'criterion' : options.criteriontemplate,
-        'level' : options.leveltemplate
+        'criterion': options.criteriontemplate,
+        'level': options.leveltemplate
     };
     M.gradingform_passfailrubriceditor.disablealleditors();
     Y.on('click', M.gradingform_passfailrubriceditor.clickanywhere, 'body', null);
-    YUI().use('event-touch', function (Y) {
+    YUI().use('event-touch', function(Y) {
         Y.one('body').on('touchstart', M.gradingform_passfailrubriceditor.clickanywhere);
         Y.one('body').on('touchend', M.gradingform_passfailrubriceditor.clickanywhere);
     });
@@ -105,7 +105,7 @@ M.gradingform_passfailrubriceditor.editmode = function(el, editmode, focustb) {
         tbplain = tb.get('parentNode').one('.plainvalue');
     }
     if (!editmode) {
-        ta.get('parentNode').setStyle('width','100%')
+        ta.get('parentNode').setStyle('width', '100%')
 
         // If we need to hide the input fields, copy their contents to plainvalue(s). If description/definition
         // is empty, display the default text ('Click to edit ...') and add/remove 'empty' CSS class to element.
@@ -130,20 +130,18 @@ M.gradingform_passfailrubriceditor.editmode = function(el, editmode, focustb) {
     } else {
         // If we need to show the input fields, set the width/height for textarea so it fills the cell.
         try {
-            ta.get('parentNode').setStyle('width','100%')
-            var width = parseFloat(ta.get('parentNode').getComputedStyle('width')), height;
+            ta.get('parentNode').setStyle('width', '100%')
+            var width = parseFloat(ta.get('parentNode').getComputedStyle('width')),
+                height;
             if (el.hasClass('level')) {
                 height = parseFloat(el.getComputedStyle('height')) - parseFloat(el.one('.score').getComputedStyle('height'));
             } else {
                 height = parseFloat(ta.get('parentNode').getComputedStyle('height'));
             }
-            ta.setStyle('width', Math.max(width - 16,50) + 'px');
-            ta.setStyle('height', Math.max(height,20) + 'px');
-           
-         
+            ta.setStyle('width', Math.max(width - 16, 50) + 'px');
+            ta.setStyle('height', Math.max(height, 20) + 'px');
 
-        }
-        catch (err) {
+        } catch (err) {
             // This browser do not support 'computedStyle', leave the default size of the textbox.
         }
         // Hide/display textarea, textbox and plaintexts.
@@ -198,9 +196,9 @@ M.gradingform_passfailrubriceditor.buttonclick = function(e, confirmed) {
         newlevid = M.gradingform_passfailrubriceditor.calculatenewid('#passfailrubric-' + name + ' .level');
     }
     var dialog_options = {
-        'scope' : this,
-        'callbackargs' : [e, true],
-        'callback' : M.gradingform_passfailrubriceditor.buttonclick
+        'scope': this,
+        'callbackargs': [e, true],
+        'callback': M.gradingform_passfailrubriceditor.buttonclick
     };
     if (chunks.length == 3 && action == 'addcriterion') {
         // Add new criterion.
@@ -208,20 +206,14 @@ M.gradingform_passfailrubriceditor.buttonclick = function(e, confirmed) {
         if (parentel.one('>tbody')) {
             parentel = parentel.one('>tbody');
         }
-        
-        /*mavg
-        for (levidx = 0; levidx < 3; levidx++) {
-          levelsstr += M.gradingform_passfailrubriceditor.templates[name].level.replace(/\{LEVEL-id\}/g, 'NEWID' + (newlevid + levidx));
-        }
-        levelsstr += M.gradingform_passfailrubriceditor.templates[name].level.replace(/\{LEVEL-id\}/g, 'NEWID0');
-        */
+
         newcriterion = M.gradingform_passfailrubriceditor.templates[name].criterion.replace(/\{LEVELS\}/, levelsstr);
         parentel.append(newcriterion.replace(/\{CRITERION-id\}/g, 'NEWID' + newid).replace(/\{.+?\}/g, ''));
         M.gradingform_passfailrubriceditor.assignclasses('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-levels .level');
         M.gradingform_passfailrubriceditor.addhandlers();
         M.gradingform_passfailrubriceditor.disablealleditors();
         M.gradingform_passfailrubriceditor.assignclasses(elements_str);
-        M.gradingform_passfailrubriceditor.editmode(Y.one('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-description'),true);
+        M.gradingform_passfailrubriceditor.editmode(Y.one('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-description'), true);
     } else if (chunks.length == 5 && action == 'addlevel') {
         // Add new level.
         parentel = Y.one('#' + name + '-criteria-' + chunks[2] + '-levels');
@@ -270,19 +262,19 @@ M.gradingform_passfailrubriceditor.buttonclick = function(e, confirmed) {
         }
         for (levidx = 0; levidx < levelsdef.length; levidx++) {
             levelsstr += M.gradingform_passfailrubriceditor.templates[name].level
-                            .replace(/\{LEVEL-id\}/g, 'NEWID' + (newlevid + levidx))
-                            .replace(/\{LEVEL-definition\}/g, levelsdef[levidx]);
+                .replace(/\{LEVEL-id\}/g, 'NEWID' + (newlevid + levidx))
+                .replace(/\{LEVEL-definition\}/g, levelsdef[levidx]);
         }
         var description = source.one('.description .textvalue');
         newcriterion = M.gradingform_passfailrubriceditor.templates[name].criterion
-                                .replace(/\{LEVELS\}/, levelsstr)
-                                .replace(/\{CRITERION-description\}/, description.get('innerHTML'));
+            .replace(/\{LEVELS\}/, levelsstr)
+            .replace(/\{CRITERION-description\}/, description.get('innerHTML'));
         parentel.append(newcriterion.replace(/\{CRITERION-id\}/g, 'NEWID' + newid).replace(/\{.+?\}/g, ''));
         M.gradingform_passfailrubriceditor.assignclasses('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-levels .level');
         M.gradingform_passfailrubriceditor.addhandlers();
         M.gradingform_passfailrubriceditor.disablealleditors();
         M.gradingform_passfailrubriceditor.assignclasses(elements_str);
-        M.gradingform_passfailrubriceditor.editmode(Y.one('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-description'),true);
+        M.gradingform_passfailrubriceditor.editmode(Y.one('#passfailrubric-' + name + ' #' + name + '-criteria-NEWID' + newid + '-description'), true);
     } else if (chunks.length == 6 && action == 'delete') {
         // Delete level.
         if (confirmed) {
@@ -300,11 +292,11 @@ M.gradingform_passfailrubriceditor.buttonclick = function(e, confirmed) {
 };
 
 // Properly set classes (first/last/odd/even), level width and/or criterion sortorder for elements Y.all(elements_str).
-M.gradingform_passfailrubriceditor.assignclasses = function (elements_str) {
+M.gradingform_passfailrubriceditor.assignclasses = function(elements_str) {
     var elements = M.gradingform_passfailrubriceditor.Y.all(elements_str);
     for (var i = 0; i < elements.size(); i++) {
         elements.item(i).removeClass('first').removeClass('last').removeClass('even').removeClass('odd').
-            addClass(((i % 2) ? 'odd' : 'even') + ((i === 0) ? ' first' : '') + ((i == elements.size() - 1) ? ' last' : ''));
+        addClass(((i % 2) ? 'odd' : 'even') + ((i === 0) ? ' first' : '') + ((i == elements.size() - 1) ? ' last' : ''));
         elements.item(i).all('input[type=hidden]').each(
             /*jshint loopfunc: true */
             function(node) {
@@ -320,10 +312,11 @@ M.gradingform_passfailrubriceditor.assignclasses = function (elements_str) {
 };
 
 // Returns unique id for the next added element, it should not be equal to any of Y.all(elements_str) ids.
-M.gradingform_passfailrubriceditor.calculatenewid = function (elements_str) {
+M.gradingform_passfailrubriceditor.calculatenewid = function(elements_str) {
     var newid = 1;
     M.gradingform_passfailrubriceditor.Y.all(elements_str).each(function(node) {
-        var idchunks = node.get('id').split('-'), id = idchunks.pop();
+        var idchunks = node.get('id').split('-'),
+            id = idchunks.pop();
         if (id.match(/^NEWID(\d+)$/)) {
             newid = Math.max(newid, parseInt(id.substring(5)) + 1);
         }

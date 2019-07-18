@@ -78,11 +78,20 @@ $string['scorepostfix'] = '{$a}points';
 $string['showdescriptionstudent'] = 'Display rubric description to those being graded';
 $string['showdescriptionteacher'] = 'Display Pass Fail Rubric description during evaluation';
 $string['criterionremark'] = '--criterionremark--';
-$string['refer'] = 'Refer';
+$string['refer'] = 'Partial';
 $string['fail'] = 'Fail';
+$string['partial'] = 'Partial';
 $string['pass'] = 'Pass';
 $string['gradehistory'] = 'Grade history';
 $string['scale_description'] ='For the passfailrubric advanced grading method';
+$string['showremarksstudent'] ='Show feedback remarks to students';
+$string['criteriagrade'] = 'Criteria grade:';
+$string['overridegrade'] = 'Override grade:';
+$string['overrideplaceholder'] = 'Grade override explanation';
+
+
+
+
 
 
 

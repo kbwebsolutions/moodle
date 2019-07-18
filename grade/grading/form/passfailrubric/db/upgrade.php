@@ -31,36 +31,35 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool true
  */
 function xmldb_gradingform_passfailrubric_upgrade($oldversion) {
-    global $CFG, $DB, $OUTPUT;
+    global $DB;
 
     $dbman = $DB->get_manager();
+    if ($oldversion < 2019071000) {
+        $table = new xmldb_table('gradingform_pfrbric_grades');
 
-    // Moodle v2.2.0 release upgrade line.
-    // Put any upgrade step following this.
+            $field = new xmldb_field('itemid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'instanceid');
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        
+            $field = new xmldb_field('explanation', XMLDB_TYPE_CHAR, '512', null, null, null, null, 'grade');
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
 
-    // Moodle v2.3.0 release upgrade line.
-    // Put any upgrade step following this.
+            $field = new xmldb_field('authoredby', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'explanation');
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
 
-    // Moodle v2.4.0 release upgrade line.
-    // Put any upgrade step following this.
+            $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'authoredby');
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+    
+            // Passfailrubric savepoint reached.
+            upgrade_plugin_savepoint(true, 2019071000, 'gradingform', 'passfailrubric');
 
-    // Moodle v2.5.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Moodle v2.6.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Moodle v2.7.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Moodle v2.8.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Moodle v2.9.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Moodle v3.0.0 release upgrade line.
-    // Put any upgrade step following this.
-
+        }
     return true;
 }

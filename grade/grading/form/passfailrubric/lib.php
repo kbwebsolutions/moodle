@@ -218,12 +218,10 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
                             $data[$key] = $level[$key];
                         }
                     }
-                    if ($doupdate) {
-                        /* The levels table is not required, commenting out is the first step towards deleting it 
-                        * simply dropping the table breaks some other code.
-                        $levelid = $DB->insert_record('gradingform_pfrbric_levels', $data);
-                        */
-                    }
+                    /* @todo The levels table is not required, commenting out is the first step towards deleting it
+                    * simply dropping the table breaks some other code.
+                    $levelid = $DB->insert_record('gradingform_pfrbric_levels', $data);
+                    */
                     $haschanges[3] = true;
                 } else {
                     // Update level in DB.
@@ -336,22 +334,28 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
                 }
             }
         }
-        if(isset($this->definition->passfailrubric_criteria)){
+        if (isset($this->definition->passfailrubric_criteria)) {
             $this->get_grading_levels();
         }
         $rs->close();
     }
 
-    public function get_grading_levels(){
+    public function get_grading_levels() {
         /* poking hard coded grading levels to overwrite what was taken from the db */
         $levels = [
-           self::REFER_GRADE => ['id' => self::REFER_GRADE, 'definition' => get_string('refer','gradingform_passfailrubric'), 'definitionformat' => 0],
-           self::FAIL_GRADE => ['id' => self::FAIL_GRADE, 'definition' => get_string('fail','gradingform_passfailrubric'), 'definitionformat' => 0],
-           self::PASS_GRADE => ['id' => self::PASS_GRADE, 'definition' => get_string('pass','gradingform_passfailrubric'), 'definitionformat' => 0]
+            self::REFER_GRADE => ['id' => self::REFER_GRADE,
+            'definition' => get_string('refer', 'gradingform_passfailrubric'), 'definitionformat' => 0],
+            self::FAIL_GRADE => ['id' => self::FAIL_GRADE,
+            'definition' => get_string('fail', 'gradingform_passfailrubric'), 'definitionformat' => 0],
+            self::PASS_GRADE => ['id' => self::PASS_GRADE,
+            'definition' => get_string('pass', 'gradingform_passfailrubric'),
+             'definitionformat' => 0]
         ];
 
-       if($this->definition->passfailrubric_criteria) foreach($this->definition->passfailrubric_criteria as $key=>$v){
-            $this->definition->passfailrubric_criteria[$key]['levels'] =$levels;
+        if ($this->definition->passfailrubric_criteria) {
+            foreach ($this->definition->passfailrubric_criteria as $key => $v) {
+                $this->definition->passfailrubric_criteria[$key]['levels'] = $levels;
+            }
         }
     }
     /**
@@ -362,12 +366,9 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
     public static function get_default_options() {
         $options = array(
             'showdescriptionteacher' => 0,
-            'alwaysshowdefinition' => 0
-           /* These were settings exclusive to the simplefeedbackrubric, first step to deletion
-           'showdescriptionstudent' => 1,
-            'autopopulatecomments' => 0,
-            'criterionordering' => 1
-            */
+            'alwaysshowdefinition' => 1,
+            'showremarksstudent' => 1,
+            'showdescriptionstudent' => 1
         );
         return $options;
     }
@@ -408,7 +409,6 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
             $properties = file_prepare_standard_editor($properties, 'description', $options, $this->get_context(),
                 'grading', 'description', $definition->id);
         }
-       // $properties->passfailrubric = array('criteria' => array(), 'options' => $this->get_options());
         if (!empty($definition->passfailrubric_criteria)) {
             $properties->passfailrubric['criteria'] = $definition->passfailrubric_criteria;
         } else if (!$definition && $addemptycriterion) {
@@ -660,7 +660,8 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
         $passfailrubriccriteria = new external_multiple_structure(
             new external_single_structure(
                 array(
-                   'id'   => new external_value(PARAM_INT, 'criterion id', VALUE_OPTIONAL),
+                   'explanation' => new external_value(PARAM_TEXT, 'explanation', VALUE_OPTIONAL),
+                   'id' => new external_value(PARAM_INT, 'criterion id', VALUE_OPTIONAL),
                    'sortorder' => new external_value(PARAM_INT, 'sortorder', VALUE_OPTIONAL),
                    'description' => new external_value(PARAM_RAW, 'description', VALUE_OPTIONAL),
                    'descriptionformat' => new external_format_value('description', VALUE_OPTIONAL),
@@ -691,6 +692,8 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
         $criteria = new external_multiple_structure(
             new external_single_structure(
                 array(
+                    'grade-overrid' => new external_value(PARAM_INT, 'grade-override', VALUE_OPTIONAL),
+                    'explanation' => new external_value(PARAM_TEXT, 'explanation', VALUE_OPTIONAL),
                     'id' => new external_value(PARAM_INT, 'filling id'),
                     'criterionid' => new external_value(PARAM_INT, 'criterion id'),
                     'levelid' => new external_value(PARAM_INT, 'level id', VALUE_OPTIONAL)
@@ -778,21 +781,33 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
      * @param array $data
      */
     public function update($data) {
-        global $DB;
+        global $DB, $USER;
         $currentgrade = $this->get_passfailrubric_filling();
-
         /* updates grading instances */
         parent::update($data);
         if (isset($data['criteria']) && $data['criteria']) {
+            if (is_numeric($data['override-grade'])) {
+                $instanceid = $this->get_data('id');
+                $newrecord = [
+                    'instanceid' => $instanceid,
+                    'itemid' => $data['itemid'],
+                    'grade' => $data['override-grade'],
+                    'explanation' => $data['explanation'],
+                    'authoredby' => $USER->id,
+                    'timecreated' => time()
+                ];
+                /* stores grades where autocalc is overriden */
+                $DB->insert_record('gradingform_pfrbric_grades', $newrecord);
+            }
             foreach ($data['criteria'] as $criterionid => $record) {
                 /*if there is no grade/filling for this criteria, insert one */
                 if (!array_key_exists($criterionid, $currentgrade['criteria'])) {
                     $newrecord = [
-                        'instanceid' => $this->get_id(), 
+                        'instanceid' => $this->get_id(),
                         'criterionid' => $criterionid,
-                        'levelid' => $record['levelid'], 
+                        'levelid' => $record['levelid'],
                         'remarkformat' => FORMAT_MOODLE,
-                        'score'  => $record['levelid'] //levelid as score looks odd but bare with me
+                        'score'  => $record['levelid'] // ...levelid as score looks odd but bare with me.
                     ];
                     if (isset($record['remark'])) {
                         $newrecord['remark'] = $record['remark'];
@@ -800,8 +815,7 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
                      $DB->insert_record('gradingform_pfrbric_fillings', $newrecord);
                 } else {
                     $newrecord = ['id' => $currentgrade['criteria'][$criterionid]['id'] ];
-                    foreach (array('levelid', 'remark'/*, 'remarkformat' */) as $key) {
-                        // TODO MDL-31235 format is not supported yet
+                    foreach (array('levelid', 'remark') as $key) {
                         if (isset($record[$key]) && $currentgrade['criteria'][$criterionid][$key] != $record[$key]) {
                             $newrecord[$key] = $record[$key];
                         }
@@ -834,43 +848,49 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
      */
     public function get_grade() {
         global $DB;
-        $id= $this->get_id();
-        $instance = ['instanceid'=>$id];
-        $scores =$DB->get_records('gradingform_pfrbric_fillings', $instance);
+        /* check the value written on last update */
+        $sql = 'SELECT grade FROM {gradingform_pfrbric_grades} where itemid=:itemid and instanceid=:instanceid';
+        $gradeoverride = $DB->get_record_sql($sql, ['itemid' => $this->data->itemid, 'instanceid' => $this->data->id]);
+        /* if the grade has been overriden, don't do the calculation, return the overriden value */
+        if ($gradeoverride->grade) {
+            return $gradeoverride->grade;
+        }
+        $id = $this->get_id();
+
+        $instance = ['instanceid' => $id];
+        $scores = $DB->get_records('gradingform_pfrbric_fillings', $instance);
         $scorecount = count($scores);
         /* @todo invent a more elegant calculation of the grades (with an array?) */
         $passcount = $failcount = $refercount = 0;
-        
-        foreach($scores as $s){
-            if($s->levelid == gradingform_passfailrubric_controller::PASS_GRADE){
+
+        foreach ($scores as $s) {
+            if ($s->levelid == gradingform_passfailrubric_controller::PASS_GRADE) {
                 $passcount++;
-            } 
-            if($s->levelid == gradingform_passfailrubric_controller::FAIL_GRADE){
+            }
+            if ($s->levelid == gradingform_passfailrubric_controller::FAIL_GRADE) {
                 $failcount++;
             }
-            if($s->levelid == gradingform_passfailrubric_controller::REFER_GRADE){
+            if ($s->levelid == gradingform_passfailrubric_controller::REFER_GRADE) {
                 $refercount++;
             }
         }
 
-        if($scorecount == 0 ){
+        if ($scorecount == 0) {
             /* Grade will show up as blank */
             return null;
-        } else if ($passcount == $scorecount){
+        } else if ($passcount == $scorecount) {
             /* Every criteria is a pass */
             return gradingform_passfailrubric_controller::PASS_GRADE;
-        } else if ($refercount ==0 && ($scorecount >0)) {
+        } else if ($refercount == 0 && ($scorecount > 0)) {
             /* Not everything is a pass but there are no refers */
             return gradingform_passfailrubric_controller::FAIL_GRADE;
-        } else if($refercount > 0){
+        } else if ($refercount > 0) {
             /* some criteria are set to refer */
             return gradingform_passfailrubric_controller::REFER_GRADE;
-        } else{
+        } else {
             return null;
         }
     }
-    
-      
 
     /**
      * Returns html for form element of type 'grading'.
@@ -930,14 +950,11 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
             $html .= html_writer::tag('div', get_string('restoredfromdraft',
                     'gradingform_passfailrubric'), array('class' => 'gradingform_passfailrubric-restored'));
         }
-        // if (!empty($options['showdescriptionteacher'])) {
-        //     $html .= html_writer::tag('div', $this->get_controller()->get_formatted_description(),
-        //             array('class' => 'gradingform_passfailrubric-description'));
-        // }
+
         $grademenu = $this->get_controller()->get_grade_range();
 
         $grade = ($currentinstance) ? $currentinstance->get_grade() : 0;
-        $value['itemid']=$this->data->itemid ? :0;
+        $value['itemid'] = $this->data->itemid ?: 0;
         $html .= $this->get_controller()->get_renderer($page)->display_passfailrubric($criteria, $options, $mode,
                 $gradingformelement->getName(), $value, $grademenu, $grade);
         return $html;

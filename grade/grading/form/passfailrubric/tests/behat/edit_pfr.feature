@@ -23,48 +23,21 @@ I need to edit previously used btec passfailrubric
       | Assignment name | PFR Test assignment 1 name |
       | Description     | Test assignment description |
       | Type            | Scale                       |
-      | Scale           | fail_refer_pass                        |
+      | Scale           | refer_fail_pass             |
       | Grading method  | Pass Fail Rubric                |
     And I go to "PFR Test assignment 1 name" advanced grading definition page
     And I set the following fields to these values:
       | Name        | Assignment 1 PFR     |
       | Description | PFR test description |
 
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID1][shortname]" to "P1"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID1][description]" to "P2 Description"
+    And I click on "Click to edit criterion" "text"
+
+    And I set the field "passfailrubric[criteria][NEWID1][description]" to "Criteria 1 text"
 
     And I click on "Add criterion" "button"
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID2][shortname]" to "P2"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID2][description]" to "P2 description"
-
-    And I click on "Add criterion" "button"
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID3][shortname]" to "M1"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID3][description]" to "M1 description"
-
-    And I click on "Add criterion" "button"
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID4][shortname]" to "M2"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID4][description]" to "M2 description"
-
-    And I click on "Add criterion" "button"
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID5][shortname]" to "D1"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID5][description]" to "D1 description"
-
-    And I click on "Add criterion" "button"
-    And I click on "Click to edit level" "text"
-    And I set the field "btec[criteria][NEWID6][shortname]" to "D2"
-    And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
-    And I set the field "btec[criteria][NEWID6][description]" to "D2 description"
-
-    And I wait "20" seconds
-
-    And I click on "Save BTEC marking and make it ready" "button"
+    
+    And I set the field "passfailrubric[criteria][NEWID2][description]" to "Criteria 2 text"
+    
+    And I click on "#id_savepassfailrubric" "css_element"
+    
+    Then I should see "Ready for use"
