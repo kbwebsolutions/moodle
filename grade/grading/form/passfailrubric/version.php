@@ -29,7 +29,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component  = 'gradingform_passfailrubric';
-$plugin->version    = 2019071500;
+$plugin->version    = 2019072100;
 $plugin->requires   = 2014110400;
 $plugin->dependencies = [ 'local_commentbank' => 'any_version'];
 $plugin->maturity   = MATURITY_BETA;

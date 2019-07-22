@@ -852,7 +852,7 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
         $sql = 'SELECT grade FROM {gradingform_pfrbric_grades} where itemid=:itemid and instanceid=:instanceid';
         $gradeoverride = $DB->get_record_sql($sql, ['itemid' => $this->data->itemid, 'instanceid' => $this->data->id]);
         /* if the grade has been overriden, don't do the calculation, return the overriden value */
-        if ($gradeoverride->grade) {
+        if (isset($gradeoverride->grade)) {
             return $gradeoverride->grade;
         }
         $id = $this->get_id();
@@ -908,8 +908,6 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
             $page->requires->js_init_call('M.gradingform_passfailrubric.init',
                     array(array(
                         'name' => $gradingformelement->getName(), 'criterion' => array_keys($criteria),
-                        'criterionordering' => $options['criterionordering'],
-                        'autopopulatecomments' => $options['autopopulatecomments']
                     )), true, $module);
                     $mode = gradingform_passfailrubric_controller::DISPLAY_EVAL;
         } else {

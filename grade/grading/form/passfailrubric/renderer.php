@@ -44,7 +44,7 @@ use local_commentbank\lib\comment_lib;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gradingform_passfailrubric_renderer extends plugin_renderer_base {
-    public $itemid=0;
+    public $itemid = 0;
     /**
      * This function returns html code for displaying criterion. Depending on $mode it may be the
      * code to edit passfailrubric, to preview the passfailrubric, to evaluate somebody or to review the evaluation.
@@ -126,13 +126,13 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             if (isset($value['remark'])) {
                 $currentremark = $value['remark'];
             }
-            
+
             /* Show feedback and grade to students after marking */
             if ($mode == gradingform_passfailrubric_controller::DISPLAY_VIEW) {
                 /** TD-14 */
                 global $DB;
-                $scale=explode(',',$DB->get_field('scale','scale',['name'=>'refer_fail_pass']));
-                $grade=$scale[$value['levelid']-1];
+                $scale = explode(',', $DB->get_field('scale', 'scale', ['name' => 'refer_fail_pass']));
+                $grade = $scale[$value['levelid'] - 1];
                 $criteriontemplate .= html_writer::start_tag('tr');
                 $criteriontemplate .= html_writer::tag('td', get_string("criteriagrade","gradingform_passfailrubric").' '. $grade, ['class' => 'remarkview']);
                 $criteriontemplate .= html_writer::end_tag('tr');
@@ -157,14 +157,14 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             $input = html_writer::tag('textarea', s($currentremark), $remarkparams);
 
             $attributes = [
-                'class'=>'add_comment',
+                'class' => 'add_comment',
                 'id'=> 'criteria-'.$criterion['id'].'-remark'
             ];
-            $commentbutton = html_writer::tag('button','Comments',$attributes);
+            $commentbutton = html_writer::tag('button', 'Comments', $attributes);
             $input .=$commentbutton;
             global $PAGE;
             if(has_capability('gradingform/passfailrubric:view_grade_history',$PAGE->context)){
-                    $input .= html_writer::start_tag('div',['class'=>'history']);
+                $input .= html_writer::start_tag('div', ['class' => 'history']);
                     $input .= '<div id="historylabel">'.get_string('gradehistory','gradingform_passfailrubric').'</div>';
                     $input .= $this->get_grade_history($criterion['id']);
                     $input .= html_writer::end_tag('div');
@@ -202,12 +202,10 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
     }
 
     public function get_grade_level($level){
-        $levels = [    
-            gradingform_passfailrubric_controller::REFER_GRADE=>get_string('refer','gradingform_passfailrubric'),
-            gradingform_passfailrubric_controller::FAIL_GRADE=>get_string('fail','gradingform_passfailrubric'),
-            gradingform_passfailrubric_controller::PASS_GRADE=>get_string('pass','gradingform_passfailrubric')
-        ];
-        return $levels[$level];
+        global $DB;
+        $scale=explode(',',$DB->get_field('scale','scale',['name'=>'refer_fail_pass']));
+        $grade=$scale[$level -1];
+        return $grade;
     }
 
     /**
@@ -423,7 +421,7 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                     'class' => 'grade-override',
                 ];
                 $passfailrubrictemplate .= html_writer::tag('label', 
-                get_string('overridegrade', 'gradingform_passfailrubric'),[]);
+                get_string('overallgrade', 'gradingform_passfailrubric'),[]);
                 $passfailrubrictemplate .= html_writer::select(
                     $grademenu, 'advancedgrading[override-grade]', '',false, $params
                 );
@@ -574,8 +572,8 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             }
             $criteriastr .= $this->criterion_template($mode, $options, $elementname, $criterion, $levelsstr, $criterionvalue);
         }
-    
-        $itemid=null;
+
+        $itemid = null;
         if(isset($values['itemid'])){
             $itemid=$values['itemid'];
         }

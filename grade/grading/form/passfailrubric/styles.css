@@ -193,7 +193,7 @@
 }
 
 .gradingform_passfailrubric.evaluate .criterion .levels .level:hover {
-    background: black;
+    background: #D3EDC2;
 }
 
 .gradingform_passfailrubric.editor .delete input,

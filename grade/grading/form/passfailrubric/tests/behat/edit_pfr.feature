@@ -38,6 +38,7 @@ I need to edit previously used btec passfailrubric
     
     And I set the field "passfailrubric[criteria][NEWID2][description]" to "Criteria 2 text"
     
-    And I click on "#id_savepassfailrubric" "css_element"
-    
-    Then I should see "Ready for use"
+   And I press "Save Pass Fail Rubric and make it ready"
+
+  # Grading two students.
+    And I go to "Student 1" "PFR Test assignment 1 name" activity advanced grading page

@@ -1,3 +1,9 @@
+### Version .6 of the PassFailRubric advanced grading type 21 Jul 2019
+Colour for hover over radio buttons fixed from black to a nice green
+Radio button strings changed from fail,refer,pass to partial,no,yes
+A little more behat test
+Codechecker compliance
+
 ### Version .5 of the PassFailRubric advanced grading type 15 Jul 2019
 Grade override select box and explanation field plus display of override log
 Display of Grading to students including feedback and Grade at top.
