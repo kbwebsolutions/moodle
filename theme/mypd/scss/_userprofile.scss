@@ -20,6 +20,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+//Hide Optional details and names areas on Profile Page
+fieldset#id_moodle_optional,
+fieldset#id_moodle_additional_names,
+fieldset#id_moodle_interests {
+    display:none;
+}
+
 #page-user-profile,
 .path-course.path-user {
     // Full screen width for profile pages.
