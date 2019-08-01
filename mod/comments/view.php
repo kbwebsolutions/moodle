@@ -81,37 +81,30 @@ echo "<hr />";
 
 //echo $output->render($page);
 
+$posts = get_comments($cm->id);
+print_r($posts);
 
-
-$sql = "SELECT cp.id, cp.created, cp.userid, cp.message, u.firstname, u.lastname
-          FROM {comments_posts} cp, {user} u
-         WHERE u.id = cp.userid 
-               AND cp.deleted = :del
-               AND cp.commentsid = :id
-      ORDER BY cp.created DESC";
-
-$posts = $DB->get_recordset_sql($sql, array('del'=>'0', 'id'=>$cm->id));
-
-
-
+/*
 echo '<div id="comment-posts"><ul class="feed">';
+
+$messages = array();
 foreach ($posts as $post) {
-$messages[] = array (
-"id" => $post->id,
-"username" => $post->firstname. ' '. $post->lastname,
-"date" => date("d F", $post->created),
-"message" => $post->message
-);
 
 
-    //render_from_template($message_list, $post);
-    //echo $output->render($page);
+    $messages[] = array(
+        "id" => $post->id,
+        "username" => $post->firstname. ' '. $post->lastname,
+        "date" => date("d F", $post->created),
+        "message" => $post->message
+    );
+
     If ($post->userid === $USER->id) {
 
     }
     $liked = checked_liked($post->id, $USER->id);
-    $user = $DB->get_record('user', array('id' => $post->userid));
-    $userpix = $OUTPUT->user_picture($user);
+    $user = $DB->get_record('user',array('id' => $post->userid));
+    $userpix = $output->user_picture($user);
+
     $code = '<li id='.$post->id.' class="item"><div class="userpix">'.$userpix.'</div>';
     $code .= '<div class="msg-body"><div class="header">';
     $code .= '<div class="name">'.$post->firstname.' '.$post->lastname.'</div>';
@@ -126,9 +119,10 @@ $messages[] = array (
     echo $code;
 }
 $posts->close();
+
 echo '</div>';
+*/
 
-print_object($messages);
-
+echo $output->render_comment_block($posts);
 
 echo $output->footer();

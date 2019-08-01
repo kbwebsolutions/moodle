@@ -43,6 +43,29 @@ function mod_comments_supports($feature) {
     }
 }
 
+
+/**
+ * Get comments from database
+ *
+ * @param the module id
+ * @return array of comments in database for given module id
+ */
+function get_comments($cmid) {
+    global $DB;
+
+
+    $sql = "SELECT cp.id, cp.created, cp.userid, cp.message, u.firstname, u.lastname
+            FROM {comments_posts} cp, {user} u
+            WHERE u.id = cp.userid 
+               AND cp.deleted = :del
+               AND cp.commentsid = :id
+            ORDER BY cp.created DESC";
+
+    $comments = $DB->get_recordset_sql($sql, array('del'=>'0', 'id'=>$cmid));
+
+    return $comments;
+}
+
 /**
  * Saves a new instance of the mod_comments into the database.
  *
