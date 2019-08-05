@@ -79,49 +79,7 @@ if ($mform->is_cancelled()) {
 
 echo "<hr />";
 
-//echo $output->render($page);
-
 $posts = get_comments($cm->id);
-print_r($posts);
-
-/*
-echo '<div id="comment-posts"><ul class="feed">';
-
-$messages = array();
-foreach ($posts as $post) {
-
-
-    $messages[] = array(
-        "id" => $post->id,
-        "username" => $post->firstname. ' '. $post->lastname,
-        "date" => date("d F", $post->created),
-        "message" => $post->message
-    );
-
-    If ($post->userid === $USER->id) {
-
-    }
-    $liked = checked_liked($post->id, $USER->id);
-    $user = $DB->get_record('user',array('id' => $post->userid));
-    $userpix = $output->user_picture($user);
-
-    $code = '<li id='.$post->id.' class="item"><div class="userpix">'.$userpix.'</div>';
-    $code .= '<div class="msg-body"><div class="header">';
-    $code .= '<div class="name">'.$post->firstname.' '.$post->lastname.'</div>';
-    $code .= '<div class="date">'.date("d F", $post->created).'</div></div>';
-    $code .= '<div class="message">'.$post->message.'</div>';
-    If ($post->userid === $USER->id) {
-        $code .= '<div class="options"><a class="option" href="#"><img src="'.$CFG->wwwroot.'/mod/comments/pix/like.svg" height="20" width="20" /> Like</a><a class="option" href="#"><img src="'.$CFG->wwwroot.'/mod/comments/pix/garbage.svg" height="20" width="20" />Delete</a></div></div>';
-    } else {
-        $code .= '<div class="options"><a href="#"><img src="'.$CFG->wwwroot.'/mod/comments/pix/like.svg" height="20" width="20" /> Like</a></div></div>';
-    }
-        $code .= '</li>';
-    echo $code;
-}
-$posts->close();
-
-echo '</div>';
-*/
 
 echo $output->render_comment_block($posts);
 

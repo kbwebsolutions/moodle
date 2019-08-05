@@ -63,3 +63,17 @@ color: #666;
 .path-mod-comments .msg-body .message {
 clear: both;
 }
+
+.path-mod-comments .likes {
+    padding-left: 1.5em;
+    margin-right: 2em;
+    background-image:url([[pix:comments|like]]);
+    background-repeat: no-repeat;
+}
+
+.path-mod-comments .delete {
+    padding-left: 1.5em;
+    margin-right: 2em;
+    background-image:url([[pix:comments|garbage]]);
+    background-repeat: no-repeat;
+}

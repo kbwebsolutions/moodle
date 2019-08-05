@@ -61,7 +61,7 @@ function get_comments($cmid) {
                AND cp.commentsid = :id
             ORDER BY cp.created DESC";
 
-    $comments = $DB->get_recordset_sql($sql, array('del'=>'0', 'id'=>$cmid));
+    $comments = $DB->get_records_sql($sql, array('del'=>'0', 'id'=>$cmid));
 
     return $comments;
 }
@@ -134,5 +134,6 @@ function comments_delete_instance($id) {
 function checked_liked($postid, $user) {
     global $DB;
 
-    return true;
+    $liked = $DB->get_record('comments_likes', array('postid' => $postid, 'userid' => $user));
+
 }
