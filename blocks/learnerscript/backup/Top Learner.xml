@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Top Learner]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czoxMToiVG9wK0xlYXJuZXIiO3M6NDoidHlwZSI7czoxMDoic3RhdGlzdGljcyI7czo4OiJxdWVyeXNxbCI7czo2MDQ6IlNFTEVDVCthLmxlYXJuZXIrRlJPTSslMjhTRUxFQ1QrQ09OQ0FUJTI4dS5maXJzdG5hbWUlMkMrJTI3KyUyNyUyQyt1Lmxhc3RuYW1lJTI5K2FzK2xlYXJuZXIlMkMrU1VNJTI4bHRzLnRpbWVzcGVudCUyOSthcyt0aW1lc3BlbnQrRlJPTSslNjBwcmVmaXhfYmxvY2tfbHNfdGltZXN0YXRzJTYwK2x0cyslMEQlMEFKT0lOKyU2MHByZWZpeF91c2VyJTYwK3UrT04rdS5pZCslM0QrbHRzLnVzZXJpZCslMEQlMEFKT0lOK3ByZWZpeF91c2VyX2Vucm9sbWVudHMrdWUrT04rdWUudXNlcmlkKyUzRCtsdHMudXNlcmlkJTBEJTBBSk9JTitwcmVmaXhfZW5yb2wrZStPTitlLmlkKyUzRCt1ZS5lbnJvbGlkJTBEJTBBSk9JTitwcmVmaXhfY291cnNlK2MrT04rYy5pZCslM0QrZS5jb3Vyc2VpZCUwRCUwQVdIRVJFK3UuaWQrJTNFKzIrKyUyNSUyNUZJTFRFUl9DT1VSU0VDQVRFR09SSUVTU1VCSURTJTNBYy5jYXRlZ29yeSUyNSUyNStBTkQrbHRzLnRpbWVjcmVhdGVkK0JFVFdFRU4rJTI1JTI1TFNfU1RBUlREQVRFJTI1JTI1K0FORCslMjUlMjVMU19FTkREQVRFJTI1JTI1JTBEJTBBR1JPVVArQnkrdS5pZCtPUkRFUitCWSt0aW1lc3BlbnQrREVTQytMSU1JVCsxJTI5K0FTK2EiO3M6Nzoic3VtbWFyeSI7YToyOntzOjQ6InRleHQiO3M6MDoiIjtzOjY6ImZvcm1hdCI7czoxOiIxIjt9czo2OiJnbG9iYWwiO3M6MToiMSI7czoyOiJpZCI7aTo2ODtzOjg6ImNvdXJzZWlkIjtpOjE7czozNToibWZvcm1faXNleHBhbmRlZF9pZF9hZHZhbmNlZG9wdGlvbnMiO2k6MDtzOjEyOiJzdWJtaXRidXR0b24iO3M6NDoiTmV4dCI7czoxMjoiZGlzYWJsZXRhYmxlIjtpOjA7fX19]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[1]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Timespent]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878517]]></timecreated>
+<timemodified><![CDATA[1563878517]]></timemodified>
+<title><![CDATA[Top Learner]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[319423739]]></logo>
+<tilescolourpicker><![CDATA[ED4337]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[FFFFFF]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Timespent]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[side-db-second]]></region>
+<weight><![CDATA[0]]></weight>
+</position></report>

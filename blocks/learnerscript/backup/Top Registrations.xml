@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Top Registrations]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czoxNzoiVG9wK1JlZ2lzdHJhdGlvbnMiO3M6NDoidHlwZSI7czoxMDoic3RhdGlzdGljcyI7czo4OiJxdWVyeXNxbCI7czo2MDk6IlNFTEVDVCtjLmNvdW50cnklMkMrYy5yZWdpc3RyYXRpb25zK0ZST00rJTI4U0VMRUNUK2NvdW50JTI4dS5jb3VudHJ5JTI5K0FTK3JlZ2lzdHJhdGlvbnMlMkNJRiUyOHUuY291bnRyeSUzRCUyNyUyNyUyQyUyMk90aGVyJTIyJTJDdS5jb3VudHJ5JTI5K0FTK2NvdW50cnkrRlJPTStwcmVmaXhfdXNlcit1KyUwRCUwQUxFRlQrSk9JTitwcmVmaXhfdXNlcl9lbnJvbG1lbnRzK3VlK09OK3VlLnVzZXJpZCslM0QrdS5pZCUwRCUwQUxFRlQrSk9JTitwcmVmaXhfZW5yb2wrZStPTitlLmlkKyUzRCt1ZS5lbnJvbGlkJTBEJTBBTEVGVCtKT0lOK3ByZWZpeF9jb3Vyc2UrYytPTitjLmlkKyUzRCtlLmNvdXJzZWlkJTBEJTBBV0hFUkUrdS5pZCslM0UrMislMjUlMjVGSUxURVJfQ09VUlNFQ0FURUdPUklFU1NVQklEUyUzQWMuY2F0ZWdvcnklMjUlMjUlMEQlMEFBTkQrdS50aW1lY3JlYXRlZCtCRVRXRUVOKyUyNSUyNUxTX1NUQVJUREFURSUyNSUyNStBTkQrJTI1JTI1TFNfRU5EREFURSUyNSUyNSslMEQlMEElMjUlMjVTRUFSQ0glM0F1LmNvdW50cnklMjUlMjUlMEQlMEFHUk9VUCtCWSt1LmNvdW50cnkrT1JERVIrQlkrcmVnaXN0cmF0aW9ucytERVNDK0xJTUlUKzElMjkrQVMrYyI7czo3OiJzdW1tYXJ5IjthOjI6e3M6NDoidGV4dCI7czowOiIiO3M6NjoiZm9ybWF0IjtzOjE6IjEiO31zOjY6Imdsb2JhbCI7czoxOiIxIjtzOjI6ImlkIjtpOjczO3M6ODoiY291cnNlaWQiO2k6MTtzOjM1OiJtZm9ybV9pc2V4cGFuZGVkX2lkX2FkdmFuY2Vkb3B0aW9ucyI7aTowO3M6MTI6InN1Ym1pdGJ1dHRvbiI7czo0OiJOZXh0IjtzOjEyOiJkaXNhYmxldGFibGUiO2k6MDt9fX0=]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[2]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Geographical]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878518]]></timecreated>
+<timemodified><![CDATA[1563878518]]></timemodified>
+<title><![CDATA[Top Registrations]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[301073434]]></logo>
+<tilescolourpicker><![CDATA[ED4337]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Geographical]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[side-db-second]]></region>
+<weight><![CDATA[0]]></weight>
+</position></report>

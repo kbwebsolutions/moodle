@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Modules]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czo3OiJNb2R1bGVzIjtzOjQ6InR5cGUiO3M6MTA6InN0YXRpc3RpY3MiO3M6ODoicXVlcnlzcWwiO3M6MTAyODoiU0VMRUNUKyUyQStGUk9NJTBEJTBBKyUyOFNFTEVDVCslMjhTRUxFQ1QrY291bnQlMjhESVNUSU5DVCtjbS5pZCUyOSUwRCUwQStGUk9NK3ByZWZpeF9jb3Vyc2VfbW9kdWxlcytBUytjbSslMEQlMEFKT0lOK3ByZWZpeF9jb3Vyc2UrQVMrYytPTitjLmlkJTNEY20uY291cnNlKyUwRCUwQVdIRVJFK2NtLnZpc2libGUrJTNEMStBTkQrYy52aXNpYmxlKyUzRCsxK0FORCtjbS5kZWxldGlvbmlucHJvZ3Jlc3MrJTNEKzArKyUyNSUyNUZJTFRFUl9DT1VSU0VDQVRFR09SSUVTU1VCSURTJTNBYy5jYXRlZ29yeSUyNSUyNSslMjUlMjVGSUxURVJfQ09VUlNFUyUzQWMuaWQlMjUlMjUrQU5EK2NtLmFkZGVkK0JFVFdFRU4rJTI1JTI1TFNfU1RBUlREQVRFJTI1JTI1K0FORCslMjUlMjVMU19FTkREQVRFJTI1JTI1JTI5K2FzK1RvdGFsJTJDKyUwRCUwQSUyOFNFTEVDVCtjb3VudCUyOGNtLmlkJTI5JTBEJTBBK0ZST00rcHJlZml4X2NvdXJzZV9tb2R1bGVzK0FTK2NtKyUwRCUwQUpPSU4rcHJlZml4X2NvdXJzZStBUytjK09OK2MuaWQrJTNEK2NtLmNvdXJzZSUwRCUwQStKT0lOK3ByZWZpeF9tb2R1bGVzK0FTK20rT04rbS5pZCslM0RjbS5tb2R1bGUrJTBEJTBBV0hFUkUrYy52aXNpYmxlKyUzRCsxK0FORCtjbS52aXNpYmxlKyUzRCsxK0FORCtjbS5kZWxldGlvbmlucHJvZ3Jlc3MrJTNEKzArQU5EK20ubmFtZStJTislMjglMjdyZXNvdXJjZSUyNyUyQyslMjdwYWdlJTI3JTJDKyUyN3VybCUyNyUyQyslMjdpbXNjcCUyNyUyQyslMjdsYWJlbCUyNyUyQyslMjdib29rJTI3JTJDKyUyN2ZvbGRlciUyNyUyOSsrJTI1JTI1RklMVEVSX0NPVVJTRUNBVEVHT1JJRVNTVUJJRFMlM0FjLmNhdGVnb3J5JTI1JTI1KyUyNSUyNUZJTFRFUl9DT1VSU0VTJTNBYy5pZCUyNSUyNStBTkQrY20uYWRkZWQrQkVUV0VFTislMjUlMjVMU19TVEFSVERBVEUlMjUlMjUrQU5EKyUyNSUyNUxTX0VORERBVEUlMjUlMjUlMjlhcytSZXNvdXJjZXMrRlJPTStwcmVmaXhfY291cnNlX21vZHVsZXMrYXMrTW9kdWxlcytMSU1JVCsxJTI5K20lMEQlMEEiO3M6Nzoic3VtbWFyeSI7YToyOntzOjQ6InRleHQiO3M6MDoiIjtzOjY6ImZvcm1hdCI7czoxOiIxIjt9czo2OiJnbG9iYWwiO3M6MToiMSI7czoyOiJpZCI7aTozNztzOjg6ImNvdXJzZWlkIjtpOjE7czozNToibWZvcm1faXNleHBhbmRlZF9pZF9hZHZhbmNlZG9wdGlvbnMiO2k6MDtzOjEyOiJzdWJtaXRidXR0b24iO3M6NDoiTmV4dCI7czoxMjoiZGlzYWJsZXRhYmxlIjtpOjA7fX19]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[1]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[course]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878493]]></timecreated>
+<timemodified><![CDATA[1563878493]]></timemodified>
+<title><![CDATA[Modules]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[321371922]]></logo>
+<tilescolourpicker><![CDATA[1A77BA]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Course]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[side-db-four]]></region>
+<weight><![CDATA[1]]></weight>
+</position></report>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Device Statistics]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[sql]]></type>
+<components><![CDATA[YTo2OntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czoxNzoiRGV2aWNlK1N0YXRpc3RpY3MiO3M6NDoidHlwZSI7czozOiJzcWwiO3M6ODoicXVlcnlzcWwiO3M6NTYzOiJTRUxFQ1QrYmQuZGV2aWNldHlwZSUyQ2NvdW50JTI4YmQudXNlcmlkJTI5K2FzK251bWJlcm9mdXNlcnMrJTBEJTBBRlJPTStwcmVmaXhfYmxvY2tfZGV2aWNlbHMrYmQlMEQlMEErSk9JTitwcmVmaXhfdXNlcl9lbnJvbG1lbnRzK3VlK09OK3VlLnVzZXJpZCslM0QrYmQudXNlcmlkJTBEJTBBK0pPSU4rcHJlZml4X2Vucm9sK2UrT04rZS5pZCslM0QrdWUuZW5yb2xpZCUwRCUwQStKT0lOK3ByZWZpeF9jb3Vyc2UrYytPTitjLmlkKyUzRCtlLmNvdXJzZWlkJTBEJTBBV0hFUkUrJTBEJTBBMSslM0QrMSslMEQlMEElMjUlMjVGSUxURVJfQ09VUlNFQ0FURUdPUklFU1NVQklEUyUzQWMuY2F0ZWdvcnklMjUlMjUlMEQlMEErQU5EK2JkLmRldmljZXR5cGUrSVMrTk9UK05VTEwlMEQlMEFBTkQrYmQudGltZW1vZGlmaWVkK0JFVFdFRU4rJTI1JTI1TFNfU1RBUlREQVRFJTI1JTI1K0FORCslMjUlMjVMU19FTkREQVRFJTI1JTI1JTBEJTBBJTI1JTI1U0VBUkNIJTNBYmQuZGV2aWNldHlwZSUyNSUyNSUwRCUwQStHUk9VUCtCWStiZC5kZXZpY2V0eXBlK09SREVSK0JZK251bWJlcm9mdXNlcnMrREVTQyI7czo3OiJzdW1tYXJ5IjthOjI6e3M6NDoidGV4dCI7czowOiIiO3M6NjoiZm9ybWF0IjtzOjE6IjEiO31zOjY6Imdsb2JhbCI7czoxOiIxIjtzOjI6ImlkIjtpOjIyO3M6ODoiY291cnNlaWQiO2k6MTtzOjM1OiJtZm9ybV9pc2V4cGFuZGVkX2lkX2FkdmFuY2Vkb3B0aW9ucyI7aTowO3M6MTI6InN1Ym1pdGJ1dHRvbiI7czo0OiJOZXh0IjtzOjEyOiJkaXNhYmxldGFibGUiO2k6MDt9fXM6NzoiY29sdW1ucyI7YToxOntzOjg6ImVsZW1lbnRzIjthOjI6e2k6MDthOjY6e3M6MjoiaWQiO3M6MTU6IkVIR1BraUJ4NW96aDJjbSI7czoxMDoicGx1Z2lubmFtZSI7czozOiJzcWwiO3M6MTQ6InBsdWdpbmZ1bGxuYW1lIjtzOjM6IlNRTCI7czo3OiJzdW1tYXJ5IjtzOjA6IiI7czo0OiJ0eXBlIjtzOjE1OiJzZWxlY3RlZGNvbHVtbnMiO3M6ODoiZm9ybWRhdGEiO086ODoic3RkQ2xhc3MiOjc6e3M6NToidmFsdWUiO2I6MTtzOjk6ImNvbHVtbmFtZSI7czoxMDoiRGV2aWNldHlwZSI7czo2OiJjb2x1bW4iO3M6MTA6ImRldmljZXR5cGUiO3M6NzoiaGVhZGluZyI7czowOiIiO3M6NDoid3JhcCI7czowOiIiO3M6NToiYWxpZ24iO3M6MDoiIjtzOjQ6InNpemUiO3M6MDoiIjt9fWk6MTthOjY6e3M6MjoiaWQiO3M6MTU6IkdkNk5DQnllMFNhOE1RNiI7czoxMDoicGx1Z2lubmFtZSI7czozOiJzcWwiO3M6MTQ6InBsdWdpbmZ1bGxuYW1lIjtzOjM6IlNRTCI7czo3OiJzdW1tYXJ5IjtzOjA6IiI7czo0OiJ0eXBlIjtzOjE1OiJzZWxlY3RlZGNvbHVtbnMiO3M6ODoiZm9ybWRhdGEiO086ODoic3RkQ2xhc3MiOjc6e3M6NToidmFsdWUiO2I6MTtzOjk6ImNvbHVtbmFtZSI7czoxNToiTnVtYmVyK29mK1ZpZXdzIjtzOjY6ImNvbHVtbiI7czoxMzoibnVtYmVyb2Z1c2VycyI7czo3OiJoZWFkaW5nIjtzOjA6IiI7czo0OiJ3cmFwIjtzOjA6IiI7czo1OiJhbGlnbiI7czowOiIiO3M6NDoic2l6ZSI7czowOiIiO319fX1zOjc6ImZpbHRlcnMiO2E6MTp7czo4OiJlbGVtZW50cyI7YTowOnt9fXM6MTI6ImNhbGN1bGF0aW9ucyI7YToxOntzOjg6ImVsZW1lbnRzIjtOO31zOjg6Im9yZGVyaW5nIjthOjE6e3M6ODoiZWxlbWVudHMiO047fXM6NDoicGxvdCI7YToxOntzOjg6ImVsZW1lbnRzIjthOjE6e2k6MDthOjU6e3M6MjoiaWQiO3M6MTU6Ik81Y2JrMkhhU0lYR0JWZyI7czo4OiJmb3JtZGF0YSI7Tzo4OiJzdGRDbGFzcyI6OTp7czo5OiJjaGFydG5hbWUiO3M6MTI6IkRldmljZStTdGF0cyI7czo4OiJhcmVhbmFtZSI7czoxMDoiZGV2aWNldHlwZSI7czo5OiJhcmVhdmFsdWUiO3M6MTM6Im51bWJlcm9mdXNlcnMiO3M6MTE6InNlcmllc2xhYmVsIjtzOjA6IiI7czoxMDoic2hvd2xlZ2VuZCI7czoxOiIwIjtzOjEwOiJkYXRhbGFiZWxzIjtzOjE6IjEiO3M6MTA6ImNvbHVtbnNvcnQiO3M6MTA6ImRldmljZXR5cGUiO3M6Nzoic29ydGluZyI7czowOiIiO3M6NToibGltaXQiO3M6MDoiIjt9czoxMDoicGx1Z2lubmFtZSI7czozOiJwaWUiO3M6MTQ6InBsdWdpbmZ1bGxuYW1lIjtzOjM6IlBpZSI7czo3OiJzdW1tYXJ5IjtzOjExOiJBK3BpZStncmFwaCI7fX19fQ==]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[1]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reportdashboard]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Geographical]]></subpagepattern>
+<defaultregion><![CDATA[reports-db-two]]></defaultregion>
+<defaultweight><![CDATA[1]]></defaultweight>
+<timecreated><![CDATA[1563878483]]></timecreated>
+<timemodified><![CDATA[1563878483]]></timemodified>
+<title><![CDATA[Device Statistics]]></title>
+<reportcontenttype><![CDATA[O5cbk2HaSIXGBVg]]></reportcontenttype>
+<reporttype><![CDATA[]]></reporttype>
+<logo><![CDATA[]]></logo>
+<tilescolourpicker><![CDATA[12445F]]></tilescolourpicker>
+<disableheader><![CDATA[0]]></disableheader>
+<tilescolour><![CDATA[]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"></position></report>

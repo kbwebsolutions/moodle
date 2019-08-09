@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Quizzes]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToyOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czo3OiJRdWl6emVzIjtzOjQ6InR5cGUiO3M6MTA6InN0YXRpc3RpY3MiO3M6ODoicXVlcnlzcWwiO3M6OTQxOiJTRUxFQ1QrY291bnQlMjhjbS5pZCUyOStBUyslMjdUb3RhbCUyNyUyQyUwRCUwQSUyOFNFTEVDVCtjb3VudCUyOGNtLmlkJTI5K0ZST00rcHJlZml4X2NvdXJzZV9tb2R1bGVzK0FTK2NtKysrJTBEJTBBKysrSk9JTitwcmVmaXhfY291cnNlK0FTK2MrT04rYy5pZCUzRGNtLmNvdXJzZSUwRCUwQSsrK0pPSU4rcHJlZml4X21vZHVsZXMrQVMrbStPTittLmlkKyUzRCtjbS5tb2R1bGUrKyUwRCUwQSsrK1dIRVJFK2NtLnZpc2libGUrJTNEMStBTkQrYy52aXNpYmxlKyUzRCsxK0FORCtkZWxldGlvbmlucHJvZ3Jlc3MrJTNEMCtBTkQrbS5uYW1lJTNEJTI3cXVpeiUyNysrJTI1JTI1RklMVEVSX0NPVVJTRUNBVEVHT1JJRVNTVUJJRFMlM0FjLmNhdGVnb3J5JTI1JTI1KyUyNSUyNUZJTFRFUl9DT1VSU0VTJTNBYy5pZCUyNSUyNStBTkQrY20uYWRkZWQrQkVUV0VFTislMjUlMjVMU19TVEFSVERBVEUlMjUlMjUrQU5EKyUyNSUyNUxTX0VORERBVEUlMjUlMjUlMjkrQVMrJTI3QWN0aXZlJTI3JTBEJTBBRlJPTStwcmVmaXhfY291cnNlX21vZHVsZXMrQVMrY20rJTBEJTBBSk9JTitwcmVmaXhfcXVpeitBUytxK09OK3EuaWQrJTNEK2NtLmluc3RhbmNlJTBEJTBBSk9JTitwcmVmaXhfbW9kdWxlcytBUyttK09OK20uaWQrJTNEK2NtLm1vZHVsZSUwRCUwQUpPSU4rcHJlZml4X2NvdXJzZStBUytjK09OK2MuaWQlM0RjbS5jb3Vyc2UrV0hFUkUrY20uZGVsZXRpb25pbnByb2dyZXNzKyUzRDArQU5EKytjLnZpc2libGUrJTNEKzElMEQlMEFBTkQrbS5uYW1lKyUzRCslMjdxdWl6JTI3KyslMjUlMjVGSUxURVJfQ09VUlNFQ0FURUdPUklFU1NVQklEUyUzQWMuY2F0ZWdvcnklMjUlMjUrJTI1JTI1RklMVEVSX0NPVVJTRVMlM0FjLmlkJTI1JTI1K0FORCtjbS5hZGRlZCtCRVRXRUVOKyUyNSUyNUxTX1NUQVJUREFURSUyNSUyNStBTkQrJTI1JTI1TFNfRU5EREFURSUyNSUyNSI7czo3OiJzdW1tYXJ5IjthOjI6e3M6NDoidGV4dCI7czowOiIiO3M6NjoiZm9ybWF0IjtzOjE6IjEiO31zOjY6Imdsb2JhbCI7czoxOiIxIjtzOjI6ImlkIjtpOjU0O3M6ODoiY291cnNlaWQiO2k6MTtzOjM1OiJtZm9ybV9pc2V4cGFuZGVkX2lkX2FkdmFuY2Vkb3B0aW9ucyI7aTowO3M6MTI6InN1Ym1pdGJ1dHRvbiI7czo0OiJOZXh0IjtzOjEyOiJkaXNhYmxldGFibGUiO2k6MDt9fXM6MTE6InBlcm1pc3Npb25zIjthOjE6e3M6NjoiY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjEzOiJjb25kaXRpb25leHByIjtzOjA6IiI7fX19]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[1]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[course]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878504]]></timecreated>
+<timemodified><![CDATA[1563878504]]></timemodified>
+<title><![CDATA[Quizzes]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[375835883]]></logo>
+<tilescolourpicker><![CDATA[ED4337]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Course]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[side-db-second]]></region>
+<weight><![CDATA[1]]></weight>
+</position></report>

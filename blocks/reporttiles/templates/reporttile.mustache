@@ -1,0 +1,69 @@
+{{^singlerecord}}
+<div class="dashboard_reporttile_container {{tile_with_link}}" style="border-bottom: 7px solid #{{stylecolorpicker}}">
+    <!-- <div class="reporttile_highlighter" {{stylecolorpicker}}></div> -->
+    {{#instanceurlcheck}}
+        <a href={{instanceurlcheck}} />
+    {{/instanceurlcheck}}
+        <div class="dashboard_tiles" {{styletilescolour}}>
+            <span>
+                <span class="reporttile_title" title="{{configtitle}}">{{config_title_fullname}}</span>
+                {{#tableformat}}
+                <span class="dashboard_tiles_img"><img src="{{tilelogo}}" /></span> {{/tableformat}}
+                <div class='tiles_information' data-reportid='{{reportid}}' data-instanceid='{{instanceid}}' data-reporttype='{{reporttype}}'>
+                    {{^tableformat}}
+                    <div id='plotreportcontainer{{instanceid}}' class='report_dashboard_container' data-reportid={{reportid}}
+                        data-reporttype='{{reporttype}}' data-blockinstance={{instanceid}} data-chartcolor={{stylecolorpicker}}> </div>
+                    {{/tableformat}}
+                    {{#tableformat}}
+                    <table width='100%'>
+                        <tr>
+                            <div id="reportloading_{{instanceid}}">
+                                <img src={{loading}} alt="loading" title="loading" />
+                            </div>
+                        </tr>
+                    </table>
+                    {{/tableformat}}
+                </div>
+            </span>
+        </div>
+    {{#instanceurlcheck}}
+        </a>
+    {{/instanceurlcheck}}
+</div>
+{{/singlerecord}}
+
+
+{{#singlerecord}}
+<div class="dashboard_reporttile_container reporttile_singlecontainer {{tile_with_link}}" {{colorformat}}>
+    <!-- <div class="reporttile_highlighter" {{stylecolorpicker}}></div> -->
+    {{#instanceurlcheck}}
+        <a href={{instanceurlcheck}} />
+    {{/instanceurlcheck}}
+        <div class="dashboard_tiles dashboard_singletile" {{styletilescolour}}>
+            <span>
+                <div class='tiles_information singlerecord_tile' data-reportid={{reportid}} data-instanceid={{instanceid}} data-reporttype='{{reporttype}}'>
+                    {{^tableformat}}
+                        <h2 class="reporttile_title" title="{{config_title_fullname}}">{{config_title_fullname}}</h2>
+                        <div id='plotreportcontainer{{instanceid}}' class='report_dashboard_container' data-reportid={{reportid}} data-reporttype='{{reporttype}}' data-blockinstance={{instanceid}} data-chartcolor={{stylecolorpicker}}> </div>
+                    {{/tableformat}}
+                    {{#tableformat}}
+                    <div class="sigletile_content">
+                        <table class="singleTileTable">
+                            <tr>
+                                <div id="reportloading_{{instanceid}}">
+                                    <img src={{loading}} alt="loading" title="loading" />
+                                </div>
+                            </tr>
+                        </table>
+                        <span class="dashboard_tiles_img"><img src="{{tilelogo}}" /></span>
+                    </div>
+                    {{/tableformat}}
+                </div>
+            </span>
+        </div>
+    {{#instanceurlcheck}}
+        </a>
+    {{/instanceurlcheck}}
+</div>
+{{/singlerecord}}
+<!-- <div id="container" style="display:inline-block;"></div> -->

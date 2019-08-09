@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Trending Browser]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czoxNjoiVHJlbmRpbmcrQnJvd3NlciI7czo0OiJ0eXBlIjtzOjEwOiJzdGF0aXN0aWNzIjtzOjg6InF1ZXJ5c3FsIjtzOjUzNDoiU0VMRUNUK3QuYnJvd3NlciUyQ3QudXNlcmlkK2FzKyUyN05vLitvZitVc2VycyUyNytGUk9NKyUyOFNFTEVDVCtjb3VudCUyOERJU1RJTkNUK2JkLnVzZXJpZCUyOSthcyt1c2VyaWQlMkMrYnJvd3NlcitGUk9NK3ByZWZpeF9ibG9ja19kZXZpY2VscytiZCslMEQlMEFMRUZUK0pPSU4rcHJlZml4X3VzZXJfZW5yb2xtZW50cyt1ZStPTit1ZS51c2VyaWQrJTNEK2JkLnVzZXJpZCUwRCUwQUxFRlQrSk9JTitwcmVmaXhfZW5yb2wrZStPTitlLmlkKyUzRCt1ZS5lbnJvbGlkJTBEJTBBTEVGVCtKT0lOK3ByZWZpeF9jb3Vyc2UrYytPTitjLmlkKyUzRCtlLmNvdXJzZWlkJTBEJTBBV0hFUkUrMSUzRDErJTI1JTI1RklMVEVSX0NPVVJTRUNBVEVHT1JJRVNTVUJJRFMlM0FjLmNhdGVnb3J5JTI1JTI1K0FORCtiZC50aW1lbW9kaWZpZWQrQkVUV0VFTislMjUlMjVMU19TVEFSVERBVEUlMjUlMjUrQU5EKyUyNSUyNUxTX0VORERBVEUlMjUlMjUrR1JPVVArQlkrYmQuYnJvd3NlcitPUkRFUitCWStiZC51c2VyaWQrREVTQytMSU1JVCsxKyUyOSthcyt0IjtzOjc6InN1bW1hcnkiO2E6Mjp7czo0OiJ0ZXh0IjtzOjA6IiI7czo2OiJmb3JtYXQiO3M6MToiMSI7fXM6NjoiZ2xvYmFsIjtzOjE6IjEiO3M6MjoiaWQiO2k6NzM7czo4OiJjb3Vyc2VpZCI7aToxO3M6MzU6Im1mb3JtX2lzZXhwYW5kZWRfaWRfYWR2YW5jZWRvcHRpb25zIjtpOjA7czoxMjoic3VibWl0YnV0dG9uIjtzOjQ6Ik5leHQiO3M6MTI6ImRpc2FibGV0YWJsZSI7aTowO319fQ==]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[1]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Geographical]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878521]]></timecreated>
+<timemodified><![CDATA[1563878521]]></timemodified>
+<title><![CDATA[Trending Browser]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[360715880]]></logo>
+<tilescolourpicker><![CDATA[1A77BA]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Geographical]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[side-db-first]]></region>
+<weight><![CDATA[8]]></weight>
+</position></report>

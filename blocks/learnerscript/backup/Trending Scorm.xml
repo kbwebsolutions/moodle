@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Trending Scorm]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czoxNDoiVHJlbmRpbmcrU2Nvcm0iO3M6NDoidHlwZSI7czoxMDoic3RhdGlzdGljcyI7czo4OiJxdWVyeXNxbCI7czo3ODQ6IlNFTEVDVCt0LmFjdGl2aXR5K0ZST00rJTI4U0VMRUNUKytzY29ybS5uYW1lK2FzKyUyN2FjdGl2aXR5JTI3JTJDK1NFQ19UT19USU1FJTI4U1VNJTI4bHN0LnRpbWVzcGVudCUyOSUyOSthcyslMjdtYXh0aW1lc3BlbnQlMjclMkMrU1VNJTI4bHN0LnRpbWVzcGVudCUyOSthcyt0aW1lc3BlbnQlMEQlMEFGUk9NK3ByZWZpeF9ibG9ja19sc190aW1lc3RhdHMrbHN0KyUwRCUwQUpPSU4rcHJlZml4X2NvdXJzZStjK09OK2MuaWQrJTNEK2xzdC5jb3Vyc2VpZCUwRCUwQUpPSU4rcHJlZml4X2NvdXJzZV9tb2R1bGVzK0FTK2NtK09OK2NtLmlkKyUzRCtsc3QuY29udGV4dGluc3RhbmNlaWQrQU5EK2NtLmNvdXJzZSslM0QrYy5pZCUwRCUwQUpPSU4rcHJlZml4X21vZHVsZXMrQVMrbStPTittLmlkKyUzRCtjbS5tb2R1bGUlMEQlMEFKT0lOK3ByZWZpeF9zY29ybStBUytzY29ybStPTitzY29ybS5pZCslM0QrY20uaW5zdGFuY2UrJTBEJTBBV0hFUkUrbHN0LmNvbnRleHRsZXZlbCtJTislMjg3MCUyOStBTkQrbS5uYW1lKyUzRCslMjdzY29ybSUyNytBTkQrbHN0LmNvbnRleHRpbnN0YW5jZWlkKyUzRSswKysrJTI1JTI1RklMVEVSX0NPVVJTRUNBVEVHT1JJRVNTVUJJRFMlM0FjLmNhdGVnb3J5JTI1JTI1JTBEJTBBQU5EK2xzdC50aW1lY3JlYXRlZCtCRVRXRUVOKyUyNSUyNUxTX1NUQVJUREFURSUyNSUyNStBTkQrJTI1JTI1TFNfRU5EREFURSUyNSUyNSUwRCUwQUdST1VQK0JZK2xzdC5jb250ZXh0aW5zdGFuY2VpZCtPUkRFUitCWSt0aW1lc3BlbnQrREVTQytMSU1JVCsxJTI5K2FzK3QiO3M6Nzoic3VtbWFyeSI7YToyOntzOjQ6InRleHQiO3M6MDoiIjtzOjY6ImZvcm1hdCI7czoxOiIxIjt9czo2OiJnbG9iYWwiO3M6MToiMSI7czoyOiJpZCI7aTo3OTtzOjg6ImNvdXJzZWlkIjtpOjE7czozNToibWZvcm1faXNleHBhbmRlZF9pZF9hZHZhbmNlZG9wdGlvbnMiO2k6MDtzOjEyOiJzdWJtaXRidXR0b24iO3M6NDoiTmV4dCI7czoxMjoiZGlzYWJsZXRhYmxlIjtpOjA7fX19]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[0]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Timespent]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878526]]></timecreated>
+<timemodified><![CDATA[1563878526]]></timemodified>
+<title><![CDATA[Trending Scorm]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[566734017]]></logo>
+<tilescolourpicker><![CDATA[1A77BA]]></tilescolourpicker>
+<tileformat><![CDATA[border]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Timespent]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[center-second]]></region>
+<weight><![CDATA[2]]></weight>
+</position></report>

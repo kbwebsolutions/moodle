@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<report version="2018051714"><visible><![CDATA[1]]></visible>
+<name><![CDATA[Users]]></name>
+<summary><![CDATA[]]></summary>
+<type><![CDATA[statistics]]></type>
+<components><![CDATA[YToxOntzOjk6ImN1c3RvbXNxbCI7YToxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTA6e3M6NDoibmFtZSI7czo1OiJVc2VycyI7czo0OiJ0eXBlIjtzOjEwOiJzdGF0aXN0aWNzIjtzOjg6InF1ZXJ5c3FsIjtzOjEwODk6IlNFTEVDVCslMjhTRUxFQ1QrQ09VTlQlMjhESVNUSU5DVCtyYS51c2VyaWQlMjkrJTBEJTBBRlJPTStwcmVmaXhfdXNlcit1JTBEJTBBSk9JTitwcmVmaXhfcm9sZV9hc3NpZ25tZW50cytyYStPTityYS51c2VyaWQrJTNEK3UuaWQlMEQlMEErSk9JTitwcmVmaXhfY29udGV4dCtBUytjdHgrT04rY3R4LmlkKyUzRCtyYS5jb250ZXh0aWQlMEQlMEFKT0lOK3ByZWZpeF9jb3Vyc2UrYytPTitjLmlkKyUzRCtjdHguaW5zdGFuY2VpZCUwRCUwQStKT0lOK3ByZWZpeF9lbnJvbCtlK09OK2UuY291cnNlaWQrJTNEK2MuaWQrQU5EK2Uuc3RhdHVzKyUzRCswJTBEJTBBSk9JTitwcmVmaXhfdXNlcl9lbnJvbG1lbnRzK3VlK29uK3VlLmVucm9saWQrJTNEK2UuaWQrQU5EK3VlLnVzZXJpZCslM0QrcmEudXNlcmlkK0FORCt1ZS5zdGF0dXMrJTNEKzAlMEQlMEFKT0lOK3ByZWZpeF9yb2xlK3IrT04rci5pZCslM0QrcmEucm9sZWlkK0FORCtyLnNob3J0bmFtZSslM0QrJTI3c3R1ZGVudCUyNyUwRCUwQStXSEVSRStjLnZpc2libGUrJTNEKzErQU5EK3UuY29uZmlybWVkKyUzRCsxK0FORCt1LmRlbGV0ZWQrJTNEKzArJTI1JTI1RklMVEVSX0NPVVJTRUNBVEVHT1JJRVNTVUJJRFMlM0FjLmNhdGVnb3J5JTI1JTI1K0FORCtyYS50aW1lbW9kaWZpZWQrQkVUV0VFTislMjUlMjVMU19TVEFSVERBVEUlMjUlMjUrQU5EKyUyNSUyNUxTX0VORERBVEUlMjUlMjUrJTI5K0FTK2xlYXJuZXJzJTJDK0NPVU5UJTI4RElTVElOQ1QrdHJhLnVzZXJpZCUyOStBUytpbnN0cnVjdG9ycyUwRCUwQUZST00rcHJlZml4X2NvdXJzZStBUytjJTBEJTBBSk9JTitwcmVmaXhfY29udGV4dCtBUytjdHgrT04rYy5pZCslM0QrY3R4Lmluc3RhbmNlaWQlMEQlMEFKT0lOK3ByZWZpeF9yb2xlX2Fzc2lnbm1lbnRzKytBUyt0cmErT04rdHJhLmNvbnRleHRpZCslM0QrY3R4LmlkJTBEJTBBV0hFUkUrdHJhLnJvbGVpZCUzRDMrKyUyNSUyNUZJTFRFUl9DT1VSU0VDQVRFR09SSUVTU1VCSURTJTNBYy5jYXRlZ29yeSUyNSUyNStBTkQrdHJhLnRpbWVtb2RpZmllZCtCRVRXRUVOKyUyNSUyNUxTX1NUQVJUREFURSUyNSUyNStBTkQrJTI1JTI1TFNfRU5EREFURSUyNSUyNSI7czo3OiJzdW1tYXJ5IjthOjI6e3M6NDoidGV4dCI7czowOiIiO3M6NjoiZm9ybWF0IjtzOjE6IjEiO31zOjY6Imdsb2JhbCI7czoxOiIxIjtzOjI6ImlkIjtpOjg4O3M6ODoiY291cnNlaWQiO2k6MTtzOjM1OiJtZm9ybV9pc2V4cGFuZGVkX2lkX2FkdmFuY2Vkb3B0aW9ucyI7aTowO3M6MTI6InN1Ym1pdGJ1dHRvbiI7czo0OiJOZXh0IjtzOjEyOiJkaXNhYmxldGFibGUiO2k6MDt9fX0=]]></components>
+<export><![CDATA[]]></export>
+<global><![CDATA[1]]></global>
+<lastexecutiontime><![CDATA[18]]></lastexecutiontime>
+<disabletable><![CDATA[0]]></disabletable>
+<instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard]]></pagetypepattern>
+<subpagepattern><![CDATA[Dashboard]]></subpagepattern>
+<defaultregion><![CDATA[side-db-first]]></defaultregion>
+<defaultweight><![CDATA[10]]></defaultweight>
+<timecreated><![CDATA[1563878529]]></timecreated>
+<timemodified><![CDATA[1563878529]]></timemodified>
+<title><![CDATA[Users]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[910125389]]></logo>
+<tilescolourpicker><![CDATA[ED4337]]></tilescolourpicker>
+<tileformat><![CDATA[fill]]></tileformat>
+<tilescolour><![CDATA[000000]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"><contextid><![CDATA[1]]></contextid>
+<pagetype><![CDATA[blocks-reportdashboard-dashboard]]></pagetype>
+<subpage><![CDATA[Dashboard]]></subpage>
+<visible><![CDATA[1]]></visible>
+<region><![CDATA[reportdb-second]]></region>
+<weight><![CDATA[1]]></weight>
+</position><instance version="2018051714"><blockname><![CDATA[reporttiles]]></blockname>
+<parentcontextid><![CDATA[1]]></parentcontextid>
+<showinsubcontexts><![CDATA[0]]></showinsubcontexts>
+<requiredbytheme><![CDATA[0]]></requiredbytheme>
+<pagetypepattern><![CDATA[blocks-reportdashboard-dashboard-manager]]></pagetypepattern>
+<subpagepattern><![CDATA[Dashboard]]></subpagepattern>
+<defaultregion><![CDATA[reportdb-second]]></defaultregion>
+<defaultweight><![CDATA[5]]></defaultweight>
+<timecreated><![CDATA[1563878529]]></timecreated>
+<timemodified><![CDATA[1563878529]]></timemodified>
+<title><![CDATA[Users]]></title>
+<reportcontenttype><![CDATA[]]></reportcontenttype>
+<reporttype><![CDATA[table]]></reporttype>
+<logo><![CDATA[0]]></logo>
+<tilescolourpicker><![CDATA[]]></tilescolourpicker>
+<tileformat><![CDATA[]]></tileformat>
+<tilescolour><![CDATA[]]></tilescolour>
+<url><![CDATA[]]></url>
+</instance><position version="2018051714"></position></report>
