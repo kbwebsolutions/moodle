@@ -56,15 +56,6 @@ if ($ADMIN->fulltree) {
             get_string('idpnamedefault', 'auth_saml2'),
             PARAM_TEXT));
 
-    // Manage available IdPs.
-    $settings->add(new setting_button(
-        'auth_saml2/availableidps',
-        get_string('availableidps', 'auth_saml2'),
-        get_string('availableidps_help', 'auth_saml2'),
-        get_string('availableidps', 'auth_saml2'),
-        $CFG->wwwroot . '/auth/saml2/availableidps.php'
-        ));
-
     // Display IDP Link.
     $settings->add(new admin_setting_configselect(
             'auth_saml2/showidplink',
@@ -77,7 +68,7 @@ if ($ADMIN->fulltree) {
             'auth_saml2/idpmetadatarefresh',
             get_string('idpmetadatarefresh', 'auth_saml2'),
             get_string('idpmetadatarefresh_help', 'auth_saml2'),
-            1, $yesno));
+            0, $yesno));
 
     // Debugging.
     $settings->add(new admin_setting_configselect(
@@ -185,13 +176,6 @@ if ($ADMIN->fulltree) {
             get_string('anyauth_help', 'auth_saml2'),
             0, $yesno));
 
-    // Simplify attributes
-    $settings->add(new admin_setting_configselect(
-            'auth_saml2/attrsimple',
-            get_string('attrsimple', 'auth_saml2'),
-            get_string('attrsimple_help', 'auth_saml2'),
-            1, $yesno));
-
     // IDP to Moodle mapping.
     // IDP attribute.
     $settings->add(new admin_setting_configtext(
@@ -235,6 +219,15 @@ if ($ADMIN->fulltree) {
             '',
             PARAM_URL));
 
+    // Select available IdPs.
+    $settings->add(new setting_button(
+        'auth_saml2/availableidps',
+        get_string('availableidps', 'auth_saml2'),
+        get_string('availableidps_help', 'auth_saml2'),
+        get_string('availableidps', 'auth_saml2'),
+        $CFG->wwwroot . '/auth/saml2/availableidps.php'
+        ));
+
     // Multi IdP display type.
     $multiidpdisplayoptions = [
         saml2_settings::OPTION_MULTI_IDP_DISPLAY_DROPDOWN => get_string('multiidpdropdown', 'auth_saml2'),
@@ -246,14 +239,6 @@ if ($ADMIN->fulltree) {
         get_string('multiidpdisplay_help', 'auth_saml2'),
         saml2_settings::OPTION_MULTI_IDP_DISPLAY_DROPDOWN,
         $multiidpdisplayoptions));
-
-    // Attempt Single Sign out.
-    $settings->add(new admin_setting_configselect(
-        'auth_saml2/attemptsignout',
-        get_string('attemptsignout', 'auth_saml2'),
-        get_string('attemptsignout_help', 'auth_saml2'),
-        1,
-        $yesno));
 
     // SAMLPHP version.
     $authplugin = get_auth_plugin('saml2');

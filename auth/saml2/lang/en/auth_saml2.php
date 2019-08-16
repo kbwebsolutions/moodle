@@ -26,16 +26,12 @@ $string['alterlogout'] = 'Alternative Logout URL';
 $string['alterlogout_help'] = 'The URL to redirect a user after all internal logout mechanisms are run';
 $string['anyauth'] = 'Allowed any auth type';
 $string['anyauth_help'] = 'Yes: Allow SAML login for all users? No: Only users who have saml2 as their type.';
-$string['attemptsignout'] = 'Attempt IdP Signout';
-$string['attemptsignout_help'] = 'This will attempt to communicate with the IdP to send a sign out request';
 $string['auth_saml2description'] = 'Authenticate with a SAML2 IdP';
 $string['autocreate'] = 'Auto create users';
 $string['autocreate_help'] = 'If users are in the IdP but not in moodle create a moodle account.';
-$string['availableidps'] = 'Manage available IdPs';
-$string['availableidps_help'] = 'If an IdP metadata xml contains multiple IdP entities or you have specificed multiple metadata urls,
-you will need to select which entities are availiable for users to login with.';
-$string['attrsimple'] = 'Simplify attributes';
-$string['attrsimple_help'] = 'Various IdP\'s such as ADFS use long attribute keys such as urns or namespaced xml schema names. If set to Yes this will simplify these, eg map http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname to such \'givenname\'.';
+$string['availableidps'] = 'Select available IdPs';
+$string['availableidps_help'] = 'If an IdP metadata xml contains multiple IdP entities, you will need to select which entities are availiable
+for users to login with.';
 $string['certificatedetails'] = 'Certificate details';
 $string['certificatedetailshelp'] = '<h1>SAML2 auto generated public certificate contents</h1><p>The path for the cert is here:</p>';
 $string['certificate_help'] = 'Regenerate the Private Key and Certificate used by this SP. | <a href=\'{$a}\'>View SP certificate</a>';
@@ -76,29 +72,19 @@ $string['logdir_help'] = 'The log directory SSPHP will write to, the file will b
 $string['logdir'] = 'Log Directory';
 $string['logtofile'] = 'Enable logging to file';
 $string['logtofile_help'] = 'Turning this on will redirect SSPHP log output to a file in the logdir';
-$string['manageidpsheading'] = 'Manage available IdPs';
 $string['mdlattr_help'] = 'Which Moodle user field should the IdP attribute be matched to?';
 $string['mdlattr'] = 'Mapping Moodle';
 $string['metadatafetchfailed'] = 'Metadata fetch failed: {$a}';
 $string['metadatafetchfailedstatus'] = 'Metadata fetch failed: Status code {$a}';
 $string['metadatafetchfailedunknown'] = 'Metadata fetch failed: Unknown cURL error';
-$string['multiidpinfo'] = '
-<ul>
-<li>An IdP can only be used if it is set as Active</li>
-<li>When duallogin has been turned on all active IdPs will be displayed on the login page</li>
-<li>When an IdP has been set as Default and duallogin is not turned on, this IdP will automatically be used unless ?multiidp=on or saml=off is passed on /login/index.php</li>
-<li>When an IdP has been set as Admin any users that log in using this IdP will automatically be made an admin</li>
-<li>An IdP can be given an Alias, when going to /login/index.php?idpalias={alias} the alias can be passed to directly use that IdP</li>
-</ul>';
 $string['multiidpbuttons'] = 'Buttons with icons';
 $string['multiidpdisplay'] = 'Multiple IdP display type';
 $string['multiidpdisplay_help'] = 'If an IdP metadata xml contains multiple IdP entities, how will each available IdP be displayed?';
 $string['multiidpdropdown'] = 'Drop-down list';
 $string['nameidasattrib'] = 'Expose NameID as attribute';
 $string['nameidasattrib_help'] = 'The NameID claim will be exposed to SSPHP as an attribute named nameid';
-$string['noattribute'] = 'You have logged in successfully but we could not find your \'{$a}\' attribute to associate you to an account in Moodle.';
-$string['noidpfound'] = 'The IdP \'{$a}\' was not found as a configured IdP.';
-$string['nouser'] = 'You have logged in successfully as \'{$a}\' but do not have an account in Moodle.';
+$string['noattribute'] = 'You have logged in succesfully but we could not find your \'{$a}\' attribute to associate you to an account in Moodle.';
+$string['nouser'] = 'You have logged in succesfully as \'{$a}\' but do not have an account in Moodle.';
 $string['nullprivatecert'] = 'Creation of Private Certificate failed.';
 $string['nullpubliccert'] = 'Creation of Public Certificate failed.';
 $string['organizationalunitname'] = 'Organisational Unit';
@@ -118,7 +104,7 @@ $string['spmetadatasign'] = 'SP Metadata signature';
 $string['spmetadata'] = 'SP Metadata';
 $string['sspversion'] = 'SimpleSAMLphp version';
 $string['stateorprovincename'] = 'State or Province';
-$string['suspendeduser'] = 'You have logged in successfully as \'{$a}\' but your account has been suspended in Moodle.';
+$string['suspendeduser'] = 'You have logged in succesfully as \'{$a}\' but your account has been suspended in Moodle.';
 $string['taskmetadatarefresh'] = 'Metadata refresh task';
 $string['test_auth'] = '<a href="{$a}">Test isAuthenticated and login</a>';
 $string['test_auth'] = '<a href="{$a}">Test isAuthenticated and login</a>';
@@ -129,7 +115,7 @@ $string['test_passive'] = '<a href="{$a}">Test using isPassive</a>';
 $string['test_passive_str'] = 'Test using isPassive';
 $string['tolower_help'] = 'Apply lowercase to IdP attribute before matching?';
 $string['tolower'] = 'Lowercase';
-$string['wrongauth'] = 'You have logged in successfully as \'{$a}\' but are not authorized to access Moodle.';
+$string['wrongauth'] = 'You have logged in succesfully as \'{$a}\' but are not authorized to access Moodle.';
 $string['auth_data_mapping'] = 'Data mapping';
 $string['auth_fieldlockfield'] = 'Lock value ({$a})';
 $string['auth_fieldmapping'] = 'Data mapping ({$a})';
@@ -164,4 +150,3 @@ $string['sha384'] = 'SHA384';
 $string['sha512'] = 'SHA512';
 $string['signaturealgorithm'] = 'Signing Algorithm';
 $string['signaturealgorithm_help'] = 'This is the algorithm that will be used to sign SAML requests. Warning: The SHA1 Algorithm is only provided for backwards compatibility, unless you absolutely must use it it is recommended to avoid it and use at least SHA256 instead.';
-$string['selectloginservice'] = 'Select a login service';

@@ -47,18 +47,10 @@ class selectidp_dropdown extends moodleform {
     public function definition() {
         $mform = $this->_form;
 
-        $metadataentities = $this->_customdata['metadataentities'];
+        $idpentityids = $this->_customdata['idpentityids'];
         $wants = $this->_customdata['wants'];
         $idpname = $this->_customdata['idpname'];
         $displaytype = $this->_customdata['displaytype'];
-
-        $idpentityids = array();
-
-        foreach ($metadataentities as $idpentities) {
-            foreach ($idpentities as $idpentityid => $idp) {
-                $idpentityids[$idpentityid] = $idp->name;
-            }
-        }
 
         $mform->addElement('hidden', 'wants', $wants);
         $mform->addElement('select', 'idp', '', $idpentityids);
