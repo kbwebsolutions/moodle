@@ -45,8 +45,7 @@ class mod_comments_mod_form extends moodleform_mod {
 
         $mform = $this->_form;
 
-        //$id = _customdata->id;
-        $id = '18';
+        $id = $this->_customdata['modid'];
 
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));

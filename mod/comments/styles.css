@@ -2,63 +2,71 @@
 * style sheet for Comments
 */
 
+
+
 .path-mod-comments ul.feed {
     margin:0;
-    padding:0;
+    padding: 1em;
     list-style:none;
     max-width: 100%;
+    border-top: 2px double #ccc;
+    margin-bottom: 1em;
 }
 .path-mod-comments li.item {
     display:flex;
-    flex-flow: row wrap;
+    flex-flow: nowrap;
+    justify-content: center;
     margin-bottom: 1.5em;
+    width:100%;
+    border-bottom: 1px solid #ccc;
 }
 
 .path-mod-comments .userpix{
     order: 1;
     margin-right: 1em;
 }
-.path-mod-comments .userpix .avatar{
 
-}
 
 .path-mod-comments .msg-body {
-    flex: 3 0px;
     order: 2;
+    width:100%;
+}
+ .path-mod-comments .msg-body .header {
+     display: flex;
+ }
+
+.path-mod-comments .msg-body .header .name {
+    order: 1;
+    width: 80%;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+
 }
 
-.path-mod-comments .msg-body .options {
+.path-mod-comments .msg-body .header .date {
+    order: 2;
+    width:20%;
+    color: #a0a0a0;
     font-size: 0.9em;
-    padding: 0.5em 0em;
+    text-align: end;
 }
 
-.path-mod-comments .msg-body .options .option {
-    margin-right: 3em;
+.path-mod-comments .options {
+    font-size: 0.75em;
+    padding: 1rem 0;
+    order: 3;
+    widows: 100%;
 }
 
-.path-mod-comments .msg-body .options a {
+.path-mod-comments .options a {
     color: #EE7EA0;
 }
 
-.path-mod-comments .msg-body .options a:hover {
+.path-mod-comments .options a:hover {
     text-decoration: none;
     color: #EE7EA0;
 }
 
-
-.path-mod-comments .msg-body .username {
-display: inline-block;
-float: left;
-font-weight: bold;
-color: #000;
-
-}
-
-.path-mod-comments .msg-body .date {
-display: inline-block;
-float: right;
-color: #666;
-}
 
 .path-mod-comments .msg-body .message {
 clear: both;

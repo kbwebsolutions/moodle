@@ -137,3 +137,9 @@ function checked_liked($postid, $user) {
     $liked = $DB->get_record('comments_likes', array('postid' => $postid, 'userid' => $user));
 
 }
+
+function deleteComment($postid){
+    global $DB;
+
+    $DB->delete_records('comments', array('id' => $postid));
+}

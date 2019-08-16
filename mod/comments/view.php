@@ -49,17 +49,13 @@ $event->trigger();*/
 $PAGE->set_url('/mod/comments/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($cm->name));
 $PAGE->set_heading(format_string($course->fullname));
-$PAGE->set_context($context);
 $output = $PAGE->get_renderer('mod_comments');
-$page = new \mod_comments\output\comment_posts();
 $pageurl = $PAGE->url;
 
 echo $output->header();
 
-$mformdata = array('modid' => $cm->id);
 
-
-$mform = new mod_comments_message_form($pageurl, $mformdata);
+$mform = new mod_comments_message_form($pageurl, array('modid'=>$cm->id));
 
 
 $mform->display();
@@ -74,13 +70,13 @@ if ($mform->is_cancelled()) {
     $todb->message = $fromform->posting;
     $todb->deleted = 0;
     $DB->insert_record('comments_posts', $todb);
-    redirect(new moodle_url('/mod/comments/view.php', array('id' => $fromform->id)));
+    //redirect(new moodle_url('/mod/comments/view.php', array('id' => $fromform->id)));
 };
 
-echo "<hr />";
 
 $posts = get_comments($cm->id);
-
-echo $output->render_comment_block($posts);
+$commentposts = new \mod_comments\output\comment_posts($posts);
+echo $output->render_comment_posts($commentposts);
+//echo $output->render_comment_posts($posts);
 
 echo $output->footer();

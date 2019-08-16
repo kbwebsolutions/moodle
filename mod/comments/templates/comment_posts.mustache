@@ -21,8 +21,8 @@
     {
         "section": "Topic 5",
         "messages": [
-            {"messageid": "12", "userpix": "Picture Here", "username": "Kieran Briggs", "date": "22 April", "message": "content of the message"},
-            {"messageid": "14", "userpix": "Picture Here", "username": "Tony Stark", "date": "2 April", "message": "I am Iron Man"}
+            {"id": "12", "userpix": "<img src='http://localhost/eef/pluginfile.php/5/user/icon/mypd/f2?rev=15'>", "firsname": "Kieran","lastname":"Briggs", "date": "22 April", "message": "content of the message"},
+            {"id": "14", "userpix": "<img src='http://localhost/eef/pluginfile.php/5/user/icon/mypd/f2?rev=15'>", "firstname": "Tony","lastname":"Stark", "date": "2 April", "message": "I am Iron Man"}
         ]
     }
 
@@ -31,7 +31,17 @@
 <div id = "comment-posts">
 <ul class ="comments feed">
     {{#messages}}
-    {{>mod_comments/comment_post}}
+        <li id="message{{id}}" class="item">
+            <div class="userpix">{{{userpix}}}</div>
+            <div class="msg-body">
+                <div class="header">
+                    <div class="name">{{firstname}} {{lastname}} <em>says</em></div>
+                    <div class="date">{{#userdate}}{{created}}, %d %b{{/userdate}}</div>
+                </div>
+                <div class="message">{{message}}</div>
+                <div class="options"><a class="likes" href="#">{{# str}}like, mod_comments{{/str}}</a>  <a class="delete" href="#">{{# str}}delete, mod_comments{{/str}}</a></div>
+            </div>
+        </li>
     {{/messages}}
 </ul>
 </div>
