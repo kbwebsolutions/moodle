@@ -108,7 +108,7 @@ $subpagepatterntype = $dashboardurl;
 $PAGE->set_url($seturl);
 $PAGE->set_pagetype($pagepattentype);
 $PAGE->set_subpage($subpagepatterntype);
-$PAGE->set_pagelayout('base');
+$PAGE->set_pagelayout('report');  // Originaly base KRB
 $PAGE->add_body_class('reportdashboard');
 $PAGE->navbar->ignore_active();
 $navdashboardurl = new moodle_url($seturl);
