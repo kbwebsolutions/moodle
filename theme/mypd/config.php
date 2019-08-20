@@ -175,7 +175,7 @@ $THEME->layouts = array(
     ),
     // The pagelayout used for reports.
     'report' => array(
-        'file' => 'default.php',
+        'file' => 'report.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
