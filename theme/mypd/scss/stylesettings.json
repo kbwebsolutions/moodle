@@ -8,6 +8,11 @@
   "classes": "eefheader"
 },
 {
+"title": "Required Header",
+"type": "inline",
+"classes": "requiredheader"
+},
+{
 "title": "Video time",
 "type": "block",
 "classes": "videotime"
