@@ -28,7 +28,7 @@
 
 }}
 <h4>{{section}}</h4>
-<div id = "comment-posts">
+<div id = "comment-posts" data-region="comment-posts">
 <ul class ="comments feed">
     {{#messages}}
         <li id="message{{id}}" class="item">
@@ -39,9 +39,14 @@
                     <div class="date">{{#userdate}}{{created}}, %d %b{{/userdate}}</div>
                 </div>
                 <div class="message">{{message}}</div>
-                <div class="options"><a class="likes" href="#">{{# str}}like, mod_comments{{/str}}</a>  <a class="delete" href="#">{{# str}}delete, mod_comments{{/str}}</a></div>
+                <div class="options"><a id="like" class="likes" href="">{{# str}}like, mod_comments{{/str}}</a>  <a id="remove" class="delete" href="">{{# str}}delete, mod_comments{{/str}}</a></div>
             </div>
         </li>
     {{/messages}}
 </ul>
 </div>
+{{#js}}
+    require(['mod_comments/options'], function(remove) {
+    remove.remove();
+    });
+{{/js}}
