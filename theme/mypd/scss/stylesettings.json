@@ -13,6 +13,11 @@
 "classes": "requiredheader"
 },
 {
+"title": "Estimated time",
+"type": "block",
+"classes": "estimatedtime"
+},
+{
 "title": "Video time",
 "type": "block",
 "classes": "videotime"
