@@ -35,3 +35,14 @@ btn-cct {
 		color: #fff;
 	}
 }
+
+.theme-mypd p a:not(.btn):not(.dropdown-item):not(._blanktarget):not(.mypd-due-date):not(.yui3-button):not(.mast-breadcrumb):not(.active):not(.disabled) {
+	color: $brand-primary;
+	border-bottom: 1px solid $brand-secondary;
+	&:focus,
+	&:hover{
+		color:darken($brand-secondary, 8%);
+		border-bottom: 2px solid $brand-primary;
+		text-decoration: none;
+	}
+}
