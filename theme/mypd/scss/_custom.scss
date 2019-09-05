@@ -48,3 +48,25 @@ btn-cct {
 		text-decoration: none;
 	}
 }
+
+//Accordion Styles
+.md-accordion {
+
+	i {
+		float:right;
+	}
+	.card {
+		border: 0px;
+	}
+	.card-header {
+		background-color: transparent;
+	}
+
+	[data-toggle="collapse"] .fa:before {
+		content: "\f0d8";
+	}
+
+	[data-toggle="collapse"].collapsed .fa:before {
+		content: "\f0d7";
+	}
+}
