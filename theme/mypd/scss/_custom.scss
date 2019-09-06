@@ -37,8 +37,11 @@ btn-cct {
 }
 
 //TODO Clean up this selector
-.theme-mypd #region-main p a:not(.btn):not(.dropdown-item):not(._blanktarget):not(.mypd-due-date):not(.yui3-button):not(.mast-breadcrumb):not(.active):not(.disabled),
-.theme-mypd #region-main li a:not(.btn):not(.dropdown-item):not(._blanktarget):not(.mypd-due-date):not(.yui3-button):not(.mast-breadcrumb):not(.active):not(.disabled):not(.mod-link):not(.mypd-edit-asset):not(.edit-summary):not(.previous_section):not(.next_section) {
+.theme-mypd #region-main .modtype_label .no-overflow a:not(.btn):not(.dropdown-item):not(._blanktarget):not(.mypd-due-date):not(.yui3-button):not(.active):not(.disabled),
+.theme-mypd #region-main .summary .no-overflow a:not(.btn):not(.dropdown-item):not(._blanktarget):not(.mypd-due-date):not(.yui3-button):not(.active):not(.disabled),
+.theme-mypd #region-main .pagemod-content a:not(.mypd-action-icon),
+.theme-mypd #region-main .specificfeedback a
+ {
 	color: $brand-primary;
 	border-bottom: 1px solid $brand-secondary;
 	&:focus,
