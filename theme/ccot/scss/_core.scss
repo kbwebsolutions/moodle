@@ -2992,9 +2992,9 @@ body:not(.pagelayout-course) #moodle-footer {
     }
 }
 
-ul {
-	list-style: none;
-	padding-left:0;
+ul { //Changed by KRB 9 sept 19
+	//list-style: none;
+	padding-left:1em;
 }
 
 // Custom menu lists.
