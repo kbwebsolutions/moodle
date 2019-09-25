@@ -52,7 +52,7 @@
 }
 
 .path-mod-comments .options {
-    font-size: 0.75em;
+    font-size: 0.9em;
     padding: 1rem 0;
     order: 3;
     widows: 100%;
@@ -72,7 +72,7 @@
 clear: both;
 }
 
-.path-mod-comments .likes {
+.path-mod-comments .like {
     padding-left: 1.5em;
     margin-right: 2em;
     background-image:url([[pix:comments|like]]);
@@ -83,5 +83,12 @@ clear: both;
     padding-left: 1.5em;
     margin-right: 2em;
     background-image:url([[pix:comments|garbage]]);
+    background-repeat: no-repeat;
+}
+
+.path-mod-comments .flag {
+    padding-left: 1.5em;
+    margin-right: 2em;
+    background-image:url([[pix:comments|flag]]);
     background-repeat: no-repeat;
 }
