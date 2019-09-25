@@ -39,46 +39,4 @@ class renderer extends plugin_renderer_base
         return $this->render_from_template('mod_comments/comment_posts', $data);
     }
 
-    /*public function render_comment_posts($data)
-    {
-        global $DB, $USER, $output;
-        //print_r($data);
-        $code = '<div id="comment-posts"><ul class="feed">';
-        foreach ($data as $post) {
-
-            If ($post->userid === $USER->id) {
-
-            }
-            $liked = checked_liked($post->id, $USER->id);
-            $user = $DB->get_record('user', array('id' => $post->userid));
-            $userpix = $output->user_picture($user);
-
-            $code .= '<li id=' . $post->id . ' class="item">';
-            $code .= '<div class="userpix">' . $userpix . '</div>';
-            $code .= '<div class="msg-body"><div class="header">';
-            $code .= '<div class="name">' . $post->firstname . ' ' . $post->lastname . '</div>';
-            $code .= '<div class="date">' . date("d F", $post->created) . '</div></div>';
-            $code .= '<div class="message">' . $post->message . '</div>';
-            If ($post->userid === $USER->id) {
-                $code .= '<div class="options"><a class="likes" href="#">Likes</a><a class="delete" href="#">Delete</a></div></div>';
-            } else {
-                $code .= '<div class="options"><a class="likes" href="#">Likes</a></div></div>';
-            }
-            $code .= '</li>';
-
-            $messages[$post->id] = array(
-                'messageid' => $post->id,
-                'userpix' => $userpix,
-                'name'=> $post->firstname . ' ' . $post->lastname,
-                'date'=>  date("d F", $post->created),
-                'comment' =>  $post->message
-
-            );
-        }
-
-        echo '</div>';
-        print_object($messages);
-        return $code;
-    }*/
-
 }
