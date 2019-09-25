@@ -30,6 +30,7 @@ $string['commentsname_help'] = 'Add the name of the activity here';
 $string['commentsfieldset'] = 'Options';
 $string['delete'] = 'Delete';
 $string['details'] = "Comment";
+$string['flag'] = "Flag";
 $string['like'] = "Like";
 $string['pluginname'] = 'Section Comments';
 $string['missingidandcmid'] = 'No Module or course ID';
