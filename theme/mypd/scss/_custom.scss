@@ -35,3 +35,16 @@ btn-cct {
 		color: #fff;
 	}
 }
+
+//Comments plugin styling
+
+.section li.modtype_comments {
+	border:0px;
+
+	.mypd-assettype {
+		display:none;
+	}
+	.instancename {
+		color: $brand-secondary;
+	}
+}
