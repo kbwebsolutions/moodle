@@ -32,7 +32,7 @@ class comment_posts implements renderable, templatable {
 
     public function export_for_template(renderer_base $output)
     {
-        global $DB;
+        global $DB, $USER;
 
         $data = ['messages' => []];
         foreach ($this->comments as $key => $comment) {
@@ -40,6 +40,9 @@ class comment_posts implements renderable, templatable {
             $user = $DB->get_record('user', array('id' => $comment->userid));
             $userpix = $output->user_picture($user);
             $data['messages'][$key]->userpix = $userpix;
+            if ($USER->id == $comment->userid) {
+                $data['messages'][$key]->delete = "delete";
+            }
 
 
 
