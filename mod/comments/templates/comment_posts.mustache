@@ -39,11 +39,11 @@
                     <div class="date">{{#userdate}}{{created}}, %d %b{{/userdate}}</div>
                 </div>
                 <div class="message">{{message}}</div>
-                <div class="options"><a class="like" data-id={{id}} href="">{{# str}}like, mod_comments{{/str}}</a>
+                <div class="options"><span id = "like{{id}}" class="like likeoff" data-id={{id}}>{{# str}}like, mod_comments{{/str}}</span>
                 {{#delete}}
-                    <a class="delete" data-id={{id}} href="">{{# str}}delete, mod_comments{{/str}}</a>
+                    <span class="delete" data-id={{id}}>{{# str}}delete, mod_comments{{/str}}</span>
                 {{/delete}}
-                <a class="flag" href="">{{# str}}flag, mod_comments{{/str}}</a></div>
+                <span class="flag">{{# str}}flag, mod_comments{{/str}}</span></div>
             </div>
         </li>
     {{/messages}}
