@@ -24,6 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+
+
+
 /**
  * Process site cover image.
  *
