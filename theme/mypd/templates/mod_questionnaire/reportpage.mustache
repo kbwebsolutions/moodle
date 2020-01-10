@@ -73,13 +73,13 @@
         {{#title}}<h3 class="surveyTitle">{{{.}}}</h3>{{{printblank}}}{{/title}}
         {{#subtitle}}<h4 class="surveySubTitle">{{{.}}}</h4>{{/subtitle}}
         {{#addinfo}}<div class="addInfo">{{{.}}}</div>{{/addinfo}}
+        {{#feedbacknotes}}{{{.}}}{{/feedbacknotes}}
         {{#feedbackcharts}}{{{.}}}{{/feedbackcharts}}
         {{#feedbackscores}}{{{.}}}{{/feedbackscores}}
         {{#feedbackmessages}}
         <h3>{{# str }} feedbackreport, mod_questionnaire {{/ str }}</h3>
         {{{.}}}
         {{/feedbackmessages}}
-        {{#feedbacknotes}}{{{.}}}{{/feedbacknotes}}
         {{#responses}}{{{.}}}{{/responses}}
         {{#bottomnavigationbar}}<div class="box respondentsnavbar">{{{.}}}</div>{{/bottomnavigationbar}}
     </div>
