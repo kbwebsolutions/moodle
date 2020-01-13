@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir.'/coursecatlib.php');
 require_once($CFG->dirroot.'/message/output/popup/lib.php');
 
+use core_competency\url;
 use stdClass;
 use context_course;
 use context_system;
@@ -194,6 +195,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             return '';
         }
         // @codingStandardsIgnoreStart
+        $hamburgerurl = $OUTPUT->image_url('hamburger', 'theme');
+        $hambugericon = '<img id="mypd-admin-icon" class="svg-icon mypd-gear-icon" title="' .$hamburgerurl. '" alt="' .$hamburgerurl. '" src="' .$hamburgerurl. '">';
         $gearicon = '<svg xmlns="http://www.w3.org/2000/svg" id="mypd-admin-icon" viewBox="0 0 100 100">
                         <title>'.get_string('admin', 'theme_mypd').'</title>
                         <path d="M85.2,54.9c0.2-1.4,0.3-2.9,0.3-4.5c0-1.5-0.1-3-0.3-4.5l9.6-7.5c0.9-0.7,1-1.9,0.6-2.9l-9.1-15.8c-0.6-1-1.8-1.3-2.8-1
@@ -214,8 +217,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'title' => get_string('admin', 'theme_mypd'),
             'aria-label' => get_string('admin', 'theme_mypd'),
         );
-
-        return html_writer::link($url, $gearicon, $attributes);
+        //return html_writer::link($url, $gearicon, $attributes);
+        return html_writer::link($url, $hambugericon, $attributes);
     }
 
 
@@ -638,7 +641,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'link' => s($CFG->wwwroot).'/login/logout.php?sesskey='.sesskey(),
             'title' => get_string('logout')
         ];
-        $quicklinks = [$profilelink, $preferenceslink, $gradelink, $logoutlink];
+        $quicklinks = [$profilelink, $preferenceslink, $gradelink];
 
         // Build up courses.
         $courseservice = course::service();
