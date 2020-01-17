@@ -636,12 +636,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'link' => s($CFG->wwwroot). '/user/preferences.php',
             'title' => get_string('preferences')
         ];
+        $badgeslink = [
+            'link' => s($CFG->wwwroot).'/badges/mybadges.php',
+            'title' => get_string('badges')
+        ];
         $logoutlink = [
             'id' => 'mypd-pm-logout',
             'link' => s($CFG->wwwroot).'/login/logout.php?sesskey='.sesskey(),
             'title' => get_string('logout')
         ];
-        $quicklinks = [$profilelink, $preferenceslink, $gradelink];
+        $quicklinks = [$profilelink, $preferenceslink, $gradelink, $badgeslink];
 
         // Build up courses.
         $courseservice = course::service();

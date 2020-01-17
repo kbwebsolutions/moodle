@@ -1122,7 +1122,7 @@ body.mypd-resource-card li.mypd-resource {
 
     // MOODLE MODS //
     &.modtype_url {
-        border-top-color: #999;
+        border-top-color: $color-url;
     }
 
     &.modtype_imscp,
