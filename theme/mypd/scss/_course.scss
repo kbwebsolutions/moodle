@@ -1011,7 +1011,8 @@ body.mypd-resource-card li.mypd-resource {
 
     &.modtype_forum,
     &.modtype_chat,
-    &.modtype_hsuforum {
+    &.modtype_hsuforum,
+    &.modtype_bookingform {
         border-top-color: $color-communication;
     }
 
@@ -1026,7 +1027,8 @@ body.mypd-resource-card li.mypd-resource {
     &.modtype_quiz,
     &.modtype_survey,
     &.modtype_questionnaire,
-    &.modtype_lesson {
+    &.modtype_lesson,
+    &.modtype_hvp {
         border-top-color: $color-quiz;
     }
 
@@ -1066,6 +1068,9 @@ body.mypd-resource-card li.mypd-resource {
         cursor: pointer;
     }
 
+    &.modtype_url {
+        border-top-color: $color-url;
+    }
     .contentafterlink {
         //font-size: small;
     }
@@ -1121,9 +1126,6 @@ body.mypd-resource-card li.mypd-resource {
     }
 
     // MOODLE MODS //
-    &.modtype_url {
-        border-top-color: $color-url;
-    }
 
     &.modtype_imscp,
     &.modtype_scorm {
