@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 100 100">
-  <style>
-    .st0{fill:#FFFFFF;stroke:#999999;stroke-width:3;stroke-miterlimit:10;} .st1{fill:none;stroke:#999999;stroke-miterlimit:10;} .st2{opacity:0.75;fill:#FF7E41;} .st3{fill:#FF7E41;} .st4{fill:none;stroke:#999999;stroke-width:3;stroke-miterlimit:10;}
-  </style>
-  <circle cx="49.9" cy="50.2" r="48.1" class="st0"/>
-  <path d="M91.3 51.4c0 22.8-82.6 22.8-82.6 0S27.2 10.1 50 10.1s41.3 18.5 41.3 41.3z" class="st1"/>
-  <path d="M74.722 22.744l3.182 3.182L51.46 52.37l-3.183-3.18z" class="st2"/>
-  <ellipse cx="50" cy="50.6" transform="rotate(-45 50.033 50.597)" class="st3" rx="9.1" ry="9.1"/>
-  <ellipse cx="49.9" cy="81.5" transform="rotate(-45 49.898 81.457)" class="st4" rx="9.1" ry="9.1"/>
-</svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1,.cls-2{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}.cls-1{stroke:#ee7ea0;}.cls-2{stroke:#999;}</style></defs><title>course_dashboard</title><path class="cls-1" d="M9,15.29V15a3,3,0,1,1,6,0v.28" transform="translate(0 -0.01)"/><line class="cls-1" x1="14.25" y1="5.25" x2="12" y2="12"/><path class="cls-1" d="M6.38,7.51A.37.37,0,0,0,6,7.88a.38.38,0,1,0,.75,0h0a.37.37,0,0,0-.37-.37h0" transform="translate(0 -0.01)"/><path class="cls-1" d="M19.13,11.26a.37.37,0,0,0-.38.37.38.38,0,1,0,.75,0,.37.37,0,0,0-.37-.37h0" transform="translate(0 -0.01)"/><path class="cls-1" d="M17.63,7.51a.37.37,0,0,0-.38.37.38.38,0,1,0,.75,0h0a.37.37,0,0,0-.38-.37h0" transform="translate(0 -0.01)"/><path class="cls-1" d="M9.38,4.51A.37.37,0,0,0,9,4.88a.38.38,0,1,0,.75,0,.37.37,0,0,0-.37-.37h0" transform="translate(0 -0.01)"/><path class="cls-2" d="M21.43,18.14a15.75,15.75,0,0,0-18.86,0" transform="translate(0 -0.01)"/><circle class="cls-2" cx="12" cy="12" r="11.25"/><path class="cls-1" d="M4.88,11.26a.37.37,0,0,0-.38.37.38.38,0,1,0,.75,0,.37.37,0,0,0-.37-.37" transform="translate(0 -0.01)"/></svg>
