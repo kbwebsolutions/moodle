@@ -80,3 +80,32 @@ btn-cct {
 b, strong {
 	font-weight: 600;
 }
+
+// Not enrolled course page.
+
+#page-enrol-index {
+
+	hr {
+		display:none;
+	}
+
+	.courseimage {
+		display:none;
+	}
+
+	.coursebox {
+		border-bottom: 2px solid $brand-secondary;
+
+		.info {
+			display:none;
+		}
+		.content .summary {
+			width: 100%;
+		}
+	}
+
+	#notice {
+		background-color: #ffffff;
+		font-size: 1em;
+	}
+}
