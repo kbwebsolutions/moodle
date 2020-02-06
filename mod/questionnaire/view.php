@@ -116,12 +116,12 @@ if (!$questionnaire->is_active()) {
     if ($questionnaire->questions) { // Sanity check.
         if (!$questionnaire->user_has_saved_response($USER->id)) {
             $questionnaire->page->add_to_page('complete',
-                '<a href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
+                '<a class="btn btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
                 'id='.$questionnaire->cm->id).'">'.get_string('answerquestions', 'questionnaire').'</a>');
         } else {
             $resumesurvey = get_string('resumesurvey', 'questionnaire');
             $questionnaire->page->add_to_page('complete',
-                '<a href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
+                '<a class="btn btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
                 'id='.$questionnaire->cm->id.'&resume=1').'" title="'.$resumesurvey.'">'.$resumesurvey.'</a>');
         }
     } else {
@@ -165,13 +165,13 @@ if ($questionnaire->capabilities->readownresponses && ($usernumresp > 0)) {
         $argstr .= '&byresponse=1&action=vresp';
     }
     $questionnaire->page->add_to_page('yourresponse',
-        '<a href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr).'">'.$titletext.'</a>');
+        '<a class="btn btn-sm btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr).'">'.$titletext.'</a>');
 }
 
 if ($questionnaire->can_view_all_responses($usernumresp)) {
     $argstr = 'instance='.$questionnaire->id.'&group='.$currentgroupid;
     $questionnaire->page->add_to_page('allresponses',
-        '<a href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/report.php?'.$argstr).'">'.
+        '<a class="btn btn-sm btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/report.php?'.$argstr).'">'.
         get_string('viewallresponses', 'questionnaire').'</a>');
 }
 

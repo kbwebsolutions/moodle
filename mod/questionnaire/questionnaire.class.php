@@ -2172,12 +2172,12 @@ class questionnaire {
         }
         if ($this->capabilities->readownresponses) {
             $this->page->add_to_page('message',
-                ('<a href="'.$CFG->wwwroot.'/mod/questionnaire/myreport.php?id='.
+                ('<a class="btn btn-secondary" href="'.$CFG->wwwroot.'/mod/questionnaire/myreport.php?id='.
                     $this->cm->id.'&amp;instance='.$this->cm->instance.'&amp;user='.$USER->id.'&byresponse=0&action=vresp">'.
                     get_string("continue").'</a>'));
         } else {
             $this->page->add_to_page('message',
-                ('<a href="'.$CFG->wwwroot.'/course/view.php?id='.$this->course->id.'">'.
+                ('<a class="btn btn-secondary" href="'.$CFG->wwwroot.'/course/view.php?id='.$this->course->id.'">'.
                     get_string("continue").'</a>'));
         }
         return;
