@@ -29,7 +29,7 @@
         this.canvas.uid        = this.canvas.uid ? this.canvas.uid : RGraph.CreateUID();
         this.colorsParsed      = false;
         this.coordsText        = [];
-        this.original_colors   = [];
+        this.original_colors   = ['#88d2db, #ef464e, #833045, #fed8d6, #dld3d4, #ffd15b '];
 
 
         /**
@@ -57,7 +57,7 @@
             'chart.centery':                null,
             'chart.radius':                 null,
             'chart.angles.start':           0,
-            'chart.colors':                 ['rgba(255,0,0,0.5)', 'rgba(255,255,0,0.5)', 'rgba(0,255,255,0.5)', 'rgb(0,255,0)', 'gray', 'blue', 'rgb(255,128,255)','green', 'pink', 'gray', 'aqua'],
+            'chart.colors':                 ['rgba(136,210,219,0.2)', 'rgba(39,70,76,0.2)', 'rgba(255,209,91,0.2)', 'rgb(252,216,214,0.2)', 'rgb(209,211,212,0.2)', 'rgb(131,48,69,0.2)', 'rgb(255,128,255)'],
             'chart.colors.sequential':      false,
             'chart.colors.alpha':           null,
             'chart.margin':                 0,
