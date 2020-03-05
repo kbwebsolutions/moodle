@@ -116,12 +116,12 @@ if (!$questionnaire->is_active()) {
     if ($questionnaire->questions) { // Sanity check.
         if (!$questionnaire->user_has_saved_response($USER->id)) {
             $questionnaire->page->add_to_page('complete',
-                '<a class="btn btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
+                '<a class="btn btn-success" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
                 'id='.$questionnaire->cm->id).'">'.get_string('answerquestions', 'questionnaire').'</a>');
         } else {
             $resumesurvey = get_string('resumesurvey', 'questionnaire');
             $questionnaire->page->add_to_page('complete',
-                '<a class="btn btn-secondary" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
+                '<a class="btn btn-success" href="'.$CFG->wwwroot.htmlspecialchars('/mod/questionnaire/complete.php?' .
                 'id='.$questionnaire->cm->id.'&resume=1').'" title="'.$resumesurvey.'">'.$resumesurvey.'</a>');
         }
     } else {
