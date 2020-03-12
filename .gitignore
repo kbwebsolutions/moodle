@@ -37,3 +37,4 @@ composer.phar
 atlassian-ide-plugin.xml
 /node_modules/
 local/hackfest/*
+local/codechecker
