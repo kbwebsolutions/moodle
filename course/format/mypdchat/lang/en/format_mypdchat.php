@@ -59,7 +59,7 @@ $string['deleteafterunenrol_help'] = 'When a user unenrols from a course all his
 $string['deletemodspermanently'] = 'Automatically delete activities';
 $string['deletemodspermanently_help'] = 'When set to Yes an activity is deleted, when the last post is deleted, where this activity was attached to.
     Note that posts (and probably activities) are also deleted, when a user is deleted. So please be careful with this setting!';
-$string['editnotification'] = 'Edit notification settings';
+$string['editnotification'] = 'Comment Notification Settings';
 $string['edited'] = 'edited';
 $string['enablelikes'] = 'Enable likes';
 $string['enablelikesdesc'] = 'Default setting for enable likes.';
@@ -121,7 +121,7 @@ $string['postdeleted'] = 'Post deleted';
 $string['postidinvalid'] = 'Invalid post-ID';
 $string['postedonto'] = '{$a->author}{$a->date} to {$a->to}';
 $string['postislocked'] = 'Post is locked';
-$string['poststatusordnote'] = 'Post status or note';
+$string['poststatusordnote'] = 'Create new post';
 $string['postsaved'] = 'Post successfully saved';
 $string['poststatus'] = 'Post status';
 $string['privatepost'] = 'Private post';
