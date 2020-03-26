@@ -179,6 +179,6 @@ $string['turneditoron'] = 'HTML-Editor on';
 $string['unknownuser'] = 'Unknown user';
 $string['updatepost'] = 'Update';
 $string['updatepostfiltered'] = 'Timeline is filtered to show the post to update';
-$string['uploadafile'] = 'Upload a file';
+$string['uploadafile'] = 'Upload an image or a file   ';
 $string['unlockpost'] = 'Post is locked, click to unlock';
 $string['writecomment'] = 'Comment';

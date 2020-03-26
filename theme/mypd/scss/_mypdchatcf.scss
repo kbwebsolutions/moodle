@@ -39,6 +39,29 @@
     background-color: #ffffff;
     padding: 1em;
 
+    li.mypd-image {
+      border:none;
+
+      .activityinstance {
+        visibility:hidden;
+      }
+
+      .mypd-resource-figure-caption {
+        display:none;
+      }
+    }
+
+    li.mypd-resource {
+      float:none;
+      height: unset;
+      padding:0.5em 0;
+      background-color: transparent;
+
+      .activityinstance {
+        padding-left: 1em;
+      }
+    }
+
     .tl-authorname {
       font-size: 16px;
     }
@@ -70,6 +93,7 @@
 
     .tl-posttext {
       margin: 1em 0;
+
     }
 
     .tl-post-actionarea {
