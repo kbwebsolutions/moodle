@@ -1,0 +1,13 @@
+//* Styles for Page content type
+
+.format-singleactivity {
+    #region-main {
+      max-width: 65% !important;
+    }
+
+    #coursetools,
+    a.btn-secondary {
+      display: none;
+    }
+
+}
