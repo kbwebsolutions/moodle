@@ -10,6 +10,10 @@
     overflow: visible;
     height: 100%;
     width: 100%;
+
+    a#addalink {
+      margin-left: 2em;
+    }
     #postform {
       width:100%;
       padding-left: 2em;
@@ -70,6 +74,9 @@
       border-left: none;
     }
     li.tl-comment {
+
+      clear:both;
+
       .tl-text{
         border-left: none;
         background-color: #F0F2F5;

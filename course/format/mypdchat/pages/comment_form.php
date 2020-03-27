@@ -44,10 +44,10 @@ class comment_form extends moodleform {
         }
         $errorcache->delete($postid);
 
-        $textareaparams = array('class' => 'tl-commenttext', 'id' => 'commenttext_' . $postid.'_'.$replycommentid);
+        $textareaparams = array('class' => 'tl-commenttext', 'id' => 'commenttext_' . $postid.'_'.$replycommentid, 'rows' => '5', 'cols' => '65');
         $mform->addElement('textarea', 'text', '', $textareaparams);
         $mform->setType('text', PARAM_TEXT);
-        $mform->addRule('text', null, 'required', null, 'client');
+        //$mform->addRule('text', null, 'required', null, 'client');
 
         $mform->addElement('hidden', 'postid', $postid);
         $mform->setType('postid', PARAM_INT);
