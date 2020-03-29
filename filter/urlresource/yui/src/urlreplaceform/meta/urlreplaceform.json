@@ -1,0 +1,5 @@
+{
+    "moodle-filter_urlresource-urlreplaceform": {
+        "requires": ["base", "node"]
+    }
+}

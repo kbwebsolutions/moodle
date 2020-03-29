@@ -15,19 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
+ * mypdchat course format, Tasks
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
+ * @package format_mypdchat
+ * @copyright 2014 Andreas Wagner, Synergy Learning
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace format_mypdchat\task;
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
+class send_timeline_instant extends \core\task\scheduled_task {
 
-$plugin->component = 'mod_questionnaire';
+    public function get_name() {
+        // Shown in admin screens.
+        return get_string('sendtimelineintant', 'format_mypdchat');
+    }
 
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+    public function execute() {
+        global $CFG;
+
+        require_once($CFG->dirroot . '/course/format/mypdchat/locallib.php');
+
+        // Send out all digests.
+        $notification = \format_mypdchat\local\notification::instance();
+        $notification->instant_cron();
+    }
+
+}
+

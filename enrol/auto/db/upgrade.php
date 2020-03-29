@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
+ * This file keeps track of upgrades to the auto enrolment plugin
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     enrol_auto
+ * @author      Eugene Venter <eugene@catalyst.net.nz>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
+function xmldb_enrol_auto_upgrade($oldversion) {
+    global $CFG, $DB, $OUTPUT;
 
-$plugin->component = 'mod_questionnaire';
+    $dbman = $DB->get_manager();
 
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+    return true;
+}

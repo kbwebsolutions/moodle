@@ -15,19 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   local_filterurlresbak
+ * @copyright 2014 Andreas Wagner, Synergy Learning
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
-
-$plugin->component = 'mod_questionnaire';
-
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+$plugin->version   = 2015030100;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2014051200;        // Requires this Moodle version.
+$plugin->cron = 0;
+$plugin->release = 'Version 1.0';
+$plugin->component = 'local_filterurlresbak'; // Full name of the plugin (used for diagnostics).
+$plugin->maturity = MATURITY_STABLE;
+$plugin->dependencies = array(
+    'filter_urlresource' => 2015030100
+);

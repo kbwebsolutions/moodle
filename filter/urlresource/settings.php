@@ -15,19 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    filter
+ * @subpackage urlresource
+ * @copyright  2014 Andreas Wagner, Synergy Learning
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
+if ($ADMIN->fulltree) {
 
-$plugin->component = 'mod_questionnaire';
-
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+    $settings->add(new admin_setting_configtext('filter_urlresource/imgmaxwidth',
+                    get_string('imgmaxwidth', 'filter_urlresource'),
+                    get_string('imgmaxwidth_desc', 'filter_urlresource'),
+                    150, PARAM_INT));
+}

@@ -15,19 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
+ * Auto enrolment plugin version specification.
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     enrol_auto
+ * @author      Eugene Venter <eugene@catalyst.net.nz>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
-
-$plugin->component = 'mod_questionnaire';
-
-$plugin->release  = '3.5.4 (Build - 2019032100)';
+$plugin->version   = 2018032501;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2016120500;        // Requires this Moodle version
+$plugin->component = 'enrol_auto';      // Full name of the plugin (used for diagnostics)
 $plugin->maturity  = MATURITY_STABLE;
+$plugin->release = 'melodie-r1';
+

@@ -1,0 +1,133 @@
+#page-course-view-mypdchat {
+
+  #moodle-page {
+    background-color: #F0F2F5;
+  }
+//* Comment box styles
+
+  #section-2 {
+    visibility: visible;
+    overflow: visible;
+    height: 100%;
+    width: 100%;
+
+    a#addalink {
+      margin-left: 2em;
+    }
+    #postform {
+      width:100%;
+      padding-left: 2em;
+    }
+    .content {
+      display:block;
+    }
+
+    #sw-addactivitylink {
+      display:none;
+    }
+  }
+
+  #menutl_filtermodules {
+    display:none;
+  }
+
+  #counttotalpost {
+    text-align: right;
+  }
+
+//* Styles for the Posts
+
+  .tl-post {
+    margin: 30px 0;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 1em;
+
+    li.mypd-image {
+      border:none;
+
+      .activityinstance {
+        visibility:hidden;
+      }
+
+      .mypd-resource-figure-caption {
+        display:none;
+      }
+    }
+
+    li.mypd-resource {
+      float:none;
+      height: unset;
+      padding:0.5em 0;
+      background-color: transparent;
+
+      .activityinstance {
+        padding-left: 1em;
+      }
+    }
+
+    .tl-authorname {
+      font-size: 16px;
+    }
+
+    .tl-text {
+      border-left: none;
+    }
+    li.tl-comment {
+
+      clear:both;
+
+      .tl-text{
+        border-left: none;
+        background-color: #F0F2F5;
+        padding: 10px;
+        border-radius: 20px;
+        margin-bottom: 5px;
+      }
+      .tl-actionlink {
+        border-top: none;
+        text-align: left;
+        font-size: 10px;
+      }
+
+      .tl-timeago {
+        font-size: 10px;
+        color: #666;
+        line-height: 15px;
+        padding-left: 5em;
+      }
+    }
+
+    .tl-posttext {
+      margin: 1em 0;
+
+    }
+
+    .tl-post-actionarea {
+      background-color: #ffffff;
+      border-top: none;
+
+      .tl-countcomments {
+        float: right;
+      }
+      .tl-counts {
+        font-size: 0.95em;
+        margin-top:1em;
+      }
+      .tl-commentform {
+        margin: 2em;
+      }
+      .tl-actionlink {
+        border-top: 1px solid #dedede;
+        border-bottom: 1px solid #dedede;
+        padding: 0.25em;
+        margin-top: 0.5em;
+
+        .tl-commenticon {
+          margin-left: 25%;
+        }
+
+      }
+    }
+  }
+}

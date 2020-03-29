@@ -1,0 +1,10 @@
+{
+    "name": "moodle-filter_urlresource-urlreplaceform",
+    "builds": {
+        "moodle-filter_urlresource-urlreplaceform": {
+            "jsfiles": [
+                "urlreplaceform.js"
+            ]
+        }
+    }
+}

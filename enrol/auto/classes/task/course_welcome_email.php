@@ -15,19 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
  *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author Eugene Venter <eugene@catalyst.net.nz>
+ * @package enrol_auto
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace enrol_auto\task;
 
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
+/**
+ * Send a course 'welcome' email to users.
+ */
+class course_welcome_email extends \core\task\adhoc_task
+{
 
-$plugin->component = 'mod_questionnaire';
+    public function execute() {
+        $data = $this->get_custom_data();
 
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+        $autoplugin = enrol_get_plugin('auto');
+        $autoplugin->email_welcome_message($data->instance, $data->user);
+    }
+}

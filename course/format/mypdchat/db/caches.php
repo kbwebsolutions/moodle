@@ -15,19 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Questionnaire version information.
- *
- * @package mod_questionnaire
- * @author  Mike Churchward
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    format
+ * @subpackage mypdchat
+ * @copyright  2014 Andreas Wagner, Synergy Learning
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version  = 2019031300;  // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2017042800; // Moodle version.
-
-$plugin->component = 'mod_questionnaire';
-
-$plugin->release  = '3.5.4 (Build - 2019032100)';
-$plugin->maturity  = MATURITY_STABLE;
+$definitions = array(
+    'postformparams' => array(
+        'mode' => cache_store::MODE_SESSION
+    ),
+    'postformerrors' => array(
+        'mode' => cache_store::MODE_SESSION
+    ),
+    'timelinefilter' => array(
+        'mode' => cache_store::MODE_SESSION
+    ),
+    'commentformerrors' => array(
+        'mode' => cache_store::MODE_SESSION
+    ),
+    'attachedrecentactivities' => array(
+        'mode' => cache_store::MODE_SESSION
+    )
+);
