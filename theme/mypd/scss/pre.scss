@@ -30,6 +30,15 @@ $font-size-med: .9rem;
 $font-size-sm:   .8rem;
 $font-size-xs:   .7rem;
 
+// Brand StyleGuide Colors
+
+$brand-student:         #88d2db;
+$brand-cteach:          #ef464e;
+$brand-nqt:             #833045;
+$brand-affiliate:       #fed8d6;
+$brand-member:          #d1d3d4;
+$brand-fellow:          #ffd15b;
+
 // This needs some investigation of issues around IE11 and Moodle's autoprefixer implementaion.
 //$enable-flex:               true;
 
@@ -82,7 +91,7 @@ $user-content-max-width:         43.5em;
 // Button customisations
 // -------------------------
 
-$btn-secondary-color:           $brand-primary;
+$btn-secondary-color:           $brand-secondary;
 
 $border-radius:          0;
 $border-radius-lg:       0;
