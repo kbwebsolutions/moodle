@@ -176,7 +176,7 @@ class format_mypdchat_renderer extends format_topics_renderer {
         }
 
         $c = html_writer::tag('div', fullname($commentauthor) . $dl, array('class' => 'tl-authorname'));
-        $c .= html_writer::tag('div', $comment->text);
+        $c .= html_writer::tag('div', $comment->text, array('class' => 'tl-commenttext'));
 
         $o .= html_writer::tag('div', $c, array('class' => 'tl-text'));
         $o .= html_writer::tag('div', $this->render_timeline_comment_ago($comment->timecreated), array('class' => 'tl-timeago'));
@@ -588,7 +588,7 @@ class format_mypdchat_renderer extends format_topics_renderer {
             foreach ($allgroups as $gid => $unused) {
                 $groupsmenu[$gid] = format_string($allgroups[$gid]->name);
             }
-            $f = html_writer::select($groupsmenu, 'tl_filtergroup', $filteroptions->filtergroups, array('' => $alllabel));
+            //$f = html_writer::select($groupsmenu, 'tl_filtergroup', $filteroptions->filtergroups, array('' => $alllabel));
         }
 
         // ... create select for module type.

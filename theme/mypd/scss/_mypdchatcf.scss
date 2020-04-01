@@ -42,7 +42,16 @@
     border-radius: 20px;
     background-color: #ffffff;
     padding: 1em;
-
+    .tl-posttext a {
+      color: $brand-primary;
+      border-bottom: 1px solid $brand-secondary;
+      &:focus,
+      &:hover{
+        color:darken($brand-secondary, 8%);
+        border-bottom: 2px solid $brand-primary;
+        text-decoration: none;
+      }
+    }
     li.mypd-image {
       border:none;
 
@@ -88,6 +97,17 @@
         border-top: none;
         text-align: left;
         font-size: 10px;
+      }
+
+      .tl-commenttext a {
+        color: $brand-primary;
+        border-bottom: 1px solid $brand-secondary;
+        &:focus,
+        &:hover{
+          color:darken($brand-secondary, 8%);
+          border-bottom: 2px solid $brand-primary;
+          text-decoration: none;
+        }
       }
 
       .tl-timeago {
