@@ -115,11 +115,16 @@ class post_form extends moodleform {
         foreach ($allgroups as $gid => $unused) {
             $groupsmenu[$gid] = format_string($allgroups[$gid]->name);
         }
-
-        if (count($groupsmenu) > 0) {
-            $postoptions[] = $mform->createElement('select', 'togroupid', '', $groupsmenu);
-            if (isset($formparams['togroupid'])) {
-                $mform->setDefault('togroupid', $formparams['togroupid']);
+        if ($groupmode == NOGROUPS) {
+            $postoptions[] = $mform->createElement('hidden', 'togroupid', 0);
+            $mform->setType('togroupid', PARAM_INT);
+        }
+        if (!($groupmode == NOGROUPS)) {
+            if (count($groupsmenu) > 0) {
+                $postoptions[] = $mform->createElement('select', 'togroupid', '', $groupsmenu);
+                if (isset($formparams['togroupid'])) {
+                    $mform->setDefault('togroupid', $formparams['togroupid']);
+                }
             }
         }
 
