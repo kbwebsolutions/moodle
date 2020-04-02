@@ -59,7 +59,7 @@ class comments {
 
         list($inpostid, $inpostparams) = $DB->get_in_or_equal(array_keys($posts));
 
-        $sql = "SELECT * FROM {format_mypdchat_comments} WHERE postid {$inpostid} AND replycommentid = '0' ORDER BY timecreated DESC";
+        $sql = "SELECT * FROM {format_mypdchat_comments} WHERE postid {$inpostid} AND replycommentid = '0' ORDER BY timecreated ASC";
 
         if (!$comments = $DB->get_records_sql($sql, $inpostparams)) {
             return false;
