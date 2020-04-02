@@ -50,4 +50,4 @@ if (!file_exists($saml2auth->certpem) || !file_exists($saml2auth->certcrt)) {
     }
 }
 
-SimpleSAML\Configuration::setConfigDir("$CFG->dirroot/auth/saml2/config");
+SimpleSAML_Configuration::setConfigDir("$CFG->dirroot/auth/saml2/config");

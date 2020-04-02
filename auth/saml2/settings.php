@@ -56,15 +56,6 @@ if ($ADMIN->fulltree) {
             get_string('idpnamedefault', 'auth_saml2'),
             PARAM_TEXT));
 
-    // Manage available IdPs.
-    $settings->add(new setting_button(
-        'auth_saml2/availableidps',
-        get_string('availableidps', 'auth_saml2'),
-        get_string('availableidps_help', 'auth_saml2'),
-        get_string('availableidps', 'auth_saml2'),
-        $CFG->wwwroot . '/auth/saml2/availableidps.php'
-        ));
-
     // Display IDP Link.
     $settings->add(new admin_setting_configselect(
             'auth_saml2/showidplink',
@@ -77,7 +68,7 @@ if ($ADMIN->fulltree) {
             'auth_saml2/idpmetadatarefresh',
             get_string('idpmetadatarefresh', 'auth_saml2'),
             get_string('idpmetadatarefresh_help', 'auth_saml2'),
-            1, $yesno));
+            0, $yesno));
 
     // Debugging.
     $settings->add(new admin_setting_configselect(
@@ -142,13 +133,6 @@ if ($ADMIN->fulltree) {
             $CFG->wwwroot . '/auth/saml2/regenerate.php'
             ));
 
-    $settings->add(new admin_setting_configpasswordunmask(
-        'auth_saml2/privatekeypass',
-        get_string('privatekeypass', 'auth_saml2'),
-        get_string('privatekeypass_help', 'auth_saml2'),
-        get_site_identifier(),
-        PARAM_TEXT));
-
     // SP Metadata.
     $settings->add(new setting_textonly(
            'auth_saml2/spmetadata',
@@ -192,13 +176,6 @@ if ($ADMIN->fulltree) {
             get_string('anyauth_help', 'auth_saml2'),
             0, $yesno));
 
-    // Simplify attributes.
-    $settings->add(new admin_setting_configselect(
-            'auth_saml2/attrsimple',
-            get_string('attrsimple', 'auth_saml2'),
-            get_string('attrsimple_help', 'auth_saml2'),
-            1, $yesno));
-
     // IDP to Moodle mapping.
     // IDP attribute.
     $settings->add(new admin_setting_configtext(
@@ -234,30 +211,6 @@ if ($ADMIN->fulltree) {
             get_string('autocreate_help', 'auth_saml2'),
             0, $yesno));
 
-    // Attribute name that contains groups
-    $settings->add(new admin_setting_configtext(
-            'auth_saml2/groupattr',
-            get_string('groupattr', 'auth_saml2'),
-            get_string('groupattr_help', 'auth_saml2'),
-            '',
-            PARAM_TEXT));
-
-    // Restricted groups
-    $settings->add(new admin_setting_configtext(
-            'auth_saml2/restricted_groups',
-            get_string('restricted_groups', 'auth_saml2'),
-            get_string('restricted_groups_help', 'auth_saml2'),
-            'employee',
-            PARAM_TEXT));
-
-    // Allowed groups
-    $settings->add(new admin_setting_configtext(
-            'auth_saml2/allowed_groups',
-            get_string('allowed_groups', 'auth_saml2'),
-            get_string('allowed_groups_help', 'auth_saml2'),
-            'student',
-            PARAM_TEXT));
-
     // Alternative Logout URL.
     $settings->add(new admin_setting_configtext(
             'auth_saml2/alterlogout',
@@ -265,6 +218,15 @@ if ($ADMIN->fulltree) {
             get_string('alterlogout_help', 'auth_saml2'),
             '',
             PARAM_URL));
+
+    // Select available IdPs.
+    $settings->add(new setting_button(
+        'auth_saml2/availableidps',
+        get_string('availableidps', 'auth_saml2'),
+        get_string('availableidps_help', 'auth_saml2'),
+        get_string('availableidps', 'auth_saml2'),
+        $CFG->wwwroot . '/auth/saml2/availableidps.php'
+        ));
 
     // Multi IdP display type.
     $multiidpdisplayoptions = [
@@ -277,14 +239,6 @@ if ($ADMIN->fulltree) {
         get_string('multiidpdisplay_help', 'auth_saml2'),
         saml2_settings::OPTION_MULTI_IDP_DISPLAY_DROPDOWN,
         $multiidpdisplayoptions));
-
-    // Attempt Single Sign out.
-    $settings->add(new admin_setting_configselect(
-        'auth_saml2/attemptsignout',
-        get_string('attemptsignout', 'auth_saml2'),
-        get_string('attemptsignout_help', 'auth_saml2'),
-        1,
-        $yesno));
 
     // SAMLPHP version.
     $authplugin = get_auth_plugin('saml2');
@@ -299,43 +253,6 @@ if ($ADMIN->fulltree) {
     $help = get_string('auth_updatelocal_expl', 'auth');
     $help .= get_string('auth_fieldlock_expl', 'auth');
     $help .= get_string('auth_updateremote_expl', 'auth');
-
-    // User block and redirect feature setting section.
-    $settings->add(new admin_setting_heading('auth_saml2/blockredirectheading', get_string('blockredirectheading', 'auth_saml2'),
-        new lang_string('auth_saml2blockredirectdescription', 'auth_saml2')));
-
-    // Flagged login response options.
-    $flaggedloginresponseoptions = [
-        saml2_settings::OPTION_FLAGGED_LOGIN_MESSAGE => get_string('flaggedresponsetypemessage', 'auth_saml2'),
-        saml2_settings::OPTION_FLAGGED_LOGIN_REDIRECT => get_string('flaggedresponsetyperedirect', 'auth_saml2')
-    ];
-
-    // Flagged login response options selector.
-    $settings->add(new admin_setting_configselect(
-        'auth_saml2/flagresponsetype',
-        get_string('flagresponsetype', 'auth_saml2'),
-        get_string('flagresponsetype_help', 'auth_saml2'),
-        saml2_settings::OPTION_FLAGGED_LOGIN_REDIRECT,
-        $flaggedloginresponseoptions));
-
-
-    // Set the http OR https fully qualified scheme domain name redirect destination for flagged accounts.
-    $settings->add(new admin_setting_configtext(
-        'auth_saml2/flagredirecturl',
-        get_string('flagredirecturl', 'auth_saml2'),
-        get_string('flagredirecturl_help', 'auth_saml2'),
-        '',
-        PARAM_URL));
-
-    // Set the displayed message for flagged accounts.
-    $settings->add(new admin_setting_configtextarea(
-        'auth_saml2/flagmessage',
-        get_string('flagmessage', 'auth_saml2'),
-        get_string('flagmessage_help', 'auth_saml2'),
-        get_string('flagmessage_default', 'auth_saml2'),
-        PARAM_TEXT,
-        50,
-        3));
 
     if (moodle_major_version() < '3.3') {
         auth_saml2_display_auth_lock_options($settings, $authplugin->authtype, $authplugin->userfields, $help, true, true,

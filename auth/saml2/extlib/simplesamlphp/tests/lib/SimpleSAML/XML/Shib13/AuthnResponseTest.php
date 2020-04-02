@@ -11,13 +11,12 @@
 
 namespace SimpleSAML\Test\XML\Shib13;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\XML\Shib13\AuthnResponse;
 
-class AuthnResponseTest extends TestCase
+class AuthnResponseTest extends \PHPUnit_Framework_TestCase
 {
     const XMLDOC = <<< XML
-<Response xmlns="urn:oasis:names:tc:SAML:1.0:protocol"
+<Response xmlns="urn:oasis:names:tc:SAML:1.0:protocol" 
     MajorVersion="1" MinorVersion="1"
     ResponseID="" IssueInstant="">
     <Assertion xmlns="urn:oasis:names:tc:SAML:1.0:assertion"
@@ -35,7 +34,7 @@ class AuthnResponseTest extends TestCase
 XML;
 
     const BADXMLDOC = <<< XML
-<Response xmlns="urn:oasis:names:tc:SAML:1.0:protocol"
+<Response xmlns="urn:oasis:names:tc:SAML:1.0:protocol" 
     MajorVersion="1" MinorVersion="1"
     ResponseID="" IssueInstant="">
     <Assertion xmlns="urn:oasis:names:tc:SAML:1.0:assertion"
@@ -112,10 +111,10 @@ XML;
         $result = $this->xml->getNameID();
 
         $this->assertEquals(
-            [
+            array(
                 'Value' => 'NameIdentifier',
                 'Format' => 'urn:mace:shibboleth:1.0:nameIdentifier',
-            ],
+            ),
             $result
         );
     }

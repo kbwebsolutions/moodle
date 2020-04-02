@@ -7,8 +7,7 @@ namespace SimpleSAML\XHTML;
  *
  * @package SimpleSAMLphp
  */
-interface TemplateControllerInterface
-{
+interface TemplateControllerInterface {
 
     /**
      * Implement to modify the twig environment after its initialization (e.g. add filters or extensions).

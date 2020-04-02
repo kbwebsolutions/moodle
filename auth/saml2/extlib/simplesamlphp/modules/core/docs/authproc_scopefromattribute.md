@@ -25,7 +25,7 @@ Set the `scope` attribute to the scope from the `eduPersonPrincipalName` attribu
     'authproc' => array(
         50 => array(
             'class' => 'core:ScopeFromAttribute',
-            'sourceAttribute' => 'eduPersonPrincipalName',
-            'targetAttribute' => 'scope',
+            'sourceAttribute' => 'eduPersonPrincipal'
+            'targetAttribute' => 'scope'
         ),
     ),

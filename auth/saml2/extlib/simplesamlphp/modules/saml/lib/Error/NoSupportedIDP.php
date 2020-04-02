@@ -1,7 +1,4 @@
 <?php
-
-namespace SimpleSAML\Module\saml\Error;
-
 /**
  * A SAML error indicating that none of the IdPs requested are supported.
  *
@@ -9,9 +6,11 @@ namespace SimpleSAML\Module\saml\Error;
  * @package SimpleSAMLphp
  */
 
+namespace SimpleSAML\Module\saml\Error;
+
 use SAML2\Constants;
 
-class NoSupportedIDP extends \SimpleSAML\Module\saml\Error
+class NoSupportedIDP extends \sspmod_saml_Error
 {
     /**
      * NoSupportedIDP error constructor.

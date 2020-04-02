@@ -38,11 +38,11 @@ class SessionHandlerStore extends SessionHandlerCookie
      *
      * @param string|null $sessionId The ID of the session we should load, or null to use the default.
      *
-     * @return \SimpleSAML\Session|null The session object, or null if it doesn't exist.
+     * @return \SimpleSAML_Session|null The session object, or null if it doesn't exist.
      */
     public function loadSession($sessionId = null)
     {
-        assert(is_string($sessionId) || $sessionId === null);
+        assert('is_string($sessionId) || is_null($sessionId)');
 
         if ($sessionId === null) {
             $sessionId = $this->getCookieSessionId();
@@ -54,7 +54,7 @@ class SessionHandlerStore extends SessionHandlerCookie
 
         $session = $this->store->get('session', $sessionId);
         if ($session !== null) {
-            assert($session instanceof Session);
+            assert('$session instanceof SimpleSAML_Session');
             return $session;
         }
 
@@ -65,13 +65,13 @@ class SessionHandlerStore extends SessionHandlerCookie
     /**
      * Save a session to the data store.
      *
-     * @param \SimpleSAML\Session $session The session object we should save.
+     * @param \SimpleSAML_Session $session The session object we should save.
      */
-    public function saveSession(Session $session)
+    public function saveSession(\SimpleSAML_Session $session)
     {
         $sessionId = $session->getSessionId();
 
-        $config = Configuration::getInstance();
+        $config = \SimpleSAML_Configuration::getInstance();
         $sessionDuration = $config->getInteger('session.duration', 8 * 60 * 60);
         $expire = time() + $sessionDuration;
 

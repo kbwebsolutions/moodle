@@ -2,8 +2,7 @@
 
 namespace SimpleSAML\Test\Store;
 
-use PHPUnit\Framework\TestCase;
-use \SimpleSAML\Configuration;
+use \SimpleSAML_Configuration as Configuration;
 use \SimpleSAML\Store;
 
 /**
@@ -14,28 +13,28 @@ use \SimpleSAML\Store;
  *
  * @package simplesamlphp/simplesamlphp
  */
-class RedisTest extends TestCase
+class RedisTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
-        $this->config = [];
+        $this->config = array();
 
         $this->mocked_redis = $this->getMockBuilder('Predis\Client')
-                                   ->setMethods(['get', 'set', 'setex', 'del', 'disconnect'])
+                                   ->setMethods(array('get', 'set', 'setex', 'del', 'disconnect'))
                                    ->disableOriginalConstructor()
                                    ->getMock();
 
         $this->mocked_redis->method('get')
-                           ->will($this->returnCallback([$this, 'getMocked']));
+                           ->will($this->returnCallback(array($this, 'getMocked')));
 
         $this->mocked_redis->method('set')
-                           ->will($this->returnCallback([$this, 'setMocked']));
+                           ->will($this->returnCallback(array($this, 'setMocked')));
 
         $this->mocked_redis->method('setex')
-                           ->will($this->returnCallback([$this, 'setexMocked']));
+                           ->will($this->returnCallback(array($this, 'setexMocked')));
 
         $this->mocked_redis->method('del')
-                           ->will($this->returnCallback([$this, 'delMocked']));
+                           ->will($this->returnCallback(array($this, 'delMocked')));
 
         $nop = function () {
             return;
@@ -75,37 +74,16 @@ class RedisTest extends TestCase
      */
     public function testRedisInstance()
     {
-        $config = Configuration::loadFromArray([
+        $config = Configuration::loadFromArray(array(
             'store.type' => 'redis',
             'store.redis.prefix' => 'phpunit_',
-        ], '[ARRAY]', 'simplesaml');
+        ), '[ARRAY]', 'simplesaml');
 
         $store = Store::getInstance();
 
         $this->assertInstanceOf('SimpleSAML\Store\Redis', $store);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
-        $this->clearInstance($store, '\SimpleSAML\Store');
-    }
-
-    /**
-     * @covers \SimpleSAML\Store::getInstance
-     * @covers \SimpleSAML\Store\Redis::__construct
-     * @test
-     */
-    public function testRedisInstanceWithPassword()
-    {
-        $config = Configuration::loadFromArray([
-            'store.type' => 'redis',
-            'store.redis.prefix' => 'phpunit_',
-            'store.redis.password' => 'password',
-        ], '[ARRAY]', 'simplesaml');
-
-        $store = Store::getInstance();
-
-        $this->assertInstanceOf('SimpleSAML\Store\Redis', $store);
-
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
         $this->clearInstance($store, '\SimpleSAML\Store');
     }
 

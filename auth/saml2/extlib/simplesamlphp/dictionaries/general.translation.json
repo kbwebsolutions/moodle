@@ -33,9 +33,7 @@
     "ro": "Da",
     "eu": "Bai",
     "af": "Ja",
-    "el": "\u039d\u03b1\u03af",
-    "zu": "Yebo",
-    "xh": "Ewe"
+    "el": "\u039d\u03b1\u03af"
   },
   "no": {
     "no": "Nei",
@@ -71,15 +69,13 @@
     "ro": "Nu",
     "eu": "Ez",
     "af": "Nee",
-    "el": "\u038c\u03c7\u03b9",
-    "xh": "Hayi",
-    "zu": "Cha"
+    "el": "\u038c\u03c7\u03b9"
   },
   "remember": {
     "no": "Godta ogs\u00e5 for fremtiden",
     "nn": "Godta ogs\u00e5 for framtida",
     "sv": "Spara samtycke",
-    "es": "Recordar",
+    "es": "Recordar el consentimiento",
     "fr": "Se souvenir du consentement",
     "de": "Zustimmung merken",
     "nl": "Bewaar toestemming",
@@ -109,15 +105,13 @@
     "ro": "\u021aine minte",
     "eu": "Onespena gogoratu",
     "af": "Onthou",
-    "el": "\u039d\u03b1 \u03b8\u03c5\u03bc\u03ac\u03c3\u03b1\u03b9 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae \u03bc\u03bf\u03c5",
-    "zu": "Khumbula",
-    "xh": "Khumbula"
+    "el": "\u039d\u03b1 \u03b8\u03c5\u03bc\u03ac\u03c3\u03b1\u03b9 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae \u03bc\u03bf\u03c5"
   },
   "yes_continue": {
     "no": "Ja, fortsett",
     "nn": "Ja, fortsett",
     "sv": "Ja",
-    "es": "S\u00ed, continuar",
+    "es": "S\u00ed",
     "fr": "Oui",
     "de": "Ja, ich stimme zu",
     "nl": "Ja, ik ga akkoord",
@@ -147,15 +141,13 @@
     "ro": "Da, continu\u0103",
     "eu": "Bai, jarraitu",
     "af": "Ja, voortgaan",
-    "el": "\u0391\u03c0\u03bf\u03b4\u03bf\u03c7\u03ae",
-    "xh": "Ewe, qhubeka",
-    "zu": "Yebo, qhubeka"
+    "el": "\u0391\u03c0\u03bf\u03b4\u03bf\u03c7\u03ae"
   },
   "no_cancel": {
     "no": "Nei, avbryt",
     "nn": "Nei, avbryt",
     "sv": "Nej",
-    "es": "No, cancelar",
+    "es": "No",
     "fr": "Non",
     "de": "Nein, ich stimme nicht zu",
     "nl": "Nee, ik weiger",
@@ -185,9 +177,7 @@
     "ro": "Nu, renun\u021b",
     "eu": "Ez, utzi",
     "af": "Nee, kanselleer",
-    "el": "\u0391\u03c0\u03cc\u03c1\u03c1\u03b9\u03c8\u03b7",
-    "xh": "Hayi, rhoxisa",
-    "zu": "Cha, khansela"
+    "el": "\u0391\u03c0\u03cc\u03c1\u03c1\u03b9\u03c8\u03b7"
   },
   "service_provider": {
     "no": "Tjenesteleverand\u00f8r",
@@ -223,8 +213,6 @@
     "ro": "Furnizor de servicii",
     "eu": "Zerbitzu hornitzailea",
     "af": "Diens Verskaffer",
-    "el": "\u03a0\u03ac\u03c1\u03bf\u03c7\u03bf\u03c2 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1\u03c2",
-    "xh": "Umboneleli Wenkonzo",
-    "zu": "Umhlinzeki Wesevisi"
+    "el": "\u03a0\u03ac\u03c1\u03bf\u03c7\u03bf\u03c2 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1\u03c2"
   }
 }

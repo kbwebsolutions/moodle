@@ -1,13 +1,9 @@
 <?php
 
-namespace SimpleSAML\Test\Module\core\Auth\Process;
-
-use PHPUnit\Framework\TestCase;
-
 /**
  * Test for the core:TargetedID filter.
  */
-class TargetedIDTest extends TestCase
+class Test_Core_Auth_Process_TargetedID extends PHPUnit_Framework_TestCase
 {
     /**
      * Helper function to run the filter with a given configuration.
@@ -18,7 +14,7 @@ class TargetedIDTest extends TestCase
      */
     private static function processFilter(array $config, array $request)
     {
-        $filter = new \SimpleSAML\Module\core\Auth\Process\TargetedID($config, null);
+        $filter = new sspmod_core_Auth_Process_TargetedID($config, NULL);
         $filter->process($request);
         return $request;
     }
@@ -28,11 +24,12 @@ class TargetedIDTest extends TestCase
 //     */
 //    public function testBasic()
 //    {
-//        $config = [];
-//        $request = [
-//            'Attributes' => [],
+//        $config = array(
+//        );
+//        $request = array(
+//            'Attributes' => array(),
 //            'UserID' => 'user2@example.org',
-//        ];
+//        );
 //        $result = self::processFilter($config, $request);
 //        $attributes = $result['Attributes'];
 //        $this->assertArrayHasKey('eduPersonTargetedID', $attributes);
@@ -45,21 +42,22 @@ class TargetedIDTest extends TestCase
 //     */
 //    public function testWithSrcDst()
 //    {
-//        $config = [];
-//        $request = [
-//            'Attributes' => [
+//        $config = array(
+//        );
+//        $request = array(
+//            'Attributes' => array(
 //                'eduPersonTargetedID' => 'dummy',
-//            ],
+//            ),
 //            'UserID' => 'user2@example.org',
-//            'Source' => [
+//            'Source' => array(
 //                'metadata-set' => 'saml20-idp-hosted',
 //                'entityid' => 'urn:example:src:id',
-//            ],
-//            'Destination' => [
+//            ),
+//            'Destination' => array(
 //                'metadata-set' => 'saml20-sp-remote',
 //                'entityid' => 'joe',
-//            ],
-//        ];
+//            ),
+//        );
 //        $result = self::processFilter($config, $request);
 //        $attributes = $result['Attributes'];
 //        $this->assertArrayHasKey('eduPersonTargetedID', $attributes);
@@ -71,28 +69,26 @@ class TargetedIDTest extends TestCase
 //     */
 //    public function testNameIdGeneration()
 //    {
-//        $config = [
+//        $config = array(
 //            'nameId' => true,
-//        ];
+//        );
 //        $request = array(
-//            'Attributes' => [],
+//            'Attributes' => array(
+//            ),
 //            'UserID' => 'user2@example.org',
-//            'Source' => [
+//            'Source' => array(
 //                'metadata-set' => 'saml20-idp-hosted',
 //                'entityid' => 'urn:example:src:id',
-//            ],
-//            'Destination' => [
+//            ),
+//            'Destination' => array(
 //                'metadata-set' => 'saml20-sp-remote',
 //                'entityid' => 'joe',
-//            ],
+//            ),
 //        );
 //        $result = self::processFilter($config, $request);
 //        $attributes = $result['Attributes'];
 //        $this->assertArrayHasKey('eduPersonTargetedID', $attributes);
-//        $this->assertRegExp(
-//            '#^<saml:NameID xmlns:saml="urn:oasis:names:tc:SAML:2\.0:assertion" NameQualifier="urn:example:src:id" SPNameQualifier="joe" Format="urn:oasis:names:tc:SAML:2\.0:nameid-format:persistent">[0-9a-f]{40}</saml:NameID>$#',
-//            $attributes['eduPersonTargetedID'][0]
-//        );
+//        $this->assertRegExp('#^<saml:NameID xmlns:saml="urn:oasis:names:tc:SAML:2\.0:assertion" NameQualifier="urn:example:src:id" SPNameQualifier="joe" Format="urn:oasis:names:tc:SAML:2\.0:nameid-format:persistent">[0-9a-f]{40}</saml:NameID>$#', $attributes['eduPersonTargetedID'][0]);
 //    }
 //
 //    /**
@@ -100,29 +96,30 @@ class TargetedIDTest extends TestCase
 //     */
 //    public function testIdIsPersistent()
 //    {
-//        $config = [];
-//        $request = [
-//            'Attributes' => [
+//        $config = array(
+//        );
+//        $request = array(
+//            'Attributes' => array(
 //                'eduPersonTargetedID' => 'dummy',
-//            ],
+//            ),
 //            'UserID' => 'user2@example.org',
-//            'Source' => [
+//            'Source' => array(
 //                'metadata-set' => 'saml20-idp-hosted',
 //                'entityid' => 'urn:example:src:id',
-//            ],
-//            'Destination' => [
+//            ),
+//            'Destination' => array(
 //                'metadata-set' => 'saml20-sp-remote',
 //                'entityid' => 'joe',
-//            ],
-//        ];
+//            ),
+//        );
 //        for ($i = 0; $i < 10; ++$i) {
-//            $result = self::processFilter($config, $request);
-//            $attributes = $result['Attributes'];
-//            $tid = $attributes['eduPersonTargetedID'][0];
-//            if (isset($prevtid)) {
-//                $this->assertEquals($prevtid, $tid);
-//                $prevtid = $tid;
-//            }
+//		$result = self::processFilter($config, $request);
+//		$attributes = $result['Attributes'];
+//                $tid = $attributes['eduPersonTargetedID'][0];
+//                if (isset($prevtid)) {
+//                    $this->assertEquals($prevtid, $tid);
+//                    $prevtid = $tid;
+//                }
 //        }
 //    }
 //
@@ -131,32 +128,34 @@ class TargetedIDTest extends TestCase
 //     */
 //    public function testIdIsUnique()
 //    {
-//        $config = [];
-//        $request = [
-//            'Attributes' => [],
+//        $config = array(
+//        );
+//        $request = array(
+//            'Attributes' => array(
+//            ),
 //            'UserID' => 'user2@example.org',
-//            'Source' => [
+//            'Source' => array(
 //                'metadata-set' => 'saml20-idp-hosted',
 //                'entityid' => 'urn:example:src:id',
-//            ],
-//            'Destination' => [
+//            ),
+//            'Destination' => array(
 //                'metadata-set' => 'saml20-sp-remote',
 //                'entityid' => 'joe',
-//            ],
-//        ];
-//        $result = self::processFilter($config, $request);
-//        $tid1 = $result['Attributes']['eduPersonTargetedID'][0];
+//            ),
+//        );
+//	$result = self::processFilter($config, $request);
+//	$tid1 = $result['Attributes']['eduPersonTargetedID'][0];
 //
 //        $request['UserID'] = 'user3@example.org';
-//        $result = self::processFilter($config, $request);
-//        $tid2 = $result['Attributes']['eduPersonTargetedID'][0];
-//
+//	$result = self::processFilter($config, $request);
+//	$tid2 = $result['Attributes']['eduPersonTargetedID'][0];
+//        
 //        $this->assertNotEquals($tid1, $tid2);
 //
 //        $request['Destination']['entityid'] = 'urn:example.org:another-sp';
-//        $result = self::processFilter($config, $request);
-//        $tid3 = $result['Attributes']['eduPersonTargetedID'][0];
-//
+//	$result = self::processFilter($config, $request);
+//	$tid3 = $result['Attributes']['eduPersonTargetedID'][0];
+//        
 //        $this->assertNotEquals($tid2, $tid3);
 //    }
 
@@ -167,11 +166,12 @@ class TargetedIDTest extends TestCase
      */
     public function testNoUserID()
     {
-        $config = [];
-        $request = [
-            'Attributes' => [],
-        ];
-        self::processFilter($config, $request);
+        $config = array(
+        );
+        $request = array(
+            'Attributes' => array(),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -181,15 +181,15 @@ class TargetedIDTest extends TestCase
      */
     public function testAttributeNotExists()
     {
-        $config = [
+        $config = array(
             'attributename' => 'uid',
-        ];
-        $request = [
-            'Attributes' => [
+        );
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Jack Student',
-            ],
-        ];
-        self::processFilter($config, $request);
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -199,15 +199,15 @@ class TargetedIDTest extends TestCase
      */
     public function testConfigInvalidAttributeName()
     {
-        $config = [
+        $config = array(
             'attributename' => 5,
-        ];
-        $request = [
-            'Attributes' => [
+        );
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Jack Student',
-            ],
-        ];
-        self::processFilter($config, $request);
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -217,14 +217,14 @@ class TargetedIDTest extends TestCase
      */
     public function testConfigInvalidNameId()
     {
-        $config = [
+        $config = array(
             'nameId' => 'persistent',
-        ];
-        $request = [
-            'Attributes' => [
+        );
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Jack Student',
-            ],
-        ];
-        self::processFilter($config, $request);
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 }

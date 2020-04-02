@@ -38,15 +38,8 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
      * Regression test for Issue 132.
      */
     public function test_it_can_initialise_more_than_once() {
-        global $CFG, $DB;
+        global $CFG;
         $this->resetAfterTest(true);
-
-        // Add a fake IdP.
-        $DB->insert_record('auth_saml2_idps', array(
-            'metadataurl' => 'http://www.example.com',
-            'entityid'    => 'http://www.example.com',
-            'name'        => 'Test IdP',
-            'activeidp'   => 1));
 
         for ($i = 0; $i < 3; $i++) {
             require($CFG->dirroot . '/auth/saml2/setup.php');
@@ -311,17 +304,10 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
      * Test test_is_configured
      */
     public function test_is_configured() {
-        global $DB;
-
         $this->resetAfterTest();
 
-        // Add a fake IdP.
         $url = 'http://www.example.com';
-        $DB->insert_record('auth_saml2_idps', array(
-            'metadataurl' => $url,
-            'entityid'    => $url,
-            'name'        => 'Test IdP',
-            'activeidp'   => 1));
+        set_config('idpentityids', json_encode([$url => $url]), 'auth_saml2');
 
         /** @var auth_plugin_saml2 $auth */
         $auth = get_auth_plugin('saml2');
@@ -364,22 +350,15 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
     }
 
     public function test_is_configured_works_with_multi_idp_in_one_xml() {
-        global $DB;
-
         $this->resetAfterTest();
 
-        // Add two fake IdPs.
-        $metadataurl = 'https://idp.example.org/idp/shibboleth';
-        $DB->insert_record('auth_saml2_idps', array(
-            'metadataurl' => $metadataurl,
-            'entityid'    => 'https://idp1.example.org/idp/shibboleth',
-            'name'        => 'Test IdP 1',
-            'activeidp'   => 1));
-        $DB->insert_record('auth_saml2_idps', array(
-            'metadataurl' => $metadataurl,
-            'entityid'    => 'https://idp2.example.org/idp/shibboleth',
-            'name'        => 'Test IdP 2',
-            'activeidp'   => 1));
+        $idpentityids = json_encode([
+                                        'xml' => [
+                                            'https://idp1.example.org/idp/shibboleth' => 0,
+                                            'https://idp2.example.org/idp/shibboleth' => 0,
+                                        ],
+                                    ]);
+        set_config('idpentityids', $idpentityids, 'auth_saml2');
 
         /** @var auth_plugin_saml2 $auth */
         $auth = get_auth_plugin('saml2');
@@ -389,60 +368,10 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
 
         $this->assertFalse($auth->is_configured());
 
-        $xmlfile = md5("https://idp.example.org/idp/shibboleth");
+        $xmlfile = md5("https://idp1.example.org/idp/shibboleth\nhttps://idp2.example.org/idp/shibboleth");
         touch($auth->get_file("{$xmlfile}.idp.xml"));
 
         $this->assertTrue($auth->is_configured());
-    }
-
-    public function test_get_email_from_attributes() {
-        $this->resetAfterTest();
-
-        $auth = get_auth_plugin('saml2');
-        $this->assertFalse($auth->get_email_from_attributes([]));
-        $this->assertFalse($auth->get_email_from_attributes(['email' => ['test@test.com']]));
-
-        set_config('field_map_email', 'test', 'auth_saml2');
-        $auth = get_auth_plugin('saml2');
-
-        $this->assertFalse($auth->get_email_from_attributes(['email' => ['test@test.com']]));
-
-        set_config('field_map_email', 'email', 'auth_saml2');
-        $auth = get_auth_plugin('saml2');
-        $this->assertEquals('test@test.com', $auth->get_email_from_attributes(['email' => ['test@test.com']]));
-
-        set_config('field_map_email', 'email', 'auth_saml2');
-        $auth = get_auth_plugin('saml2');
-        $this->assertEquals('test@test.com', $auth->get_email_from_attributes(['email' => ['test@test.com', 'test2@test.com']]));
-    }
-
-    public function test_is_email_taken() {
-        $this->resetAfterTest();
-
-        $auth = get_auth_plugin('saml2');
-        $user = $this->getDataGenerator()->create_user();
-
-        $this->assertFalse($auth->is_email_taken(''));
-        $this->assertFalse($auth->is_email_taken('', $user->username));
-
-        $this->assertTrue($auth->is_email_taken($user->email));
-        $this->assertTrue($auth->is_email_taken(strtoupper($user->email)));
-        $this->assertTrue($auth->is_email_taken(ucfirst($user->email)));
-        $this->assertFalse($auth->is_email_taken($user->email, $user->username));
-        $this->assertFalse($auth->is_email_taken(strtoupper($user->email), $user->username));
-        $this->assertFalse($auth->is_email_taken(ucfirst($user->email), $user->username));
-
-        // Create a new user with the same email, but different mnethostid.
-        $user2 = $this->getDataGenerator()->create_user(['email' => $user->email, 'mnethostid' => 777]);
-
-        // Delete original user.
-        delete_user($user);
-        $this->assertFalse($auth->is_email_taken($user->email));
-        $this->assertFalse($auth->is_email_taken(strtoupper($user->email)));
-        $this->assertFalse($auth->is_email_taken(ucfirst($user->email)));
-        $this->assertFalse($auth->is_email_taken($user->email, $user->username));
-        $this->assertFalse($auth->is_email_taken(strtoupper($user->email), $user->username));
-        $this->assertFalse($auth->is_email_taken(ucfirst($user->email), $user->username));
     }
 }
 

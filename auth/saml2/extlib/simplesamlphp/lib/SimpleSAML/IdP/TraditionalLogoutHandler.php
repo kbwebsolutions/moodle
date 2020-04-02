@@ -5,18 +5,19 @@ namespace SimpleSAML\IdP;
 use SimpleSAML\Logger;
 use SimpleSAML\Utils\HTTP;
 
+
 /**
  * Class that handles traditional logout.
  *
  * @package SimpleSAMLphp
  */
-
 class TraditionalLogoutHandler implements LogoutHandlerInterface
 {
+
     /**
      * The IdP we are logging out from.
      *
-     * @var \SimpleSAML\IdP
+     * @var \SimpleSAML_IdP
      */
     private $idp;
 
@@ -24,9 +25,9 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
     /**
      * TraditionalLogout constructor.
      *
-     * @param \SimpleSAML\IdP $idp The IdP to log out from.
+     * @param \SimpleSAML_IdP $idp The IdP to log out from.
      */
-    public function __construct(\SimpleSAML\IdP $idp)
+    public function __construct(\SimpleSAML_IdP $idp)
     {
         $this->idp = $idp;
     }
@@ -46,14 +47,14 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
             $this->idp->finishLogout($state);
         }
 
-        $relayState = \SimpleSAML\Auth\State::saveState($state, 'core:LogoutTraditional', true);
+        $relayState = \SimpleSAML_Auth_State::saveState($state, 'core:LogoutTraditional', true);
 
         $id = $association['id'];
         Logger::info('Logging out of '.var_export($id, true).'.');
 
         try {
-            $idp = \SimpleSAML\IdP::getByState($association);
-            $url = call_user_func([$association['Handler'], 'getLogoutURL'], $idp, $association, $relayState);
+            $idp = \SimpleSAML_IdP::getByState($association);
+            $url = call_user_func(array($association['Handler'], 'getLogoutURL'), $idp, $association, $relayState);
             HTTP::redirectTrustedURL($url);
         } catch (\Exception $e) {
             Logger::warning('Unable to initialize logout to '.var_export($id, true).'.');
@@ -62,7 +63,7 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
 
             // Try the next SP
             $this->logoutNextSP($state);
-            assert(false);
+            assert('FALSE');
         }
     }
 
@@ -79,7 +80,7 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
     {
         $state['core:LogoutTraditional:Remaining'] = $this->idp->getAssociations();
 
-        $this->logoutNextSP($state);
+        self::logoutNextSP($state);
     }
 
 
@@ -90,20 +91,20 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
      *
      * @param string $assocId The association that is terminated.
      * @param string|null $relayState The RelayState from the start of the logout.
-     * @param \SimpleSAML\Error\Exception|null $error The error that occurred during session termination (if any).
+     * @param \SimpleSAML_Error_Exception|null $error The error that occurred during session termination (if any).
      *
-     * @throws \SimpleSAML\Error\Exception If the RelayState was lost during logout.
+     * @throws \SimpleSAML_Error_Exception If the RelayState was lost during logout.
      */
-    public function onResponse($assocId, $relayState, \SimpleSAML\Error\Exception $error = null)
+    public function onResponse($assocId, $relayState, \SimpleSAML_Error_Exception $error = null)
     {
-        assert(is_string($assocId));
-        assert(is_string($relayState) || $relayState === null);
+        assert('is_string($assocId)');
+        assert('is_string($relayState) || is_null($relayState)');
 
         if ($relayState === null) {
-            throw new \SimpleSAML\Error\Exception('RelayState lost during logout.');
+            throw new \SimpleSAML_Error_Exception('RelayState lost during logout.');
         }
 
-        $state = \SimpleSAML\Auth\State::loadState($relayState, 'core:LogoutTraditional');
+        $state = \SimpleSAML_Auth_State::loadState($relayState, 'core:LogoutTraditional');
 
         if ($error === null) {
             Logger::info('Logged out of '.var_export($assocId, true).'.');
@@ -114,6 +115,6 @@ class TraditionalLogoutHandler implements LogoutHandlerInterface
             $state['core:Failed'] = true;
         }
 
-        $this->logoutNextSP($state);
+        self::logoutNextSP($state);
     }
 }

@@ -16,14 +16,17 @@ SimpleSAMLphp
 -------------
 
 ```bash
-rm -rf simplesamlphp
+rm -rf simplesamlphp saml2 xmlseclibs
 
 curl -L https://simplesamlphp.org/download?latest | tar vxz
 mv simplesamlphp-1.15.4 simplesamlphp
+mv simplesamlphp/vendor/simplesamlphp/saml2 .
+mv simplesamlphp/vendor/robrichards/xmlseclibs .
 rm -rf simplesamlphp/config
 rm -rf simplesamlphp/metadata
+rm -rf simplesamlphp/vendor # If later you get missing libraries, maybe you need to move them.
 
-git add simplesamlphp
+git add simplesamlphp saml2 xmlseclibs
 git commit -m 'Issue #XXX - Updating with code from simplesamlphp-1.15.4' # Customise the message!
 
 # Check what was customised when this document was updated, you may want to cherry pick it.
@@ -36,6 +39,6 @@ git diff master..HEAD
 git diff HEAD
 
 # Done!
-git add simplesamlphp
+git add simplesamlphp saml2 xmlseclibs
 git commit -m 'Issue #XXX - Backporting modifications for auth_saml2' # Customise the message!
 ```

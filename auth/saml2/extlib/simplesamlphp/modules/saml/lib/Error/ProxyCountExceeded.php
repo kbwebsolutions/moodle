@@ -1,7 +1,4 @@
 <?php
-
-namespace SimpleSAML\Module\saml\Error;
-
 /**
  * A SAML error indicating that the maximum amount of proxies traversed has been reached.
  *
@@ -9,9 +6,11 @@ namespace SimpleSAML\Module\saml\Error;
  * @package SimpleSAMLphp
  */
 
+namespace SimpleSAML\Module\saml\Error;
+
 use SAML2\Constants;
 
-class ProxyCountExceeded extends \SimpleSAML\Module\saml\Error
+class ProxyCountExceeded extends \sspmod_saml_Error
 {
     /**
      * ProxyCountExceeded error constructor.

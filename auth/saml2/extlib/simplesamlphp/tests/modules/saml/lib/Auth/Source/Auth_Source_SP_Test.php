@@ -2,8 +2,7 @@
 
 namespace SimpleSAML\Test\Module\saml\Auth\Source;
 
-use PHPUnit\Framework\TestCase;
-use \SimpleSAML\Configuration;
+use \SimpleSAML_Configuration as Configuration;
 
 /**
  * Custom Exception to throw to terminate a TestCase.
@@ -28,11 +27,11 @@ class ExitTestException extends \Exception
 
 
 /**
- * Wrap the SSP \SimpleSAML\Module\saml\Auth\Source\SP class
+ * Wrap the SSP sspmod_saml_Auth_Source_SP class
  * - Use introspection to make startSSO2Test available
  * - Override sendSAML2AuthnRequest() to catch the AuthnRequest being sent
  */
-class SPTester extends \SimpleSAML\Module\saml\Auth\Source\SP
+class SP_Tester extends \sspmod_saml_Auth_Source_SP
 {
 
     public function __construct($info, $config)
@@ -41,7 +40,7 @@ class SPTester extends \SimpleSAML\Module\saml\Auth\Source\SP
     }
 
 
-    public function startSSO2Test(Configuration $idpMetadata, array $state)
+    public function startSSO2Test(\SimpleSAML_Configuration $idpMetadata, array $state)
     {
         $reflector = new \ReflectionObject($this);
         $method = $reflector->getMethod('startSSO2');
@@ -55,20 +54,20 @@ class SPTester extends \SimpleSAML\Module\saml\Auth\Source\SP
     {
         // Exit test. Continuing would mean running into a assert(FALSE)
         throw new ExitTestException(
-            [
+            array(
                 'state'   => $state,
                 'binding' => $binding,
                 'ar'      => $ar,
-            ]
+            )
         );
     }
 }
 
 
 /**
- * Set of test cases for \SimpleSAML\Module\saml\Auth\Source\SP.
+ * Set of test cases for sspmod_saml_Auth_Source_SP.
  */
-class SPTest extends TestCase
+class SP_Test extends \PHPUnit_Framework_TestCase
 {
 
     private $idpMetadata = null;
@@ -79,7 +78,7 @@ class SPTest extends TestCase
     private function getIdpMetadata()
     {
         if (!$this->idpMetadata) {
-            $this->idpMetadata = new Configuration(
+            $this->idpMetadata = new \SimpleSAML_Configuration(
                 $this->idpConfigArray,
                 'Auth_Source_SP_Test::getIdpMetadata()'
             );
@@ -91,17 +90,17 @@ class SPTest extends TestCase
 
     protected function setUp()
     {
-        $this->idpConfigArray = [
+        $this->idpConfigArray = array(
             'metadata-set'        => 'saml20-idp-remote',
             'entityid'            => 'https://engine.surfconext.nl/authentication/idp/metadata',
-            'SingleSignOnService' => [
-                [
+            'SingleSignOnService' => array(
+                array(
                     'Binding'  => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
                     'Location' => 'https://engine.surfconext.nl/authentication/idp/single-sign-on',
-                ],
-            ],
-            'keys'                => [
-                [
+                ),
+            ),
+            'keys'                => array(
+                array(
                     'encryption'      => false,
                     'signing'         => true,
                     'type'            => 'X509Certificate',
@@ -121,27 +120,27 @@ class SPTest extends TestCase
                         'ZkQO8EsscJPPy/Zp4uHAnADWACkOUHiCbcKiUUFu66dX0Wr/v53Gekz487GgVRs8HEeT9MU1reBKRgdENR8PNg4rbQfLc'.
                         '3YQKLWK7yWnn/RenjDpuCiePj8N8/80tGgrNgK/6fzM3zI18sSywnXLswxqDb/J+jgVxnQ6MrsTf1urM8MnfcxG/82oHI'.
                         'wfMh/sXPCZpo+DTLkhQxctJ3M=',
-                ],
-            ],
-        ];
+                ),
+            ),
+        );
 
-        $this->config = Configuration::loadFromArray([], '[ARRAY]', 'simplesaml');
+        $this->config = Configuration::loadFromArray(array(), '[ARRAY]', 'simplesaml');
     }
 
 
     /**
-     * Create a SAML AuthnRequest using \SimpleSAML\Module\saml\Auth\Source\SP
+     * Create a SAML AuthnRequest using sspmod_saml_Auth_Source_SP
      *
      * @param array $state The state array to use in the test. This is an array of the parameters described in section
      * 2 of https://simplesamlphp.org/docs/development/saml:sp
      *
      * @return \SAML2\AuthnRequest The AuthnRequest generated.
      */
-    private function createAuthnRequest($state = [])
+    private function createAuthnRequest($state = array())
     {
-        $info = ['AuthId' => 'default-sp'];
-        $config = [];
-        $as = new SPTester($info, $config);
+        $info = array('AuthId' => 'default-sp');
+        $config = array();
+        $as = new SP_Tester($info, $config);
 
         /** @var \SAML2\AuthnRequest $ar */
         $ar = null;
@@ -187,16 +186,16 @@ class SPTest extends TestCase
      */
     public function testNameID()
     {
-        $state = [
-            'saml:NameID' => ['Value' => 'user@example.org', 'Format' => \SAML2\Constants::NAMEID_UNSPECIFIED]
-        ];
+        $state = array(
+            'saml:NameID' => array('Value' => 'user@example.org', 'Format' => \SAML2\Constants::NAMEID_UNSPECIFIED)
+        );
 
         /** @var \SAML2\AuthnRequest $ar */
         $ar = $this->createAuthnRequest($state);
 
         $nameID = $ar->getNameId();
-        $this->assertEquals($state['saml:NameID']['Value'], $nameID->getValue());
-        $this->assertEquals($state['saml:NameID']['Format'], $nameID->getFormat());
+        $this->assertEquals($state['saml:NameID']['Value'], $nameID->value);
+        $this->assertEquals($state['saml:NameID']['Format'], $nameID->Format);
 
         /** @var $xml \DOMElement */
         $xml = $ar->toSignedXML();
@@ -219,9 +218,9 @@ class SPTest extends TestCase
      */
     public function testAuthnContextClassRef()
     {
-        $state = [
+        $state = array(
             'saml:AuthnContextClassRef' => 'http://example.com/myAuthnContextClassRef'
-        ];
+        );
 
         /** @var \SAML2\AuthnRequest $ar */
         $ar = $this->createAuthnRequest($state);
@@ -248,9 +247,9 @@ class SPTest extends TestCase
      */
     public function testForcedAuthn()
     {
-        $state = [
+        $state = array(
             'ForceAuthn' => true
-        ];
+        );
 
         /** @var \SAML2\AuthnRequest $ar */
         $ar = $this->createAuthnRequest($state);

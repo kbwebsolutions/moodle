@@ -35,10 +35,18 @@ if (!empty($CFG->loginhttps)) {
 }
 
 $metadatasources = [];
-foreach ($saml2auth->metadataentities as $metadataurl => $idpentities) {
+foreach ($saml2auth->idpentityids as $source => $entity) {
+    if (is_object($entity)) {
+        $entity = (array)$entity;
+    }
+    if (is_array($entity)) {
+        $entity = array_keys($entity);
+        $entity = implode("\n", $entity);
+    }
+
     $metadatasources[] = [
         'type' => 'xml',
-        'file' => "$CFG->dataroot/saml2/" . md5($metadataurl) . ".idp.xml"
+        'file' => "$CFG->dataroot/saml2/" . md5($entity) . ".idp.xml"
     ];
 }
 
@@ -53,7 +61,7 @@ $config = array(
     'showerrors'        => $CFG->debugdisplay ? true : false,
     'errorreporting'    => false,
     'debug.validatexml' => false,
-    'secretsalt'        => $saml2auth->config->privatekeypass,
+    'secretsalt'        => get_site_identifier(),
     'technicalcontact_name'  => $CFG->supportname,
     'technicalcontact_email' => $CFG->supportemail ? $CFG->supportemail : $CFG->noreplyaddress,
     // TODO \core_user::get_support_user().
@@ -81,7 +89,7 @@ $config = array(
     'metadata.sign.enable'          => $saml2auth->config->spmetadatasign ? true : false,
     'metadata.sign.certificate'     => $saml2auth->certcrt,
     'metadata.sign.privatekey'      => $saml2auth->certpem,
-    'metadata.sign.privatekey_pass' => $saml2auth->config->privatekeypass,
+    'metadata.sign.privatekey_pass' => get_site_identifier(),
     'metadata.sources'              => $metadatasources,
 
     'store.type' => !empty($CFG->auth_saml2_store) ? $CFG->auth_saml2_store : '\\auth_saml2\\store',
@@ -97,6 +105,9 @@ $config = array(
 
     // TODO setting for signature.algorithm (ADFS 3 requires http://www.w3.org/2001/04/xmldsig-more#rsa-sha256)
     // TODO setting for redirect.sign
+    // TODO setting for NameIDPolicy
+    // TODO automated IDP metadata import from public metadata URL e.g.
+    // https://adfs.nmit.ac.nz/federationmetadata/2007-06/federationmetadata.xml (ADFS rotates its keys automatically every year)
     // TODO More options for post-processing of the UID - essentially we need a safer version of SSPHP's authproc.
     // A basic plugin system would be ideal as requirements here can vary wildly.
 );

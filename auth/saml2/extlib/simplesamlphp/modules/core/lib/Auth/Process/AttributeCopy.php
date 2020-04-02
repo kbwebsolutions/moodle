@@ -1,7 +1,5 @@
 <?php
 
-namespace SimpleSAML\Module\core\Auth\Process;
-
 /**
  * Attribute filter for renaming attributes.
  *
@@ -17,61 +15,62 @@ namespace SimpleSAML\Module\core\Auth\Process;
  *         ),
  *
  */
+class sspmod_core_Auth_Process_AttributeCopy extends SimpleSAML_Auth_ProcessingFilter {
 
-class AttributeCopy extends \SimpleSAML\Auth\ProcessingFilter
-{
-    /**
-     * Assosiative array with the mappings of attribute names.
-     */
-    private $map = [];
+	/**
+	 * Assosiative array with the mappings of attribute names.
+	 */
+	private $map = array();
 
-    /**
-     * Initialize this filter, parse configuration
-     *
-     * @param array $config  Configuration information about this filter.
-     * @param mixed $reserved  For future use.
-     */
-    public function __construct($config, $reserved)
-    {
-        parent::__construct($config, $reserved);
 
-        assert(is_array($config));
+	/**
+	 * Initialize this filter, parse configuration
+	 *
+	 * @param array $config  Configuration information about this filter.
+	 * @param mixed $reserved  For future use.
+	 */
+	public function __construct($config, $reserved) {
+		parent::__construct($config, $reserved);
 
-        foreach ($config as $source => $destination) {
-            if (!is_string($source)) {
-                throw new \Exception('Invalid source attribute name: '.var_export($source, true));
-            }
+		assert('is_array($config)');
 
-            if (!is_string($destination) && !is_array($destination)) {
-                throw new \Exception('Invalid destination attribute name: '.var_export($destination, true));
-            }
+		foreach($config as $source => $destination) {
 
-            $this->map[$source] = $destination;
-        }
-    }
+			if(!is_string($source)) {
+				throw new Exception('Invalid source attribute name: ' . var_export($source, TRUE));
+			}
 
-    /**
-     * Apply filter to rename attributes.
-     *
-     * @param array &$request  The current request
-     */
-    public function process(&$request)
-    {
-        assert(is_array($request));
-        assert(array_key_exists('Attributes', $request));
+			if(!is_string($destination) && !is_array($destination)) {
+				throw new Exception('Invalid destination attribute name: ' . var_export($destination, TRUE));
+			}
 
-        $attributes = &$request['Attributes'];
+			$this->map[$source] = $destination;
+		}
+	}
 
-        foreach ($attributes as $name => $values) {
-            if (array_key_exists($name, $this->map)) {
-                if (!is_array($this->map[$name])) {
-                    $attributes[$this->map[$name]] = $values;
-                } else {
-                    foreach ($this->map[$name] as $to_map) {
-                        $attributes[$to_map] = $values;
-                    }
-                }
-            }
-        }
-    }
+
+	/**
+	 * Apply filter to rename attributes.
+	 *
+	 * @param array &$request  The current request
+	 */
+	public function process(&$request) {
+		assert('is_array($request)');
+		assert('array_key_exists("Attributes", $request)');
+
+		$attributes =& $request['Attributes'];
+
+		foreach($attributes as $name => $values) {
+			if (array_key_exists($name,$this->map)){
+				if (!is_array($this->map[$name])) {
+					$attributes[$this->map[$name]] = $values;
+				} else {
+					foreach ($this->map[$name] as $to_map) {
+						$attributes[$to_map] = $values;
+					}
+				}
+			}
+		}
+
+	}
 }

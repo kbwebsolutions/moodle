@@ -1,13 +1,9 @@
 <?php
 
-namespace SimpleSAML\Test\Module\core\Auth\Process;
-
-use PHPUnit\Framework\TestCase;
-
 /**
  * Test for the core:AttributeAdd filter.
  */
-class AttributeAddTest extends TestCase
+class Test_Core_Auth_Process_AttributeAdd extends PHPUnit_Framework_TestCase
 {
 
     /**
@@ -19,7 +15,7 @@ class AttributeAddTest extends TestCase
      */
     private static function processFilter(array $config, array $request)
     {
-        $filter = new \SimpleSAML\Module\core\Auth\Process\AttributeAdd($config, null);
+        $filter = new sspmod_core_Auth_Process_AttributeAdd($config, NULL);
         $filter->process($request);
         return $request;
     }
@@ -29,16 +25,16 @@ class AttributeAddTest extends TestCase
      */
     public function testBasic()
     {
-        $config = [
-            'test' => ['value1', 'value2'],
-        ];
-        $request = [
-            'Attributes' => [],
-        ];
+        $config = array(
+            'test' => array('value1', 'value2'),
+        );
+        $request = array(
+            'Attributes' => array(),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test', $attributes);
-        $this->assertEquals($attributes['test'], ['value1', 'value2']);
+        $this->assertEquals($attributes['test'], array('value1', 'value2'));
     }
 
     /**
@@ -46,23 +42,23 @@ class AttributeAddTest extends TestCase
      */
     public function testExistingNotModified()
     {
-        $config = [
-            'test' => ['value1', 'value2'],
-        ];
-        $request = [
-            'Attributes' => [
-                'original1' => ['original_value1'],
-                'original2' => ['original_value2'],
-            ],
-        ];
+        $config = array(
+            'test' => array('value1', 'value2'),
+        );
+        $request = array(
+            'Attributes' => array(
+                'original1' => array('original_value1'),
+                'original2' => array('original_value2'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test', $attributes);
-        $this->assertEquals($attributes['test'], ['value1', 'value2']);
+        $this->assertEquals($attributes['test'], array('value1', 'value2'));
         $this->assertArrayHasKey('original1', $attributes);
-        $this->assertEquals($attributes['original1'], ['original_value1']);
+        $this->assertEquals($attributes['original1'], array('original_value1'));
         $this->assertArrayHasKey('original2', $attributes);
-        $this->assertEquals($attributes['original2'], ['original_value2']);
+        $this->assertEquals($attributes['original2'], array('original_value2'));
     }
 
     /**
@@ -70,16 +66,16 @@ class AttributeAddTest extends TestCase
      */
     public function testStringValue()
     {
-        $config = [
+        $config = array(
             'test' => 'value',
-        ];
-        $request = [
-            'Attributes' => [],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test', $attributes);
-        $this->assertEquals($attributes['test'], ['value']);
+        $this->assertEquals($attributes['test'], array('value'));
     }
 
     /**
@@ -87,19 +83,19 @@ class AttributeAddTest extends TestCase
      */
     public function testAddMultiple()
     {
-        $config = [
-            'test1' => ['value1'],
-            'test2' => ['value2'],
-        ];
-        $request = [
-            'Attributes' => [],
-        ];
+        $config = array(
+            'test1' => array('value1'),
+            'test2' => array('value2'),
+        );
+        $request = array(
+            'Attributes' => array(),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test1', $attributes);
-        $this->assertEquals($attributes['test1'], ['value1']);
+        $this->assertEquals($attributes['test1'], array('value1'));
         $this->assertArrayHasKey('test2', $attributes);
-        $this->assertEquals($attributes['test2'], ['value2']);
+        $this->assertEquals($attributes['test2'], array('value2'));
     }
 
     /**
@@ -107,17 +103,17 @@ class AttributeAddTest extends TestCase
      */
     public function testAppend()
     {
-        $config = [
-            'test' => ['value2'],
-        ];
-        $request = [
-            'Attributes' => [
-                'test' => ['value1'],
-            ],
-        ];
+        $config = array(
+            'test' => array('value2'),
+        );
+        $request = array(
+            'Attributes' => array(
+                'test' => array('value1'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['test'], ['value1', 'value2']);
+        $this->assertEquals($attributes['test'], array('value1', 'value2'));
     }
 
     /**
@@ -125,18 +121,18 @@ class AttributeAddTest extends TestCase
      */
     public function testReplace()
     {
-        $config = [
+        $config = array(
             '%replace',
-            'test' => ['value2'],
-        ];
-        $request = [
-            'Attributes' => [
-                'test' => ['value1'],
-            ],
-        ];
+            'test' => array('value2'),
+        );
+        $request = array(
+            'Attributes' => array(
+                'test' => array('value1'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['test'], ['value2']);
+        $this->assertEquals($attributes['test'], array('value2'));
     }
 
     /**
@@ -146,16 +142,16 @@ class AttributeAddTest extends TestCase
      */
     public function testWrongFlag()
     {
-        $config = [
+        $config = array(
             '%nonsense',
-            'test' => ['value2'],
-        ];
-        $request = [
-            'Attributes' => [
-                'test' => ['value1'],
-            ],
-        ];
-        self::processFilter($config, $request);
+            'test' => array('value2'),
+        );
+        $request = array(
+            'Attributes' => array(
+                'test' => array('value1'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -165,15 +161,15 @@ class AttributeAddTest extends TestCase
      */
     public function testWrongAttributeValue()
     {
-        $config = [
+        $config = array(
             '%replace',
-            'test' => [true],
-        ];
-        $request = [
-            'Attributes' => [
-                'test' => ['value1'],
-            ],
-        ];
-        self::processFilter($config, $request);
+            'test' => array(true),
+        );
+        $request = array(
+            'Attributes' => array(
+                'test' => array('value1'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 }

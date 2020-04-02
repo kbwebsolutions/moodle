@@ -14,10 +14,11 @@ use SimpleSAML\Logger;
  */
 class ErrorLogLoggingHandler implements LoggingHandlerInterface
 {
+
     /**
      * This array contains the mappings from syslog log level to names.
      */
-    private static $levelNames = [
+    private static $levelNames = array(
         Logger::EMERG   => 'EMERG',
         Logger::ALERT   => 'ALERT',
         Logger::CRIT    => 'CRIT',
@@ -26,7 +27,7 @@ class ErrorLogLoggingHandler implements LoggingHandlerInterface
         Logger::NOTICE  => 'NOTICE',
         Logger::INFO    => 'INFO',
         Logger::DEBUG   => 'DEBUG',
-    ];
+    );
 
     /**
      * The name of this process.
@@ -39,9 +40,9 @@ class ErrorLogLoggingHandler implements LoggingHandlerInterface
     /**
      * ErrorLogLoggingHandler constructor.
      *
-     * @param \SimpleSAML\Configuration $config The configuration object for this handler.
+     * @param \SimpleSAML_Configuration $config The configuration object for this handler.
      */
-    public function __construct(\SimpleSAML\Configuration $config)
+    public function __construct(\SimpleSAML_Configuration $config)
     {
         $this->processname = $config->getString('logging.processname', 'SimpleSAMLphp');
     }
@@ -72,8 +73,8 @@ class ErrorLogLoggingHandler implements LoggingHandlerInterface
             $levelName = sprintf('UNKNOWN%d', $level);
         }
 
-        $formats = ['%process', '%level'];
-        $replacements = [$this->processname, $levelName];
+        $formats = array('%process', '%level');
+        $replacements = array($this->processname, $levelName);
         $string = str_replace($formats, $replacements, $string);
         $string = preg_replace('/%\w+(\{[^\}]+\})?/', '', $string);
         $string = trim($string);

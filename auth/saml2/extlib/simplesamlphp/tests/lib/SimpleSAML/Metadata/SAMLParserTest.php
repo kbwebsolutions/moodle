@@ -1,22 +1,20 @@
 <?php
-
-namespace SimpleSAML\Test\Metadata;
-
-use PHPUnit\Framework\TestCase;
+namespace SimpleSAML\Metadata;
 
 /**
  * Test SAML parsing
  */
-class SAMLParserTest extends TestCase
+class SAMLParserTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * Test Registration Info is parsed
      */
     public function testRegistrationInfo()
     {
-        $expected = [
+        $expected = array(
             'registrationAuthority' => 'https://incommon.org',
-        ];
+        );
 
         $document = \SAML2\DOMDocumentFactory::fromString(
             <<<XML
@@ -32,11 +30,12 @@ XML
         );
 
 
-        $entities = \SimpleSAML\Metadata\SAMLParser::parseDescriptorsElement($document->documentElement);
+        $entities = \SimpleSAML_Metadata_SAMLParser::parseDescriptorsElement($document->documentElement);
         $this->assertArrayHasKey('theEntityID', $entities);
         // RegistrationInfo is accessible in the SP or IDP metadata accessors
         $metadata = $entities['theEntityID']->getMetadata20SP();
         $this->assertEquals($expected, $metadata['RegistrationInfo']);
+
     }
 
     /**
@@ -45,9 +44,9 @@ XML
      */
     public function testRegistrationInfoInheritance()
     {
-        $expected = [
+        $expected = array(
             'registrationAuthority' => 'https://incommon.org',
-        ];
+        );
 
         $document = \SAML2\DOMDocumentFactory::fromString(
             <<<XML
@@ -73,7 +72,7 @@ XML
 XML
         );
 
-        $entities = \SimpleSAML\Metadata\SAMLParser::parseDescriptorsElement($document->documentElement);
+        $entities = \SimpleSAML_Metadata_SAMLParser::parseDescriptorsElement($document->documentElement);
         $this->assertArrayHasKey('theEntityID', $entities);
         $this->assertArrayHasKey('subEntityId', $entities);
         // RegistrationInfo is accessible in the SP or IDP metadata accessors
@@ -115,7 +114,7 @@ XML
 XML
         );
 
-        $entities = \SimpleSAML\Metadata\SAMLParser::parseDescriptorsElement($document->documentElement);
+        $entities = \SimpleSAML_Metadata_SAMLParser::parseDescriptorsElement($document->documentElement);
         $this->assertArrayHasKey('theEntityID', $entities);
 
         $metadata = $entities['theEntityID']->getMetadata20SP();
@@ -123,14 +122,11 @@ XML
         $this->assertEquals("Example service", $metadata['name']['en']);
         $this->assertEquals("Dit is een voorbeeld voor de unittest.", $metadata['description']['nl']);
 
-        $expected_a = [
-            "urn:mace:dir:attribute-def:eduPersonPrincipalName",
-            "urn:mace:dir:attribute-def:mail",
-            "urn:mace:dir:attribute-def:displayName"
-        ];
-        $expected_r = ["urn:mace:dir:attribute-def:eduPersonPrincipalName"];
+        $expected_a = array("urn:mace:dir:attribute-def:eduPersonPrincipalName", "urn:mace:dir:attribute-def:mail", "urn:mace:dir:attribute-def:displayName");
+        $expected_r = array("urn:mace:dir:attribute-def:eduPersonPrincipalName");
 
         $this->assertEquals($expected_a, $metadata['attributes']);
         $this->assertEquals($expected_r, $metadata['attributes.required']);
     }
+
 }

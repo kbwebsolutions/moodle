@@ -2,37 +2,37 @@
 
 namespace SimpleSAML\Test\Utils;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\Utils\Arrays;
 
 /**
  * Tests for SimpleSAML\Utils\Arrays.
  */
-class ArraysTest extends TestCase
+class ArraysTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * Test the arrayize() function.
      */
     public function testArrayize()
     {
         // check with empty array as input
-        $array = [];
+        $array = array();
         $this->assertEquals($array, Arrays::arrayize($array));
 
         // check non-empty array as input
-        $array = ['key' => 'value'];
+        $array = array('key' => 'value');
         $this->assertEquals($array, Arrays::arrayize($array));
 
         // check indexes are ignored when input is an array
         $this->assertArrayNotHasKey('invalid', Arrays::arrayize($array, 'invalid'));
 
         // check default index
-        $expected = ['string'];
+        $expected = array('string');
         $this->assertEquals($expected, Arrays::arrayize($expected[0]));
 
         // check string index
         $index = 'key';
-        $expected = [$index => 'string'];
+        $expected = array($index => 'string');
         $this->assertEquals($expected, Arrays::arrayize($expected[$index], $index));
     }
 
@@ -47,33 +47,33 @@ class ArraysTest extends TestCase
 
         // check bad arrays
         $this->assertFalse(
-            Arrays::transpose(['1', '2', '3']),
+            Arrays::transpose(array('1', '2', '3')),
             'Invalid two-dimensional array was accepted'
         );
         $this->assertFalse(
-            Arrays::transpose(['1' => 0, '2' => '0', '3' => [0]]),
+            Arrays::transpose(array('1' => 0, '2' => '0', '3' => array(0))),
             'Invalid elements on a two-dimensional array were accepted'
         );
 
         // check array with numerical keys
-        $array = [
-            'key1' => [
+        $array = array(
+            'key1' => array(
                 'value1'
-            ],
-            'key2' => [
+            ),
+            'key2' => array(
                 'value1',
                 'value2'
-            ]
-        ];
-        $transposed = [
-            [
+            )
+        );
+        $transposed = array(
+            array(
                 'key1' => 'value1',
                 'key2' => 'value1'
-            ],
-            [
+            ),
+            array(
                 'key2' => 'value2'
-            ]
-        ];
+            )
+        );
         $this->assertEquals(
             $transposed,
             Arrays::transpose($array),
@@ -81,24 +81,24 @@ class ArraysTest extends TestCase
         );
 
         // check array with string keys
-        $array = [
-            'key1' => [
+        $array = array(
+            'key1' => array(
                 'subkey1' => 'value1'
-            ],
-            'key2' => [
+            ),
+            'key2' => array(
                 'subkey1' => 'value1',
                 'subkey2' => 'value2'
-            ]
-        ];
-        $transposed = [
-            'subkey1' => [
+            )
+        );
+        $transposed = array(
+            'subkey1' => array(
                 'key1' => 'value1',
                 'key2' => 'value1'
-            ],
-            'subkey2' => [
+            ),
+            'subkey2' => array(
                 'key2' => 'value2'
-            ]
-        ];
+            )
+        );
         $this->assertEquals(
             $transposed,
             Arrays::transpose($array),
@@ -106,26 +106,26 @@ class ArraysTest extends TestCase
         );
 
         // check array with no keys in common between sub arrays
-        $array = [
-            'key1' => [
+        $array = array(
+            'key1' => array(
                 'subkey1' => 'value1'
-            ],
-            'key2' => [
+            ),
+            'key2' => array(
                 'subkey2' => 'value1',
                 'subkey3' => 'value2'
-            ]
-        ];
-        $transposed = [
-            'subkey1' => [
+            )
+        );
+        $transposed = array(
+            'subkey1' => array(
                 'key1' => 'value1',
-            ],
-            'subkey2' => [
+            ),
+            'subkey2' => array(
                 'key2' => 'value1'
-            ],
-            'subkey3' => [
+            ),
+            'subkey3' => array(
                 'key2' => 'value2'
-            ]
-        ];
+            )
+        );
         $this->assertEquals(
             $transposed,
             Arrays::transpose($array),

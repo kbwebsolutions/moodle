@@ -11,35 +11,34 @@
 
 namespace SimpleSAML\XML;
 
-use DOMComment;
-use DOMElement;
-use DOMText;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use SimpleSAML\Utils\Config;
 
 class Signer
 {
+
+
     /**
      * @var string The name of the ID attribute.
      */
-    private $idAttrName = '';
+    private $idAttrName;
 
     /**
      * @var XMLSecurityKey|bool  The private key (as an XMLSecurityKey).
      */
-    private $privateKey = false;
+    private $privateKey;
 
     /**
      * @var string The certificate (as text).
      */
-    private $certificate = '';
+    private $certificate;
 
 
     /**
-     * @var array Extra certificates which should be included in the response.
+     * @var string Extra certificates which should be included in the response.
      */
-    private $extraCertificates = [];
+    private $extraCertificates;
 
 
     /**
@@ -52,15 +51,20 @@ class Signer
      *  - privatekey       The file with the private key, relative to the cert-directory.
      *  - privatekey_pass  The passphrase for the private key.
      *  - certificate      The file with the certificate, relative to the cert-directory.
-     *  - privatekey_array The private key, as an array returned from \SimpleSAML\Utils\Crypto::loadPrivateKey.
-     *  - publickey_array  The public key, as an array returned from \SimpleSAML\Utils\Crypto::loadPublicKey.
+     *  - privatekey_array The private key, as an array returned from SimpleSAML_Utilities::loadPrivateKey.
+     *  - publickey_array  The public key, as an array returned from SimpleSAML_Utilities::loadPublicKey.
      *  - id               The name of the ID attribute.
      *
      * @param array $options  Associative array with options for the constructor. Defaults to an empty array.
      */
-    public function __construct($options = [])
+    public function __construct($options = array())
     {
-        assert(is_array($options));
+        assert('is_array($options)');
+
+        $this->idAttrName = false;
+        $this->privateKey = false;
+        $this->certificate = false;
+        $this->extraCertificates = array();
 
         if (array_key_exists('privatekey', $options)) {
             $pass = null;
@@ -84,7 +88,7 @@ class Signer
         }
 
         if (array_key_exists('id', $options)) {
-            $this->setIDAttribute($options['id']);
+            $this->setIdAttribute($options['id']);
         }
     }
 
@@ -93,16 +97,16 @@ class Signer
      * Set the private key from an array.
      *
      * This function loads the private key from an array matching what is returned
-     * by \SimpleSAML\Utils\Crypto::loadPrivateKey(...).
+     * by SimpleSAML_Utilities::loadPrivateKey(...).
      *
      * @param array $privatekey  The private key.
      */
     public function loadPrivateKeyArray($privatekey)
     {
-        assert(is_array($privatekey));
-        assert(array_key_exists('PEM', $privatekey));
+        assert('is_array($privatekey)');
+        assert('array_key_exists("PEM", $privatekey)');
 
-        $this->privateKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA256, ['type' => 'private']);
+        $this->privateKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, array('type' => 'private'));
         if (array_key_exists('password', $privatekey)) {
             $this->privateKey->passphrase = $privatekey['password'];
         }
@@ -125,9 +129,9 @@ class Signer
      */
     public function loadPrivateKey($file, $pass = null, $full_path = false)
     {
-        assert(is_string($file));
-        assert(is_string($pass) || $pass === null);
-        assert(is_bool($full_path));
+        assert('is_string($file)');
+        assert('is_string($pass) || is_null($pass)');
+        assert('is_bool($full_path)');
 
         if (!$full_path) {
             $keyFile = Config::getCertPath($file);
@@ -136,14 +140,14 @@ class Signer
         }
 
         if (!file_exists($keyFile)) {
-            throw new \Exception('Could not find private key file "'.$keyFile.'".');
+            throw new \Exception('Could not find private key file "' . $keyFile . '".');
         }
         $keyData = file_get_contents($keyFile);
         if ($keyData === false) {
-            throw new \Exception('Unable to read private key file "'.$keyFile.'".');
+            throw new \Exception('Unable to read private key file "' . $keyFile . '".');
         }
 
-        $privatekey = ['PEM' => $keyData];
+        $privatekey = array('PEM' => $keyData);
         if ($pass !== null) {
             $privatekey['password'] = $pass;
         }
@@ -155,14 +159,14 @@ class Signer
      * Set the public key / certificate we should include in the signature.
      *
      * This function loads the public key from an array matching what is returned
-     * by \SimpleSAML\Utils\Crypto::loadPublicKey(...).
+     * by SimpleSAML_Utilities::loadPublicKey(...).
      *
      * @param array $publickey The public key.
      * @throws \Exception
      */
     public function loadPublicKeyArray($publickey)
     {
-        assert(is_array($publickey));
+        assert('is_array($publickey)');
 
         if (!array_key_exists('PEM', $publickey)) {
             // We have a public key with only a fingerprint
@@ -188,8 +192,8 @@ class Signer
      */
     public function loadCertificate($file, $full_path = false)
     {
-        assert(is_string($file));
-        assert(is_bool($full_path));
+        assert('is_string($file)');
+        assert('is_bool($full_path)');
 
         if (!$full_path) {
             $certFile = Config::getCertPath($file);
@@ -198,14 +202,13 @@ class Signer
         }
 
         if (!file_exists($certFile)) {
-            throw new \Exception('Could not find certificate file "'.$certFile.'".');
+            throw new \Exception('Could not find certificate file "' . $certFile . '".');
         }
 
-        $cert = file_get_contents($certFile);
-        if ($cert === false) {
-            throw new \Exception('Unable to read certificate file "'.$certFile.'".');
+        $this->certificate = file_get_contents($certFile);
+        if ($this->certificate === false) {
+            throw new \Exception('Unable to read certificate file "' . $certFile . '".');
         }
-        $this->certificate = $cert;
     }
 
 
@@ -216,7 +219,7 @@ class Signer
      */
     public function setIDAttribute($idAttrName)
     {
-        assert(is_string($idAttrName));
+        assert('is_string($idAttrName)');
 
         $this->idAttrName = $idAttrName;
     }
@@ -235,8 +238,8 @@ class Signer
      */
     public function addCertificate($file, $full_path = false)
     {
-        assert(is_string($file));
-        assert(is_bool($full_path));
+        assert('is_string($file)');
+        assert('is_bool($full_path)');
 
         if (!$full_path) {
             $certFile = Config::getCertPath($file);
@@ -245,12 +248,12 @@ class Signer
         }
 
         if (!file_exists($certFile)) {
-            throw new \Exception('Could not find extra certificate file "'.$certFile.'".');
+            throw new \Exception('Could not find extra certificate file "' . $certFile . '".');
         }
 
         $certificate = file_get_contents($certFile);
         if ($certificate === false) {
-            throw new \Exception('Unable to read extra certificate file "'.$certFile.'".');
+            throw new \Exception('Unable to read extra certificate file "' . $certFile . '".');
         }
 
         $this->extraCertificates[] = $certificate;
@@ -271,10 +274,10 @@ class Signer
      */
     public function sign($node, $insertInto, $insertBefore = null)
     {
-        assert($node instanceof DOMElement);
-        assert($insertInto instanceof DOMElement);
-        assert($insertBefore === null || $insertBefore instanceof DOMElement ||
-            $insertBefore instanceof DOMComment || $insertBefore instanceof DOMText);
+        assert('$node instanceof DOMElement');
+        assert('$insertInto instanceof DOMElement');
+        assert('is_null($insertBefore) || $insertBefore instanceof DOMElement ' .
+            '|| $insertBefore instanceof DOMComment || $insertBefore instanceof DOMText');
 
         if ($this->privateKey === false) {
             throw new \Exception('Private key not set.');
@@ -284,24 +287,25 @@ class Signer
         $objXMLSecDSig = new XMLSecurityDSig();
         $objXMLSecDSig->setCanonicalMethod(XMLSecurityDSig::EXC_C14N);
 
-        $options = [];
-        if (!empty($this->idAttrName)) {
+        $options = array();
+        if ($this->idAttrName !== false) {
             $options['id_name'] = $this->idAttrName;
         }
 
         $objXMLSecDSig->addReferenceList(
-            [$node],
-            XMLSecurityDSig::SHA256,
-            ['http://www.w3.org/2000/09/xmldsig#enveloped-signature', XMLSecurityDSig::EXC_C14N],
+            array($node),
+            XMLSecurityDSig::SHA1,
+            array('http://www.w3.org/2000/09/xmldsig#enveloped-signature', XMLSecurityDSig::EXC_C14N),
             $options
         );
 
-        /** @var \RobRichards\XMLSecLibs\XMLSecurityKey $this->privateKey */
         $objXMLSecDSig->sign($this->privateKey);
 
 
-        // Add the certificate to the signature
-        $objXMLSecDSig->add509Cert($this->certificate, true);
+        if ($this->certificate !== false) {
+            // Add the certificate to the signature
+            $objXMLSecDSig->add509Cert($this->certificate, true);
+        }
 
         // Add extra certificates
         foreach ($this->extraCertificates as $certificate) {

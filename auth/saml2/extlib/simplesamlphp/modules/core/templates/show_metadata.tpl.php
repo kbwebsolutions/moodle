@@ -13,7 +13,7 @@ $metadata['<?php echo $this->data['m']['metadata-index']; unset($this->data['m']
     </pre>
 </div>
 <script type="text/javascript">
-    var clipboard = new ClipboardJS('#btncp');
+    var clipboard = new Clipboard('#btncp');
 </script>
 <br/>
 <p><a href="<?php echo $this->data['backlink']; ?>"><span class="btn">Back</span></a></p>

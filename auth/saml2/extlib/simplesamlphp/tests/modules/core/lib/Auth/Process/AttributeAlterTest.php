@@ -1,13 +1,9 @@
 <?php
 
-namespace SimpleSAML\Test\Module\core\Auth\Process;
-
-use PHPUnit\Framework\TestCase;
-
 /**
  * Test for the core:AttributeAlter filter.
  */
-class AttributeAlterTest extends TestCase
+class Test_Core_Auth_Process_AttributeAlter extends PHPUnit_Framework_TestCase
 {
 
     /**
@@ -19,7 +15,7 @@ class AttributeAlterTest extends TestCase
      */
     private static function processFilter(array $config, array $request)
     {
-        $filter = new \SimpleSAML\Module\core\Auth\Process\AttributeAlter($config, null);
+        $filter = new sspmod_core_Auth_Process_AttributeAlter($config, NULL);
         $filter->process($request);
         return $request;
     }
@@ -29,22 +25,22 @@ class AttributeAlterTest extends TestCase
      */
     public function testBasic()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
             'replacement' => 'right',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                 'test' => ['somethingiswrong'],
-             ],
-        ];
+        $request = array(
+            'Attributes' => array(
+                 'test' => array('somethingiswrong'),
+             ),
+        );
 
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test', $attributes);
-        $this->assertEquals($attributes['test'], ['somethingisright']);
+        $this->assertEquals($attributes['test'], array('somethingisright'));
     }
 
     /**
@@ -52,25 +48,25 @@ class AttributeAlterTest extends TestCase
      */
     public function testWithTarget()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'target' => 'test2',
             'pattern' => '/wrong/',
             'replacement' => 'right',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                 'something' => ['somethingelse'],
-                 'test' => ['wrong'],
-             ],
-        ];
+        $request = array(
+            'Attributes' => array(
+                 'something' => array('somethingelse'),
+                 'test' => array('wrong'),
+             ),
+        );
 
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('test2', $attributes);
-        $this->assertEquals($attributes['test'], ['wrong']);
-        $this->assertEquals($attributes['test2'], ['right']);
+        $this->assertEquals($attributes['test'], array('wrong'));
+        $this->assertEquals($attributes['test2'], array('right'));
     }
 
     /**
@@ -78,26 +74,24 @@ class AttributeAlterTest extends TestCase
      */
     public function testNomatch()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
             'replacement' => 'right',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                 'something' => ['somevalue'],
-                 'somethingelse' => ['someothervalue'],
-             ],
-        ];
+        $request = array(
+            'Attributes' => array(
+                 'something' => array('somevalue'),
+                 'somethingelse' => array('someothervalue'),
+             ),
+        );
 
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals(
-            $attributes,
-            ['something' => ['somevalue'],
-            'somethingelse' => ['someothervalue']]
-        );
+        $this->assertEquals($attributes,
+            array('something' => array('somevalue'),
+            'somethingelse' => array('someothervalue')));
     }
 
     /**
@@ -105,20 +99,20 @@ class AttributeAlterTest extends TestCase
      */
     public function testReplaceMatch()
     {
-        $config = [
+        $config = array(
             'subject' => 'source',
             'pattern' => '/wrong/',
             'replacement' => 'right',
             '%replace',
-        ];
-        $request = [
-            'Attributes' => [
-                'source' => ['wrongthing'],
-            ],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'source' => array('wrongthing'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['source'], ['right']);
+        $this->assertEquals($attributes['source'], array('right'));
     }
 
     /**
@@ -126,22 +120,22 @@ class AttributeAlterTest extends TestCase
      */
     public function testReplaceMatchWithTarget()
     {
-        $config = [
+        $config = array(
             'subject' => 'source',
             'pattern' => '/wrong/',
             'replacement' => 'right',
             'target' => 'test',
             '%replace',
-        ];
-        $request = [
-            'Attributes' => [
-                'source' => ['wrong'],
-                'test'   => ['wrong'],
-            ],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'source' => array('wrong'),
+                'test'   => array('wrong'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['test'], ['right']);
+        $this->assertEquals($attributes['test'], array('right'));
     }
 
     /**
@@ -149,22 +143,22 @@ class AttributeAlterTest extends TestCase
      */
     public function testReplaceNoMatch()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/doink/',
             'replacement' => 'wrong',
             'target' => 'test',
             '%replace',
-        ];
-        $request = [
-            'Attributes' => [
-                'source' => ['wrong'],
-                'test'   => ['right'],
-            ],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'source' => array('wrong'),
+                'test'   => array('right'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['test'], ['right']);
+        $this->assertEquals($attributes['test'], array('right'));
     }
 
     /**
@@ -174,21 +168,21 @@ class AttributeAlterTest extends TestCase
      */
     public function testRemoveMatch()
     {
-        $config = [
+        $config = array(
             'subject' => 'eduPersonAffiliation',
             'pattern' => '/^emper/',
             '%remove',
-        ];
-        $request = [
-            'Attributes' => [
-                'displayName' => ['emperor kuzco'],
-                'eduPersonAffiliation' => ['member', 'emperor', 'staff'],
-            ],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'displayName' => array('emperor kuzco'),
+                'eduPersonAffiliation' => array('member', 'emperor', 'staff'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['displayName'], ['emperor kuzco']);
-        $this->assertEquals($attributes['eduPersonAffiliation'], [0 => 'member', 2 => 'staff']);
+        $this->assertEquals($attributes['displayName'], array('emperor kuzco'));
+        $this->assertEquals($attributes['eduPersonAffiliation'], array(0 => 'member', 2 => 'staff'));
     }
 
     /**
@@ -196,17 +190,17 @@ class AttributeAlterTest extends TestCase
      */
     public function testRemoveMatchAll()
     {
-        $config = [
+        $config = array(
             'subject' => 'eduPersonAffiliation',
             'pattern' => '/^emper/',
             '%remove',
-        ];
-        $request = [
-            'Attributes' => [
-                'displayName' => ['emperor kuzco'],
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'displayName' => array('emperor kuzco'),
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('eduPersonAffiliation', $attributes);
@@ -219,17 +213,17 @@ class AttributeAlterTest extends TestCase
      */
     public function testWrongConfig()
     {
-        $config = [
+        $config = array(
             'subject' => 'eduPersonAffiliation',
             'pattern' => '/^emper/',
             '%dwiw',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
-        self::processFilter($config, $request);
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -239,15 +233,15 @@ class AttributeAlterTest extends TestCase
      */
     public function testIncompleteConfig()
     {
-        $config = [
+        $config = array(
             'subject' => 'eduPersonAffiliation',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
-        self::processFilter($config, $request);
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -257,17 +251,23 @@ class AttributeAlterTest extends TestCase
      */
     public function testIncompleteConfig2()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
-        self::processFilter($config, $request);
+        $request = array(
+            'Attributes' => array(
+                 'test' => array('somethingiswrong'),
+             ),
+        );
+
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -277,19 +277,25 @@ class AttributeAlterTest extends TestCase
      */
     public function testIncompleteConfig3()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
             '%replace',
             '%remove',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
-        self::processFilter($config, $request);
+        $request = array(
+            'Attributes' => array(
+                 'test' => array('somethingiswrong'),
+             ),
+        );
+
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -299,19 +305,25 @@ class AttributeAlterTest extends TestCase
      */
     public function testIncompleteConfig4()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
             'target' => 'test2',
             '%remove',
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
-        self::processFilter($config, $request);
+        $request = array(
+            'Attributes' => array(
+                 'test' => array('somethingiswrong'),
+             ),
+        );
+
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
+        $result = self::processFilter($config, $request);
     }
 
 
@@ -322,17 +334,24 @@ class AttributeAlterTest extends TestCase
      */
     public function testIncompleteConfig5()
     {
-        $config = [
+        $config = array(
             'subject' => 'test',
             'pattern' => '/wrong/',
             'replacement' => null,
-        ];
+        );
 
-        $request = [
-            'Attributes' => [
-                'eduPersonAffiliation' => ['emperess', 'emperor'],
-            ],
-        ];
+        $request = array(
+            'Attributes' => array(
+                 'test' => array('somethingiswrong'),
+             ),
+        );
+
+        $request = array(
+            'Attributes' => array(
+                'eduPersonAffiliation' => array('emperess', 'emperor'),
+            ),
+        );
         $result = self::processFilter($config, $request);
     }
 }
+

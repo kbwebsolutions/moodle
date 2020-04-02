@@ -1,17 +1,22 @@
 <?php
-$this->data['header'] = $this->t('{metarefresh:metarefresh:metarefresh_header}');
+$this->data['header'] = $this->t('{aggregator:aggregator:aggregator_header}');
 $this->includeAtTemplateBase('includes/header.php');
 
-echo '<h1>'.$this->data['header'].'</h1>';
+echo('<h1>Metarefresh fetch</h1>');
+
 
 if (!empty($this->data['logentries'])) {
-    echo '<pre style="border: 1px solid #aaa; padding: .5em; overflow: scroll">';
-    foreach ($this->data['logentries'] as $l) {
-        echo $l."\n";
-    }
-    echo '</pre>';
+	
+	echo '<pre style="border: 1px solid #aaa; padding: .5em; overflow: scroll">';
+	foreach($this->data['logentries'] AS $l) {
+		echo $l . "\n";		
+	}
+	echo '</pre>';
+	
 } else {
-    echo $this->t('{metarefresh:metarefresh:no_output}');
+	echo 'No output from metarefresh.';
 }
+
+
 
 $this->includeAtTemplateBase('includes/footer.php');

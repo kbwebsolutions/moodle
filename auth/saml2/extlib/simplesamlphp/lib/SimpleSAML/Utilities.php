@@ -1,6 +1,5 @@
 <?php
 
-namespace SimpleSAML;
 
 /**
  * Misc static functions that is used several places.in example parsing and id generation.
@@ -10,9 +9,9 @@ namespace SimpleSAML;
  *
  * @deprecated This entire class will be removed in SimpleSAMLphp 2.0.
  */
-
-class Utilities
+class SimpleSAML_Utilities
 {
+
     /**
      * @deprecated This property will be removed in SSP 2.0. Please use SimpleSAML\Logger::isErrorMasked() instead.
      */
@@ -113,11 +112,11 @@ class Utilities
 
 
     /**
-     * @deprecated This method will be removed in SSP 2.0. Please use \SimpleSAML\Auth\State::parseStateID() instead.
+     * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML_Auth_State::parseStateID() instead.
      */
     public static function parseStateID($stateId)
     {
-        return \SimpleSAML\Auth\State::parseStateID($stateId);
+        return SimpleSAML_Auth_State::parseStateID($stateId);
     }
 
 
@@ -150,7 +149,7 @@ class Utilities
      */
     public static function generateID()
     {
-        return \SimpleSAML\Utils\Random::generateID();
+        return SimpleSAML\Utils\Random::generateID();
     }
 
 
@@ -160,7 +159,7 @@ class Utilities
      */
     public static function generateTimestamp($instant = null)
     {
-        return \SimpleSAML\Utils\Time::generateTimestamp($instant);
+        return SimpleSAML\Utils\Time::generateTimestamp($instant);
     }
 
 
@@ -169,16 +168,16 @@ class Utilities
      */
     public static function parseDuration($duration, $timestamp = null)
     {
-        return \SimpleSAML\Utils\Time::parseDuration($duration, $timestamp);
+        return SimpleSAML\Utils\Time::parseDuration($duration, $timestamp);
     }
 
 
     /**
-     * @deprecated This method will be removed in SSP 2.0. Please raise a SimpleSAML\Error\Error exception instead.
+     * @deprecated This method will be removed in SSP 2.0. Please raise a SimpleSAML_Error_Error exception instead.
      */
-    public static function fatalError($trackId = 'na', $errorCode = null, \Exception $e = null)
+    public static function fatalError($trackId = 'na', $errorCode = null, Exception $e = null)
     {
-        throw new \SimpleSAML\Error\Error($errorCode, $e);
+        throw new SimpleSAML_Error_Error($errorCode, $e);
     }
 
 
@@ -187,15 +186,15 @@ class Utilities
      */
     public static function ipCIDRcheck($cidr, $ip = null)
     {
-        return \SimpleSAML\Utils\Net::ipCIDRcheck($cidr, $ip);
+        return SimpleSAML\Utils\Net::ipCIDRcheck($cidr, $ip);
     }
 
 
-    private static function doRedirect($url, $parameters = [])
+    private static function _doRedirect($url, $parameters = array())
     {
-        assert(is_string($url));
-        assert(!empty($url));
-        assert(is_array($parameters));
+        assert('is_string($url)');
+        assert('!empty($url)');
+        assert('is_array($parameters)');
 
         if (!empty($parameters)) {
             $url = self::addURLparameter($url, $parameters);
@@ -214,7 +213,7 @@ class Utilities
         }
 
         if (strlen($url) > 2048) {
-            \SimpleSAML\Logger::warning('Redirecting to a URL longer than 2048 bytes.');
+            SimpleSAML\Logger::warning('Redirecting to a URL longer than 2048 bytes.');
         }
 
         // Set the location header
@@ -253,18 +252,18 @@ class Utilities
      * @deprecated 1.12.0 This method will be removed from the API. Instead, use the redirectTrustedURL() or
      * redirectUntrustedURL() functions accordingly.
      */
-    public static function redirect($url, $parameters = [], $allowed_redirect_hosts = null)
+    public static function redirect($url, $parameters = array(), $allowed_redirect_hosts = null)
     {
-        assert(is_string($url));
-        assert(strlen($url) > 0);
-        assert(is_array($parameters));
+        assert('is_string($url)');
+        assert('strlen($url) > 0');
+        assert('is_array($parameters)');
 
         if ($allowed_redirect_hosts !== null) {
             $url = self::checkURLAllowed($url, $allowed_redirect_hosts);
         } else {
             $url = self::normalizeURL($url);
         }
-        self::doRedirect($url, $parameters);
+        self::_doRedirect($url, $parameters);
     }
 
 
@@ -272,7 +271,7 @@ class Utilities
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\HTTP::redirectTrustedURL()
      *     instead.
      */
-    public static function redirectTrustedURL($url, $parameters = [])
+    public static function redirectTrustedURL($url, $parameters = array())
     {
         \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, $parameters);
     }
@@ -282,7 +281,7 @@ class Utilities
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\HTTP::redirectUntrustedURL()
      *     instead.
      */
-    public static function redirectUntrustedURL($url, $parameters = [])
+    public static function redirectUntrustedURL($url, $parameters = array())
     {
         \SimpleSAML\Utils\HTTP::redirectUntrustedURL($url, $parameters);
     }
@@ -293,7 +292,7 @@ class Utilities
      */
     public static function transposeArray($in)
     {
-        return \SimpleSAML\Utils\Arrays::transpose($in);
+        return SimpleSAML\Utils\Arrays::transpose($in);
     }
 
 
@@ -301,18 +300,18 @@ class Utilities
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\XML::isDOMNodeOfType()
      *     instead.
      */
-    public static function isDOMElementOfType(\DOMNode $element, $name, $nsURI)
+    public static function isDOMElementOfType(DOMNode $element, $name, $nsURI)
     {
-        return \SimpleSAML\Utils\XML::isDOMNodeOfType($element, $name, $nsURI);
+        return SimpleSAML\Utils\XML::isDOMNodeOfType($element, $name, $nsURI);
     }
 
 
     /**
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\XML::getDOMChildren() instead.
      */
-    public static function getDOMChildren(\DOMElement $element, $localName, $namespaceURI)
+    public static function getDOMChildren(DOMElement $element, $localName, $namespaceURI)
     {
-        return \SimpleSAML\Utils\XML::getDOMChildren($element, $localName, $namespaceURI);
+        return SimpleSAML\Utils\XML::getDOMChildren($element, $localName, $namespaceURI);
     }
 
 
@@ -321,7 +320,7 @@ class Utilities
      */
     public static function getDOMText($element)
     {
-        return \SimpleSAML\Utils\XML::getDOMText($element);
+        return SimpleSAML\Utils\XML::getDOMText($element);
     }
 
 
@@ -359,7 +358,7 @@ class Utilities
      */
     public static function generateRandomBytes($length)
     {
-        assert(is_int($length));
+        assert('is_int($length)');
 
         return openssl_random_pseudo_bytes($length);
     }
@@ -420,7 +419,7 @@ class Utilities
      */
     public static function parseAttributes($attributes)
     {
-        return \SimpleSAML\Utils\Attributes::normalizeAttributesArray($attributes);
+        return SimpleSAML\Utils\Attributes::normalizeAttributesArray($attributes);
     }
 
 
@@ -429,7 +428,7 @@ class Utilities
      */
     public static function getSecretSalt()
     {
-        return \SimpleSAML\Utils\Config::getSecretSalt();
+        return SimpleSAML\Utils\Config::getSecretSalt();
     }
 
 
@@ -464,27 +463,27 @@ class Utilities
     /**
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\Crypto::loadPublicKey() instead.
      */
-    public static function loadPublicKey(\SimpleSAML\Configuration $metadata, $required = false, $prefix = '')
+    public static function loadPublicKey(SimpleSAML_Configuration $metadata, $required = false, $prefix = '')
     {
-        return \SimpleSAML\Utils\Crypto::loadPublicKey($metadata, $required, $prefix);
+        return SimpleSAML\Utils\Crypto::loadPublicKey($metadata, $required, $prefix);
     }
 
 
     /**
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\Crypto::loadPrivateKey() instead.
      */
-    public static function loadPrivateKey(\SimpleSAML\Configuration $metadata, $required = false, $prefix = '')
+    public static function loadPrivateKey(SimpleSAML_Configuration $metadata, $required = false, $prefix = '')
     {
-        return \SimpleSAML\Utils\Crypto::loadPrivateKey($metadata, $required, $prefix);
+        return SimpleSAML\Utils\Crypto::loadPrivateKey($metadata, $required, $prefix);
     }
 
 
     /**
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\XML::formatDOMElement() instead.
      */
-    public static function formatDOMElement(\DOMElement $root, $indentBase = '')
+    public static function formatDOMElement(DOMElement $root, $indentBase = '')
     {
-        \SimpleSAML\Utils\XML::formatDOMElement($root, $indentBase);
+        SimpleSAML\Utils\XML::formatDOMElement($root, $indentBase);
     }
 
 
@@ -493,7 +492,7 @@ class Utilities
      */
     public static function formatXMLString($xml, $indentBase = '')
     {
-        return \SimpleSAML\Utils\XML::formatXMLString($xml, $indentBase);
+        return SimpleSAML\Utils\XML::formatXMLString($xml, $indentBase);
     }
 
 
@@ -502,7 +501,7 @@ class Utilities
      */
     public static function arrayize($data, $index = 0)
     {
-        return \SimpleSAML\Utils\Arrays::arrayize($data, $index);
+        return SimpleSAML\Utils\Arrays::arrayize($data, $index);
     }
 
 
@@ -511,7 +510,7 @@ class Utilities
      */
     public static function isAdmin()
     {
-        return \SimpleSAML\Utils\Auth::isAdmin();
+        return SimpleSAML\Utils\Auth::isAdmin();
     }
 
 
@@ -520,7 +519,7 @@ class Utilities
      */
     public static function getAdminLoginURL($returnTo = null)
     {
-        return \SimpleSAML\Utils\Auth::getAdminLoginURL($returnTo);
+        return SimpleSAML\Utils\Auth::getAdminLoginURL($returnTo);
     }
 
 
@@ -558,21 +557,21 @@ class Utilities
      */
     public static function createHttpPostRedirectLink($destination, $post)
     {
-        assert(is_string($destination));
-        assert(is_array($post));
+        assert('is_string($destination)');
+        assert('is_array($post)');
 
-        $postId = \SimpleSAML\Utils\Random::generateID();
-        $postData = [
+        $postId = SimpleSAML\Utils\Random::generateID();
+        $postData = array(
             'post' => $post,
             'url'  => $destination,
-        ];
+        );
 
-        $session = \SimpleSAML\Session::getSessionFromRequest();
+        $session = SimpleSAML_Session::getSessionFromRequest();
         $session->setData('core_postdatalink', $postId, $postData);
 
-        $redirInfo = base64_encode(\SimpleSAML\Utils\Crypto::aesEncrypt($session->getSessionId().':'.$postId));
+        $redirInfo = base64_encode(SimpleSAML\Utils\Crypto::aesEncrypt($session->getSessionId().':'.$postId));
 
-        $url = \SimpleSAML\Module::getModuleURL('core/postredirect.php', ['RedirInfo' => $redirInfo]);
+        $url = SimpleSAML\Module::getModuleURL('core/postredirect.php', array('RedirInfo' => $redirInfo));
         $url = preg_replace("#^https:#", "http:", $url);
 
         return $url;
@@ -611,7 +610,7 @@ class Utilities
      */
     public static function getTempDir()
     {
-        return \SimpleSAML\Utils\System::getTempDir();
+        return SimpleSAML\Utils\System::getTempDir();
     }
 
 
@@ -620,7 +619,7 @@ class Utilities
      */
     public static function maskErrors($mask)
     {
-        \SimpleSAML\Logger::maskErrors($mask);
+        SimpleSAML\Logger::maskErrors($mask);
     }
 
 
@@ -629,7 +628,7 @@ class Utilities
      */
     public static function popErrorMask()
     {
-        \SimpleSAML\Logger::popErrorMask();
+        SimpleSAML\Logger::popErrorMask();
     }
 
 
@@ -665,7 +664,7 @@ class Utilities
     /**
      * @deprecated This method will be removed in SSP 2.0. Please use SimpleSAML\Utils\HTTP::fetch() instead.
      */
-    public static function fetch($path, $context = [], $getHeaders = false)
+    public static function fetch($path, $context = array(), $getHeaders = false)
     {
         return \SimpleSAML\Utils\HTTP::fetch($path, $context, $getHeaders);
     }
@@ -676,7 +675,7 @@ class Utilities
      */
     public static function aesEncrypt($clear)
     {
-        return \SimpleSAML\Utils\Crypto::aesEncrypt($clear);
+        return SimpleSAML\Utils\Crypto::aesEncrypt($clear);
     }
 
 
@@ -685,7 +684,7 @@ class Utilities
      */
     public static function aesDecrypt($encData)
     {
-        return \SimpleSAML\Utils\Crypto::aesDecrypt($encData);
+        return SimpleSAML\Utils\Crypto::aesDecrypt($encData);
     }
 
 
@@ -694,7 +693,7 @@ class Utilities
      */
     public static function isWindowsOS()
     {
-        return \SimpleSAML\Utils\System::getOS() === \SimpleSAML\Utils\System::WINDOWS;
+        return SimpleSAML\Utils\System::getOS() === SimpleSAML\Utils\System::WINDOWS;
     }
 
 

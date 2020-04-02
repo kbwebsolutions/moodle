@@ -36,7 +36,7 @@ class auth_saml2_autoloader_test extends advanced_testcase {
         $classes = [
             \Psr\Log\LoggerInterface::class,
             \SAML2\Utils::class,
-            \SimpleSAML\Configuration::class,
+            SimpleSAML_Configuration::class,
             \RobRichards\XMLSecLibs\XMLSecEnc::class,
             Twig_Loader_Filesystem::class,
         ];

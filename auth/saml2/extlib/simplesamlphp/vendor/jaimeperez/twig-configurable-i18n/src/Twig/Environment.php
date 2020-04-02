@@ -9,12 +9,13 @@
  */
 namespace JaimePerez\TwigConfigurableI18n\Twig;
 
-class Environment extends \Twig\Environment
+class Environment extends \Twig_Environment
 {
+
     /**
      * @var array The array of options passed to the constructor.
      */
-    protected $options = [];
+    protected $options = array();
 
 
     /**
@@ -26,11 +27,11 @@ class Environment extends \Twig\Environment
      *
      *  * translation_function_plural: the name of a function to translate a message in plural.
      *
-     * @see \Twig\Environment::__construct()
-     * @param \Twig\Loader\LoaderInterface $loader A Twig_LoaderInterface instance.
+     * @see \Twig_Environment::__construct()
+     * @param \Twig_LoaderInterface|null $loader A Twig_LoaderInterface instance.
      * @param array                      $options An array of options.
      */
-    public function __construct(\Twig\Loader\LoaderInterface $loader, $options = [])
+    public function __construct(\Twig_LoaderInterface $loader = null, $options = array())
     {
         parent::__construct($loader, $options);
         $this->options = $options;

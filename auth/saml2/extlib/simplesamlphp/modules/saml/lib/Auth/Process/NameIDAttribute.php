@@ -1,15 +1,14 @@
 <?php
 
-namespace SimpleSAML\Module\saml\Auth\Process;
 
 /**
  * Authentication processing filter to create an attribute from a NameID.
  *
  * @package SimpleSAMLphp
  */
-
-class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
+class sspmod_saml_Auth_Process_NameIDAttribute extends SimpleSAML_Auth_ProcessingFilter
 {
+
     /**
      * The attribute we should save the NameID in.
      *
@@ -35,7 +34,7 @@ class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
     public function __construct($config, $reserved)
     {
         parent::__construct($config, $reserved);
-        assert(is_array($config));
+        assert('is_array($config)');
 
         if (isset($config['attribute'])) {
             $this->attribute = (string) $config['attribute'];
@@ -59,13 +58,13 @@ class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
      * @param string $format The format string.
      * @return array The format string broken into its individual components.
      *
-     * @throws \SimpleSAML\Error\Exception if the replacement is invalid.
+     * @throws SimpleSAML_Error_Exception if the replacement is invalid.
      */
     private static function parseFormat($format)
     {
-        assert(is_string($format));
+        assert('is_string($format)');
 
-        $ret = [];
+        $ret = array();
         $pos = 0;
         while (($next = strpos($format, '%', $pos)) !== false) {
             $ret[] = substr($format, $pos, $next - $pos);
@@ -82,13 +81,13 @@ class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
                     $ret[] = 'SPNameQualifier';
                     break;
                 case 'V':
-                    $ret[] = 'Value';
+                    $ret[] = 'value';
                     break;
                 case '%':
                     $ret[] = '%';
                     break;
                 default:
-                    throw new \SimpleSAML\Error\Exception('NameIDAttribute: Invalid replacement: "%'.$replacement.'"');
+                    throw new SimpleSAML_Error_Exception('NameIDAttribute: Invalid replacement: "%'.$replacement.'"');
             }
 
             $pos = $next + 2;
@@ -106,25 +105,26 @@ class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
      */
     public function process(&$state)
     {
-        assert(is_array($state));
-        assert(isset($state['Source']['entityid']));
-        assert(isset($state['Destination']['entityid']));
+        assert('is_array($state)');
+        assert('isset($state["Source"]["entityid"])');
+        assert('isset($state["Destination"]["entityid"])');
 
         if (!isset($state['saml:sp:NameID'])) {
             return;
         }
 
         $rep = $state['saml:sp:NameID'];
-        assert(!is_null($rep->getValue()));
+        assert(isset($rep->value));
+
         $rep->{'%'} = '%';
-        if ($rep->getFormat() !== null) {
-            $rep->setFormat(\SAML2\Constants::NAMEID_UNSPECIFIED);
+        if (!isset($rep->Format)) {
+            $rep->Format = \SAML2\Constants::NAMEID_UNSPECIFIED;
         }
-        if ($rep->getNameQualifier() !== null) {
-            $rep->setNameQualifier($state['Source']['entityid']);
+        if (!isset($rep->NameQualifier)) {
+            $rep->NameQualifier = $state['Source']['entityid'];
         }
-        if ($rep->getSPNameQualifier() !== null) {
-            $rep->setSPNameQualifier($state['Destination']['entityid']);
+        if (!isset($rep->SPNameQualifier)) {
+            $rep->SPNameQualifier = $state['Destination']['entityid'];
         }
 
         $value = '';
@@ -133,11 +133,11 @@ class NameIDAttribute extends \SimpleSAML\Auth\ProcessingFilter
             if ($isString) {
                 $value .= $element;
             } else {
-                $value .= call_user_func([$rep, 'get'.$element]);
+                $value .= $rep->$element;
             }
             $isString = !$isString;
         }
 
-        $state['Attributes'][$this->attribute] = [$value];
+        $state['Attributes'][$this->attribute] = array($value);
     }
 }

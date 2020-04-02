@@ -12,10 +12,9 @@ namespace SimpleSAML\Test\Web;
 
 include(dirname(__FILE__).'/../BuiltInServer.php');
 
-use PHPUnit\Framework\TestCase;
 use \SimpleSAML\Test\BuiltInServer;
 
-class IndexTest extends TestCase
+class IndexTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,13 +70,18 @@ class IndexTest extends TestCase
             $this->markTestSkipped('The web-based tests cannot be run in HHVM for the moment.');
         }
 
+        if (version_compare(phpversion(), '5.4') === -1) {
+            // no built-in server prior to 5.4
+            $this->markTestSkipped('The web-based tests cannot be run in PHP versions older than 5.4.');
+        }
+
         // test most basic redirection
-        $this->updateConfig([
+        $this->updateConfig(array(
                 'baseurlpath' => 'http://example.org/simplesaml/'
-        ]);
-        $resp = $this->server->get('/index.php', [], [
+        ));
+        $resp = $this->server->get('/index.php', array(), array(
             CURLOPT_FOLLOWLOCATION => 0,
-        ]);
+        ));
         $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
             'http://example.org/simplesaml/module.php/core/frontpage_welcome.php',
@@ -85,12 +89,12 @@ class IndexTest extends TestCase
         );
 
         // test non-default path and https
-        $this->updateConfig([
+        $this->updateConfig(array(
             'baseurlpath' => 'https://example.org/'
-        ]);
-        $resp = $this->server->get('/index.php', [], [
+        ));
+        $resp = $this->server->get('/index.php', array(), array(
             CURLOPT_FOLLOWLOCATION => 0,
-        ]);
+        ));
         $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
             'https://example.org/module.php/core/frontpage_welcome.php',
@@ -98,12 +102,12 @@ class IndexTest extends TestCase
         );
 
         // test URL guessing
-        $this->updateConfig([
+        $this->updateConfig(array(
             'baseurlpath' => '/simplesaml/'
-        ]);
-        $resp = $this->server->get('/index.php', [], [
+        ));
+        $resp = $this->server->get('/index.php', array(), array(
             CURLOPT_FOLLOWLOCATION => 0,
-        ]);
+        ));
         $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
             'http://'.$this->server_addr.'/simplesaml/module.php/core/frontpage_welcome.php',

@@ -1,13 +1,9 @@
 <?php
 
-namespace SimpleSAML\Test\Module\core\Auth\Process;
-
-use PHPUnit\Framework\TestCase;
-
 /**
  * Test for the core:AttributeRealm filter.
  */
-class AttributeRealmTest extends TestCase
+class Test_Core_Auth_Process_AttributeRealm extends PHPUnit_Framework_TestCase
 {
 
     /**
@@ -19,7 +15,7 @@ class AttributeRealmTest extends TestCase
      */
     private static function processFilter(array $config, array $request)
     {
-        $filter = new \SimpleSAML\Module\core\Auth\Process\AttributeRealm($config, null);
+        $filter = new sspmod_core_Auth_Process_AttributeRealm($config, NULL);
         $filter->process($request);
         return $request;
     }
@@ -29,16 +25,16 @@ class AttributeRealmTest extends TestCase
      */
     public function testBasic()
     {
-        $config = [
-        ];
-        $request = [
-            'Attributes' => [],
+        $config = array(
+        );
+        $request = array(
+            'Attributes' => array(),
             'UserID' => 'user2@example.org',
-        ];
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('realm', $attributes);
-        $this->assertEquals($attributes['realm'], ['example.org']);
+        $this->assertEquals($attributes['realm'], array('example.org'));
     }
 
     /**
@@ -48,12 +44,12 @@ class AttributeRealmTest extends TestCase
      */
     public function testNoUserID()
     {
-        $config = [
-        ];
-        $request = [
-            'Attributes' => [],
-        ];
-        self::processFilter($config, $request);
+        $config = array(
+        );
+        $request = array(
+            'Attributes' => array(),
+        );
+        $result = self::processFilter($config, $request);
     }
 
     /**
@@ -61,21 +57,21 @@ class AttributeRealmTest extends TestCase
      */
     public function testAttributeNameConfig()
     {
-        $config = [
+        $config = array(
             'attributename' => 'schacHomeOrganization',
-        ];
-        $request = [
-            'Attributes' => [
+        );
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Joe User',
                 'schacGender' => 9,
-            ],
+            ),
             'UserID' => 'user2@example.org',
-        ];
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('schacHomeOrganization', $attributes);
         $this->assertArrayHasKey('displayName', $attributes);
-        $this->assertEquals($attributes['schacHomeOrganization'], ['example.org']);
+        $this->assertEquals($attributes['schacHomeOrganization'], array('example.org'));
     }
 
     /**
@@ -83,21 +79,21 @@ class AttributeRealmTest extends TestCase
      */
     public function testTargetAttributeOverwritten()
     {
-        $config = [
+        $config = array(
             'attributename' => 'schacHomeOrganization',
-        ];
-        $request = [
-            'Attributes' => [
+        );
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Joe User',
                 'schacGender' => 9,
                 'schacHomeOrganization' => 'example.com',
-            ],
+            ),
             'UserID' => 'user2@example.org',
-        ];
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('schacHomeOrganization', $attributes);
-        $this->assertEquals($attributes['schacHomeOrganization'], ['example.org']);
+        $this->assertEquals($attributes['schacHomeOrganization'], array('example.org'));
     }
 
     /**
@@ -105,13 +101,13 @@ class AttributeRealmTest extends TestCase
      */
     public function testNoAtisNoOp()
     {
-        $config = [];
-        $request = [
-            'Attributes' => [
+        $config = array();
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Joe User',
-            ],
+            ),
             'UserID' => 'user2',
-        ];
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('realm', $attributes);
@@ -122,13 +118,13 @@ class AttributeRealmTest extends TestCase
      */
     public function testMultiAtisNoOp()
     {
-        $config = [];
-        $request = [
-            'Attributes' => [
+        $config = array();
+        $request = array(
+            'Attributes' => array(
                 'displayName' => 'Joe User',
-            ],
+            ),
             'UserID' => 'user2@home@example.org',
-        ];
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('realm', $attributes);

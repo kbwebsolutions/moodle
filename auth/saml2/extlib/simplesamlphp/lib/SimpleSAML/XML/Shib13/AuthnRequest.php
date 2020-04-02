@@ -36,21 +36,18 @@ class AuthnRequest
 
     public function createRedirect($destination, $shire)
     {
-        $metadata = \SimpleSAML\Metadata\MetaDataStorageHandler::getMetadataHandler();
+        $metadata = \SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler();
         $idpmetadata = $metadata->getMetaDataConfig($destination, 'shib13-idp-remote');
 
-        $desturl = $idpmetadata->getDefaultEndpoint(
-            'SingleSignOnService',
-            ['urn:mace:shibboleth:1.0:profiles:AuthnRequest']
-        );
+        $desturl = $idpmetadata->getDefaultEndpoint('SingleSignOnService', array('urn:mace:shibboleth:1.0:profiles:AuthnRequest'));
         $desturl = $desturl['Location'];
 
         $target = $this->getRelayState();
         
-        $url = $desturl.'?'.
-            'providerId='.urlencode($this->getIssuer()).
-            '&shire='.urlencode($shire).
-            (isset($target) ? '&target='.urlencode($target) : '');
+        $url = $desturl . '?' .
+            'providerId=' . urlencode($this->getIssuer()) .
+            '&shire=' . urlencode($shire) .
+            (isset($target) ? '&target=' . urlencode($target) : '');
         return $url;
     }
 }

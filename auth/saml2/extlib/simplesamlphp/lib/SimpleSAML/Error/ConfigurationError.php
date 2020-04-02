@@ -1,7 +1,4 @@
 <?php
-
-namespace SimpleSAML\Error;
-
 /**
  * This exception represents a configuration error.
  *
@@ -9,8 +6,12 @@ namespace SimpleSAML\Error;
  * @package SimpleSAMLphp
  */
 
-class ConfigurationError extends Error
+namespace SimpleSAML\Error;
+
+
+class ConfigurationError extends \SimpleSAML_Error_Error
 {
+
     /**
      * The reason for this exception.
      *
@@ -37,7 +38,7 @@ class ConfigurationError extends Error
     {
         $file_str = '';
         $reason_str = '.';
-        $params = ['CONFIG'];
+        $params = array('CONFIG');
         if ($file !== null) {
             $params['%FILE%'] = $file;
             $basepath = dirname(dirname(dirname(dirname(__FILE__)))).'/';

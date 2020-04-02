@@ -2,13 +2,12 @@
 
 namespace SimpleSAML\Test\Module\core\Auth\Process;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\Module\core\Auth\Process\AttributeValueMap;
 
 /**
  * Test for the core:AttributeValueMap filter.
  */
-class AttributeValueMapTest extends TestCase
+class AttributeValueMapTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -34,26 +33,26 @@ class AttributeValueMapTest extends TestCase
      */
     public function testBasic()
     {
-        $config = [
+        $config = array(
             'sourceattribute' => 'memberOf',
             'targetattribute' => 'eduPersonAffiliation',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
                     'otherGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('memberOf', $attributes);
         $this->assertArrayHasKey('eduPersonAffiliation', $attributes);
-        $this->assertEquals($attributes['eduPersonAffiliation'], ['member']);
+        $this->assertEquals($attributes['eduPersonAffiliation'], array('member'));
     }
 
 
@@ -65,27 +64,27 @@ class AttributeValueMapTest extends TestCase
      */
     public function testNoDuplicates()
     {
-        $config = [
+        $config = array(
             'sourceattribute' => 'memberOf',
             'targetattribute' => 'eduPersonAffiliation',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
                     'otherGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup', 'otherGroup'],
-                'eduPersonAffiliation' => ['member', 'someValue'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup', 'otherGroup'),
+                'eduPersonAffiliation' => array('member', 'someValue'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('memberOf', $attributes);
         $this->assertArrayHasKey('eduPersonAffiliation', $attributes);
-        $this->assertEquals($attributes['eduPersonAffiliation'], ['member', 'someValue']);
+        $this->assertEquals($attributes['eduPersonAffiliation'], array('member', 'someValue'));
     }
 
 
@@ -97,28 +96,28 @@ class AttributeValueMapTest extends TestCase
      */
     public function testReplace()
     {
-        $config = [
+        $config = array(
             'sourceattribute' => 'memberOf',
             'targetattribute' => 'eduPersonAffiliation',
             '%replace',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
                     'otherGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-                'eduPersonAffiliation' => ['someValue'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+                'eduPersonAffiliation' => array('someValue'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayNotHasKey('memberOf', $attributes);
         $this->assertArrayHasKey('eduPersonAffiliation', $attributes);
-        $this->assertEquals($attributes['eduPersonAffiliation'], ['member']);
+        $this->assertEquals($attributes['eduPersonAffiliation'], array('member'));
     }
 
 
@@ -130,28 +129,28 @@ class AttributeValueMapTest extends TestCase
      */
     public function testKeep()
     {
-        $config = [
+        $config = array(
             'sourceattribute' => 'memberOf',
             'targetattribute' => 'eduPersonAffiliation',
             '%keep',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
                     'otherGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-                'eduPersonAffiliation' => ['someValue'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+                'eduPersonAffiliation' => array('someValue'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('memberOf', $attributes);
         $this->assertArrayHasKey('eduPersonAffiliation', $attributes);
-        $this->assertEquals($attributes['eduPersonAffiliation'], ['someValue', 'member']);
+        $this->assertEquals($attributes['eduPersonAffiliation'], array('someValue','member'));
     }
 
 
@@ -163,21 +162,21 @@ class AttributeValueMapTest extends TestCase
      */
     public function testUnknownFlag()
     {
-        $config = [
+        $config = array(
             '%test',
             'targetattribute' => 'affiliation',
             'sourceattribute' => 'memberOf',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+            ),
+        );
         $result = self::processFilter($config, $request);
         $this->assertArrayHasKey('affiliation', $result['Attributes']);
         $this->assertArrayNotHasKey('memberOf', $result['Attributes']);
@@ -195,19 +194,19 @@ class AttributeValueMapTest extends TestCase
      */
     public function testMissingSourceAttribute()
     {
-        $config = [
+        $config = array(
             'targetattribute' => 'affiliation',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+            ),
+        );
         self::processFilter($config, $request);
     }
 
@@ -222,19 +221,19 @@ class AttributeValueMapTest extends TestCase
      */
     public function testMissingTargetAttribute()
     {
-        $config = [
+        $config = array(
             'sourceattribute' => 'memberOf',
-            'values' => [
-                'member' => [
+            'values' => array(
+                'member' => array(
                     'theGroup',
-                ],
-            ],
-        ];
-        $request = [
-            'Attributes' => [
-                'memberOf' => ['theGroup'],
-            ],
-        ];
+                ),
+            ),
+        );
+        $request = array(
+            'Attributes' => array(
+                'memberOf' => array('theGroup'),
+            ),
+        );
         self::processFilter($config, $request);
     }
 }

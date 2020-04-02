@@ -44,7 +44,7 @@ abstract class SessionHandlerCookie extends SessionHandler
         // call the constructor in the base class in case it should become necessary in the future
         parent::__construct();
 
-        $config = Configuration::getInstance();
+        $config = \SimpleSAML_Configuration::getInstance();
         $this->cookie_name = $config->getString('session.cookie.name', 'SimpleSAMLSessionID');
     }
 
@@ -57,7 +57,7 @@ abstract class SessionHandlerCookie extends SessionHandler
     public function newSessionId()
     {
         $this->session_id = self::createSessionID();
-        Session::createSession($this->session_id);
+        \SimpleSAML_Session::createSession($this->session_id);
 
         return $this->session_id;
     }
@@ -71,7 +71,7 @@ abstract class SessionHandlerCookie extends SessionHandler
     public function getCookieSessionId()
     {
         if ($this->session_id === null) {
-            if ($this->hasSessionCookie()) {
+            if (self::hasSessionCookie()) {
                 // attempt to retrieve the session id from the cookie
                 $this->session_id = $_COOKIE[$this->cookie_name];
             }
@@ -159,8 +159,8 @@ abstract class SessionHandlerCookie extends SessionHandler
      */
     public function setCookie($sessionName, $sessionID, array $cookieParams = null)
     {
-        assert(is_string($sessionName));
-        assert(is_string($sessionID) || $sessionID === null);
+        assert('is_string($sessionName)');
+        assert('is_string($sessionID) || is_null($sessionID)');
 
         if ($cookieParams !== null) {
             $params = array_merge($this->getCookieParams(), $cookieParams);

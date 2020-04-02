@@ -8,9 +8,8 @@
 
 namespace SimpleSAML\Test\Module\saml\Auth\Process;
 
-use PHPUnit\Framework\TestCase;
 
-class FilterScopesTest extends TestCase
+class FilterScopesTest extends \PHPUnit_Framework_TestCase
 {
 
     /*
@@ -34,51 +33,51 @@ class FilterScopesTest extends TestCase
     public function testValidScopes()
     {
         // test declared scopes
-        $config = [];
-        $request = [
-            'Source'     => [
-                'SingleSignOnService' => [
-                    [
+        $config = array();
+        $request = array(
+            'Source'     => array(
+                'SingleSignOnService' => array(
+                    array(
                         'Binding'  => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
                         'Location' => 'https://example.org/saml2/idp/SSOService.php',
-                    ],
-                ],
-                'scope' => [
+                    ),
+                ),
+                'scope' => array(
                     'example.com',
                     'example.net',
-                ],
-            ],
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['jdoe@example.com'],
-            ],
-        ];
+                ),
+            ),
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('jdoe@example.com'),
+            ),
+        );
         $result = $this->processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
 
         // test multiple values
-        $request['Attributes'] = [
-            'eduPersonPrincipalName' => [
+        $request['Attributes'] = array(
+            'eduPersonPrincipalName' => array(
                 'jdoe@example.com',
                 'jdoe@example.net',
-            ],
-        ];
+            ),
+        );
         $result = $this->processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
 
         // test implicit scope
-        $request['Attributes'] = [
-            'eduPersonPrincipalName' => ['jdoe@example.org'],
-        ];
+        $request['Attributes'] = array(
+            'eduPersonPrincipalName' => array('jdoe@example.org'),
+        );
         $result = $this->processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
 
         // test alternative attributes
-        $config['attributes'] = [
+        $config['attributes'] = array(
             'mail',
-        ];
-        $request['Attributes'] = [
-            'mail' => ['john.doe@example.org'],
-        ];
+        );
+        $request['Attributes'] = array(
+            'mail' => array('john.doe@example.org'),
+        );
         $result = $this->processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
 
@@ -95,43 +94,43 @@ class FilterScopesTest extends TestCase
     public function testInvalidScopes()
     {
         // test scope not matching anything, empty attribute
-        $config = [];
-        $request = [
-            'Source'     => [
-                'SingleSignOnService' => [
-                    [
+        $config = array();
+        $request = array(
+            'Source'     => array(
+                'SingleSignOnService' => array(
+                    array(
                         'Binding'  => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
                         'Location' => 'https://example.org/saml2/idp/SSOService.php',
-                    ],
-                ],
-                'scope' => [
+                    ),
+                ),
+                'scope' => array(
                     'example.com',
                     'example.net',
-                ],
-            ],
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['jdoe@example.edu'],
-            ],
-        ];
+                ),
+            ),
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('jdoe@example.edu'),
+            ),
+        );
         $result = $this->processFilter($config, $request);
-        $this->assertEquals([], $result['Attributes']);
+        $this->assertEquals(array(), $result['Attributes']);
 
         // test some scopes allowed and some others not
         $request['Attributes']['eduPersonPrincipalName'][] = 'jdoe@example.com';
         $result = $this->processFilter($config, $request);
         $this->assertEquals(
-            [
-                'eduPersonPrincipalName' => [
+            array(
+                'eduPersonPrincipalName' => array(
                     'jdoe@example.com',
-                ],
-            ],
+                ),
+            ),
             $result['Attributes']
         );
 
         // test attribute missing scope
-        $request['Attributes'] = [
-            'eduPersonPrincipalName' => ['jdoe'],
-        ];
+        $request['Attributes'] = array(
+            'eduPersonPrincipalName' => array('jdoe'),
+        );
         $result = $this->processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
     }

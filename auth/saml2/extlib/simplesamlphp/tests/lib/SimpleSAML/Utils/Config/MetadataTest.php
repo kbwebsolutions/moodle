@@ -2,13 +2,12 @@
 
 namespace SimpleSAML\Test\Utils\Config;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\Utils\Config\Metadata;
 
 /**
  * Tests related to SAML metadata.
  */
-class MetadataTest extends TestCase
+class MetadataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -24,9 +23,9 @@ class MetadataTest extends TestCase
         }
 
         // test missing type
-        $contact = [
+        $contact = array(
             'name' => 'John Doe'
-        ];
+        );
         try {
             Metadata::getContact($contact);
         } catch (\InvalidArgumentException $e) {
@@ -34,9 +33,9 @@ class MetadataTest extends TestCase
         }
 
         // test invalid type
-        $contact = [
+        $contact = array(
             'contactType' => 'invalid'
-        ];
+        );
         try {
             Metadata::getContact($contact);
         } catch (\InvalidArgumentException $e) {
@@ -45,9 +44,9 @@ class MetadataTest extends TestCase
 
         // test all valid contact types
         foreach (Metadata::$VALID_CONTACT_TYPES as $type) {
-            $contact = [
+            $contact = array(
                 'contactType' => $type
-            ];
+            );
             $parsed = Metadata::getContact($contact);
             $this->assertArrayHasKey('contactType', $parsed);
             $this->assertArrayNotHasKey('givenName', $parsed);
@@ -55,10 +54,10 @@ class MetadataTest extends TestCase
         }
 
         // test basic name parsing
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
             'name'        => 'John Doe'
-        ];
+        );
         $parsed = Metadata::getContact($contact);
         $this->assertArrayNotHasKey('name', $parsed);
         $this->assertArrayHasKey('givenName', $parsed);
@@ -67,10 +66,10 @@ class MetadataTest extends TestCase
         $this->assertEquals('Doe', $parsed['surName']);
 
         // test comma-separated names
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
             'name'        => 'Doe, John'
-        ];
+        );
         $parsed = Metadata::getContact($contact);
         $this->assertArrayHasKey('givenName', $parsed);
         $this->assertArrayHasKey('surName', $parsed);
@@ -78,10 +77,10 @@ class MetadataTest extends TestCase
         $this->assertEquals('Doe', $parsed['surName']);
 
         // test long names
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
             'name'        => 'John Fitzgerald Doe Smith'
-        ];
+        );
         $parsed = Metadata::getContact($contact);
         $this->assertArrayNotHasKey('name', $parsed);
         $this->assertArrayHasKey('givenName', $parsed);
@@ -89,10 +88,10 @@ class MetadataTest extends TestCase
         $this->assertEquals('John Fitzgerald Doe Smith', $parsed['givenName']);
 
         // test comma-separated long names
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
             'name'        => 'Doe Smith, John Fitzgerald'
-        ];
+        );
         $parsed = Metadata::getContact($contact);
         $this->assertArrayNotHasKey('name', $parsed);
         $this->assertArrayHasKey('givenName', $parsed);
@@ -101,10 +100,10 @@ class MetadataTest extends TestCase
         $this->assertEquals('Doe Smith', $parsed['surName']);
 
         // test givenName
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
-        ];
-        $invalid_types = [0, [0], 0.1, true, false];
+        );
+        $invalid_types = array(0, array(0), 0.1, true, false);
         foreach ($invalid_types as $type) {
             $contact['givenName'] = $type;
             try {
@@ -115,10 +114,10 @@ class MetadataTest extends TestCase
         }
 
         // test surName
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
-        ];
-        $invalid_types = [0, [0], 0.1, true, false];
+        );
+        $invalid_types = array(0, array(0), 0.1, true, false);
         foreach ($invalid_types as $type) {
             $contact['surName'] = $type;
             try {
@@ -129,10 +128,10 @@ class MetadataTest extends TestCase
         }
 
         // test company
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
-        ];
-        $invalid_types = [0, [0], 0.1, true, false];
+        );
+        $invalid_types = array(0, array(0), 0.1, true, false);
         foreach ($invalid_types as $type) {
             $contact['company'] = $type;
             try {
@@ -143,10 +142,10 @@ class MetadataTest extends TestCase
         }
 
         // test emailAddress
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
-        ];
-        $invalid_types = [0, 0.1, true, false, []];
+        );
+        $invalid_types = array(0, 0.1, true, false, array());
         foreach ($invalid_types as $type) {
             $contact['emailAddress'] = $type;
             try {
@@ -158,7 +157,7 @@ class MetadataTest extends TestCase
                 );
             }
         }
-        $invalid_types = [["string", true], ["string", 0]];
+        $invalid_types = array(array("string", true), array("string", 0));
         foreach ($invalid_types as $type) {
             $contact['emailAddress'] = $type;
             try {
@@ -170,7 +169,7 @@ class MetadataTest extends TestCase
                 );
             }
         }
-        $valid_types = ['email@example.com', ['email1@example.com', 'email2@example.com']];
+        $valid_types = array('email@example.com', array('email1@example.com', 'email2@example.com'));
         foreach ($valid_types as $type) {
             $contact['emailAddress'] = $type;
             $parsed = Metadata::getContact($contact);
@@ -178,10 +177,10 @@ class MetadataTest extends TestCase
         }
 
         // test telephoneNumber
-        $contact = [
+        $contact = array(
             'contactType' => 'technical',
-        ];
-        $invalid_types = [0, 0.1, true, false, []];
+        );
+        $invalid_types = array(0, 0.1, true, false, array());
         foreach ($invalid_types as $type) {
             $contact['telephoneNumber'] = $type;
             try {
@@ -193,7 +192,7 @@ class MetadataTest extends TestCase
                 );
             }
         }
-        $invalid_types = [["string", true], ["string", 0]];
+        $invalid_types = array(array("string", true), array("string", 0));
         foreach ($invalid_types as $type) {
             $contact['telephoneNumber'] = $type;
             try {
@@ -202,7 +201,7 @@ class MetadataTest extends TestCase
                 $this->assertEquals('Telephone numbers must be a string and cannot be empty.', $e->getMessage());
             }
         }
-        $valid_types = ['1234', ['1234', '5678']];
+        $valid_types = array('1234', array('1234', '5678'));
         foreach ($valid_types as $type) {
             $contact['telephoneNumber'] = $type;
             $parsed = Metadata::getContact($contact);
@@ -210,13 +209,13 @@ class MetadataTest extends TestCase
         }
 
         // test completeness
-        $contact = [];
+        $contact = array();
         foreach (Metadata::$VALID_CONTACT_OPTIONS as $option) {
             $contact[$option] = 'string';
         }
         $contact['contactType'] = 'technical';
         $contact['name'] = 'to_be_removed';
-        $contact['attributes'] = ['test' => 'testval'];
+        $contact['attributes'] = array('test' => 'testval');
         $parsed = Metadata::getContact($contact);
         foreach (array_keys($parsed) as $key) {
             $this->assertEquals($parsed[$key], $contact[$key]);
@@ -231,72 +230,32 @@ class MetadataTest extends TestCase
     public function testIsHiddenFromDiscovery()
     {
         // test for success
-        $metadata = [
-            'EntityAttributes' => [
-                Metadata::$ENTITY_CATEGORY => [
+        $metadata = array(
+            'EntityAttributes' => array(
+                Metadata::$ENTITY_CATEGORY => array(
                     Metadata::$HIDE_FROM_DISCOVERY,
-                ],
-            ],
-        ];
+                ),
+            ),
+        );
         $this->assertTrue(Metadata::isHiddenFromDiscovery($metadata));
 
         // test for failures
-        $this->assertFalse(Metadata::isHiddenFromDiscovery(['foo']));
-        $this->assertFalse(Metadata::isHiddenFromDiscovery([
+        $this->assertFalse(Metadata::isHiddenFromDiscovery(array('foo')));
+        $this->assertFalse(Metadata::isHiddenFromDiscovery(array(
             'EntityAttributes' => 'bar',
-        ]));
-        $this->assertFalse(Metadata::isHiddenFromDiscovery([
-            'EntityAttributes' => [],
-        ]));
-        $this->assertFalse(Metadata::isHiddenFromDiscovery([
-            'EntityAttributes' => [
+        )));
+        $this->assertFalse(Metadata::isHiddenFromDiscovery(array(
+            'EntityAttributes' => array(),
+        )));
+        $this->assertFalse(Metadata::isHiddenFromDiscovery(array(
+            'EntityAttributes' => array(
                 Metadata::$ENTITY_CATEGORY => '',
-            ],
-        ]));
-        $this->assertFalse(Metadata::isHiddenFromDiscovery([
-            'EntityAttributes' => [
-                Metadata::$ENTITY_CATEGORY => [],
-            ],
-        ]));
-    }
-
-    
-    /**
-     * Test \SimpleSAML\Utils\Config\Metadata::parseNameIdPolicy().
-     */
-    public function testParseNameIdPolicy()
-    {
-        // Test null or unset
-        $nameIdPolicy = null;
-        $this->assertEquals(['Format' => \SAML2\Constants::NAMEID_TRANSIENT], Metadata::parseNameIdPolicy($nameIdPolicy));
-
-        // Test false
-        $nameIdPolicy = false;
-        $this->assertEquals(null, Metadata::parseNameIdPolicy($nameIdPolicy));
-
-        // Test string
-        $nameIdPolicy = 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress';
-        $this->assertEquals(['Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'], Metadata::parseNameIdPolicy($nameIdPolicy));
-
-        // Test array
-        $nameIdPolicy = [
-            'Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:persistent',
-            'AllowCreate' => false
-        ];
-        $this->assertEquals([
-            'Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:persistent',
-            'AllowCreate' => false
-        ], Metadata::parseNameIdPolicy($nameIdPolicy));
-
-        $nameIdPolicy = [
-            'Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:persistent',
-            'AllowCreate' => false,
-            'SPNameQualifier' => 'TEST'
-        ];
-        $this->assertEquals([
-            'Format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:persistent',
-            'AllowCreate' => false,
-            'SPNameQualifier' => 'TEST'
-        ], Metadata::parseNameIdPolicy($nameIdPolicy));
+            ),
+        )));
+        $this->assertFalse(Metadata::isHiddenFromDiscovery(array(
+            'EntityAttributes' => array(
+                Metadata::$ENTITY_CATEGORY => array(),
+            ),
+        )));
     }
 }

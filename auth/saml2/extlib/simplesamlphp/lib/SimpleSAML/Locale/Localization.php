@@ -14,97 +14,63 @@ use Gettext\Translator;
 
 class Localization
 {
+
     /**
      * The configuration to use.
      *
-     * @var \SimpleSAML\Configuration
+     * @var \SimpleSAML_Configuration
      */
     private $configuration;
 
     /**
      * The default gettext domain.
-     *
-     * @var string
      */
     const DEFAULT_DOMAIN = 'messages';
 
     /**
      * Old internationalization backend included in SimpleSAMLphp.
-     *
-     * @var string
      */
     const SSP_I18N_BACKEND = 'SimpleSAMLphp';
 
     /**
      * An internationalization backend implemented purely in PHP.
-     *
-     * @var string
      */
     const GETTEXT_I18N_BACKEND = 'gettext/gettext';
 
-    /**
+    /*
      * The default locale directory
-     *
-     * @var string
      */
     private $localeDir;
 
-    /**
+    /*
      * Where specific domains are stored
-     *
-     * @var array
      */
-    private $localeDomainMap = [];
+    private $localeDomainMap = array();
 
-    /**
+    /*
      * Pointer to currently active translator
-     *
-     * @var \Gettext\Translator
      */
     private $translator;
 
-    /**
-     * Pointer to current Language
-     *
-     * @var Language
-     */
-    private $language;
-
-    /**
-     * Language code representing the current Language
-     *
-     * @var string
-     */
-    private $langcode;
-
-
-    /**
-     * The language backend to use
-     *
-     * @var string
-     */
-    public $i18nBackend;
 
     /**
      * Constructor
      *
-     * @param \SimpleSAML\Configuration $configuration Configuration object
+     * @param \SimpleSAML_Configuration $configuration Configuration object
      */
-    public function __construct(\SimpleSAML\Configuration $configuration)
+    public function __construct(\SimpleSAML_Configuration $configuration)
     {
         $this->configuration = $configuration;
         $this->localeDir = $this->configuration->resolvePath('locales');
         $this->language = new Language($configuration);
         $this->langcode = $this->language->getPosixLanguage($this->language->getLanguage());
-        $this->i18nBackend = ($this->configuration->getBoolean('usenewui', false) ? self::GETTEXT_I18N_BACKEND : self::SSP_I18N_BACKEND);
+        $this->i18nBackend = $this->configuration->getString('language.i18n.backend', self::SSP_I18N_BACKEND);
         $this->setupL10N();
     }
 
 
     /**
      * Dump the default locale directory
-     *
-     * @return string
      */
     public function getLocaleDir()
     {
@@ -116,17 +82,15 @@ class Localization
      * Get the default locale dir for a specific module aka. domain
      *
      * @param string $domain Name of module/domain
-     *
-     * @return string
      */
     public function getDomainLocaleDir($domain)
     {
-        $localeDir = $this->configuration->resolvePath('modules').'/'.$domain.'/locales';
+        $localeDir = $this->configuration->resolvePath('modules') . '/' . $domain . '/locales';
         return $localeDir;
     }
 
 
-    /**
+    /*
      * Add a new translation domain from a module
      * (We're assuming that each domain only exists in one place)
      *
@@ -142,7 +106,7 @@ class Localization
     }
 
 
-    /**
+    /*
      * Add a new translation domain
      * (We're assuming that each domain only exists in one place)
      *
@@ -161,8 +125,6 @@ class Localization
      *
      * @param string $domain Name of localization domain
      * @throws Exception If the path does not exist even for the default, fallback language
-     *
-     * @return string
      */
     public function getLangPath($domain = self::DEFAULT_DOMAIN)
     {
@@ -191,7 +153,7 @@ class Localization
         if (is_dir($langPath) && is_readable($langPath)) {
             // Report that the localization for the preferred language is missing
             $error = "Localization not found for langcode '$langcode' at '$langPath', falling back to langcode '".
-                $defLangcode."'";
+                     $defLangcode."'";
             \SimpleSAML\Logger::error($_SERVER['PHP_SELF'].' - '.$error);
             return $langPath;
         }
@@ -254,8 +216,6 @@ class Localization
      * Test to check if backend is set to default
      *
      * (if false: backend unset/there's an error)
-     *
-     * @return bool
      */
     public function isI18NBackendDefault()
     {
@@ -283,11 +243,10 @@ class Localization
 
     /**
      * Show which domains are registered
-     *
-     * @return array
      */
     public function getRegisteredDomains()
     {
         return $this->localeDomainMap;
     }
+
 }

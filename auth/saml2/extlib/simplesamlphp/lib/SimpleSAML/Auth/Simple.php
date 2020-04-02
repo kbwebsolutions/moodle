@@ -2,10 +2,12 @@
 
 namespace SimpleSAML\Auth;
 
-use \SimpleSAML\Configuration;
-use \SimpleSAML\Error\AuthSource as AuthSourceError;
+use \SimpleSAML_Auth_Source as Source;
+use \SimpleSAML_Auth_State as State;
+use \SimpleSAML_Configuration as Configuration;
+use \SimpleSAML_Error_AuthSource as AuthSourceError;
 use \SimpleSAML\Module;
-use \SimpleSAML\Session;
+use \SimpleSAML_Session as Session;
 use \SimpleSAML\Utils\HTTP;
 
 /**
@@ -13,9 +15,9 @@ use \SimpleSAML\Utils\HTTP;
  *
  * @package SimpleSAMLphp
  */
-
 class Simple
 {
+
     /**
      * The id of the authentication source we are accessing.
      *
@@ -23,43 +25,31 @@ class Simple
      */
     protected $authSource;
 
-    /** @var \SimpleSAML\Configuration */
+    /**
+     * @var \SimpleSAML_Configuration|null
+     */
     protected $app_config;
-
-    /** @var \SimpleSAML\Session */
-    protected $session;
-
 
     /**
      * Create an instance with the specified authsource.
      *
      * @param string $authSource The id of the authentication source.
-     * @param \SimpleSAML\Configuration|null $config Optional configuration to use.
-     * @param \SimpleSAML\Session|null $session Optional session to use.
      */
-    public function __construct($authSource, Configuration $config = null, Session $session = null)
+    public function __construct($authSource)
     {
-        assert(is_string($authSource));
+        assert('is_string($authSource)');
 
-        if ($config === null) {
-            $config = Configuration::getInstance();
-        }
         $this->authSource = $authSource;
-        $this->app_config = $config->getConfigItem('application', null);
-
-        if ($session === null) {
-            $session = Session::getSessionFromRequest();
-        }
-        $this->session = $session;
+        $this->app_config = Configuration::getInstance()->getConfigItem('application', null);
     }
 
 
     /**
      * Retrieve the implementing authentication source.
      *
-     * @return Source The authentication source.
+     * @return \SimpleSAML_Auth_Source The authentication source.
      *
-     * @throws AuthSourceError If the requested auth source is unknown.
+     * @throws \SimpleSAML_Error_AuthSource If the requested auth source is unknown.
      */
     public function getAuthSource()
     {
@@ -81,7 +71,9 @@ class Simple
      */
     public function isAuthenticated()
     {
-        return $this->session->isValid($this->authSource);
+        $session = Session::getSessionFromRequest();
+
+        return $session->isValid($this->authSource);
     }
 
 
@@ -98,9 +90,12 @@ class Simple
      *
      * @param array $params Various options to the authentication request. See the documentation.
      */
-    public function requireAuth(array $params = [])
+    public function requireAuth(array $params = array())
     {
-        if ($this->session->isValid($this->authSource)) {
+
+        $session = Session::getSessionFromRequest();
+
+        if ($session->isValid($this->authSource)) {
             // Already authenticated
             return;
         }
@@ -123,8 +118,9 @@ class Simple
      *
      * @param array $params Various options to the authentication request.
      */
-    public function login(array $params = [])
+    public function login(array $params = array())
     {
+
         if (array_key_exists('KeepPost', $params)) {
             $keepPost = (bool) $params['KeepPost'];
         } else {
@@ -163,7 +159,7 @@ class Simple
 
         $as = $this->getAuthSource();
         $as->initLogin($returnTo, $errorURL, $params);
-        assert(false);
+        assert('false');
     }
 
 
@@ -184,34 +180,35 @@ class Simple
      */
     public function logout($params = null)
     {
-        assert(is_array($params) || is_string($params) || $params === null);
+        assert('is_array($params) || is_string($params) || is_null($params)');
 
         if ($params === null) {
             $params = HTTP::getSelfURL();
         }
 
         if (is_string($params)) {
-            $params = [
+            $params = array(
                 'ReturnTo' => $params,
-            ];
+            );
         }
 
-        assert(is_array($params));
-        assert(isset($params['ReturnTo']) || isset($params['ReturnCallback']));
+        assert('is_array($params)');
+        assert('isset($params["ReturnTo"]) || isset($params["ReturnCallback"])');
 
         if (isset($params['ReturnStateParam']) || isset($params['ReturnStateStage'])) {
-            assert(isset($params['ReturnStateParam'], $params['ReturnStateStage']));
+            assert('isset($params["ReturnStateParam"]) && isset($params["ReturnStateStage"])');
         }
 
-        if ($this->session->isValid($this->authSource)) {
-            $state = $this->session->getAuthData($this->authSource, 'LogoutState');
+        $session = Session::getSessionFromRequest();
+        if ($session->isValid($this->authSource)) {
+            $state = $session->getAuthData($this->authSource, 'LogoutState');
             if ($state !== null) {
                 $params = array_merge($state, $params);
             }
 
-            $this->session->doLogout($this->authSource);
+            $session->doLogout($this->authSource);
 
-            $params['LogoutCompletedHandler'] = [get_class(), 'logoutCompleted'];
+            $params['LogoutCompletedHandler'] = array(get_class(), 'logoutCompleted');
 
             $as = Source::getById($this->authSource);
             if ($as !== null) {
@@ -232,20 +229,20 @@ class Simple
      */
     public static function logoutCompleted($state)
     {
-        assert(is_array($state));
-        assert(isset($state['ReturnTo']) || isset($state['ReturnCallback']));
+        assert('is_array($state)');
+        assert('isset($state["ReturnTo"]) || isset($state["ReturnCallback"])');
 
         if (isset($state['ReturnCallback'])) {
             call_user_func($state['ReturnCallback'], $state);
-            assert(false);
+            assert('false');
         } else {
-            $params = [];
+            $params = array();
             if (isset($state['ReturnStateParam']) || isset($state['ReturnStateStage'])) {
-                assert(isset($state['ReturnStateParam'], $state['ReturnStateStage']));
+                assert('isset($state["ReturnStateParam"]) && isset($state["ReturnStateStage"])');
                 $stateID = State::saveState($state, $state['ReturnStateStage']);
                 $params[$state['ReturnStateParam']] = $stateID;
             }
-            HTTP::redirectTrustedURL($state['ReturnTo'], $params);
+            \SimpleSAML\Utils\HTTP::redirectTrustedURL($state['ReturnTo'], $params);
         }
     }
 
@@ -260,13 +257,15 @@ class Simple
      */
     public function getAttributes()
     {
+
         if (!$this->isAuthenticated()) {
             // Not authenticated
-            return [];
+            return array();
         }
 
         // Authenticated
-        return $this->session->getAuthData($this->authSource, 'Attributes');
+        $session = Session::getSessionFromRequest();
+        return $session->getAuthData($this->authSource, 'Attributes');
     }
 
 
@@ -279,13 +278,14 @@ class Simple
      */
     public function getAuthData($name)
     {
-        assert(is_string($name));
+        assert('is_string($name)');
 
         if (!$this->isAuthenticated()) {
             return null;
         }
 
-        return $this->session->getAuthData($this->authSource, $name);
+        $session = Session::getSessionFromRequest();
+        return $session->getAuthData($this->authSource, $name);
     }
 
 
@@ -296,11 +296,13 @@ class Simple
      */
     public function getAuthDataArray()
     {
+
         if (!$this->isAuthenticated()) {
             return null;
         }
 
-        return $this->session->getAuthState($this->authSource);
+        $session = Session::getSessionFromRequest();
+        return $session->getAuthState($this->authSource);
     }
 
 
@@ -314,16 +316,16 @@ class Simple
      */
     public function getLoginURL($returnTo = null)
     {
-        assert($returnTo === null || is_string($returnTo));
+        assert('is_null($returnTo) || is_string($returnTo)');
 
         if ($returnTo === null) {
             $returnTo = HTTP::getSelfURL();
         }
 
-        $login = Module::getModuleURL('core/as_login.php', [
+        $login = Module::getModuleURL('core/as_login.php', array(
             'AuthId'   => $this->authSource,
             'ReturnTo' => $returnTo,
-        ]);
+        ));
 
         return $login;
     }
@@ -339,16 +341,16 @@ class Simple
      */
     public function getLogoutURL($returnTo = null)
     {
-        assert($returnTo === null || is_string($returnTo));
+        assert('is_null($returnTo) || is_string($returnTo)');
 
         if ($returnTo === null) {
             $returnTo = HTTP::getSelfURL();
         }
 
-        $logout = Module::getModuleURL('core/as_logout.php', [
+        $logout = Module::getModuleURL('core/as_logout.php', array(
             'AuthId'   => $this->authSource,
             'ReturnTo' => $returnTo,
-        ]);
+        ));
 
         return $logout;
     }
@@ -371,14 +373,14 @@ class Simple
         }
 
         $scheme = parse_url($url, PHP_URL_SCHEME);
-        $host = parse_url($url, PHP_URL_HOST) ? : HTTP::getSelfHost();
-        $port = parse_url($url, PHP_URL_PORT) ? : (
+        $host = parse_url($url, PHP_URL_HOST) ?: HTTP::getSelfHost();
+        $port = parse_url($url, PHP_URL_PORT) ?: (
             $scheme ? '' : trim(HTTP::getServerPort(), ':')
         );
-        $scheme = $scheme ? : (HTTP::getServerHTTPS() ? 'https' : 'http');
-        $path = parse_url($url, PHP_URL_PATH) ? : '/';
-        $query = parse_url($url, PHP_URL_QUERY) ? : '';
-        $fragment = parse_url($url, PHP_URL_FRAGMENT) ? : '';
+        $scheme = $scheme ?: (HTTP::getServerHTTPS() ? 'https' : 'http');
+        $path = parse_url($url, PHP_URL_PATH) ?: '/';
+        $query = parse_url($url, PHP_URL_QUERY) ?: '';
+        $fragment = parse_url($url, PHP_URL_FRAGMENT) ?: '';
 
         $port = !empty($port) ? ':'.$port : '';
         if (($scheme === 'http' && $port === ':80') || ($scheme === 'https' && $port === ':443')) {
@@ -390,7 +392,7 @@ class Simple
             return $scheme.'://'.$host.$port.$path.($query ? '?'.$query : '').($fragment ? '#'.$fragment : '');
         }
 
-        $base = trim($this->app_config->getString(
+        $base =  trim($this->app_config->getString(
             'baseURL',
             $scheme.'://'.$host.$port
         ), '/');

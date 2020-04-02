@@ -1,17 +1,14 @@
 <?php
-
 namespace SimpleSAML\Utils;
-
-use SimpleSAML\Error;
 
 /**
  * System-related utility methods.
  *
  * @package SimpleSAMLphp
  */
-
 class System
 {
+
     const WINDOWS = 1;
     const LINUX = 2;
     const OSX = 3;
@@ -63,7 +60,7 @@ class System
      * This function retrieves the path to a directory where temporary files can be saved.
      *
      * @return string Path to a temporary directory, without a trailing directory separator.
-     * @throws Error\Exception If the temporary directory cannot be created or it exists and does not belong
+     * @throws \SimpleSAML_Error_Exception If the temporary directory cannot be created or it exists and does not belong
      * to the current user.
      *
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
@@ -72,7 +69,7 @@ class System
      */
     public static function getTempDir()
     {
-        $globalConfig = \SimpleSAML\Configuration::getInstance();
+        $globalConfig = \SimpleSAML_Configuration::getInstance();
 
         $tempDir = rtrim(
             $globalConfig->getString(
@@ -85,7 +82,7 @@ class System
         if (!is_dir($tempDir)) {
             if (!mkdir($tempDir, 0700, true)) {
                 $error = error_get_last();
-                throw new Error\Exception(
+                throw new \SimpleSAML_Error_Exception(
                     'Error creating temporary directory "'.$tempDir.'": '.
                     (is_array($error) ? $error['message'] : 'no error available')
                 );
@@ -94,7 +91,7 @@ class System
             // check that the owner of the temp directory is the current user
             $stat = lstat($tempDir);
             if ($stat['uid'] !== posix_getuid()) {
-                throw new Error\Exception(
+                throw new \SimpleSAML_Error_Exception(
                     'Temporary directory "'.$tempDir.'" does not belong to the current user.'
                 );
             }
@@ -121,24 +118,17 @@ class System
     public static function resolvePath($path, $base = null)
     {
         if ($base === null) {
-            $config = \SimpleSAML\Configuration::getInstance();
+            $config = \SimpleSAML_Configuration::getInstance();
             $base = $config->getBaseDir();
         }
 
-        // normalise directory separator
-        $base = str_replace('\\', '/', $base);
-        $path = str_replace('\\', '/', $path);
-
         // remove trailing slashes
         $base = rtrim($base, '/');
-        $path = rtrim($path, '/');
 
         // check for absolute path
         if (substr($path, 0, 1) === '/') {
             // absolute path. */
             $ret = '/';
-        } elseif (static::pathContainsDriveLetter($path)) {
-            $ret = '';
         } else {
             // path relative to base
             $ret = $base;
@@ -151,7 +141,7 @@ class System
             } elseif ($d === '..') {
                 $ret = dirname($ret);
             } else {
-                if ($ret && substr($ret, -1) !== '/') {
+                if (substr($ret, -1) !== '/') {
                     $ret .= '/';
                 }
                 $ret .= $d;
@@ -173,7 +163,7 @@ class System
      * @param int    $mode The permissions to apply to the file. Defaults to 0600.
      *
      * @throws \InvalidArgumentException If any of the input parameters doesn't have the proper types.
-     * @throws Error\Exception If the file cannot be saved, permissions cannot be changed or it is not
+     * @throws \SimpleSAML_Error_Exception If the file cannot be saved, permissions cannot be changed or it is not
      *     possible to write to the target file.
      *
      * @author Andreas Solberg, UNINETT AS <andreas.solberg@uninett.no>
@@ -194,7 +184,7 @@ class System
         $res = @file_put_contents($tmpFile, $data);
         if ($res === false) {
             $error = error_get_last();
-            throw new Error\Exception(
+            throw new \SimpleSAML_Error_Exception(
                 'Error saving file "'.$tmpFile.'": '.
                 (is_array($error) ? $error['message'] : 'no error available')
             );
@@ -205,7 +195,7 @@ class System
                 unlink($tmpFile);
                 $error = error_get_last();
                 //$error = (is_array($error) ? $error['message'] : 'no error available');
-                throw new Error\Exception(
+                throw new \SimpleSAML_Error_Exception(
                     'Error changing file mode of "'.$tmpFile.'": '.
                     (is_array($error) ? $error['message'] : 'no error available')
                 );
@@ -215,7 +205,7 @@ class System
         if (!rename($tmpFile, $filename)) {
             unlink($tmpFile);
             $error = error_get_last();
-            throw new Error\Exception(
+            throw new \SimpleSAML_Error_Exception(
                 'Error moving "'.$tmpFile.'" to "'.$filename.'": '.
                 (is_array($error) ? $error['message'] : 'no error available')
             );
@@ -224,19 +214,5 @@ class System
         if (function_exists('opcache_invalidate')) {
             opcache_invalidate($filename);
         }
-    }
-
-    /**
-     * Check if the supplied path contains a Windows-style drive letter.
-     *
-     * @param string $path
-     *
-     * @return bool
-     */
-    private static function pathContainsDriveLetter($path)
-    {
-        $letterAsciiValue = ord(strtoupper(substr($path, 0, 1)));
-        return substr($path, 1, 1) === ':'
-                && $letterAsciiValue >= 65 && $letterAsciiValue <= 90;
     }
 }

@@ -2,8 +2,7 @@
 
 namespace SimpleSAML\Test\Store;
 
-use PHPUnit\Framework\TestCase;
-use \SimpleSAML\Configuration;
+use \SimpleSAML_Configuration as Configuration;
 use \SimpleSAML\Store;
 
 /**
@@ -15,15 +14,15 @@ use \SimpleSAML\Store;
  * @author Sergio Gómez <sergio@uco.es>
  * @package simplesamlphp/simplesamlphp
  */
-class SQLTest extends TestCase
+class SQLTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
-        Configuration::loadFromArray([
+        \SimpleSAML_Configuration::loadFromArray(array(
             'store.type'                    => 'sql',
             'store.sql.dsn'                 => 'sqlite::memory:',
             'store.sql.prefix'              => 'phpunit_',
-        ], '[ARRAY]', 'simplesaml');
+        ), '[ARRAY]', 'simplesaml');
     }
 
     /**
@@ -50,7 +49,7 @@ class SQLTest extends TestCase
 
         $version = $store->getTableVersion('kvstore');
 
-        $this->assertEquals(2, $version);
+        $this->assertEquals(1, $version);
     }
 
     /**
@@ -94,7 +93,7 @@ class SQLTest extends TestCase
 
         $value = $store->get('test', 'foo');
 
-        $this->assertNull($value);
+        $this->assertEquals(null, $value);
     }
 
     /**
@@ -107,10 +106,10 @@ class SQLTest extends TestCase
     {
         /** @var \SimpleSAML\Store\SQL $store */
         $store = Store::getInstance();
-
+        
         $store->set('test', 'foo', 'bar');
         $value = $store->get('test', 'foo');
-
+        
         $this->assertEquals('bar', $value);
     }
 
@@ -148,7 +147,7 @@ class SQLTest extends TestCase
         $store->delete('test', 'foo');
         $value = $store->get('test', 'foo');
 
-        $this->assertNull($value);
+        $this->assertEquals(null, $value);
     }
 
     /**
@@ -168,7 +167,7 @@ class SQLTest extends TestCase
         $store->delete('test', $key);
         $value = $store->get('test', $key);
 
-        $this->assertNull($value);
+        $this->assertEquals(null, $value);
     }
 
     protected function tearDown()
@@ -176,7 +175,7 @@ class SQLTest extends TestCase
         $config = Configuration::getInstance();
         $store = Store::getInstance();
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
         $this->clearInstance($store, '\SimpleSAML\Store');
     }
 

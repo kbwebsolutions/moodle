@@ -47,24 +47,25 @@ class selectidp_buttons extends moodleform {
     public function definition() {
         $mform = $this->_form;
 
-        $metadataentities = $this->_customdata['metadataentities'];
+        $idpentityids = $this->_customdata['idpentityids'];
+        $idpentitylogos = $this->_customdata['idpentitylogos'];
         $defaultidp = $this->_customdata['defaultidp'];
         $wants = $this->_customdata['wants'];
 
         $mform->addElement('hidden', 'wants', $wants);
         $mform->addElement('checkbox', 'rememberidp' , '', get_string('rememberidp', 'auth_saml2'));
 
-        foreach ($metadataentities as $idpentities) {
-            if (isset($idpentities[$defaultidp])) {
-                $defaultidp = $idpentities[$defaultidp];
-                $mform->addElement('html', $this->get_idpbutton($defaultidp, $defaultidp->name, $defaultidp->logo, true));
-                $mform->addElement('html', '<hr>');
-                unset($idpentities[$defaultidp]);
-            }
+        if (isset($idpentityids[$defaultidp])) {
+            $idpname = $idpentityids[$defaultidp];
+            $logourl = isset($idpentitylogos[$defaultidp]) ? $idpentitylogos[$defaultidp] : null;
+            $mform->addElement('html', $this->get_idpbutton($defaultidp, $idpname, $logourl, true));
+            $mform->addElement('html', '<hr>');
+            unset($idpentityids[$defaultidp]);
+        }
 
-            foreach ($idpentities as $idpentityid => $idp) {
-                $mform->addElement('html', $this->get_idpbutton($idpentityid, $idp->name, $idp->logo));
-            }
+        foreach ($idpentityids as $idpentityid => $idpname) {
+            $logourl = isset($idpentitylogos[$idpentityid]) ? $idpentitylogos[$idpentityid] : null;
+            $mform->addElement('html', $this->get_idpbutton($idpentityid, $idpname, $logourl));
         }
     }
 

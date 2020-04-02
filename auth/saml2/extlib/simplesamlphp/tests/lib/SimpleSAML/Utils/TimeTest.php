@@ -2,11 +2,11 @@
 
 namespace SimpleSAML\Test\Utils;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\Utils\Time;
 
-class TimeTest extends TestCase
+class TimeTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * Test the SimpleSAML\Utils\Time::generateTimestamp() method.
      *
@@ -36,7 +36,7 @@ class TimeTest extends TestCase
         }
 
         // test guessing timezone from the OS
-        \SimpleSAML\Configuration::loadFromArray(['timezone' => null], '[ARRAY]', 'simplesaml');
+        \SimpleSAML_Configuration::loadFromArray(array('timezone' => null), '[ARRAY]', 'simplesaml');
         @Time::initTimezone();
         $this->assertEquals($os, @date_default_timezone_get());
 
@@ -46,21 +46,21 @@ class TimeTest extends TestCase
         $c->setValue(false);
 
         // test unknown timezone
-        \SimpleSAML\Configuration::loadFromArray(['timezone' => 'INVALID'], '[ARRAY]', 'simplesaml');
+        \SimpleSAML_Configuration::loadFromArray(array('timezone' => 'INVALID'), '[ARRAY]', 'simplesaml');
         try {
             @Time::initTimezone();
             $this->fail('Failed to recognize an invalid timezone.');
-        } catch (\SimpleSAML\Error\Exception $e) {
+        } catch (\SimpleSAML_Error_Exception $e) {
             $this->assertEquals('Invalid timezone set in the "timezone" option in config.php.', $e->getMessage());
         }
 
         // test a valid timezone
-        \SimpleSAML\Configuration::loadFromArray(['timezone' => $tz], '[ARRAY]', 'simplesaml');
+        \SimpleSAML_Configuration::loadFromArray(array('timezone' => $tz), '[ARRAY]', 'simplesaml');
         @Time::initTimezone();
         $this->assertEquals($tz, @date_default_timezone_get());
 
         // make sure initialization happens only once
-        \SimpleSAML\Configuration::loadFromArray(['timezone' => 'Europe/Madrid'], '[ARRAY]', 'simplesaml');
+        \SimpleSAML_Configuration::loadFromArray(array('timezone' => 'Europe/Madrid'), '[ARRAY]', 'simplesaml');
         @Time::initTimezone();
         $this->assertEquals($tz, @date_default_timezone_get());
     }
@@ -143,7 +143,7 @@ class TimeTest extends TestCase
         }
         try {
             // invalid timestamp
-            Time::parseDuration('', []);
+            Time::parseDuration('', array());
             $this->fail("Did not fail with invalid timestamp parameter.");
         } catch (\InvalidArgumentException $e) {
             $this->assertEquals('Invalid input parameters', $e->getMessage());

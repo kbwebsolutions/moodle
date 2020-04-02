@@ -8,10 +8,10 @@
  */
 
 if (!array_key_exists('StateId', $_REQUEST)) {
-    throw new \SimpleSAML\Error\BadRequest('Missing required StateId query parameter.');
+	throw new SimpleSAML_Error_BadRequest('Missing required StateId query parameter.');
 }
-$state = \SimpleSAML\Auth\State::loadState($_REQUEST['StateId'], 'exampleauth:redirectfilter-test');
+$state = SimpleSAML_Auth_State::loadState($_REQUEST['StateId'], 'exampleauth:redirectfilter-test');
 
-$state['Attributes']['RedirectTest2'] = ['OK'];
+$state['Attributes']['RedirectTest2'] = array('OK');
 
-\SimpleSAML\Auth\ProcessingChain::resumeProcessing($state);
+SimpleSAML_Auth_ProcessingChain::resumeProcessing($state);

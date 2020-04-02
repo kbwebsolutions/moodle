@@ -2,8 +2,7 @@
 
 namespace SimpleSAML\Test\Utils;
 
-use PHPUnit\Framework\TestCase;
-use \SimpleSAML\Configuration;
+use \SimpleSAML_Configuration as Configuration;
 use \SimpleSAML\Utils\System;
 
 use \org\bovigo\vfs\vfsStream;
@@ -11,7 +10,7 @@ use \org\bovigo\vfs\vfsStream;
 /**
  * Tests for SimpleSAML\Utils\System.
  */
-class SystemTest extends TestCase
+class SystemTest extends \PHPUnit_Framework_TestCase
 {
     const ROOTDIRNAME = 'testdir';
     const DEFAULTTEMPDIR = 'tempdir';
@@ -21,9 +20,9 @@ class SystemTest extends TestCase
         $this->root = vfsStream::setup(
             self::ROOTDIRNAME,
             null,
-            [
-                self::DEFAULTTEMPDIR => [],
-            ]
+            array(
+                self::DEFAULTTEMPDIR => array(),
+            )
         );
         $this->root_directory = vfsStream::url(self::ROOTDIRNAME);
     }
@@ -110,33 +109,35 @@ class SystemTest extends TestCase
     }
 
     /**
+     * @requires PHP 5.4.0
      * @covers \SimpleSAML\Utils\System::writeFile
      * @test
      */
     public function testWriteFileBasic()
     {
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.self::DEFAULTTEMPDIR;
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . self::DEFAULTTEMPDIR;
         $config = $this->setConfigurationTempDir($tempdir);
 
-        $filename = $this->root_directory.DIRECTORY_SEPARATOR.'test';
+        $filename = $this->root_directory . DIRECTORY_SEPARATOR . 'test';
 
         System::writeFile($filename, '');
 
         $this->assertFileExists($filename);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     /**
+     * @requires PHP 5.4.0
      * @covers \SimpleSAML\Utils\System::writeFile
      * @test
      */
     public function testWriteFileContents()
     {
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.self::DEFAULTTEMPDIR;
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . self::DEFAULTTEMPDIR;
         $config = $this->setConfigurationTempDir($tempdir);
 
-        $filename = $this->root_directory.DIRECTORY_SEPARATOR.'test';
+        $filename = $this->root_directory . DIRECTORY_SEPARATOR . 'test';
         $contents = 'TEST';
 
         System::writeFile($filename, $contents);
@@ -146,19 +147,20 @@ class SystemTest extends TestCase
 
         $this->assertEquals($expected, $res);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     /**
+     * @requires PHP 5.4.0
      * @covers \SimpleSAML\Utils\System::writeFile
      * @test
      */
     public function testWriteFileMode()
     {
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.self::DEFAULTTEMPDIR;
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . self::DEFAULTTEMPDIR;
         $config = $this->setConfigurationTempDir($tempdir);
 
-        $filename = $this->root_directory.DIRECTORY_SEPARATOR.'test';
+        $filename = $this->root_directory . DIRECTORY_SEPARATOR . 'test';
         $mode = 0666;
 
         System::writeFile($filename, '', $mode);
@@ -168,7 +170,7 @@ class SystemTest extends TestCase
 
         $this->assertEquals($expected, $res);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     /**
@@ -177,7 +179,7 @@ class SystemTest extends TestCase
      */
     public function testGetTempDirBasic()
     {
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.self::DEFAULTTEMPDIR;
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . self::DEFAULTTEMPDIR;
         $config = $this->setConfigurationTempDir($tempdir);
 
         $res = System::getTempDir();
@@ -186,7 +188,7 @@ class SystemTest extends TestCase
         $this->assertEquals($expected, $res);
         $this->assertFileExists($res);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     /**
@@ -195,7 +197,7 @@ class SystemTest extends TestCase
      */
     public function testGetTempDirNonExistant()
     {
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.'nonexistant';
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . 'nonexistant';
         $config = $this->setConfigurationTempDir($tempdir);
 
         $res = System::getTempDir();
@@ -204,38 +206,35 @@ class SystemTest extends TestCase
         $this->assertEquals($expected, $res);
         $this->assertFileExists($res);
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     /**
+     * @requires PHP 5.4.0
      * @requires OS Linux
      * @covers \SimpleSAML\Utils\System::getTempDir
      * @test
      */
     public function testGetTempDirBadOwner()
     {
-        if (!function_exists('posix_getuid')) {
-            static::markTestSkipped('POSIX-functions not available;  skipping!');
-        }
-
         $bad_uid = posix_getuid() + 1;
 
-        $tempdir = $this->root_directory.DIRECTORY_SEPARATOR.self::DEFAULTTEMPDIR;
+        $tempdir = $this->root_directory . DIRECTORY_SEPARATOR . self::DEFAULTTEMPDIR;
         $config = $this->setConfigurationTempDir($tempdir);
 
         chown($tempdir, $bad_uid);
 
-        $this->setExpectedException('\SimpleSAML\Error\Exception');
-        System::getTempDir();
+        $this->setExpectedException('\SimpleSAML_Error_Exception');
+        $res = System::getTempDir();
 
-        $this->clearInstance($config, '\SimpleSAML\Configuration');
+        $this->clearInstance($config, '\SimpleSAML_Configuration');
     }
 
     private function setConfigurationTempDir($directory)
     {
-        $config = Configuration::loadFromArray([
+        $config = Configuration::loadFromArray(array(
             'tempdir' => $directory,
-        ], '[ARRAY]', 'simplesaml');
+        ), '[ARRAY]', 'simplesaml');
 
         return $config;
     }

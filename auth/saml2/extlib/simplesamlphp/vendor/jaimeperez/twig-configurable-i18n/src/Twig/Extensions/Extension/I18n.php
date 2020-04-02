@@ -7,47 +7,67 @@
 namespace JaimePerez\TwigConfigurableI18n\Twig\Extensions\Extension;
 
 use JaimePerez\TwigConfigurableI18n\Twig\Extensions\TokenParser\Trans;
+use Twig_Extensions_Extension_I18n;
 
-class I18n extends \Twig\Extensions\I18nExtension
+class I18n extends Twig_Extensions_Extension_I18n implements \Twig_Extension_InitRuntimeInterface
 {
-    /** @var array */
-    protected $filters = [];
+
+    /**
+     * @var string The function to use to translate singular sentences. Defaults to gettext().
+     */
+    protected $singular = 'gettext';
+
+    /**
+     * @var string The function to use to translate plural sentences. Defaults to ngettext().
+     */
+    protected $plural = 'ngettext';
 
 
     /**
-     * Build a new I18N extension.
-     *
-     * Two filters, "trans" and "transchoice" are registered by default. These two will allow you to translate
-     * singular and plural sentences, respectively.
+     * @param \Twig_Environment $environment The Twig environment to use with this exception.
      */
-    public function __construct()
+    public function initRuntime(\Twig_Environment $environment)
     {
-        $this->filters = [
-            new \Twig\TwigFilter('trans', [$this, 'translateSingular'], ['needs_environment' => true]),
-            new \Twig\TwigFilter('transchoice', [$this, 'translatePlural'], ['needs_environment' => true]),
-        ];
+        if ($environment instanceof \JaimePerez\TwigConfigurableI18n\Twig\Environment) {
+            $options = $environment->getOptions();
+            if (array_key_exists('translation_function', $options) &&
+                is_callable($options['translation_function'], false, $callable)
+            ) {
+                $this->singular = $options['translation_function'];
+            }
+            if (array_key_exists('translation_function_plural', $options) &&
+                is_callable($options['translation_function_plural'], false, $callable)
+            ) {
+                $this->plural = $options['translation_function_plural'];
+            }
+        }
+
+        parent::initRuntime($environment);
     }
 
 
     /**
      * Returns the token parser instances to add to the existing list.
      *
-     * @return \Twig\TokenParser\TokenParserInterface[]
+     * @return array An array of Twig_TokenParserInterface or Twig_TokenParserBrokerInterface instances
      */
     public function getTokenParsers()
     {
-        return [new Trans()];
+        return array(new Trans());
     }
 
 
     /**
      * Returns a list of filters to add to the existing list.
      *
-     * @return \Twig\TwigFilter[] An array of filters
+     * @return array An array of filters
      */
     public function getFilters()
     {
-        return $this->filters;
+        return array(
+            new \Twig_SimpleFilter('trans', array($this, 'translateSingular')),
+            new \Twig_SimpleFilter('transchoice', array($this, 'translatePlural')),
+        );
     }
 
 
@@ -60,18 +80,8 @@ class I18n extends \Twig\Extensions\I18nExtension
      */
     public function translateSingular()
     {
-        $singular = 'gettext';
         $args = func_get_args();
-
-        /** @var \JaimePerez\TwigConfigurableI18n\Twig\Environment $env */
-        $env = array_shift($args);
-        $options = $env->getOptions();
-        if (array_key_exists('translation_function', $options) &&
-            is_callable($options['translation_function'], false, $callable)
-        ) {
-            $singular = $options['translation_function'];
-        }
-        return call_user_func_array($singular, $args);
+        return call_user_func_array($this->singular, $args);
     }
 
 
@@ -84,18 +94,7 @@ class I18n extends \Twig\Extensions\I18nExtension
      */
     public function translatePlural()
     {
-        $plural = 'ngettext';
         $args = func_get_args();
-
-        /** @var \JaimePerez\TwigConfigurableI18n\Twig\Environment $env */
-        $env = array_shift($args);
-        $options = $env->getOptions();
-
-        if (array_key_exists('translation_function_plural', $options) &&
-            is_callable($options['translation_function_plural'])
-        ) {
-            $plural = $options['translation_function_plural'];
-        }
-        return call_user_func_array($plural, $args);
+        return call_user_func_array($this->plural, $args);
     }
 }

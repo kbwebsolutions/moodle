@@ -9,6 +9,7 @@
 
 namespace SimpleSAML\Test;
 
+
 class BuiltInServer
 {
 
@@ -88,7 +89,7 @@ class BuiltInServer
         );
 
         // execute the command and store the process ID
-        $output = [];
+        $output = array();
         exec($command, $output);
         $this->pid = (int) $output[0];
 
@@ -169,32 +170,32 @@ class BuiltInServer
      *
      * @return array|string The response obtained from the built-in server.
      */
-    public function get($query, $parameters, $curlopts = [])
+    public function get($query, $parameters, $curlopts = array())
     {
         $ch = curl_init();
         $url = 'http://'.$this->address.$query;
         $url .= (!empty($parameters)) ? '?'.http_build_query($parameters) : '';
-        curl_setopt_array($ch, [
+        curl_setopt_array($ch, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_HEADER => 1,
-        ]);
+        ));
         curl_setopt_array($ch, $curlopts);
         $resp = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         list($header, $body) = explode("\r\n\r\n", $resp, 2);
         $raw_headers = explode("\r\n", $header);
         array_shift($raw_headers);
-        $headers = [];
+        $headers = array();
         foreach ($raw_headers as $header) {
             list($name, $value) = explode(':', $header, 2);
             $headers[trim($name)] = trim($value);
         }
         curl_close($ch);
-        return [
+        return array(
             'code' => $code,
             'headers' => $headers,
             'body' => $body,
-        ];
+        );
     }
 }

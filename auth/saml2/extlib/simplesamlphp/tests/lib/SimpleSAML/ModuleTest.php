@@ -1,12 +1,12 @@
 <?php
-
 namespace SimpleSAML\Test;
 
-use PHPUnit\Framework\TestCase;
 use SimpleSAML\Module;
 
-class ModuleTest extends TestCase
+class ModuleTest extends \PHPUnit_Framework_TestCase
 {
+
+
     /**
      * Test for SimpleSAML\Module::isModuleEnabled().
      */
@@ -35,19 +35,19 @@ class ModuleTest extends TestCase
      */
     public function testGetModuleURL()
     {
-        \SimpleSAML\Configuration::loadFromArray([
+        \SimpleSAML_Configuration::loadFromArray(array(
             'baseurlpath' => 'https://example.com/simplesaml/'
-        ], '', 'simplesaml');
+        ), '', 'simplesaml');
         $this->assertEquals(
             'https://example.com/simplesaml/module.php/module/script.php',
             Module::getModuleURL('module/script.php')
         );
         $this->assertEquals(
             'https://example.com/simplesaml/module.php/module/script.php?param1=value1&param2=value2',
-            Module::getModuleURL('module/script.php', [
+            Module::getModuleURL('module/script.php', array(
                 'param1' => 'value1',
                 'param2' => 'value2',
-            ])
+            ))
         );
     }
 
@@ -107,16 +107,13 @@ class ModuleTest extends TestCase
         $this->assertEquals('sspmod_core_ACL', Module::resolveClass('core:ACL', ''));
 
         // test for the $type parameter correctly translated into a path
-        $this->assertEquals(
-            '\SimpleSAML\Module\core\Auth\Process\PHP',
-            Module::resolveClass('core:PHP', 'Auth_Process')
-        );
+        $this->assertEquals('sspmod_core_Auth_Process_PHP', Module::resolveClass('core:PHP', 'Auth_Process'));
 
         // test for valid subclasses
-        $this->assertEquals('\SimpleSAML\Module\core\Auth\Process\PHP', Module::resolveClass(
+        $this->assertEquals('sspmod_core_Auth_Process_PHP', Module::resolveClass(
             'core:PHP',
-            'Auth\Process',
-            '\SimpleSAML\Auth\ProcessingFilter'
+            'Auth_Process',
+            'SimpleSAML_Auth_ProcessingFilter'
         ));
     }
 }

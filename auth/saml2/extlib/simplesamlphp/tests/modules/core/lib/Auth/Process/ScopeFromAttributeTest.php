@@ -1,13 +1,9 @@
 <?php
 
-namespace SimpleSAML\Test\Module\core\Auth\Process;
-
-use PHPUnit\Framework\TestCase;
-
 /**
  * Test for the core:ScopeFromAttribute filter.
  */
-class ScopeFromAttributeTest extends TestCase
+class Test_Core_Auth_Process_ScopeFromAttribute extends PHPUnit_Framework_TestCase
 {
 
     /*
@@ -19,7 +15,7 @@ class ScopeFromAttributeTest extends TestCase
      */
     private static function processFilter(array $config, array $request)
     {
-        $filter = new \SimpleSAML\Module\core\Auth\Process\ScopeFromAttribute($config, null);
+        $filter = new sspmod_core_Auth_Process_ScopeFromAttribute($config, NULL);
         $filter->process($request);
         return $request;
     }
@@ -29,19 +25,19 @@ class ScopeFromAttributeTest extends TestCase
      */
     public function testBasic()
     {
-        $config = [
+        $config = array(
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['jdoe@example.com'],
-            ]
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('jdoe@example.com'),
+            )
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
         $this->assertArrayHasKey('scope', $attributes);
-        $this->assertEquals($attributes['scope'], ['example.com']);
+        $this->assertEquals($attributes['scope'], array('example.com'));
     }
 
     /*
@@ -49,19 +45,19 @@ class ScopeFromAttributeTest extends TestCase
      */
     public function testNoOverwrite()
     {
-        $config = [
+        $config = array(
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['jdoe@example.com'],
-                'scope' => ['example.edu']
-            ]
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('jdoe@example.com'),
+                'scope' => array('example.edu')
+            )
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['scope'], ['example.edu']);
+        $this->assertEquals($attributes['scope'], array('example.edu'));
     }
 
     /*
@@ -69,16 +65,16 @@ class ScopeFromAttributeTest extends TestCase
      */
     public function testNoSourceAttribute()
     {
-        $config = [
+        $config = array(
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ];
-        $request = [
-            'Attributes' => [
-                'mail' => ['j.doe@example.edu', 'john@example.org'],
-                'scope' => ['example.edu']
-            ]
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'mail' => array('j.doe@example.edu', 'john@example.org'),
+                'scope' => array('example.edu')
+            )
+        );
         $result = self::processFilter($config, $request);
         $this->assertEquals($request['Attributes'], $result['Attributes']);
     }
@@ -88,34 +84,36 @@ class ScopeFromAttributeTest extends TestCase
      */
     public function testMultiAt()
     {
-        $config = [
+        $config = array(
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['john@doe@example.com'],
-            ]
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('john@doe@example.com'),
+            )
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
-        $this->assertEquals($attributes['scope'], ['example.com']);
+        $this->assertEquals($attributes['scope'], array('example.com'));
     }
 
     /*
      * When the source attribute doesn't have a scope, a warning is emitted
+     * NOTE: currently disabled: this triggers a warning and a warning
+     * wants to start a session which we cannot do in phpunit. How to fix?
      */
     public function testNoAt()
     {
-        $config = [
+        $config = array(
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ];
-        $request = [
-            'Attributes' => [
-                'eduPersonPrincipalName' => ['johndoe'],
-            ]
-        ];
+        );
+        $request = array(
+            'Attributes' => array(
+                'eduPersonPrincipalName' => array('johndoe'),
+            )
+        );
         $result = self::processFilter($config, $request);
         $attributes = $result['Attributes'];
 

@@ -27,7 +27,7 @@ require('setup.php');
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-$config = SimpleSAML\Configuration::getInstance();
+$config = SimpleSAML_Configuration::getInstance();
 
 $PAGE->set_url("$CFG->httpswwwroot/auth/saml2/debug.php");
 $PAGE->set_course($SITE);
