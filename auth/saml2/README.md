@@ -13,6 +13,7 @@ https://moodle.org/plugins/auth_saml2
 * [Why is it better?](#why-is-it-better)
 * [How does it work?](#how-does-it-work)
 * [Features](#features)
+* [Branches](#branches)
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Testing](#testing)
@@ -48,9 +49,6 @@ configuration from Moodle configuration. In the future we should be able to
 swap to a different internal SAML implementation and the plugin GUI shouldn't
 need to change at all.
 
-* SimpleSAMLphp version 1.14.10
-
-
 Features
 --------
 
@@ -67,6 +65,14 @@ Features not yet implemented:
 * Enrolment - this should be an enrol plugin and not in an auth plugin
 * Role mapping - not yet implemented
 
+Branches
+--------
+
+| Moodle verion     | Branch      | PHP  | SimpleSAMLphp |
+| ----------------- | ----------- | ---- | ------------- |
+| Moodle 2.7 to 3.4 | 27_34STABLE | 5.5+ | v1.15.4       |
+| Moodle 3.5 to 3.8 | master      | 7.0+ | v1.17.7       |
+| Totara 12+        | master      | 7.0+ | v1.17.7       |
 
 Installation
 ------------

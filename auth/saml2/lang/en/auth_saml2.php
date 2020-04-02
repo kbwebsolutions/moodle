@@ -26,12 +26,18 @@ $string['alterlogout'] = 'Alternative Logout URL';
 $string['alterlogout_help'] = 'The URL to redirect a user after all internal logout mechanisms are run';
 $string['anyauth'] = 'Allowed any auth type';
 $string['anyauth_help'] = 'Yes: Allow SAML login for all users? No: Only users who have saml2 as their type.';
+$string['attemptsignout'] = 'Attempt IdP Signout';
+$string['attemptsignout_help'] = 'This will attempt to communicate with the IdP to send a sign out request';
 $string['auth_saml2description'] = 'Authenticate with a SAML2 IdP';
+$string['auth_saml2blockredirectdescription'] = 'Redirect or display message to SAML2 logins based on based on configured group restrictions';
 $string['autocreate'] = 'Auto create users';
 $string['autocreate_help'] = 'If users are in the IdP but not in moodle create a moodle account.';
 $string['availableidps'] = 'Select available IdPs';
 $string['availableidps_help'] = 'If an IdP metadata xml contains multiple IdP entities, you will need to select which entities are availiable
 for users to login with.';
+$string['blockredirectheading'] = 'Account blocking actions';
+$string['attrsimple'] = 'Simplify attributes';
+$string['attrsimple_help'] = 'Various IdP\'s such as ADFS use long attribute keys such as urns or namespaced xml schema names. If set to Yes this will simplify these, eg map http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname to such \'givenname\'.';
 $string['certificatedetails'] = 'Certificate details';
 $string['certificatedetailshelp'] = '<h1>SAML2 auto generated public certificate contents</h1><p>The path for the cert is here:</p>';
 $string['certificate_help'] = 'Regenerate the Private Key and Certificate used by this SP. | <a href=\'{$a}\'>View SP certificate</a>';
@@ -50,9 +56,24 @@ $string['duallogin_help'] = '
 <p>If passive, then the users that are already authenticated into the IDP will be automatically logged in, otherwise they will be sent to Moodle login page.</p>
 <p>If off, then admins can still see the manual login page via /login/index.php?saml=off</p>
 <p>If on, then external pages can deep link into moodle using saml eg /course/view.php?id=45&saml=on</p>';
+$string['emailtaken'] = 'Can\'t create a new account, because {$a} email address is already registered';
+$string['emailtakenupdate'] = 'Your email wasn\'t updated, because email address {$a} is already registered';
 $string['errorparsingxml'] = 'Error parsing XML: {$a}';
 $string['exception'] = 'SAML2 exception: {$a}';
 $string['expirydays'] = 'Expiry in Days';
+$string['flaggedresponsetypemessage'] = 'Display custom message';
+$string['flaggedresponsetyperedirect'] = 'Redirect to external URL';
+$string['flagredirecturl'] = 'Redirect URL';
+$string['flagredirecturl_help'] = '
+<p>The URL to redirect a user is not allowed to access Moodle based on configured group restrictions.</p>
+<p>(Only utilised when \'Response type\' is \'Redirect to external URL\'.)</p>';
+$string['flagmessage'] = 'Response message';
+$string['flagmessage_help'] = '
+<p>The message to display when a user is not allowed to access Moodle based on configured group restrictions.</p>
+<p>(Only displayed when \'Response response type\' is \'Display custom message\'.)</p>';
+$string['flagmessage_default'] = 'You are logged in to your identity provider however, this account has limited access to Moodle, please contact your administrator for more details.';
+$string['flagresponsetype'] = 'Account blocking response type';
+$string['flagresponsetype_help'] = 'If access is blocked based on configured group restrictions, how should Moodle respond?';
 $string['idpattr_help'] = 'Which IdP attribute should be matched against a Moodle user field?';
 $string['idpattr'] = 'Mapping IdP';
 $string['idpmetadata_badurl'] = 'Invalid metadata at {$a}';
@@ -72,25 +93,37 @@ $string['logdir_help'] = 'The log directory SSPHP will write to, the file will b
 $string['logdir'] = 'Log Directory';
 $string['logtofile'] = 'Enable logging to file';
 $string['logtofile_help'] = 'Turning this on will redirect SSPHP log output to a file in the logdir';
+$string['manageidpsheading'] = 'Manage available IdPs';
 $string['mdlattr_help'] = 'Which Moodle user field should the IdP attribute be matched to?';
 $string['mdlattr'] = 'Mapping Moodle';
 $string['metadatafetchfailed'] = 'Metadata fetch failed: {$a}';
 $string['metadatafetchfailedstatus'] = 'Metadata fetch failed: Status code {$a}';
 $string['metadatafetchfailedunknown'] = 'Metadata fetch failed: Unknown cURL error';
+$string['multiidpinfo'] = '
+<ul>
+<li>An IdP can only be used if it is set as Active</li>
+<li>When duallogin has been turned on all active IdPs will be displayed on the login page</li>
+<li>When an IdP has been set as Default and duallogin is not turned on, this IdP will automatically be used unless ?multiidp=on or saml=off is passed on /login/index.php</li>
+<li>When an IdP has been set as Admin any users that log in using this IdP will automatically be made an admin</li>
+<li>An IdP can be given an Alias, when going to /login/index.php?idpalias={alias} the alias can be passed to directly use that IdP</li>
+</ul>';
 $string['multiidpbuttons'] = 'Buttons with icons';
 $string['multiidpdisplay'] = 'Multiple IdP display type';
 $string['multiidpdisplay_help'] = 'If an IdP metadata xml contains multiple IdP entities, how will each available IdP be displayed?';
 $string['multiidpdropdown'] = 'Drop-down list';
 $string['nameidasattrib'] = 'Expose NameID as attribute';
 $string['nameidasattrib_help'] = 'The NameID claim will be exposed to SSPHP as an attribute named nameid';
-$string['noattribute'] = 'You have logged in succesfully but we could not find your \'{$a}\' attribute to associate you to an account in Moodle.';
-$string['nouser'] = 'You have logged in succesfully as \'{$a}\' but do not have an account in Moodle.';
+$string['noattribute'] = 'You have logged in successfully but we could not find your \'{$a}\' attribute to associate you to an account in Moodle.';
+$string['noidpfound'] = 'The IdP \'{$a}\' was not found as a configured IdP.';
+$string['nouser'] = 'You have logged in successfully as \'{$a}\' but do not have an account in Moodle.';
 $string['nullprivatecert'] = 'Creation of Private Certificate failed.';
 $string['nullpubliccert'] = 'Creation of Public Certificate failed.';
 $string['organizationalunitname'] = 'Organisational Unit';
 $string['organizationname'] = 'Organisation';
 $string['passivemode'] = 'Passive mode';
 $string['pluginname'] = 'SAML2';
+$string['privatekeypass'] = 'Private certificate key password';
+$string['privatekeypass_help'] = 'This is used for signing the local Moodle certificate, changing this will invalidate the current certificate.';
 $string['regenerate_submit'] = 'Regenerate';
 $string['rememberidp'] = 'Remember login service';
 $string['required'] = 'This field is required';
@@ -104,7 +137,7 @@ $string['spmetadatasign'] = 'SP Metadata signature';
 $string['spmetadata'] = 'SP Metadata';
 $string['sspversion'] = 'SimpleSAMLphp version';
 $string['stateorprovincename'] = 'State or Province';
-$string['suspendeduser'] = 'You have logged in succesfully as \'{$a}\' but your account has been suspended in Moodle.';
+$string['suspendeduser'] = 'You have logged in successfully as \'{$a}\' but your account has been suspended in Moodle.';
 $string['taskmetadatarefresh'] = 'Metadata refresh task';
 $string['test_auth'] = '<a href="{$a}">Test isAuthenticated and login</a>';
 $string['test_auth'] = '<a href="{$a}">Test isAuthenticated and login</a>';
@@ -115,7 +148,7 @@ $string['test_passive'] = '<a href="{$a}">Test using isPassive</a>';
 $string['test_passive_str'] = 'Test using isPassive';
 $string['tolower_help'] = 'Apply lowercase to IdP attribute before matching?';
 $string['tolower'] = 'Lowercase';
-$string['wrongauth'] = 'You have logged in succesfully as \'{$a}\' but are not authorized to access Moodle.';
+$string['wrongauth'] = 'You have logged in successfully as \'{$a}\' but are not authorized to access Moodle.';
 $string['auth_data_mapping'] = 'Data mapping';
 $string['auth_fieldlockfield'] = 'Lock value ({$a})';
 $string['auth_fieldmapping'] = 'Data mapping ({$a})';
@@ -135,6 +168,12 @@ $string['phone1'] = 'Phone';
 $string['phone2'] = 'Mobile phone';
 $string['nameidpolicy'] = 'NameID Policy';
 $string['nameidpolicy_help'] = '';
+$string['groupattr'] = 'Groups Attribute';
+$string['groupattr_help'] = 'Attribute that contains a set of user groups.';
+$string['restricted_groups'] = 'Restricted Groups';
+$string['restricted_groups_help'] = 'Comma delimited list of groups. User will not be allowed to login if one of the groups contains in Groups Attribute.';
+$string['allowed_groups'] = 'Allowed Groups';
+$string['allowed_groups_help'] = 'Comma delimited list of groups. User will be allowed to login if one of the groups contains in Groups Attribute. Restricted Groups will test first.';
 
 /*
  * Privacy provider (GDPR)
@@ -150,3 +189,4 @@ $string['sha384'] = 'SHA384';
 $string['sha512'] = 'SHA512';
 $string['signaturealgorithm'] = 'Signing Algorithm';
 $string['signaturealgorithm_help'] = 'This is the algorithm that will be used to sign SAML requests. Warning: The SHA1 Algorithm is only provided for backwards compatibility, unless you absolutely must use it it is recommended to avoid it and use at least SHA256 instead.';
+$string['selectloginservice'] = 'Select a login service';
