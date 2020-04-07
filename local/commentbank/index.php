@@ -25,12 +25,15 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/formslib.php');
 use local_commentbank\lib\comment_lib;
-global $CFG, $PAGE;
 
+define('EDITMODE_EDIT', 0);
+define('EDITMODE_COPY', 1);
+define('EDITMODE_MOVE', 2);
 
 $id = optional_param('id', '', PARAM_INT);
 $rowid = optional_param('rowid', '', PARAM_INT);
 $action = optional_param('action', '', PARAM_ALPHA); // Edit, addnew or delete.
+$editmode = optional_param('editmode', '', PARAM_INT); // Edit, addnew or delete.
 
 $id = $id  ?: 1;
 
@@ -41,7 +44,7 @@ global $USER;
 $PAGE->set_context(context_course::instance($id));
 $PAGE->navigation->find($id, navigation_node::TYPE_COURSE)->make_active();
 $PAGE->set_url('/local/commentbank/index.php');
-if (!has_capability('local/commentnbank:create_site_comments', $PAGE->context)) {
+if (!comment_lib::has_role('manager', $USER->id) &&  !is_siteadmin()) {
     echo $OUTPUT->header();
     echo(get_string('nopermission', 'local_commentbank'));
     echo $OUTPUT->footer();
@@ -71,11 +74,15 @@ class local_addnewcomment_form extends moodleform {
         $rowid = $this->_customdata['rowid'];
         $action = $this->_customdata['action'];
 
+        $row = [];
+        $row = $DB->get_record('local_commentbank', ['id' => $rowid]);
+
         $mform = $this->_form;
         $context = [
-            CONTEXT_SYSTEM => get_string('system','local_commentbank'),
-            CONTEXT_COURSECAT => get_string('coursecategory','local_commentbank'),
-            CONTEXT_COURSE => get_string('course','local_commentbank'),
+            CONTEXT_SYSTEM => get_string('system', 'local_commentbank'),
+            CONTEXT_COURSECAT => get_string('coursecategory', 'local_commentbank'),
+            CONTEXT_COURSE => get_string('course', 'local_commentbank'),
+            CONTEXT_MODULE => get_string('assignment', 'local_commentbank'),
         ];
         list($courses, $coursecategories) = get_course_data();
         $options = [
@@ -91,14 +98,26 @@ class local_addnewcomment_form extends moodleform {
             $mform->setDisableShortForms(true);
             $mform->addHelpButton('warningheader', 'deletecomment', 'local_commentbank');
         }
+        if ($action === 'edit') {
+          $editmoderadios = [];
+          $editmoderadios[] = $mform->createElement('radio', 'editmode', '', 'edit', '0');
+          $editmoderadios[] = $mform->createElement('radio', 'editmode', '', 'copy', '1');
+          $mform->addGroup($editmoderadios, 'editmode', get_string('editmode', 'local_commentbank'), [''], false);
+          $mform->setDefault('editmode', 0);
+        }
 
         $mform->addElement('select', 'context', 'Context', $context);
 
         $mform->setType('context', PARAM_INT);
         $mform->addElement('html', '<div id="autoselects" class="hidden">');
-        $mform->addElement('searchableselector', 'course', 'Courses', $courses, $options);
+        $mform->addElement('searchableselector', 'course', get_string('courses', 'local_commentbank'), $courses, $options);
         $mform->addElement('searchableselector', 'coursecategory', 'Course Categories', $coursecategories, $options);
+        $courseassignments = ['nothing'=>'Selected'];
+
+        $mform->addElement('select', 'assignments', get_string('assignments', 'local_commentbank'), $courseassignments);
+
         $mform->addElement('html', '</div>');
+        $mform->setType('assignments', PARAM_NOTAGS);
 
         $mform->addElement(
             'textarea',
@@ -106,43 +125,50 @@ class local_addnewcomment_form extends moodleform {
             get_string('commenttext', 'local_commentbank'),
             ['cols' => 60, 'rows' => 2]
          );
+
          $mform->setType('commenttext', PARAM_NOTAGS);
          $mform->setType('course', PARAM_NOTAGS);
+         $mform->setType('assignment', PARAM_NOTAGS);
          $mform->setType('coursecategory', PARAM_NOTAGS);
+         $mform->addElement('hidden', 'assignmentid', '0');
+         $mform->setType('assignmentid', PARAM_INT);
+
 
         if ($action == 'addnew') {
             $mform->addElement('hidden', 'action', 'addnew');
+
             $mform->setType('action', PARAM_ALPHA);
             $params = ['action' => $action, 'instanceid' => '', 'contextlevel' => ''];
-            $mform->addRule('commenttext', get_string('required'), 'required', '', 'client');
             $PAGE->requires->js_call_amd('local_commentbank/add_comment', 'init', $params);
         }
         if ($action == '') {
             $mform->addElement('hidden', 'action', $action);
             $mform->setType('action', PARAM_ALPHA);
         }
-        $records = [];
-        $records = $DB->get_record('local_commentbank', ['id' => $rowid]);
         if ($action == 'edit' || $action == 'addnew') {
             $mform->addHelpButton('context', 'contextselect', 'local_commentbank');
             $this->add_action_buttons();
         }
         if ($action == 'delete') {
-            $this->add_delete_elements($mform, $rowid, $records);
+            $this->add_delete_elements($mform, $rowid, $row);
             $submitlabel = get_string('delete');
             $this->add_action_buttons(true, $submitlabel);
         }
         if ($action == 'edit') {
-            $this->add_edit_elements($mform, $rowid, $records);
+            $this->add_edit_elements($mform, $rowid, $row);
+            $mform->addRule('commenttext', get_string('required'), 'required', '', 'client');
+
         }
+
+
     }
     public function validation($fromform, $data) {
         $errors = array();
-        if(($fromform['context'] == CONTEXT_COURSE) && (!is_numeric($fromform['course']))){
-            $errors['commenttext'] =get_string('nocourseselected','local_commentbank');
+        if (($fromform['context'] == CONTEXT_COURSE) && (!is_numeric($fromform['course']))) {
+            $errors['commenttext'] =get_string('nocourseselected', 'local_commentbank');
         }
-        if(($fromform['context'] == CONTEXT_COURSECAT) && (!is_numeric($fromform['coursecategory']))){
-            $errors['commenttext'] =get_string('nocoursecategoryselected','local_commentbank');
+        if (($fromform['context'] == CONTEXT_COURSECAT) && (!is_numeric($fromform['coursecategory']))) {
+            $errors['commenttext'] =get_string('nocoursecategoryselected', 'local_commentbank');
         }
         if ($errors) {
             return $errors;
@@ -150,25 +176,32 @@ class local_addnewcomment_form extends moodleform {
             return true;
         }
     }
-    public function add_edit_elements($mform, $rowid, $result) {
+    public function add_edit_elements($mform, $rowid, $row) {
         global $PAGE;
-        $params = ['action' => 'edit', 'instanceid' => $result->instanceid, 'contextlevel' => $result->contextlevel];
+        $params = ['action' => 'edit', 'instanceid' => $row->instanceid, 'contextlevel' => $row->contextlevel];
         $mform->addRule('commenttext', get_string('required'), 'required', '', 'client');
         $PAGE->requires->js_call_amd('local_commentbank/add_comment', 'init', $params);
 
-        if ($result) {
-            $mform->setDefault('context', $result->contextlevel);
-            if ($result->contextlevel == CONTEXT_COURSECAT) {
-                $mform->setDefault('coursecategory', $result->instanceid);
-            } else if ($result->contextlevel == CONTEXT_COURSE) {
-                $mform->setDefault('course', $result->instanceid);
-            }
+        if ($row) {
+            $mform->setDefault('context', $row->contextlevel);
+            if ($row->contextlevel == CONTEXT_COURSECAT) {
+                $mform->setDefault('coursecategory', $row->instanceid);
+            } else if ($row->contextlevel == CONTEXT_COURSE) {
+                $mform->setDefault('course', $row->instanceid);
+            } else if ($row->contextlevel == CONTEXT_MODULE) {
+                // If at module/assignment need to set course as well.
+                $course = comment_lib::get_assignment_course($row->instanceid);
+                $mform->setDefault('course', $course->id);
+                $mform->setDefault('assignmentid', $row->instanceid);
 
-            $mform->setDefault('commenttext', $result->commenttext);
+         }
+
+            $mform->setDefault('commenttext', $row->commenttext);
             $mform->addElement('hidden', 'rowid', $rowid);
             $mform->setType('rowid', PARAM_INT);
-            $mform->addElement('hidden', 'contextlevel', $result->contextlevel);
-            $mform->addElement('hidden', 'authoredby', $result->authoredby);
+            $mform->addElement('hidden', 'contextlevel', $row->contextlevel);
+            $mform->addElement('hidden', 'authoredby', $row->authoredby);
+
             $mform->setType('contextlevel', PARAM_INT);
             $mform->setType('authoredby', PARAM_INT);
             $mform->addElement('hidden', 'action', 'edit');
@@ -176,26 +209,30 @@ class local_addnewcomment_form extends moodleform {
         }
 
     }
-    public function add_delete_elements($mform, $rowid, $result) {
+    public function add_delete_elements($mform, $rowid, $row) {
         global $PAGE;
         $mform->setType('action', PARAM_ALPHA);
-        $mform->setDefault('commenttext', $result->commenttext);
+        $mform->setDefault('commenttext', $row->commenttext);
         $mform->freeze('commenttext');
         $mform->freeze('context');
-        $mform->addElement('hidden', 'rowid', $result->id);
+        $mform->addElement('hidden', 'rowid', $row->id);
 
         $mform->setType('rowid', PARAM_INT);
-        $params = ['action' => 'delete', 'instanceid' => $result->instanceid, 'contextlevel' => $result->contextlevel];
+        $params = ['action' => 'delete', 'instanceid' => $row->instanceid, 'contextlevel' => $row->contextlevel];
         $PAGE->requires->js_call_amd('local_commentbank/add_comment', 'init', $params);
 
-        if ($result) {
-            $mform->setDefault('context', $result->contextlevel);
-            if ($result->contextlevel == CONTEXT_COURSECAT) {
-                $mform->setDefault('coursecategory', $result->instanceid);
+        if ($row) {
+            $mform->setDefault('context', $row->contextlevel);
+            if ($row->contextlevel == CONTEXT_COURSECAT) {
+                $mform->setDefault('coursecategory', $row->instanceid);
                 $mform->freeze('coursecategory');
-            } else if ($result->contextlevel == CONTEXT_COURSE) {
-                $mform->setDefault('course', $result->instanceid);
+            } else if ($row->contextlevel == CONTEXT_COURSE) {
+                $mform->setDefault('course', $row->instanceid);
                 $mform->freeze('course');
+            } else if (CONTEXT_MODULE) {
+              $course = comment_lib::get_assignment_course($row->instanceid);
+              $mform->setDefault('course', $course->id);
+              $mform->setDefault('assignmentid', $row->instanceid);
             }
         }
         $mform->addElement('hidden', 'action', 'delete');
@@ -212,9 +249,9 @@ class local_addnewcomment_form extends moodleform {
  */
 function get_course_data(): array {
     global $DB;
-    $records = $DB->get_records_sql('select id, fullname from {course} where id > 1');
+    $records = $DB->get_records_sql('select id, shortname, fullname from {course} where id > 1');
     foreach ($records as $record) {
-        $courses[$record->id] = $record->fullname;
+        $courses[$record->id] = $record->shortname;
     }
     $records = $DB->get_records('course_categories', null, null, 'id,name');
     foreach ($records as $record) {
@@ -234,12 +271,15 @@ $PAGE->requires->js_call_amd('local_commentbank/bank_datatable', 'init');
  * @return int
  */
 function get_instance(stdClass $data) :int {
+    $instanceid = null;
     if ($data->context == CONTEXT_SYSTEM) {
         $instanceid = 0;
     } else if ($data->context == CONTEXT_COURSECAT) {
         $instanceid = (int) $data->coursecategory;
     } else if ($data->context == CONTEXT_COURSE) {
         $instanceid = (int) $data->course;
+    } else if ($data->context == CONTEXT_MODULE) {
+        $instanceid = (int) $data->assignmentid;
     }
     return $instanceid;
 }
@@ -257,8 +297,17 @@ if ($newcomment->is_cancelled()) {
     }
     if ($action == 'edit') {
         $instanceid = (int)get_instance($data);
-        comment_lib::update_comment($data->rowid, $data->commenttext, $data->context, $USER->id, $instanceid);
-        redirect(new moodle_url('/local/commentbank/index.php'));
+        if ($editmode == EDITMODE_EDIT) {
+          comment_lib::update_comment($data->rowid, $data->commenttext, $data->context, $USER->id, $instanceid);
+          redirect(new moodle_url('/local/commentbank/index.php'));
+        }
+        if ($editmode == EDITMODE_COPY) {
+          comment_lib::add_comment($data->commenttext, $data->context, $USER->id, $instanceid);
+          redirect(new moodle_url('/local/commentbank/index.php'));
+        }
+        if ($editmode == EDITMODE_MOVE) {
+        }
+
     }
     if ($action == 'delete') {
         comment_lib::delete_comment($data->rowid);

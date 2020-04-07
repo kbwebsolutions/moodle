@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  *
  * Spreadsheet export report for assignments marked with advanced grading methods
@@ -35,7 +34,7 @@ function local_commentbank_extend_navigation_course(navigation_node $parentnode,
     if (has_capability('local/commentnbank:create_site_comments', $context)) {
         $url = new moodle_url('/local/commentbank/index.php', array('id' => $course->id));
         $parentnode->add(get_string('pluginname', 'local_commentbank'), $url, navigation_node::TYPE_SETTING, null,
-        'commentbank',new pix_icon('t/viewdetails', 'comment bank'));
+        'commentbank', new pix_icon('t/viewdetails', 'comment bank'));
     }
 }
 
@@ -53,6 +52,8 @@ function local_commentbank_extend_navigation_course(navigation_node $parentnode,
  * @return bool
  */
 function local_commentbank_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    global $CFG;
+
     $pluginpath = __DIR__.'/';
 
     if ($filearea === 'vendorjs') {
@@ -67,7 +68,14 @@ function local_commentbank_pluginfile($course, $cm, $context, $filearea, $args, 
         $umdfile = $compdir.'.umd.js';
         $args[] = $compdir;
         $args[] = 'dist';
-        $args[] = $umdfile;
+
+        if ($CFG->cachejs) {
+            $pathinfo = (object) pathinfo($umdfile);
+            $args[] = $pathinfo->filename.'.min.js';
+        } else {
+            $args[] = $umdfile;
+        }
+
         $path = $pluginpath.'vue/'.implode('/', $args);
         send_file($path, basename($path));
         return true;

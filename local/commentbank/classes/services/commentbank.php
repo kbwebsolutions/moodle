@@ -21,6 +21,7 @@ use stdClass;
 
 use local_tlcore\datatable\query;
 use local_tlcore\datatable\column;
+use local_commentbank\lib\comment_lib;
 
 class commentbank {
 
@@ -51,7 +52,7 @@ class commentbank {
             new column('', 'edit', false, '', 'tdHTML', 'width: 1px'),
             new column('', 'delete', false, '', 'tdHTML', 'width: 1%'),
             new column(get_string('context', 'role'), 'contextlevel', true, '', '', 'width: 20%'),
-            new column(get_string('instance', 'local_commentbank'), 'instanceid', true, '', '', 'width: 20%'),
+            new column(get_string('instance', 'local_commentbank'), 'instanceid', true, '', 'tdHTML', 'width: 20%'),
             new column(get_string('authoredby', 'local_commentbank'), 'authoredbyname', true, 'thFilter', '', 'width: 20%'),
             new column(get_string('commenttext', 'local_commentbank'), 'commenttext', true, 'thFilter', 'tdHTML', 'width: 30%')
         ];
@@ -214,28 +215,38 @@ class commentbank {
      * @return void
      */
     private function transform_row(stdClass $row) {
-        global $DB;
+        global $DB, $CFG;
         $row->edit = '<a href=index.php?rowid='.$row->id.'&action=edit><i class="icon fa fa-cog"></i></a>';
         $row->delete = '<a href=index.php?rowid='.$row->id.'&action=delete><i class="icon fa fa-trash"></i></a>';
         $row->commenttext = '<a href=index.php?rowid='.$row->id.'&action=edit>'.$row->commenttext.'</a>';
-    
+
         switch ($row->contextlevel) {
             case CONTEXT_SYSTEM:
-                $site = get_site();
                 $row->contextlevel = get_string('coresystem');
                 $row->instanceid = '';
                 break;
-            case CONTEXT_COURSE: 
-                $row->contextlevel = get_string('course'); 
+            case CONTEXT_COURSE:
+                $row->contextlevel = get_string('course');
                 $course = get_course($row->instanceid);
                 $row->instanceid = $course->fullname;
                 break;
-            case CONTEXT_COURSECAT: 
-                $row->contextlevel = get_string('coursecategory'); 
-                $row->instanceid =  $DB->get_record('course_categories',['id'=>$row->instanceid])->name;
-                break;      
+            case CONTEXT_COURSECAT:
+                $row->contextlevel = get_string('coursecategory');
+                $row->instanceid =  $DB->get_record('course_categories', ['id'=>$row->instanceid])->name;
+                break;
+            case CONTEXT_MODULE:
+              $row->contextlevel = get_string('assignment', 'local_commentbank');
+              $result =  comment_lib::get_assignment($row->instanceid);
+              $html = '';
+              if ($result) {
+                $html = '<a href='.$CFG->wwwroot.'/course/view.php?id='.$result->courseid.'>';
+                $html .= $result->shortname.':'.$result->assignmentname.'</a>';
+              }
+              $row->instanceid = $html;
+            break;
         }
         return $row;
     }
+
 
 }

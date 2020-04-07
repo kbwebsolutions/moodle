@@ -23,7 +23,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
- 
+
 global $CFG, $PAGE;
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/formslib.php');
@@ -53,27 +53,3 @@ class local_addnewcomment_form extends moodleform {
 
     }
 }
-
-// if ($mform->is_cancelled()) {
-//     $commentbank = new local_commentbank_form();
-        
-//     echo $OUTPUT->header();
-//     $commentbank->display();
-//     echo $OUTPUT->footer();
-
-//    // redirect(new moodle_url('/local/tlactionplans/register_form.php'));
-// } else if ($data = $mform->get_data()) {
-//     $commentbank = new local_commentbank_form();
-    
-//     echo $OUTPUT->header();
-//     $commentbank->display();
-//     echo $OUTPUT->footer();
-
-// } else {
-//     //Set default data (if any)
-//     //$mform->set_data($toform);
-//     $mform = new local_addnewcomment_form(null,['id'=>$id]);
-//     echo $OUTPUT->header();
-//     $mform->display();
-//     echo $OUTPUT->footer();
-//   }

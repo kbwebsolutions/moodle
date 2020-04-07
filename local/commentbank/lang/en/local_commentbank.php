@@ -44,7 +44,17 @@ $string['nocourseselected'] = 'No course selected';
 $string['nocoursecategoryselected'] = 'No course category selected';
 $string['system'] = 'System';
 $string['course'] = 'Course';
+$string['courses'] = 'Courses';
+$string['assignment'] = 'Assignment';
+$string['assignments'] = 'Assignments';
+
 $string['coursecategory'] = 'Course category';
+$string['editmode'] = 'Edit mode';
+$string['commentbank:create_category_comments'] = 'Create category comments';
+$string['commentbank:create_course_comments'] = 'Create course comments';
+
+
+
 
 
 

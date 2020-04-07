@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Plugin version and other meta-data are defined here.
  *
@@ -25,11 +24,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_commentbank';
-$plugin->release = '0.2.0';
-$plugin->version = 2019061700;
+$plugin->release = '0.8.0';
+$plugin->version = 2020031000;
 $plugin->requires = 2018051700;
-
-
 $plugin->maturity = MATURITY_BETA;
 $plugin->dependencies = [
     'local_tlcore'      => 2019053000
