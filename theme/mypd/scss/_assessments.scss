@@ -1,0 +1,43 @@
+.passfail-grade {
+  font-size: 1.4em;
+  font-width: 400;
+  margin-bottom: 1em;
+}
+
+.gradingform_passfailrubric {
+
+  td.criteria-description {
+    border: none;
+    background-color: #ffffff;
+    font-size: 1.1em;
+    font-width: 400;
+    padding: 0.5em 0;
+  }
+
+  .gradeview {
+    border:none;
+  }
+
+  td.criteria-grade {
+    border: none;
+    background-color: #FFFFFF;
+    font-variant: small-caps;
+  }
+
+  td.criteria-remarks {
+    background-color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 1.5em;
+  }
+
+  .criterion {
+    border:none;
+  }
+  .criterion.even {
+    background-color: #FFFFFF;
+  }
+
+  .row:first-child {
+    display: none;
+  }
+}

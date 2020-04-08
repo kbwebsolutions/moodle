@@ -484,8 +484,9 @@ class mod_assign_renderer extends \mod_assign_renderer {
                                fullname($status->grader, $status->canviewfullnames);
             $grader = $userdescription;
             if (isset($status->gradefordisplay)) {
-                $grader = '<div class="row"><div class="col-sm-6">'.$grader.'</div>';
-                $grader .= '<div class="col-sm-6"><em>'.userdate($status->gradeddate).'</em></div>';
+                $grader = '<div class="row">';
+                //$grader .= '<div class="col-sm-6">'.$grader.'</div>';
+                $grader .= '<div class="col-sm-6"><em>Graded on '.userdate($status->gradeddate).'</em></div>';
                 $grader .= '</div>';
             }
             $o .= $grader;
