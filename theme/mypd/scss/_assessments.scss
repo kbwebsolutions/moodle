@@ -1,43 +1,44 @@
-.passfail-grade {
-  font-size: 1.4em;
-  font-width: 400;
-  margin-bottom: 1em;
-}
 
-.gradingform_passfailrubric {
 
-  td.criteria-description {
-    border: none;
-    background-color: #ffffff;
-    font-size: 1.1em;
+#page-mod-assign-view {
+
+  .passfail-grade {
+    font-size: 1.4em;
     font-width: 400;
-    padding: 0.5em 0;
+    margin-bottom: 1em;
   }
 
-  .gradeview {
-    border:none;
-  }
+  .gradingform_passfailrubric {
+    td.criteria-description {
+      border: none;
+      background-color: #ffffff;
+      font-size: 1.1em;
+      font-width: 400;
+      padding: 0.5em 0;
+    }
 
-  td.criteria-grade {
-    border: none;
-    background-color: #FFFFFF;
-    font-variant: small-caps;
-  }
+    .gradeview {
+      border: none;
+    }
 
-  td.criteria-remarks {
-    background-color: #ffffff;
-    border-bottom: 1px solid #cccccc;
-    padding-bottom: 1.5em;
-  }
+    td.criteria-grade {
+      border: none;
+      background-color: #FFFFFF;
+      font-variant: small-caps;
+    }
 
-  .criterion {
-    border:none;
-  }
-  .criterion.even {
-    background-color: #FFFFFF;
-  }
+    td.criteria-remarks {
+      background-color: #ffffff;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 1.5em;
+    }
 
-  .row:first-child {
-    display: none;
+    .criterion {
+      border: none;
+    }
+
+    .criterion.even {
+      background-color: #FFFFFF;
+    }
   }
 }
