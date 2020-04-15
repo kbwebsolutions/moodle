@@ -1012,7 +1012,8 @@ body.mypd-resource-card li.mypd-resource {
     &.modtype_forum,
     &.modtype_chat,
     &.modtype_hsuforum,
-    &.modtype_bookingform {
+    &.modtype_bookingform,
+    &.modtype_activitycomments{
         border-top-color: $color-communication;
     }
 
