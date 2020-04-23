@@ -15,12 +15,23 @@
     background-color: #f3f2aa;
     border-color: #EEEE22;
 }
-
+.gradingform_passfailrubric .ismoderated-label {
+  display: inline !important;
+  margin-left:4px;
+}
 .gradingform_passfailrubric {
     overflow: auto;
     padding-bottom: 1.5em;
     position: relative;
 }
+/* read only fields don't look any different so fake
+a disabled look with css. disabled is no good as values
+entered by js will not be sent with a form submit */
+.gradingform_passfailrubric .look-disabled {
+    color: grey;
+    background-color: #F0F0F0;
+}
+
 
 .gradingform_passfailrubric.editor .criterion .controls,
 .gradingform_passfailrubric .criterion .description,
@@ -137,8 +148,16 @@
     margin-bottom: 2px;
     width: 6em;
 }
+/* Hide the popout icons, which seem to be inserted in some core js */
+.gradingform_passfailrubric .moderation a{
+  visibility: hidden;
+}
+.gradingform_passfailrubric .moderation + a {
+  visibility: hidden;
+}
+
 .gradingform_passfailrubric .remarkview{
-    background-color:gainsboro; 
+    background-color:gainsboro;
     padding-left:0;
     padding: 4px;
     width:100%;

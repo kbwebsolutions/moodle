@@ -1,8 +1,8 @@
-@gradingform @gradingform_passfailrubric
+@gradingform @gradingform_passfailrubric @pfr_edit
 Feature: Pass Fail Rubric advanced grading forms can be created and edited
-In order to use and refine btec to grade students
+In order to use  to grade students
 As a teacher
-I need to edit previously used btec passfailrubric
+I need to edit previously used  passfailrubric
 
 @javascript
   Scenario: I can use passfailrubric grading to grade and edit them later updating students grades
@@ -32,13 +32,17 @@ I need to edit previously used btec passfailrubric
 
     And I click on "Click to edit criterion" "text"
 
-    And I set the field "passfailrubric[criteria][NEWID1][description]" to "Criteria 1 text"
+    And I set the field "passfailrubric[criteria][NEWID1][description]" to "Criteria 1"
 
     And I click on "Add criterion" "button"
-    
-    And I set the field "passfailrubric[criteria][NEWID2][description]" to "Criteria 2 text"
-    
+
+    And I set the field "passfailrubric[criteria][NEWID2][description]" to "Criteria 2"
+
    And I press "Save Pass Fail Rubric and make it ready"
 
   # Grading two students.
     And I go to "Student 1" "PFR Test assignment 1 name" activity advanced grading page
+    And I grade by filling the passfailrubric with:
+
+    | Criteria 1 | met | Very good |
+    | Criteria 2 | notmet | Awesome   |

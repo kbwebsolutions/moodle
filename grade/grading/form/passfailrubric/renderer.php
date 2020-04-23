@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Contains renderer used for displaying passfailrubric
  *
@@ -32,6 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 global $PAGE;
 $PAGE->requires->js_call_amd('gradingform_passfailrubric/add_comments', 'init');
 use local_commentbank\lib\comment_lib;
+
 /**
  * Grading method plugin renderer
  *
@@ -113,14 +113,14 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                 $descriptionclass .= ' error';
             }
             $criteriontemplate .= html_writer::tag('td', $description,
-                    array('class' => $descriptionclass, 'id' => '{NAME}-criteria-{CRITERION-id}-description'));
+                    array('class' => $descriptionclass. ' criteria-description ', 'id' => '{NAME}-criteria-{CRITERION-id}-description'));
             $levelsstrtable = html_writer::tag('table', html_writer::tag('tr',
                     $levelsstr, array('id' => '{NAME}-criteria-{CRITERION-id}-levels')));
             $levelsclass = 'levels';
             if (isset($criterion['error_levels'])) {
                 $levelsclass .= ' error';
             }
-            
+
 
             $currentremark = '';
             if (isset($value['remark'])) {
@@ -132,12 +132,14 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                 /** TD-14 */
                 global $DB;
                 $scale = explode(',', $DB->get_field('scale', 'scale', ['name' => 'refer_fail_pass']));
-                $grade = $scale[$value['levelid'] - 1];
+                //$grade = $scale[$value['levelid'] - 1];
+                $grade = $this->get_grade_level($value['levelid'], true);
+
                 $criteriontemplate .= html_writer::start_tag('tr');
-                $criteriontemplate .= html_writer::tag('td', get_string("criteriagrade","gradingform_passfailrubric").' '. $grade, ['class' => 'remarkview']);
+                $criteriontemplate .= html_writer::tag('td', get_string("criteriagrade", "gradingform_passfailrubric").' '. $grade, ['class' => 'remarkview criteria-grade']);
                 $criteriontemplate .= html_writer::end_tag('tr');
                 $criteriontemplate .= html_writer::start_tag('tr');
-                $criteriontemplate .= html_writer::tag('td', $currentremark, ['class' => 'remarkview gradeview']);
+                $criteriontemplate .= html_writer::tag('td', $currentremark, ['class' => 'remarkview gradeview criteria-remarks']);
                 $criteriontemplate .= html_writer::end_tag('tr');
             }
 
@@ -154,6 +156,16 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                 'aria-label' => $remarklabeltext,
                 'class' => 'remark'
             ];
+
+            global $PAGE;
+            // Detect Non editing teacher role by checking if they can add a new assignment.
+            // There seems to be no function like check_role('noneditingteacher).
+            // Then set to disabled so they can only add 'canned' comments from the popup.
+            if (!has_capability('mod/assign:addinstance', $PAGE->context)) {
+              $remarkparams['readonly'] = true;
+              $remarkparams['class'] = 'remark look-disabled';
+            }
+
             $input = html_writer::tag('textarea', s($currentremark), $remarkparams);
 
             $attributes = [
@@ -163,14 +175,14 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             $commentbutton = html_writer::tag('button', 'Comments', $attributes);
             $input .=$commentbutton;
             global $PAGE;
-            if(has_capability('gradingform/passfailrubric:view_grade_history',$PAGE->context)){
+            if (has_capability('gradingform/passfailrubric:view_grade_history', $PAGE->context)) {
                 $input .= html_writer::start_tag('div', ['class' => 'history']);
-                    $input .= '<div id="historylabel">'.get_string('gradehistory','gradingform_passfailrubric').'</div>';
+                    $input .= '<div id="historylabel">'.get_string('gradehistory', 'gradingform_passfailrubric').'</div>';
                     $input .= $this->get_grade_history($criterion['id']);
                     $input .= html_writer::end_tag('div');
                 }
-            $remarkattributes = ['class'=>'remarkinput'];  
-            $criteriontemplate .= html_writer::tag('td',$input,$remarkattributes);
+            $remarkattributes = ['class'=>'remarkinput'];
+            $criteriontemplate .= html_writer::tag('td', $input, $remarkattributes);
     }
         /* replace template constants such as CRITERION-id with current real values */
         $criteriontemplate = str_replace('{NAME}', $elementname, $criteriontemplate);
@@ -188,46 +200,75 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
      */
     public function get_override_history(int $itemid) :string {
         global $DB;
-        $sql = 'SELECT g.id,g.grade,g.explanation,u.username,g.timecreated FROM {gradingform_pfrbric_grades} g join {user} u on g.authoredby=u.id
+        $sql = 'SELECT g.id,g.grade,g.explanation,u.firstname,u.lastname,g.timecreated FROM {gradingform_pfrbric_grades} g join {user} u on g.authoredby=u.id
          where itemid = :itemid order by g.id desc';
-        $override_history = $DB->get_records_sql($sql, ['itemid' => $itemid]);
+        $overridehistory = $DB->get_records_sql($sql, ['itemid' => $itemid]);
         $history = '';
-        foreach ($override_history as $h) {
-            $history .= '<div class="override_history">' . $h->username . ':';
-            $history .= $this->get_grade_level($h->grade) . ':';
-            $history .= date('m/d/Y H:i', $h->timecreated).':';
+        foreach ($overridehistory as $h) {
+            $history .= '<div class="override_history">' . $h->firstname . ' ' . $h->lastname . ': ';
+            $history .= $this->get_grade_level($h->grade) . ' (';
+            $history .= userdate($h->timecreated, "%c").'): ';
             $history .=  $h->explanation.'</div>';
         }
         return $history;
     }
+    /**
+     * Pass in the number for the grade level
+     * pull apart the scale and return the string
+     * for that grade, e.g. pass in 1 return "Fail"
+     *
+     * @param integer $level
+     * @return string
+     */
+  public function get_grade_level($level, bool $fordisplay = false) : ?string{
+      global $DB;
+      // Convert short string of grade to long string.
+      $longlevel = ['Fail' =>'Not met', 'Refer'=>'Partially met', 'Pass'=>'Met'];
+      if (array_key_exists($level, $longlevel)) {
+        return $longlevel[$level];
+      }
+      $grade = "";
+      $result = $DB->get_field('scale', 'scale', ['name' => 'refer_fail_pass']);
+      if ($result) {
+        $scale = explode(',', $result);
+        $grade = $scale[$level - 1];
+      }
+      // Convert number to long grade.
+      if ($fordisplay) {
+        return $longlevel[$grade];
+      }
+      // Return short grade
+      return $grade;
 
-    public function get_grade_level($level){
-        global $DB;
-        $scale=explode(',',$DB->get_field('scale','scale',['name'=>'refer_fail_pass']));
-        $grade=$scale[$level -1];
-        return $grade;
     }
+
 
     /**
      * Get history from fillings table
+     *
+     * @param integer $criterionid
+     * @return string
      */
-    public function get_grade_history(int $criterionid){
-        global $DB;
-        $inactive = gradingform_instance::INSTANCE_STATUS_ACTIVE;
-        $sql = "SELECT DISTINCT gi.timemodified,u.username,f.levelid AS levelmet FROM 
-        {grading_instances} gi JOIN 
-        {gradingform_pfrbric_fillings} f ON gi.id=instanceid
-        JOIN {user} u ON gi.raterid=u.id WHERE f.criterionid=:criterionid
-        AND gi.itemid=:itemid AND gi.status >= :inactive ORDER BY gi.timemodified DESC";
-        $grade_history = $DB->get_records_sql($sql, ['criterionid' => $criterionid, 'itemid' => $this->itemid, 'inactive' => $inactive]);
-        $history='';
+    public function get_grade_history(int $criterionid) : string {
+      global $DB;
+      $inactive = gradingform_instance::INSTANCE_STATUS_ACTIVE;
+      $sql = "SELECT DISTINCT gi.timemodified, u.username,u.firstname,u.lastname, f.levelid AS levelmet
+              FROM {grading_instances} gi
+              JOIN {gradingform_pfrbric_fillings} f ON gi.id=instanceid
+              JOIN {user} u ON gi.raterid=u.id
+              WHERE f.criterionid=:criterionid
+              AND gi.itemid=:itemid
+              AND gi.status >= :inactive
+              ORDER BY gi.timemodified DESC";
+      $gradehistory = $DB->get_records_sql($sql, ['criterionid' => $criterionid, 'itemid' => $this->itemid, 'inactive' => $inactive]);
+      $history = '';
 
-        foreach($grade_history as $h){
-            $history .= '<div class="grade_history">'.$h->username.':';
-            $history .= $this->get_grade_level($h->levelmet).':';
-            $history .= date('m/d/Y H:i', $h->timemodified).'</div>';
-        }
-        return $history;
+      foreach ($gradehistory as $h) {
+        $history .= '<div class="grade_history">' . $h->firstname . ' '. $h->lastname . ': ';
+        $history .= $this->get_grade_level($h->levelmet, true) . '(';
+        $history .= userdate($h->timemodified, get_string('strftimedatetimeshort')).')</div>';
+      }
+      return $history;
     }
 
     /**
@@ -323,13 +364,13 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             $leveltemplate .= html_writer::tag('div', $input, array('class' => 'radio'));
             $leveltemplate .= html_writer::tag('div', $definition, array('class' => $definitionclass,
             'id' => '{NAME}-criteria-{CRITERION-id}-levels-{LEVEL-id}-definition'));
-            
+
         }
         if ($mode == gradingform_passfailrubric_controller::DISPLAY_EVAL_FROZEN && $level['checked']) {
             $leveltemplate .= html_writer::empty_tag('input', array('type' => 'hidden',
                 'name' => '{NAME}[criteria][{CRITERION-id}][levelid]', 'value' => $level['id']));
         }
-    
+
         $leveltemplate .= html_writer::end_tag('div'); // Class .level-wrapper.
         $leveltemplate .= html_writer::end_tag('td'); // Class .level.
 
@@ -388,8 +429,8 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
 
         $passfailrubrictemplate = html_writer::start_tag('div', array('id' => 'passfailrubric-{NAME}',
             'class' => 'clearfix gradingform_passfailrubric'.$classsuffix));
-          
-    
+
+
         $passfailrubrictemplate .= html_writer::tag('table', $criteriastr,
                 array('class' => 'criteria', 'id' => '{NAME}-criteria'));
         if ($mode == gradingform_passfailrubric_controller::DISPLAY_EDIT_FULL) {
@@ -404,26 +445,35 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             'id' => 'comment_popup',
             'style'=>'display:none;background-color:lightgrey'
         ];
-        global $PAGE;
-        $comments = comment_lib::get_module_comments($PAGE->course->id);
-        $passfailrubrictemplate .= html_writer::start_tag('div',$attributes);
-        foreach($comments as $comment){
+        global $PAGE, $DB;
+        $sql = "
+        SELECT cm.id as cmid from {course_modules} cm
+        JOIN {modules} m on cm.module=m.id
+        JOIN {assign_grades} ag on ag.assignment=cm.instance
+        WHERE m.name='assign' and ag.id=:itemid
+        ";
+        $comments = new \stdClass();
+        $record = $DB->get_record_sql($sql, ['itemid' => $itemid]);
+        if ($record) {
+           $comments = comment_lib::get_module_comments($PAGE->course->id, $record->cmid);
+        }
+        $passfailrubrictemplate .= html_writer::start_tag('div', $attributes);
+        foreach ($comments as $comment) {
             $passfailrubrictemplate .= '<div tabindex="0" aria-selected="false" role="button" class="reusable_remark">'.$comment->commenttext.'</div>';
         }
         $passfailrubrictemplate .= html_writer::end_tag('div');
 
         global $PAGE;
-        /** Grade menu for overriding the calculated grade. */
-        if (has_capability('gradingform/passfailrubric:view_grade_overrides', $PAGE->context)) {
+        // Grade menu for overriding the calculated grade.
             if ($grademenu) {
                 $grademenu = ['select' => 'select'] + $grademenu;
                 $params = [
                     'class' => 'grade-override',
                 ];
-                $passfailrubrictemplate .= html_writer::tag('label', 
-                get_string('overallgrade', 'gradingform_passfailrubric'),[]);
+                $passfailrubrictemplate .= html_writer::tag('label',
+                get_string('overallgrade', 'gradingform_passfailrubric'), []);
                 $passfailrubrictemplate .= html_writer::select(
-                    $grademenu, 'advancedgrading[override-grade]', '',false, $params
+                    $grademenu, 'advancedgrading[override-grade]', $grade, false, $params
                 );
                 $params = [
                     'name' => 'advancedgrading[explanation]',
@@ -431,17 +481,53 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                     'id' => 'advancedgrading-explanation',
                     'aria-label' => 'Grade override explanation',
                     'class' => 'grade-override',
-                    'placeholder' => get_string('overrideplaceholder','gradingform_passfailrubric')
+                    'placeholder' => get_string('overrideplaceholder', 'gradingform_passfailrubric')
                 ];
-              $input = html_writer::tag('textarea','', $params);
+              $input = html_writer::tag('textarea', '', $params);
               /* write a plain text log of the grade override history */
               $passfailrubrictemplate .= $input;
-              $override_history = $this->get_override_history($itemid);
-              $passfailrubrictemplate .= $override_history;
+              if (has_capability('gradingform/passfailrubric:view_grade_overrides', $PAGE->context)) {
+                 $passfailrubrictemplate .= $this->get_moderation_details($itemid);
+                 $overridehistory = $this->get_override_history($itemid);
+              }
+              $passfailrubrictemplate .= $overridehistory;
             }
-        }
+
 
         return str_replace('{NAME}', $elementname, $passfailrubrictemplate);
+    }
+    /**
+     * Get information on who has clicked the moderated checkbox
+     * on the grading form
+     *
+     * @param int $itemid
+     * @return void
+     */
+    protected function get_moderation_details(int $itemid) :string {
+        global $DB;
+
+        $html = '';
+
+        $moderation = $DB->get_record('gradingform_pfrbric_moderate', ['item' => $itemid]);
+
+        $html .= html_writer::start_tag('div', ['class' => 'moderation']);
+
+        $checkbox = [
+          'type' => 'checkbox',
+          'name' => 'advancedgrading[ismoderated]',
+          'id' => 'advancedgrading-ismoderated',
+        ];
+        if ($moderation) {
+          $checkbox['checked'] = 'checked';
+          $moderator = $DB->get_record('user', ['id' => $moderation->userid]);
+          $label = get_string('moderatedby', 'gradingform_passfailrubric') . ": " . fullname($moderator) . ' on ' . date("D d-M-Y", $moderation->timecreated);
+        } else {
+          $label = get_string('confirmmoderation', 'gradingform_passfailrubric');
+        }
+        $html .= html_writer::empty_tag('input', $checkbox);
+        $html .= html_writer::label($label, 'ismoderated', '', ['id' => 'moderated_by', 'class'=>'ismoderated-label']);
+        $html .= html_writer::end_tag('div');
+        return $html;
     }
     /**
      * Generates html template to view/edit the passfailrubric options. Expression {NAME} is used in
@@ -459,7 +545,7 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
             // Options are displayed only for people who can manage.
             return;
         }
-        $html = html_writer::start_tag('div', array('class' => 'options'));
+        $html = '';
         $html .= html_writer::tag('div', get_string('passfailrubricoptions', 'gradingform_passfailrubric'),
                 array('class' => 'optionsheading'));
         $attrs = array('type' => 'hidden', 'name' => '{NAME}[options][optionsset]', 'value' => 1);
@@ -481,7 +567,7 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                             1 => get_string($option.'1', 'gradingform_passfailrubric')
                         );
                         $valuestr = html_writer::select($selectoptions, $attrs['name'], $value, false, array('id' => $attrs['id']));
-                        $html .= html_writer::tag('span', $valuestr, array('class' => 'value')); 
+                        $html .= html_writer::tag('span', $valuestr, array('class' => 'value'));
                     } else {
                         $html .= html_writer::tag('span', get_string($option.$value, 'gradingform_passfailrubric'),
                                 array('class' => 'value'));
@@ -574,8 +660,8 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
         }
 
         $itemid = null;
-        if(isset($values['itemid'])){
-            $itemid=$values['itemid'];
+        if (isset($values['itemid'])) {
+            $itemid = $values['itemid'];
         }
 
         return $this->passfailrubric_template($mode, $options, $elementname, $criteriastr, $grademenu, $grade, $itemid);
@@ -620,10 +706,17 @@ class gradingform_passfailrubric_renderer extends plugin_renderer_base {
                 $return .= $this->display_instance($instance, $idx++, $cangrade);
             }
         }
-        /* @todo replace with html_writer output */
-        return "<div class='passfail-grade'>".$defaultcontent . '</div><tr><td></td><td>' . $return . '</td></tr>';
+        /* @todo replace with html_writer output mavg */
+        return "<div class='passfail-grade'>Your overall grade for this assessment is: ".$defaultcontent. "</div><tr><td></td><td>" . $return . "</td></tr>";
     }
 
+    public function get_grade_longform( ? string $level) : string{
+        $longform = ['Fail' => 'Not met', 'Refer' => 'Partially met', 'Pass' => 'Met'];
+        if (array_key_exists($level, $longform)) {
+            return $longform[$level];
+        }
+        return "";
+    }
     /**
      * Displays one grading instance
      *

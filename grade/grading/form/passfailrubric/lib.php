@@ -661,6 +661,7 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
             new external_single_structure(
                 array(
                    'explanation' => new external_value(PARAM_TEXT, 'explanation', VALUE_OPTIONAL),
+                   'ismoderated' => new external_value(PARAM_INT, 'ismoderated', VALUE_OPTIONAL),
                    'id' => new external_value(PARAM_INT, 'criterion id', VALUE_OPTIONAL),
                    'sortorder' => new external_value(PARAM_INT, 'sortorder', VALUE_OPTIONAL),
                    'description' => new external_value(PARAM_RAW, 'description', VALUE_OPTIONAL),
@@ -694,6 +695,7 @@ class gradingform_passfailrubric_controller extends gradingform_controller {
                 array(
                     'grade-overrid' => new external_value(PARAM_INT, 'grade-override', VALUE_OPTIONAL),
                     'explanation' => new external_value(PARAM_TEXT, 'explanation', VALUE_OPTIONAL),
+                    'ismoderated' => new external_value(PARAM_INT, 'ismoderated', VALUE_OPTIONAL),
                     'id' => new external_value(PARAM_INT, 'filling id'),
                     'criterionid' => new external_value(PARAM_INT, 'criterion id'),
                     'levelid' => new external_value(PARAM_INT, 'level id', VALUE_OPTIONAL)
@@ -798,6 +800,23 @@ class gradingform_passfailrubric_instance extends gradingform_instance {
                 ];
                 /* stores grades where autocalc is overriden */
                 $DB->insert_record('gradingform_pfrbric_grades', $newrecord);
+
+            }
+          if ($data['ismoderated'] =='on') {
+              $newrecord = [
+                'item' => $data['itemid'],
+                'userid' => $USER->id,
+                'timecreated' => time()
+            ];
+              $DB->insert_record('gradingform_pfrbric_moderate', $newrecord);
+            } else {
+              // Delete if moderate box was unchecked and current user had previously moderated.
+              $condition = ['item'=>$data['itemid'],'userid'=>$USER->id];
+              $id = $DB->get_field('gradingform_pfrbric_moderate', 'id', $condition);
+              if ($id) {
+                $DB->delete_records('gradingform_pfrbric_moderate', ['id'=>$id]);
+              }
+
             }
             foreach ($data['criteria'] as $criterionid => $record) {
                 /*if there is no grade/filling for this criteria, insert one */

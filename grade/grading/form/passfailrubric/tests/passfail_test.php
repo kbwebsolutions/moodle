@@ -48,12 +48,19 @@ class passfail_test extends basic_testcase {
     }
 
     public function test_grade_calculation() {
+      /**
+       * from lib.php
+     * Calculates the grade to be pushed to the gradebook
+     * Cannot use self::CONSTANT_NAME because this gets called from parent class
+     *
+     * @return float|int the valid grade from $this->get_controller()->get_grade_range()
+     */
 
         $criteria = [];
         $controller = '';
         $data = '';
-        $form = new gradingform_passfailrubric_instance($controller, $data); 
-      
+        $form = new gradingform_passfailrubric_instance($controller, $data);
+
     }
 
 }

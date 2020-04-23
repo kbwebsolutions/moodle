@@ -53,6 +53,10 @@ $string['feedbackrubric'] = 'Feedback rubric';
 $string['gradingof'] = '{$a} grading';
 $string['leveldelete'] = 'Delete level';
 $string['levelempty'] = 'Click to edit level';
+// Moderation.
+$string ['moderatedby'] = 'Moderated by';
+$string ['confirmmoderation'] = 'Confirm moderation';
+
 $string['name'] = 'Name';
 $string['needregrademessage'] = 'The Pass Fail Rubric definition was changed after this student had been graded. The student can not see this Pass Fail Rubric until you check the Pass Fail Rubric and update the grade.';
 $string['pluginname'] = 'Pass Fail Rubric';
@@ -78,16 +82,18 @@ $string['scorepostfix'] = '{$a}points';
 $string['showdescriptionstudent'] = 'Display rubric description to those being graded';
 $string['showdescriptionteacher'] = 'Display Pass Fail Rubric description during evaluation';
 $string['criterionremark'] = '--criterionremark--';
-$string['refer'] = 'No';
-$string['fail'] = 'Partial';
-$string['partial'] = 'Partial';
-$string['pass'] = 'Yes';
+$string['refer'] = 'Not met';
+$string['fail'] = 'Partialy met';
+$string['pass'] = 'Met';
 $string['gradehistory'] = 'Grade history';
 $string['scale_description'] ='For the passfailrubric advanced grading method';
 $string['showremarksstudent'] ='Show feedback remarks to students';
 $string['criteriagrade'] = 'Criteria grade:';
 $string['overallgrade'] = 'Overall grade:';
 $string['overrideplaceholder'] = 'Grade override explanation';
+$string['passfailrubric:view_grade_history'] = 'View grade history';
+$string['passfailrubric:view_grade_overrides'] = 'View grade overrides';
+$string['editmode'] = 'Edit mode';
 
 
 

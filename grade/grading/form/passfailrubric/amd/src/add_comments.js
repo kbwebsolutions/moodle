@@ -6,7 +6,32 @@
  * comment/remark entry field.
  */
 define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
-    var remarkfield = '';
+
+
+
+  var remarkfield = '';
+
+  /**
+   * Mark the already used comments
+   * with css class
+   */
+  var markSelected = function() {
+    var remarks = $(".reusable_remark");
+    for (i = 0; i < remarks.length; i++) {
+      var remarktext = $(remarks[i]).text();
+      var pastetarget = $("#advancedgrading-" + remarkfield);
+     // pastetarget  = $(pastetarget);
+      /* if this comment is in the remarks box/already used */
+      if(pastetarget.val().search(remarktext) > -1 ){
+        $(remarks[i]).addClass('reusable_remark_selected');
+      } else {
+        $(remarks[i]).removeClass('reusable_remark_selected');
+
+      }
+
+    }
+
+  };
     /**
      * Register event listeners for when a comment is clicked.
      *
@@ -16,17 +41,26 @@ define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
         root.on('click', function(e) {
             if ($(e.target).is(".reusable_remark")) {
                 e.preventDefault();
-                /* should copytext be trimmed? */
                 var copytext = (e.target.innerHTML);
                 /* name of the comment/remark text box where the text will be 'pasted'*/
                 var pastetarget = "#advancedgrading-" + remarkfield;
-                /* There does not appear to be a js equivalent of PHP EOL */
-                var pastetext = $(pastetarget).val() + copytext + "\r\n";
-                $(pastetarget).val(pastetext);
-                $(e.target).addClass('reusable_remark_selected');
-                $(e.target).attr("aria-selected", "true");
+                pastetarget  = $(pastetarget);
+                if(pastetarget.val().search(copytext) < 0 ){
+                  /* There does not appear to be a js equivalent of PHP EOL */
+                   EOL= "\r\n";
+                  var pastetext = $(pastetarget).val() + EOL + copytext;
+                  pastetarget.val(pastetext.trim());
+                  $(e.target).addClass('reusable_remark_selected');
+                  $(e.target).attr("aria-selected", "true");
+                } else {
+                  $(e.target).removeClass('reusable_remark_selected');
+                  // Over write the removed feedback item then trim anything like \r\n
+                  pastetarget.val(pastetarget.val().replace(copytext,"").trim());
+                }
             }
+
         });
+
     };
 
     return {
@@ -43,8 +77,11 @@ define(['jquery', 'core/modal_factory'], function($, ModalFactory) {
                         var root = modal.getRoot();
                         registerEventListeners(root);
                         modal.show();
+                        markSelected(root);
                     });
             });
+
+
         }
     };
 });
