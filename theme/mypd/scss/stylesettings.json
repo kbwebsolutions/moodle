@@ -9,7 +9,7 @@
 },
 {
 "title": "Required Header",
-"type": "inline",
+"type": "block",
 "classes": "requiredheader"
 },
 {
