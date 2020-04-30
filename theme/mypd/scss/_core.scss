@@ -118,6 +118,22 @@ table.boxwidthwide {
 
 #page-login-index,
 #page-login-signup {
+
+    .left-side {
+        padding-top:3em;
+        padding-bottom:3em;
+    }
+    .right-side {
+        p,
+        label,
+        input {
+            font-size: $font-size-med;
+        }
+    }
+    #page-header {
+        min-height: 0px;
+        border-bottom: 0px;
+    }
     #region-main {
         max-width: 100%;
         padding: 0 4% 2em;
@@ -129,7 +145,7 @@ table.boxwidthwide {
     .mypd-login {
         padding: 1em 4%;
         margin: 2em auto;
-        max-width: 30rem;
+        max-width: 60rem;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.9);
         #password {
