@@ -86,19 +86,11 @@ body.mypd-pm-open {
 // -------------------------
 .mypd-pm-login-form {
     #mypd-pm-content {
-        width: 40em;
-        margin: 2em;
+        width: 23em;
+        margin: 2em auto;
         	border: 2px solid $border-color;
         	box-shadow: 1px 2px 6px 2px $border-color;
     }
-    .card {
-        margin:1em auto;
-        border: 2px solid $border-color;
-        box-shadow: 1px 2px 6px 2px $border-color;
-        max-width: 60em;
-    }
-
-
     label {
         font-weight: 300;
         letter-spacing: 0.03rem;
@@ -108,30 +100,6 @@ body.mypd-pm-open {
         position: fixed;
         bottom: 0;
         right: 2%;
-    }
-
-    .left-side {
-        padding-top: 3em;
-    }
-
-
-    .right-side {
-        p,
-        label,
-        input {
-            font-size: $font-size-med;
-        }
-    }
-}
-
-@media (min-width: 576px) {
-    .mypd-pm-login-form {
-        .left-side {
-            border-right: 1px solid $brand-primary;
-        }
-        .card-body {
-            padding: 1.25em 0;
-        }
     }
 }
 
