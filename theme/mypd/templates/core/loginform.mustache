@@ -122,7 +122,7 @@
                             <div class="potentialidplist">
                                 {{#identityproviders}}
                                     <div class="potentialidp">
-                                        <button class="btn btn-primary" href="{{url}}" title={{#quote}}{{name}}{{/quote}}>
+                                        <a class="btn btn-primary" href="{{url}}" title={{#quote}}{{name}}{{/quote}}>
                                             {{#iconurl}}
                                                 <!--<img class="auth-icon" src="{{iconurl}}"/>-->
                                             {{/iconurl}}
@@ -130,7 +130,7 @@
                                                 {{#pix}} /i/permissions, core {{/pix}}
                                             {{/iconurl}}
                                             {{name}}
-                                        </button>
+                                        </a>
                                     </div>
                                 {{/identityproviders}}
                             </div>
@@ -162,7 +162,7 @@
             placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}}
             {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}}>
         <br>
-        <button type="submit" class="btn btn-primary btn-block" id="loginbtn">{{#str}}login{{/str}}</button>
+        <button type="submit" class="btn btn-outline-primary btn-block" id="loginbtn">{{#str}}login{{/str}}</button>
         <a class="small btn btn-link btn-block" href="{{forgotpasswordurl}}">{{#str}}forgotten{{/str}}</a>
     </form>
                     </div>
