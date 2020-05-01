@@ -76,3 +76,10 @@
   margin: 1em 0;
   font-style: italic;
 }
+#page-mod-lesson-view #region-main .contents .imglink,
+imglink {
+  display: inline;
+  a {
+    border-bottom: none;
+  }
+}
