@@ -116,7 +116,7 @@
                 <div class="row justify-content-md-center">
                     <div class="col-md-5 left-side">
                         <h5>Members Login</h5>
-                        <p>Chartered College of Teachers members should use the button below to login to MyPD</p>
+                        <p>Chartered College of Teaching members should use the button below to login to MyPD</p>
                         {{#hasidentityproviders}}
                            <!-- <h5>{{#str}} potentialidps, auth {{/str}}</h5>-->
                             <div class="potentialidplist">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-5 right-side">
                         <h6>Visitor Login</h6>
-                        <p>If you are participating in the Early Career Teacher project, please login here with your usual username and password</p>
+                        <p>If you have been provided with a specific username and password for our Early Career Teacher or Chartered Teacher programme, please login here.</p>
                         <form action="{{loginurl}}" method="post" id="login" {{^passwordautocomplete}}autocomplete="off"{{/passwordautocomplete}} class="mypd-custom-form">
         <input type="hidden" name="logintoken" value="{{logintoken}}">
         <input id="anchor" type="hidden" name="anchor" value="">
