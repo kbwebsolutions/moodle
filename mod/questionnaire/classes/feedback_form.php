@@ -87,6 +87,7 @@ class feedback_form extends \moodleform {
             $chartgroup[] = $mform->createElement('select', 'chart_type_sections',
                 get_string('chart:type', 'questionnaire') . ' (' .
                 get_string('feedbackbysection', 'questionnaire') . ')', $charttypes);
+
             if ($questionnaire->survey->feedbacksections > 1) {
                 $mform->setDefault('chart_type_sections', $questionnaire->survey->chart_type);
             }
@@ -97,6 +98,9 @@ class feedback_form extends \moodleform {
             $mform->addGroup($chartgroup, 'chartgroup',
                 get_string('chart:type', 'questionnaire'), null, false);
             $mform->addHelpButton('chartgroup', 'chart:type', 'questionnaire');
+
+            $mform->addElement('checkbox', 'compare_self', get_string('compareself','questionnaire'));
+            $mform->setDefault('compare_self', $questionnaire->survey->compare_self);
         }
         $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES, 'trusttext' => true];
         $mform->addElement('editor', 'feedbacknotes', get_string('feedbacknotes', 'questionnaire'), null, $editoroptions);

@@ -124,6 +124,11 @@ if ($settings = $feedbackform->get_data()) {
             $sdata->feedbacksections = 0;
         }
         $sdata->courseid = $settings->courseid;
+        if (isset ($settings->compare_self)) {
+            $sdata->compare_self = $settings->compare_self;
+        } else {
+            $sdata->compare_self = 0;
+        }
         if (!($sid = $questionnaire->survey_update($sdata))) {
             print_error('couldnotcreatenewsurvey', 'questionnaire');
         }

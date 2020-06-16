@@ -808,6 +808,22 @@ function xmldb_questionnaire_upgrade($oldversion=0) {
         upgrade_mod_savepoint(true, 2018050106, 'questionnaire');
     }
 
+    //Add field to switch to comparing against first attempt
+    if ($oldversion < 2020061600) {
+
+        // Define field compare_self to be added to questionnaire_survey.
+        $table = new xmldb_table('questionnaire_survey');
+        $field = new xmldb_field('compare_self', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'chart_type');
+
+        // Conditionally launch add field compare_self.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Questionnaire savepoint reached.
+        upgrade_mod_savepoint(true, 2020061600, 'questionnaire');
+    }
+
     return $result;
 }
 

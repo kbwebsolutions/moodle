@@ -1294,7 +1294,7 @@ class questionnaire {
         if (empty($this->survey->id)) {
             // Create a new survey in the database.
             $fields = array('name', 'realm', 'title', 'subtitle', 'email', 'theme', 'thanks_page', 'thank_head',
-                'thank_body', 'feedbacknotes', 'info', 'feedbacksections', 'feedbackscores', 'chart_type');
+                'thank_body', 'feedbacknotes', 'info', 'feedbacksections', 'feedbackscores', 'chart_type', 'compare_self');
             // Theme field deprecated.
             $record = new stdClass();
             $record->id = 0;
@@ -1322,7 +1322,7 @@ class questionnaire {
             }
 
             $fields = array('name', 'realm', 'title', 'subtitle', 'email', 'theme', 'thanks_page',
-                'thank_head', 'thank_body', 'feedbacknotes', 'info', 'feedbacksections', 'feedbackscores', 'chart_type');
+                'thank_head', 'thank_body', 'feedbacknotes', 'info', 'feedbacksections', 'feedbackscores', 'chart_type', 'compare_self');
             $name = $DB->get_field('questionnaire_survey', 'name', array('id' => $this->survey->id));
 
             // Trying to change survey name.
@@ -3245,6 +3245,13 @@ class questionnaire {
                 $ruser = fullname($user);
             }
         }
+
+        //If check against first attempt is ticked then Get id of first attempt for this student
+        if ($this->survey->compare_self) {
+            $firstsql = "SELECT id FROM {questionnaire_response} WHERE questionnaireid = ? AND userid = ? ORDER BY submitted ASC LIMIT 1 ";
+            $respfirst = $DB->get_field_sql($firstsql, [$this->survey->id, $userid]);
+        }
+
         // Available group modes (0 = no groups; 1 = separate groups; 2 = visible groups).
         $groupmode = groups_get_activity_groupmode($this->cm, $this->course);
         $groupname = get_string('allparticipants');
@@ -3279,6 +3286,10 @@ class questionnaire {
         $nbparticipants = count($rids);
         $responsescores = [];
 
+        $firstattemptid = array();
+        $firstattemptid[0] = $respfirst;
+
+
         // Calculate max score per question in questionnaire.
         $qmax = [];
         $maxtotalscore = 0;
@@ -3289,6 +3300,7 @@ class questionnaire {
                 $maxtotalscore += $qmax[$qid];
                 // Get all the feedback scores for this question.
                 $responsescores[$qid] = $question->get_feedback_scores($rids);
+                $firstrepsonsescores[$qid] = $question->get_feedback_scores($firstattemptid);
             }
         }
         // Just in case no values have been entered in the various questions possible answers field.
@@ -3296,6 +3308,7 @@ class questionnaire {
             return '';
         }
         $feedbackmessages = [];
+        //TODO Look Here to carry on work on compare with first attempt - KRB 21/05/20
 
         // Get individual scores for each question in this responses set.
         $qscore = [];
@@ -3325,6 +3338,21 @@ class questionnaire {
                 }
             }
         }
+
+        //Only run if Compare_self is ticked
+        if($this->survey->compare_self) {
+            foreach ($firstrepsonsescores as $qid => $firstresponsescore) {
+                if (!empty($firstresponsescore)) {
+                    foreach ($firstresponsescore as $rrid => $response) {
+                        $firstqscore[$qid] = $response->score;
+                    }
+                }
+            }
+        }
+        $firsttotalscore = array_sum($firstqscore);
+        $firstscorepercent = round($firsttotalscore / $maxtotalscore * 100);
+        $firstoppositescorepercent = 100 - $firstscorepercent;
+
         $totalscore = array_sum($qscore);
         $scorepercent = round($totalscore / $maxtotalscore * 100);
         $oppositescorepercent = 100 - $scorepercent;
@@ -3411,6 +3439,8 @@ class questionnaire {
         $score = array();
         $allscore = array();
         $maxscore = array();
+        $firstscore = array();
+        $firstscorepercent = array();
         $scorepercent = array();
         $allscorepercent = array();
         $oppositescorepercent = array();
@@ -3421,6 +3451,8 @@ class questionnaire {
 
         for ($i = 1; $i <= $numsections; $i++) {
             $score[$i] = 0;
+            $firstscore[$i] = 0;
+            $firstscorepercent[$i] = 0;
             $allscore[$i] = 0;
             $maxscore[$i] = 0;
             $scorepercent[$i] = 0;
@@ -3449,19 +3481,21 @@ class questionnaire {
                 if (isset($qscore[$qid])) {
                     $key = ($key == 0) ? 1 : $key;
                     $score[$section] += round($qscore[$qid] * $key);
+                    $firstscore[$section] += round($firstqscore[$qid] * $key);
                     $maxscore[$section] += round($qmax[$qid] * $key);
                     if ($compare  || $allresponses) {
                         $allscore[$section] += round($allqscore[$qid] * $key);
                     }
                 }
             }
-
+//TODO Kieran Briggs got to here today - Carry on from here 15 June 2020
             if ($maxscore[$section] == 0) {
                 array_push($nanscores, $section);
             }
 
             $scorepercent[$section] = ($maxscore[$section] > 0) ? (round($score[$section] / $maxscore[$section] * 100)) : 0;
             $oppositescorepercent[$section] = 100 - $scorepercent[$section];
+            $firstscorepercent[$section] = ($maxscore[$section] > 0) ? (round($firstscore[$section] / $maxscore[$section] * 100)) : 0;
 
             if (($compare || $allresponses) && $nbparticipants != 0) {
                 $allscorepercent[$section] = ($maxscore[$section] > 0) ? (round(($allscore[$section] / $nbparticipants) /
@@ -3551,6 +3585,11 @@ class questionnaire {
             unset($allscorepercent[$val]);
         }
 
+        // KRB 4.6.20 Very dirty way to show the participants first attempt at the questionnaire depending on the value of CheckFirst
+         if ($this->survey->compare_self) {
+            $allscorepercent = $firstscorepercent;
+            $groupname = "Your First Attempt";
+        }
         if ($usergraph && $this->survey->chart_type) {
             $this->page->add_to_page('feedbackcharts',
                 draw_chart($feedbacktype = 'sections', $this->survey->chart_type, array_values($chartlabels),

@@ -89,6 +89,7 @@ $string['closedate'] = 'Use Close Date';
 $string['closeson'] = 'Questionnaire closes on {$a}';
 $string['closedate_help'] = 'You can specify a date to close the questionnaire here. Check the check box, and select the date and time you want.
  Users will not be able to fill out the questionnaire after that date. If this is not selected, it will never be closed.';
+$string['compareself'] = 'Compare against users first attempt';
 $string['completionsubmit'] = 'Student must submit this questionnaire to complete it';
 $string['condition'] = 'Condition';
 $string['confalts'] = '- OR - <br />Confirmation page';
