@@ -3246,6 +3246,7 @@ class questionnaire {
             }
         }
 
+        $attemptNumber =  array_count_values(array_column($resps, 'userid'))[$userid];
         //If check against first attempt is ticked then Get id of first attempt for this student
         if ($this->survey->compare_self) {
             $firstsql = "SELECT id FROM {questionnaire_response} WHERE questionnaireid = ? AND userid = ? ORDER BY submitted ASC LIMIT 1 ";
@@ -3586,7 +3587,7 @@ class questionnaire {
         }
 
         // KRB 4.6.20 Very dirty way to show the participants first attempt at the questionnaire depending on the value of CheckFirst
-         if ($this->survey->compare_self && count($resps) > 1) {
+         if ($this->survey->compare_self && $attemptNumber > 1) {
             $allscorepercent = $firstscorepercent;
             $groupname = "Your First Attempt";
         }
