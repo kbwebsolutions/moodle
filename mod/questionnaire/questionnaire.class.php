@@ -3586,7 +3586,7 @@ class questionnaire {
         }
 
         // KRB 4.6.20 Very dirty way to show the participants first attempt at the questionnaire depending on the value of CheckFirst
-         if ($this->survey->compare_self) {
+         if ($this->survey->compare_self && count($resps) > 1) {
             $allscorepercent = $firstscorepercent;
             $groupname = "Your First Attempt";
         }
