@@ -53,6 +53,8 @@ $string['editmode'] = 'Edit mode';
 $string['commentbank:create_category_comments'] = 'Create category comments';
 $string['commentbank:create_course_comments'] = 'Create course comments';
 
+$string['uploadcomment'] = 'Upload Comments';
+$string['uploadedcomments'] = 'Uploaded Comments';
 
 
 
