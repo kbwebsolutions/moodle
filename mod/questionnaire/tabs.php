@@ -78,12 +78,12 @@ if ($questionnaire->capabilities->readownresponses && ($usernumresp > 0)) {
         $inactive[] = 'myreport';
         $activated[] = 'myreport';
         $row2 = array();
-        $argstr2 = $argstr.'&action=summary';
-        $row2[] = new tabobject('mysummary', $CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr2),
-                                get_string('summary', 'questionnaire'));
         $argstr2 = $argstr.'&byresponse=1&action=vresp';
         $row2[] = new tabobject('mybyresponse', $CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr2),
                                 get_string('viewindividualresponse', 'questionnaire'));
+        $argstr2 = $argstr.'&action=summary';
+        $row2[] = new tabobject('mysummary', $CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr2),
+                get_string('summary', 'questionnaire'));
         $argstr2 = $argstr.'&byresponse=0&action=vall&group='.$currentgroupid;
         $row2[] = new tabobject('myvall', $CFG->wwwroot.htmlspecialchars('/mod/questionnaire/myreport.php?'.$argstr2),
                                 get_string('myresponses', 'questionnaire'));
