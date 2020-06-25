@@ -1,0 +1,21 @@
+[submodule "local/commander"]
+	path = local/commander
+	url = https://github.com/MFreakNL/moodle-local_commander.git
+[submodule "mod/journal"]
+	path = mod/journal
+	url = https://github.com/elearningsoftware/moodle-mod_journal
+[submodule "auth/saml2"]
+	path = auth/saml2
+	url = https://github.com/catalyst/moodle-auth_saml2.git
+[submodule "enrol/auto"]
+	path = enrol/auto
+	url = https://github.com/catalyst/moodle-enrol_auto.git
+[submodule "admin/tool/syncgroups"]
+	path = admin/tool/syncgroups
+	url = https://github.com/danielneis/moodle-tool_syncgroups.git
+[submodule "availability/condition/cohort"]
+	path = availability/condition/cohort
+	url = https://github.com/moodleuulm/moodle-availability_cohort.git
+[submodule "report/benchmark"]
+	path = report/benchmark
+	url = https://github.com/mikasmart/moodle-report_benchmark.git
