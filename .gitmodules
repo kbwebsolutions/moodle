@@ -19,3 +19,9 @@
 [submodule "report/benchmark"]
 	path = report/benchmark
 	url = https://github.com/mikasmart/moodle-report_benchmark.git
+[submodule "theme/snap"]
+	path = theme/snap
+	url = https://github.com/blackboard-open-source/moodle-theme_snap.git
+[submodule "theme/charteredcollege"]
+	path = theme/charteredcollege
+	url = https://github.com/kbwebsolutions/theme-ChateredCollegeOfTeaching.git
