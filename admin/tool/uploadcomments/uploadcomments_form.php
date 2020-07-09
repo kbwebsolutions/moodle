@@ -61,12 +61,18 @@ class uploadcommentspreviewform extends  moodleform {
     function definition() {
 
 
-        $mform2 = $this->_form;
+        $mform = $this->_form;
         $columns = $this->_customdata['columns'];
         $data    = $this->_customdata['data'];
 
+        // hidden fields
+        $mform->addElement('hidden', 'iid');
+        $mform->setType('iid', PARAM_INT);
 
-        $this->add_action_buttons(true, get_string('uploadcomments_btn', 'tool_uploaduser'));
+        $mform->addElement('hidden', 'previewrows');
+        $mform->setType('previewrows', PARAM_INT);
+
+        $this->add_action_buttons(true, get_string('uploadcomments_btn', 'tool_uploadcomments'));
 
         $this->set_data($data);
     }

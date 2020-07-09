@@ -28,7 +28,7 @@ function uu_validate_comments_upload_columns(csv_import_reader $cir, $stdfields,
         $field = $columns[$key];
 
         $lcfield = core_text::strtolower($field);
-        if (in_array($field, $stdfields) or in_array($lcfield, $stdfields)) {
+        if (in_array($field, $stdfields) || in_array($lcfield, $stdfields)) {
             // standard fields are only lowercase
             $newfield = $lcfield;
 
@@ -58,4 +58,13 @@ function uu_validate_comments_upload_columns(csv_import_reader $cir, $stdfields,
     }
 
     return $processed;
+}
+
+function createNewComment($comment) {
+    global $DB, $USER;
+
+    $comment->authoredby = $USER->id;
+var_dump($comment);
+    return $DB->insert_record('local_commentbank', $comment, true);
+
 }

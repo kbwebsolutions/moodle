@@ -45,7 +45,6 @@ if (empty($iid)) {
     if ($formdata = $mform1->get_data()) {
         $iid = csv_import_reader::get_new_iid('uploadcomments');
         $cir = new csv_import_reader($iid, 'uploadcomments');
-print_object($iid);
         $content = $mform1->get_file_content('commentsfile');
         $readcount = $cir->load_csv_content($content, $formdata->encoding, $formdata->delimiter_name);
         $csvloaderror = $cir->get_error();
@@ -67,13 +66,58 @@ print_object($iid);
 
         $mform1->display();
         echo $OUTPUT->footer();
-        die();
+        die;
     }
 } else {
-
+    $cir = new csv_import_reader($iid, 'uploadcomments');
+    $filecolumns = uu_validate_comments_upload_columns($cir, $req_fields, $returnurl);
 }
 
 $mform2 = new uploadcommentspreviewform(null, array('columns'=>$filecolumns, 'data'=>array('iid'=>$iid, 'previewrows'=>$previewrows)));
+
+
+if ($formdata = $mform2->is_cancelled()) {
+    $cir->cleanup(true);
+    redirect($returnurl);
+
+} else if ($formdata = $mform2->get_data()) {
+
+    // Print the header
+    echo $OUTPUT->header();
+    echo $OUTPUT->heading(get_string('uploaccommentsresults', 'tool_uploadcomments'));
+
+    // init csv import helper
+    $cir->init();
+    $linenum = 1; //column header is first line
+
+    while ($line = $cir->next()) {
+        $linenum++;
+        $comment = new stdClass();
+        foreach($line as $keynum => $value){
+            $key = $filecolumns[$keynum];
+            if(strpos($key, 'comment') === 0){
+                $comment->commenttext = $value;
+            }
+            if(strpos($key, 'contextlevel') === 0){
+                $comment->contextlevel = $value;
+            }
+            if(strpos($key, 'contextid') === 0){
+                $comment->instanceid = $value;
+            }
+
+        }
+        $comment->timemodified = time();
+        $comment->timecreated = time();
+
+        $commentid = createNewComment($comment);
+    }
+
+    echo $OUTPUT->footer();
+    die();
+}
+
+echo $OUTPUT->header();
+echo $OUTPUT->heading(get_string('uploadcommentsspreview', 'tool_uploadcomments'));
 
 // preview table data
 $data = array();
@@ -90,10 +134,19 @@ while ($linenum <= $previewrows and $fields = $cir->next()) {
     $rowcols['status'] = array();
 
     if (empty($rowcols['comment'])) {
-       $rowcols['status'][] = get_string('missingcomment');
+       $rowcols['status'][] = get_string('missingcomment', 'tool_uploadcomments');
     }
 
     if (isset($rowcols['contextlevel'])) {
+        switch($rowcols['contextlevel']) {
+            case '40':
+            case '50':
+            case '70':
+            case '10':
+                break;
+            default:
+                $rowcols['status'][] = get_string('incorrectcontext', 'tool_uploadcomments');
+        }
         $rowcols['contextlevel'] = $rowcols['contextlevel'];
     }
 
@@ -108,25 +161,23 @@ if ($fields = $cir->next()) {
 }
 $cir->close();
 
-    $table = new html_table();
-    $table->id = "ucpreview";
-    $table->attributes['class'] = 'generaltable';
-    $table->tablealign = 'center';
-    $table->summary = get_string('uploadcommentsspreview', 'tool_uploadcomments');
-    $table->head = array();
-   $table->data = $data;
+$table = new html_table();
+$table->id = "ucpreview";
+$table->attributes['class'] = 'generaltable';
+$table->tablealign = 'center';
+$table->summary = get_string('uploadcommentsspreview', 'tool_uploadcomments');
+$table->head = array();
+$table->data = $data;
 
-    $table->head[] = get_string('uccsvline', 'tool_uploadcomments');
-    foreach ($filecolumns as $column) {
-        $table->head[] = $column;
-    }
-    $table->head[] = get_string('status');
+$table->head[] = get_string('uccsvline', 'tool_uploadcomments');
+foreach ($filecolumns as $column) {
+    $table->head[] = $column;
+}
+$table->head[] = get_string('status');
 
+echo html_writer::tag('div', html_writer::table($table), array('class'=>'flexible-wrap'));
 
-    echo $OUTPUT->header();
-
-    echo $OUTPUT->heading(get_string('uploadcommentsspreview', 'tool_uploadcomments'));
-
-    echo html_writer::tag('div', html_writer::table($table), array('class'=>'flexible-wrap'));
 $mform2->display();
-    echo $OUTPUT->footer();
+
+echo $OUTPUT->footer();
+die;
