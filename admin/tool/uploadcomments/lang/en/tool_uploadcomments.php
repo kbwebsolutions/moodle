@@ -1,8 +1,12 @@
 <?php
 
+$string['context'] = 'Context';
+$string['comment'] = 'Comment';
 $string['csvdelimiter'] = 'CSV delimiter';
+$string['commentsadded'] = 'Comment successfully added';
 $string['encoding'] = 'Encoding';
 $string['incorrectcontext'] = 'Incorrect Context';
+$string['instance'] = 'Instance';
 $string['missingcomment'] = 'Missing Comment';
 $string['pluginname'] = 'Upload Assessment Comments';
 $string['rowpreviewnum'] = 'Preview rows';

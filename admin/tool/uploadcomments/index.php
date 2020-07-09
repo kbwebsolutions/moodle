@@ -89,28 +89,48 @@ if ($formdata = $mform2->is_cancelled()) {
     // init csv import helper
     $cir->init();
     $linenum = 1; //column header is first line
-
+    $cpt = new uc_progress_tracker();
+    $cpt->start();
     while ($line = $cir->next()) {
+        $cpt->flush();
         $linenum++;
+        $cpt->track('line', $linenum);
         $comment = new stdClass();
         foreach($line as $keynum => $value){
             $key = $filecolumns[$keynum];
             if(strpos($key, 'comment') === 0){
                 $comment->commenttext = $value;
+                $cpt->track('comment', s($value), 'normal');
             }
             if(strpos($key, 'contextlevel') === 0){
                 $comment->contextlevel = $value;
+                $cpt->track('context', s($value), 'normal');
             }
             if(strpos($key, 'contextid') === 0){
                 $comment->instanceid = $value;
+                $cpt->track('instance', s($value), 'normal');
             }
 
         }
+        $cpt->track('status', 'Added');
         $comment->timemodified = time();
         $comment->timecreated = time();
 
         $commentid = createNewComment($comment);
     }
+    $cpt->close();
+    $uploaded = $linenum -1;
+    echo $OUTPUT->box_start('boxwidthnarrow boxaligncenter generalbox', 'uploadresults');
+    echo '<p>';
+    echo get_string('commentsadded', 'tool_uploadcomments').': '.$uploaded.'<br />';
+
+
+
+    echo $OUTPUT->box_end();
+
+
+        echo $OUTPUT->continue_button($returnurl);
+
 
     echo $OUTPUT->footer();
     die();
@@ -124,7 +144,7 @@ $data = array();
 $cir->init();
 $linenum = 1; //column header is first line
 $noerror = true; // Keep status of any error.
-while ($linenum <= $previewrows and $fields = $cir->next()) {
+while ($linenum <= $previewrows && $fields = $cir->next()) {
     $linenum++;
     $rowcols = array();
     $rowcols['line'] = $linenum;
@@ -147,12 +167,8 @@ while ($linenum <= $previewrows and $fields = $cir->next()) {
             default:
                 $rowcols['status'][] = get_string('incorrectcontext', 'tool_uploadcomments');
         }
-        $rowcols['contextlevel'] = $rowcols['contextlevel'];
     }
 
-    if (isset($rowcols['contextid'])) {
-        $rowcols['contextid'] = $rowcols['contextid'];
-    }
      $rowcols['status'] = implode('<br />', $rowcols['status']);
     $data[] = $rowcols;
 }
