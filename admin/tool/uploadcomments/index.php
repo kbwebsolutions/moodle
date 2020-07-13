@@ -18,15 +18,15 @@
  * Bulk user registration script from a comma separated file
  *
  * @package    tool
- * @subpackage uploaduser
- * @copyright  2004 onwards Martin Dougiamas (http://dougiamas.com)
+ * @subpackage uploadcomments
+ * @copyright  2020 Kieran Briggs (kbriggs@chartered.college)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require('../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once('uploadcomments_form.php');
-require_once ('locallib.php');
+require_once('locallib.php');
 require_once($CFG->libdir.'/csvlib.class.php');
 
 $iid         = optional_param('iid', '', PARAM_INT);
@@ -36,7 +36,7 @@ require_login();
 admin_externalpage_setup('tooluploadcomments');
 require_capability('tool/uploadcomments:uploadcomments', context_system::instance());
 
-$req_fields = array('id', 'comment','contextlevel', 'contextid');
+$reqfields = array('id', 'comment', 'contextlevel', 'contextid');
 $returnurl = new moodle_url('/admin/tool/uploadcomments/index.php');
 $mform1 = new uploadcommentsform();
 
@@ -53,10 +53,10 @@ if (empty($iid)) {
         if (!is_null($csvloaderror)) {
             print_error('csvloaderror', '', $returnurl, $csvloaderror);
         }
-        // test if columns ok
-        $filecolumns = uu_validate_comments_upload_columns($cir, $req_fields, $returnurl);
+        // Test if columns ok.
+        $filecolumns = uu_validate_comments_upload_columns($cir, $reqfields, $returnurl);
 
-        // continue to form2
+        // Continue to the next form.
 
     } else {
         echo $OUTPUT->header();
@@ -70,10 +70,11 @@ if (empty($iid)) {
     }
 } else {
     $cir = new csv_import_reader($iid, 'uploadcomments');
-    $filecolumns = uu_validate_comments_upload_columns($cir, $req_fields, $returnurl);
+    $filecolumns = uu_validate_comments_upload_columns($cir, $reqfields, $returnurl);
 }
 
-$mform2 = new uploadcommentspreviewform(null, array('columns'=>$filecolumns, 'data'=>array('iid'=>$iid, 'previewrows'=>$previewrows)));
+$mform2 = new uploadcommentspreviewform(null, array('columns' => $filecolumns,
+                                        'data' => array('iid' => $iid, 'previewrows' => $previewrows)));
 
 
 if ($formdata = $mform2->is_cancelled()) {
@@ -82,13 +83,12 @@ if ($formdata = $mform2->is_cancelled()) {
 
 } else if ($formdata = $mform2->get_data()) {
 
-    // Print the header
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('uploaccommentsresults', 'tool_uploadcomments'));
 
-    // init csv import helper
+    // Init csv import helper.
     $cir->init();
-    $linenum = 1; //column header is first line
+    $linenum = 1; // Column header is first line.
     $cpt = new uc_progress_tracker();
     $cpt->start();
     while ($line = $cir->next()) {
@@ -96,17 +96,17 @@ if ($formdata = $mform2->is_cancelled()) {
         $linenum++;
         $cpt->track('line', $linenum);
         $comment = new stdClass();
-        foreach($line as $keynum => $value){
+        foreach ($line as $keynum => $value) {
             $key = $filecolumns[$keynum];
-            if(strpos($key, 'comment') === 0){
+            if (strpos($key, 'comment') === 0) {
                 $comment->commenttext = $value;
                 $cpt->track('comment', s($value), 'normal');
             }
-            if(strpos($key, 'contextlevel') === 0){
+            if (strpos($key, 'contextlevel') === 0) {
                 $comment->contextlevel = $value;
                 $cpt->track('context', s($value), 'normal');
             }
-            if(strpos($key, 'contextid') === 0){
+            if (strpos($key, 'contextid') === 0) {
                 $comment->instanceid = $value;
                 $cpt->track('instance', s($value), 'normal');
             }
@@ -116,10 +116,10 @@ if ($formdata = $mform2->is_cancelled()) {
         $comment->timemodified = time();
         $comment->timecreated = time();
 
-        $commentid = createNewComment($comment);
+        $commentid = create_new_comment($comment);
     }
     $cpt->close();
-    $uploaded = $linenum -1;
+    $uploaded = $linenum - 1;
     echo $OUTPUT->box_start('boxwidthnarrow boxaligncenter generalbox', 'uploadresults');
     echo '<p>';
     echo get_string('commentsadded', 'tool_uploadcomments').': '.$uploaded.'<br />';
@@ -139,22 +139,22 @@ if ($formdata = $mform2->is_cancelled()) {
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('uploadcommentsspreview', 'tool_uploadcomments'));
 
-// preview table data
+// Preview table data.
 $data = array();
 $cir->init();
-$linenum = 1; //column header is first line
+$linenum = 1; // Column header is first line.
 $noerror = true; // Keep status of any error.
 while ($linenum <= $previewrows && $fields = $cir->next()) {
     $linenum++;
     $rowcols = array();
     $rowcols['line'] = $linenum;
-    foreach($fields as $key => $field) {
+    foreach ($fields as $key => $field) {
         $rowcols[$filecolumns[$key]] = s(trim($field));
     }
     $rowcols['status'] = array();
 
     if (empty($rowcols['comment'])) {
-       $rowcols['status'][] = get_string('missingcomment', 'tool_uploadcomments');
+        $rowcols['status'][] = get_string('missingcomment', 'tool_uploadcomments');
     }
 
     if (isset($rowcols['contextlevel'])) {
@@ -191,7 +191,7 @@ foreach ($filecolumns as $column) {
 }
 $table->head[] = get_string('status');
 
-echo html_writer::tag('div', html_writer::table($table), array('class'=>'flexible-wrap'));
+echo html_writer::tag('div', html_writer::table($table), array('class' => 'flexible-wrap'));
 
 $mform2->display();
 

@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once $CFG->libdir.'/formslib.php';
+require_once($CFG->libdir.'/formslib.php');
 
 
 class uploadcommentsform extends moodleform {
@@ -49,7 +49,7 @@ class uploadcommentsform extends moodleform {
         $mform->addElement('select', 'encoding', get_string('encoding', 'tool_uploadcomments'), $choices);
         $mform->setDefault('encoding', 'UTF-8');
 
-        $choices = array('10'=>10, '20'=>20, '100'=>100, '1000'=>1000, '100000'=>100000);
+        $choices = array('10' => 10, '20' => 20, '100' => 100, '1000' => 1000, '100000' => 100000);
         $mform->addElement('select', 'previewrows', get_string('rowpreviewnum', 'tool_uploadcomments'), $choices);
         $mform->setType('previewrows', PARAM_INT);
 
@@ -59,13 +59,11 @@ class uploadcommentsform extends moodleform {
 
 class uploadcommentspreviewform extends  moodleform {
     function definition() {
-
-
         $mform = $this->_form;
         $columns = $this->_customdata['columns'];
         $data    = $this->_customdata['data'];
 
-        // hidden fields
+        // Hidden fields.
         $mform->addElement('hidden', 'iid');
         $mform->setType('iid', PARAM_INT);
 

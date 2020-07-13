@@ -25,5 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$ADMIN->add('courses', new admin_externalpage('tooluploadcomments', get_string('uploadcomments', 'tool_uploadcomments'), "$CFG->wwwroot/$CFG->admin/tool/uploadcomments/index.php", 'moodle/site:uploadusers'));
+$ADMIN->add('courses', new admin_externalpage('tooluploadcomments',
+                                                get_string('uploadcomments', 'tool_uploadcomments'),
+                                            "$CFG->wwwroot/$CFG->admin/tool/uploadcomments/index.php",
+                                    'moodle/site:uploadusers'));
 
