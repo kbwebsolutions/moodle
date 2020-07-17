@@ -28,11 +28,11 @@ $capabilities = array(
 
     // Allows the user to upload user pictures.
         'tool/uploadcomments:uploadcomments' => array(
-                'riskbitmask' => RISK_SPAM,
+                'riskbitmask' => RISK_SPAM, RISK_XSS,
                 'captype' => 'write',
                 'contextlevel' => CONTEXT_SYSTEM,
                 'archetypes' => array(
-                        'manager' => CAP_ALLOW
+                        'manager' => CAP_PROHIBIT
                 ),
                 'clonepermissionsfrom' =>  'moodle/site:uploadusers',
         ),

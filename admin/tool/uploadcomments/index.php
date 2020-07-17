@@ -29,6 +29,8 @@ require_once('uploadcomments_form.php');
 require_once('locallib.php');
 require_once($CFG->libdir.'/csvlib.class.php');
 
+global $DB;
+
 $iid         = optional_param('iid', '', PARAM_INT);
 $previewrows = optional_param('previewrows', 10, PARAM_INT);
 
@@ -99,12 +101,25 @@ if ($formdata = $mform2->is_cancelled()) {
         foreach ($line as $keynum => $value) {
             $key = $filecolumns[$keynum];
             if (strpos($key, 'comment') === 0) {
-                $comment->commenttext = $value;
+                $comment->commenttext = clean_param($value, PARAM_NOTAGS);
                 $cpt->track('comment', s($value), 'normal');
             }
             if (strpos($key, 'contextlevel') === 0) {
                 $comment->contextlevel = $value;
-                $cpt->track('context', s($value), 'normal');
+                switch ($value) {
+                    case '10':
+                        $cpt->track('context', 'system', 'normal');
+                        break;
+                    case '40':
+                        $cpt->track('context', 'category', 'normal');
+                        break;
+                    case '50':
+                        $cpt->track('context', 'course', 'normal');
+                        break;
+                    case '70':
+                        $cpt->track('context', 'assignment', 'normal');
+                        break;
+                }
             }
             if (strpos($key, 'contextid') === 0) {
                 $comment->instanceid = $value;
@@ -113,6 +128,7 @@ if ($formdata = $mform2->is_cancelled()) {
 
         }
         $cpt->track('status', 'Added');
+
         $comment->timemodified = time();
         $comment->timecreated = time();
 
@@ -158,13 +174,39 @@ while ($linenum <= $previewrows && $fields = $cir->next()) {
     }
 
     if (isset($rowcols['contextlevel'])) {
-        switch($rowcols['contextlevel']) {
+
+        switch ($rowcols['contextlevel']) {
             case '40':
+                $rowcols['contextlevel'] = "Category";
+                $rowcols['contextid'] = $DB->get_field('course_categories', 'name', array('id' => $rowcols['contextid']));
+                if(!empty($rowcols['contextid'])){
+                    break;
+                }
+                $rowcols['status'][] = get_string('incorrectcategoryid', 'tool_uploadcomments');
+                break;
+
             case '50':
+                $rowcols['contextlevel'] = "Course";
+                $rowcols['contextid'] = $DB->get_field('course', 'shortname', array('id' => $rowcols['contextid']));
+                if(!empty($rowcols['contextid'])){
+                    break;
+                }
+                $rowcols['status'][] = get_string('incorrectcourseid', 'tool_uploadcomments');
+                break;
             case '70':
+                $rowcols['contextlevel'] = "Assignment";
+                $rowcols['contextid'] = $DB->get_field('assign', 'name', array('id' => $rowcols['contextid']));
+                if(!empty($rowcols['contextid'])){
+                    break;
+                }
+                $rowcols['status'][] = get_string('incorrectassignmentid', 'tool_uploadcomments');
+                break;
             case '10':
+                $rowcols['contextlevel'] = "System";
+                $rowcols['contextid'] = "N/A";
                 break;
             default:
+                $rowcols['contextdisplay'] = " ";
                 $rowcols['status'][] = get_string('incorrectcontext', 'tool_uploadcomments');
         }
     }

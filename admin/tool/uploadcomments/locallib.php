@@ -81,19 +81,21 @@ class uc_progress_tracker {
      */
     public function start() {
         $ci = 0;
-        echo '<table id="ucresults" class="generaltable boxaligncenter flexible-wrap" summary="'.get_string('uploaccommentsresults', 'tool_uploadcomments').'">';
+        echo '<table id="ucresults" class="generaltable boxaligncenter flexible-wrap" summary="' .
+                get_string('uploaccommentsresults', 'tool_uploadcomments') . '">';
         echo '<tr class="heading r0">';
-        echo '<th class="header c'.$ci++.'" scope="col">'.get_string('uccsvline', 'tool_uploadcomments').'</th>';
-        echo '<th class="header c'.$ci++.'" scope="col">'.get_string('comment', 'tool_uploadcomments').'</th>';
-        echo '<th class="header c'.$ci++.'" scope="col">'.get_string('context', 'tool_uploadcomments').'</th>';
-        echo '<th class="header c'.$ci++.'" scope="col">'.get_string('instance', 'tool_uploadcomments').'</th>';
-        echo '<th class="header c'.$ci++.'" scope="col">'.get_string('status').'</th>';
+        echo '<th class="header c' . $ci++ . '" scope="col">' . get_string('uccsvline', 'tool_uploadcomments') . '</th>';
+        echo '<th class="header c' . $ci++ . '" scope="col">' . get_string('comment', 'tool_uploadcomments') . '</th>';
+        echo '<th class="header c' . $ci++ . '" scope="col">' . get_string('context', 'tool_uploadcomments') . '</th>';
+        echo '<th class="header c' . $ci++ . '" scope="col">' . get_string('instance', 'tool_uploadcomments') . '</th>';
+        echo '<th class="header c' . $ci++ . '" scope="col">' . get_string('status') . '</th>';
         echo '</tr>';
         $this->_row = null;
     }
 
     /**
      * Flush previous line and start a new one.
+     *
      * @return void
      */
     public function flush() {
@@ -107,16 +109,16 @@ class uc_progress_tracker {
         }
         $ci = 0;
         $ri = 1;
-        echo '<tr class="r'.$ri.'">';
+        echo '<tr class="r' . $ri . '">';
         foreach ($this->_row as $key => $field) {
             foreach ($field as $type => $content) {
                 if ($field[$type] !== '') {
-                    $field[$type] = '<span class="uc'.$type.'">'.$field[$type].'</span>';
+                    $field[$type] = '<span class="uc' . $type . '">' . $field[$type] . '</span>';
                 } else {
                     unset($field[$type]);
                 }
             }
-            echo '<td class="cell c'.$ci++.'">';
+            echo '<td class="cell c' . $ci++ . '">';
             if (!empty($field)) {
                 echo implode('<br />', $field);
             } else {
@@ -132,6 +134,7 @@ class uc_progress_tracker {
 
     /**
      * Add tracking info
+     *
      * @param string $col name of column
      * @param string $msg message
      * @param string $level 'normal', 'warning' or 'error'
@@ -143,7 +146,7 @@ class uc_progress_tracker {
             $this->flush();
         }
         if (!in_array($col, $this->columns)) {
-            debugging('Incorrect column:'.$col);
+            debugging('Incorrect column:' . $col);
             return;
         }
         if ($merge) {
@@ -158,10 +161,13 @@ class uc_progress_tracker {
 
     /**
      * Print the table end
+     *
      * @return void
      */
     public function close() {
         $this->flush();
         echo '</table>';
     }
+
+
 }
