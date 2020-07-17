@@ -19,3 +19,4 @@ $string['uploadcomments_help'] = 'Use this tool to bulk add comments to the comm
 $string['uploadcommentsspreview'] = 'Preview uploaded comments';
 $string['uploaccommentsresults'] = 'Upload Comments Results';
 $string['uccsvline'] = 'CSV Line';
+$string['uploadcomments:uploadcomments'] = 'Upload Assignment Comments via CSV';

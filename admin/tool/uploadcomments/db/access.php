@@ -26,13 +26,15 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    // Allows the user to upload user pictures.
+    // Allows the user to upload comments via csv.
         'tool/uploadcomments:uploadcomments' => array(
-                'riskbitmask' => RISK_SPAM, RISK_XSS,
+                'riskbitmask' => RISK_SPAM | RISK_XSS,
                 'captype' => 'write',
                 'contextlevel' => CONTEXT_SYSTEM,
                 'archetypes' => array(
-                        'manager' => CAP_PROHIBIT
+                        'manager' => CAP_PROHIBIT,
+                        'teacher' => CAP_PROHIBIT,
+                        'editingteacher' => CAP_PROHIBIT
                 ),
                 'clonepermissionsfrom' =>  'moodle/site:uploadusers',
         ),
