@@ -26,15 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-<<<<<<< HEAD
-    // Allows the user to upload user pictures.
-        'tool/uploadcomments:uploadcomments' => array(
-                'riskbitmask' => RISK_SPAM, RISK_XSS,
-                'captype' => 'write',
-                'contextlevel' => CONTEXT_SYSTEM,
-                'archetypes' => array(
-                        'manager' => CAP_PROHIBIT
-=======
     // Allows the user to upload comments via csv.
         'tool/uploadcomments:uploadcomments' => array(
                 'riskbitmask' => RISK_SPAM | RISK_XSS,
@@ -44,7 +35,6 @@ $capabilities = array(
                         'manager' => CAP_PROHIBIT,
                         'teacher' => CAP_PROHIBIT,
                         'editingteacher' => CAP_PROHIBIT
->>>>>>> Comments_csv_Uploader
                 ),
                 'clonepermissionsfrom' =>  'moodle/site:uploadusers',
         ),

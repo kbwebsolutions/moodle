@@ -18,9 +18,5 @@ $string['uploadcomments_btn'] = 'Upload Comments';
 $string['uploadcomments_help'] = 'Use this tool to bulk add comments to the comment bank';
 $string['uploadcommentsspreview'] = 'Preview uploaded comments';
 $string['uploaccommentsresults'] = 'Upload Comments Results';
-<<<<<<< HEAD
-$string['uccsvline'] = 'CSV Line';
-=======
 $string['uccsvline'] = 'CSV Line';
 $string['uploadcomments:uploadcomments'] = 'Upload Assignment Comments via CSV';
->>>>>>> Comments_csv_Uploader

@@ -25,15 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-<<<<<<< HEAD
-$plugin->version   = 2018070900; // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2018050800; // Requires this Moodle version
-$plugin->release = '0.9.0';
-=======
 $plugin->version   = 2018071700; // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2018050800; // Requires this Moodle version
 $plugin->release = '0.9.5';
->>>>>>> Comments_csv_Uploader
 $plugin->maturity = MATURITY_BETA;
 $plugin->component = 'tool_uploadcomments'; // Full name of the plugin (used for diagnostics)
 $plugin->dependencies = [
