@@ -31,3 +31,6 @@
 [submodule "filter/fontawesome"]
 	path = filter/fontawesome
 	url = https://kbwebsolutions@github.com/ffhs/moodle-filter_fontawesome.git
+[submodule "local/commentbank"]
+	path = local/commentbank
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-local_commentbank.git
