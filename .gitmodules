@@ -28,3 +28,6 @@
 [submodule "theme/snap"]
 	path = theme/snap
 	url = https://github.com/blackboard-open-source/moodle-theme_snap.git
+[submodule "filter/fontawesome"]
+	path = filter/fontawesome
+	url = https://kbwebsolutions@github.com/ffhs/moodle-filter_fontawesome.git
