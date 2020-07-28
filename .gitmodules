@@ -34,3 +34,6 @@
 [submodule "local/commentbank"]
 	path = local/commentbank
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-local_commentbank.git
+[submodule "local/profilecohort"]
+	path = local/profilecohort
+	url = https://kbwebsolutions@github.com/moodleuulm/moodle-local_profilecohort.git
