@@ -40,6 +40,9 @@
 [submodule "filter/embedquestion"]
 	path = filter/embedquestion
 	url = https://kbwebsolutions@github.com/moodleou/moodle-filter_embedquestion.git
-[submodule "lib/editor/atto/plugins/embequestion"]
-	path = lib/editor/atto/plugins/embequestion
+[submodule "lib/editor/atto/plugins/styles"]
+	path = lib/editor/atto/plugins/styles
+	url = https://kbwebsolutions@github.com/moodleuulm/moodle-atto_styles.git
+[submodule "lib/editor/atto/plugins/embedquestion"]
+	path = lib/editor/atto/plugins/embedquestion
 	url = https://kbwebsolutions@github.com/moodleou/moodle-atto_embedquestion.git
