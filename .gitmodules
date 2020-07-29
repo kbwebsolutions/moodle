@@ -19,9 +19,6 @@
 [submodule "report/benchmark"]
 	path = report/benchmark
 	url = https://github.com/mikasmart/moodle-report_benchmark.git
-[submodule "theme/charteredcollege"]
-	path = theme/charteredcollege
-	url = https://github.com/kbwebsolutions/theme-ChateredCollegeOfTeaching.git
 [submodule "mod/questionnaire"]
 	path = mod/questionnaire
 	url = https://github.com/kbwebsolutions/moodle-mod_questionnaire.git
@@ -49,3 +46,6 @@
 [submodule "course/format/mypdchat"]
 	path = course/format/mypdchat
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-format_mypdchat.git
+[submodule "theme/charteredcollege"]
+	path = theme/charteredcollege
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-theme_ChateredCollegeOfTeaching.git
