@@ -49,3 +49,6 @@
 [submodule "theme/charteredcollege"]
 	path = theme/charteredcollege
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-theme_ChateredCollegeOfTeaching.git
+[submodule "mod/bookingform"]
+	path = mod/bookingform
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-mod_bookingform.git
