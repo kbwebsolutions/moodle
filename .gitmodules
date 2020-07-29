@@ -46,3 +46,6 @@
 [submodule "lib/editor/atto/plugins/embedquestion"]
 	path = lib/editor/atto/plugins/embedquestion
 	url = https://kbwebsolutions@github.com/moodleou/moodle-atto_embedquestion.git
+[submodule "course/format/mypdchat"]
+	path = course/format/mypdchat
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-format_mypdchat.git
