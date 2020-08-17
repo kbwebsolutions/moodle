@@ -61,3 +61,6 @@
 [submodule "grade/grading/form/passfailrubric"]
 	path = grade/grading/form/passfailrubric
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-grading_passfailrubric.git
+[submodule "local/filterurlresbak"]
+	path = local/filterurlresbak
+	url = https://kbwebsolutions@github.com/synergylearning/moodle-local_filterurlresbak.git
