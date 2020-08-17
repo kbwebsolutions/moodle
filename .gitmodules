@@ -22,9 +22,6 @@
 [submodule "mod/questionnaire"]
 	path = mod/questionnaire
 	url = https://github.com/kbwebsolutions/moodle-mod_questionnaire.git
-[submodule "theme/snap"]
-	path = theme/snap
-	url = https://github.com/blackboard-open-source/moodle-theme_snap.git
 [submodule "filter/fontawesome"]
 	path = filter/fontawesome
 	url = https://kbwebsolutions@github.com/ffhs/moodle-filter_fontawesome.git
@@ -67,3 +64,6 @@
 [submodule "filter/urlresource"]
 	path = filter/urlresource
 	url = https://kbwebsolutions@github.com/synergylearning/moodle-filter_urlresource.git
+[submodule "theme/snap"]
+	path = theme/snap
+	url = https://kbwebsolutions@github.com/blackboard-open-source/moodle-theme_snap.git
