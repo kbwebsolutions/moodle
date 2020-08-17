@@ -52,3 +52,6 @@
 [submodule "mod/bookingform"]
 	path = mod/bookingform
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-mod_bookingform.git
+[submodule "local/metadata"]
+	path = local/metadata
+	url = https://kbwebsolutions@github.com/PoetOS/moodle-local_metadata.git
