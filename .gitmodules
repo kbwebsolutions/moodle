@@ -64,3 +64,6 @@
 [submodule "local/filterurlresbak"]
 	path = local/filterurlresbak
 	url = https://kbwebsolutions@github.com/synergylearning/moodle-local_filterurlresbak.git
+[submodule "filter/urlresource"]
+	path = filter/urlresource
+	url = https://kbwebsolutions@github.com/synergylearning/moodle-filter_urlresource.git
