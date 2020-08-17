@@ -58,3 +58,6 @@
 [submodule "admin/tool/uploadcomments"]
 	path = admin/tool/uploadcomments
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-tool_uploadcomments.git
+[submodule "grade/grading/form/passfailrubric"]
+	path = grade/grading/form/passfailrubric
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-grading_passfailrubric.git
