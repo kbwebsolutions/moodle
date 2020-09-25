@@ -64,6 +64,3 @@
 [submodule "filter/urlresource"]
 	path = filter/urlresource
 	url = https://kbwebsolutions@github.com/synergylearning/moodle-filter_urlresource.git
-[submodule "theme/snap"]
-	path = theme/snap
-	url = https://kbwebsolutions@github.com/blackboard-open-source/moodle-theme_snap.git
