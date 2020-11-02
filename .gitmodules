@@ -64,3 +64,6 @@
 [submodule "filter/urlresource"]
 	path = filter/urlresource
 	url = https://kbwebsolutions@github.com/synergylearning/moodle-filter_urlresource.git
+[submodule "mod/sectioncomplete"]
+	path = mod/sectioncomplete
+	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-mod_sectioncomplete.git
