@@ -67,9 +67,6 @@
 [submodule "mod/sectioncomplete"]
 	path = mod/sectioncomplete
 	url = https://kbwebsolutions@github.com/kbwebsolutions/moodle-mod_sectioncomplete.git
-[submodule "theme/snap"]
-	path = theme/snap
-	url = https://kbwebsolutions@github.com/open-lms-open-source/moodle-theme_snap.git
 [submodule "enrol/attributes"]
 	path = enrol/attributes
 	url = https://kbwebsolutions@github.com/ndunand/moodle-enrol_attributes.git
